@@ -24,6 +24,17 @@ Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum að
 + http://www.arionbanki.is/markadir
 + http://www.m5.is/
 
+###Almennur fróðleikur:
++ http://www.visindavefur.hi.is/
+
+###Hagnýtar upplýsingar:
++ http://www.hagstofa.is/
+
+###Bíóupplýsingar:
++ http://midi.is/forsida/
++ http://m.kvikmyndir.is/bio/
+
+
 ### Sjónvarpsdagskrá allra stöðva
 + http://dagskra.ruv.is/dagskra/
 + http://www.skjarinn.is/einn/
