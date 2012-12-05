@@ -98,6 +98,7 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -H 'accept-versio
 					<h2>Strætó</h2>
 
 					<h4>Leita að leiðum milli tveggja staða:</h4>
+					<a href="http://hurl.it/hurls/6b08e9d0bf121e1e09a3618e98a3aa8f7d36edc7/b152a02fe0e92ba31943692f8b3bfdb8adfde012" target="_blank">Dæmi á hurl.it</a>
 					
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -152,6 +153,7 @@ curl -X POST apis.is/bus/search -H 'Content-Type: application/json' -d '{
 </pre>
 
 					<h4>Rauntímastaðsetningar strætóa:</h4>
+					<a href="http://hurl.it/hurls/1c89bca8ff315af54fbf7b2cd16446bbe20649d1/e17496f8b73941113d04ff18d9588c33e3671160" target="_blank">Dæmi á hurl.it</a>
 					
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -160,6 +162,7 @@ curl -X POST apis.is/bus/realtime -H 'Content-Type: application/json' -d '{
 }'
 </pre>
 <p><span class="label label-info">ATH!</span> <strong>Ef <i>busses</i> er ekki sent með þá koma rauntímastaðsetningar allra strætóa.</strong></p>
+<p><span class="label label-info">ATH!</span> <strong>Ekki eru sýndar niðurstöður fyrir strætóa sem eru ekki í umferð .</strong></p>
 
 					</div>
 <pre class="prettyprint linenums">
@@ -168,48 +171,6 @@ curl -X POST apis.is/bus/realtime -H 'Content-Type: application/json' -d '{
     {
       "busNr": "1",
       "busses": [
-        {
-          "unixTime": 1354618573,
-          "x": 64.135171,
-          "y": -21.923732,
-          "from": "Hlemmur",
-          "to": "Klukkuvellir"
-        },
-        {
-          "unixTime": 1354618569,
-          "x": 64.145024,
-          "y": -21.921835,
-          "from": "Klukkuvellir",
-          "to": "Hlemmur"
-        },
-        {
-          "unixTime": 1354618575,
-          "x": 64.043737,
-          "y": -21.962636,
-          "from": "Klukkuvellir",
-          "to": "Hlemmur"
-        },
-        {
-          "unixTime": 1354618564,
-          "x": 64.133528,
-          "y": -21.900062,
-          "from": "Klukkuvellir",
-          "to": "Hlemmur"
-        },
-        {
-          "unixTime": 1354618573,
-          "x": 64.057271,
-          "y": -21.965172,
-          "from": "Klukkuvellir",
-          "to": "Hlemmur"
-        },
-        {
-          "unixTime": 1354618565,
-          "x": 64.064292,
-          "y": -21.948598,
-          "from": "Hlemmur",
-          "to": "Klukkuvellir"
-        },
         {
           "unixTime": 1354618575,
           "x": 64.090668,
@@ -256,6 +217,7 @@ curl -X POST apis.is/bus/realtime -H 'Content-Type: application/json' -d '{
 					<h2>Sími</h2>
 
 					<h4>Leita að einstakling út frá nafni:</h4>
+					<a href="http://hurl.it/hurls/0dbe6dc863a93938e177e8498a2eebcaf73a6d11/afd6b1a8e3825ad32735da998df86d2545cb75ec" target="_blank">Dæmi á hurl.it</a>
 					
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -278,6 +240,7 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
 
 
 					<h4>Leita að einstakling út frá símanúmeri:</h4>
+					<a href="http://hurl.it/hurls/4d66246df75665620a7a7b095a05d6b0dc0bdd01/7bbd323682e667e30226fae4e6b7c408c59e5bf7" target="_blank">Dæmi á hurl.it</a>
 
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -303,14 +266,37 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
 
 				<div class="well" id="currency">
 					<h2>Gjaldmiðlar</h2>
-					<p><span class="label label-warning">ATH!</span> <strong>Þessi endapunktur er ekki full kláraður</strong></p>
 
 					<h4>Fá upplýsingar um gjaldmiðla:</h4>
+					<a href="http://hurl.it/hurls/d3ea70f18a7cd560ffa1dc72f93d68e8712596c1/61f2d253086c1afc6d38bc9edfbcb3612c7a3187" target="_blank">Dæmi á hurl.it</a>
+
+<div class="bs-docs-example">
+
 <pre class="prettyprint linenums">
-curl -X POST apis.is/currency -H 'Content-Type: application/json'  
+curl -X POST apis.is/currency -H 'Content-Type: application/json' -d '{"provider":"m5"}'
 </pre>
 
 				</div>
+<pre class="prettyprint linenums">
+{
+    "results": [
+        {
+            "shortName": "USD",
+            "longName": "Bandarískur dalur",
+            "value": "125,11",
+            "changeCur": "0,26",
+            "changePer": "0,21"
+        },
+        {
+            "shortName": "DKK",
+            "longName": "Dönsk króna",
+            "value": "21,915",
+            "changeCur": "0,0015",
+            "changePer": "0,01"
+        }
+    ]
+}
+</pre>
 
 				<div class="well" id="sms">
 
@@ -327,6 +313,7 @@ curl -X POST apis.is/currency -H 'Content-Type: application/json'
 					<h2>Fyrirtæki</h2>
 
 					<h4>Leita að fyrirtæki út frá nafni:</h4>
+					<a href="http://hurl.it/hurls/27cca1bf319b5b25dee95e1269f4c0aa48c498de/5afde9008c5d0da6d5f34a12835d527b435ce656" target="_blank">Dæmi á hurl.it</a>
 
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -350,6 +337,7 @@ curl -X POST apis.is/company -H 'Content-Type: application/json' -d '{
 </pre>
 
 					<h4>Leita að fyrirtæki út frá heimilisfangi:</h4>
+					<a href="http://hurl.it/hurls/e4851e459971f898e5478986421d254e2fb22679/47f15e5da55e4cce611e0ec6e011eedf7da933df" target="_blank">Dæmi á hurl.it</a>
 
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -373,6 +361,7 @@ curl -X POST apis.is/company -H 'Content-Type: application/json' -d '{
 </pre>
 
 					<h4>Leita að fyrirtæki út frá kennitölu:</h4>
+					<a href="http://hurl.it/hurls/13544b60f6ae849e2a201942deced9232c941af2/7167dcc4227ddb3b6f6d627537c1dfcd6877b2d2" target="_blank">Dæmi á hurl.it</a>
 
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
@@ -396,11 +385,12 @@ curl -X POST apis.is/company -H 'Content-Type: application/json' -d '{
 </pre>
 
 					<h4>Leita að fyrirtæki út frá vasknúmeri:</h4>
+					<a href="http://hurl.it/hurls/a1f51f0120dc4aeb177e790ecc4e866ef3c3bba0/1a9653ef3b6ec1a422fa8606b5103e965897839c" target="_blank">Dæmi á hurl.it</a>
 
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
 curl -X POST apis.is/company -H 'Content-Type: application/json' -d '{
-	"vsknr":"VSKNRHÉR"
+	"vsknr":"12345"
 }'
 </pre>
 					</div>
