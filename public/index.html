@@ -267,8 +267,7 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
 				<div class="well" id="currency">
 					<h2>Gjaldmiðlar</h2>
 
-					<h4>Fá upplýsingar um gjaldmiðla:</h4>
-					<a href="http://hurl.it/hurls/d3ea70f18a7cd560ffa1dc72f93d68e8712596c1/61f2d253086c1afc6d38bc9edfbcb3612c7a3187" target="_blank">Dæmi á hurl.it</a>
+					<h4>Fá upplýsingar um gjaldmiðla frá m5.is:</h4>
 
 <div class="bs-docs-example">
 
@@ -283,20 +282,60 @@ curl -X POST apis.is/currency -H 'Content-Type: application/json' -d '{"provider
         {
             "shortName": "USD",
             "longName": "Bandarískur dalur",
-            "value": "125,11",
-            "changeCur": "0,26",
-            "changePer": "0,21"
+            "value": "126.60",
+            "askValue": 0,
+            "bidValue": 0,
+            "changeCur": "0.67",
+            "changePer": "0.54"
         },
         {
             "shortName": "DKK",
             "longName": "Dönsk króna",
-            "value": "21,915",
-            "changeCur": "0,0015",
-            "changePer": "0,01"
+            "value": "21.946",
+            "askValue": 0,
+            "bidValue": 0,
+            "changeCur": "0.051",
+            "changePer": "0.23"
         }
     ]
 }
 </pre>
+
+
+					<h4>Fá upplýsingar um gjaldmiðla frá Arion banka:</h4>
+
+<div class="bs-docs-example">
+
+<pre class="prettyprint linenums">
+curl -X POST apis.is/currency -H 'Content-Type: application/json' -d '{"provider":"arion"}'
+</pre>
+
+				</div>
+<pre class="prettyprint linenums">
+{
+    "results": [
+        {
+            "shortName": "USD",
+            "longName": "Bandarískur dalur",
+            "value": 126.185,
+            "askValue": 126.56,
+            "bidValue": 125.81,
+            "changeCur": -0.0395,
+            "changePer": 0
+        },
+        {
+            "shortName": "GBP",
+            "longName": "Sterlingspund",
+            "value": 201.855,
+            "askValue": 202.46,
+            "bidValue": 201.25,
+            "changeCur": -0.19719,
+            "changePer": 0
+        }
+    ]
+}
+</pre>
+
 </div>
 				<div class="well" id="sms">
 
@@ -460,6 +499,6 @@ $('.sidebar-nav').scrollspy()
   })();
 
 </script>
-<!--Server version 0.0.0-40  - 06.12.12-->
+<!--Server version 0.0.0-44  - 07.12.12-->
 </body>
 </html>
