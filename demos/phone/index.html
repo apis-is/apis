@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Apis.is</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+    body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background: url('img/cream_dust_@2X.png') repeat;
+        background-size: 100px 100px; /* size in px of image @1X */
+    }
+    .sidebar-nav {
+        padding: 9px 0;
+    }
+    .bs-docs-example::after{
+        content:"Dæmi";
+    }
+    .well{
+        margin-bottom:40px;
+    }
+    .com { color: #93a1a1; }
+    .lit { color: #195f91; }
+    .pun, .opn, .clo { color: #93a1a1; }
+    .fun { color: #dc322f; }
+    .str, .atv { color: #049cdb; }
+    .kwd, .prettyprint .tag { color: #1e347b; }
+    .typ, .atn, .dec, .var { color: teal; }
+    .pln { color: #48484c; }
+
+    .prettyprint {
+        padding: 8px;
+        background-color: #f7f7f9;
+        border: 1px solid #e1e1e8;
+    }
+    .prettyprint.linenums {
+        -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    }
+
+    .loader {
+        width: 100%;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .no-results {
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+        font-size: 32px;
+        text-align: center;
+        font-family: 'Iceland', cursive;
+        color: #cccccc;
+        background: #eeeeee;
+    }
+
+    /* Specify class=linenums on a pre to get line numbering */
+    ol.linenums {
+        margin: 0 0 0 33px; /* IE indents via margin-left */
+    }
+    ol.linenums li {
+        padding-left: 12px;
+        color: #bebec5;
+        line-height: 20px;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .welcome  {
+        text-align: justify;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    h1 {
+        margin: 0;
+    }
+
+    h1 a {
+        font-size: 50px;
+        font-family: 'Iceland', cursive;
+        font-style: normal;
+    }
+
+    h1 a small {
+        color: #000;
+    }
+
+    h1 a:hover {
+        text-decoration: none;
+    }
+
+    h2 {
+        font-family: 'Iceland', cursive;
+        font-style: normal;
+        font-size: 32px;
+        color: #dddddd;
+        text-shadow: 0px 1px 0px #fff;
+        color: #000;
+    }
+
+    </style>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body lang="is-IS">
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="row">
+                <div class="span6">
+                    <h1><a href="http://apis.is/#phone" target="_blank">APIs.is<small>...símaskrár demó</small></a></h1>
+                </div>
+                <div class="search span6">
+                    <form method="POST" class="form-search" action="">
+                        <input type="text" x-webkit-speech="x-webkit-speech" autofocus="autofocus" placeholder="Nafn eða símanúmer" name="query" id="query" class="search-query span5 pull-right">
+                        <input type="submit" value="Leita" class="hidden">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="loader hidden"><img src="img/loader.gif" /></div>
+            <div class="welcome">
+                <p><b><a href="http://apis.is#phone">Símaskrá</a></b></p>
+
+                <p>
+                    Þetta er sýnissíða fyrir data scraper sem að <a href="http://www.twitter.com/krisjanmik" target="_blank">Kristjáns Inga Mikaelssonar</a> en scraperinn nýtir gögn frá <a href="http://www.ja.is" target="_blank">Já.is</a>.
+                </p>
+
+                <ul>
+                    <li>Hægt að leita út frá nafni, heimili eða símanúmeri</li>
+                    <li>Skilar slóð á .vcf upplýsingakort fyrir einstakling</li>
+                    <li>Þegar vélbúnaðarkostur verður uppfærður bætast nokkrir áhugaverðir hlutir hér.</li>
+                </ul>
+
+                <p><a href="http://www.twitter.com/rthor" target="_blank">Ragnar Þór Valgeirsson</a> setti upp þessa sýningarsíðu.</p>
+
+                <p>Þú skalt endilega kíkja á <a href="http://github.com/kristjanmik/apis" target="_blank">Github síðu verkefnisins</a> og reyna að hjálpa til!</p>
+            </div>
+            <div id="results" class="hidden">
+                <div>
+                    <h2>Niðurstöður</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nafn</th>
+                                <th>Heimilisfang</th>
+                                <th>Sími</th>
+                                <th>Nafnspjald</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="json">
+                    <h2>JSON</h2>
+                    <pre class="prettyprint linenums"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="personTemplate">
+        <td><%= name %></td>
+        <td><%= address %></td>
+        <td class="number"><%= number %></td>
+        <td><a href="<%= bCard %>">Sækja</a></td>
+    </script>
+
+    <a href="https://github.com/kristjanmik/apis"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
