@@ -9,7 +9,8 @@
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
-    <style type="text/css">
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+    <style type="text/css">tu
     body {
         padding-top: 60px;
         padding-bottom: 40px;
@@ -105,9 +106,9 @@
         color: #000;
     }
 
+    .hidden, input.hidden, *.hidden { display: none; }
+
     </style>
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -119,7 +120,7 @@
         <div class="wrapper">
             <div class="row">
                 <div class="span6">
-                    <h1><a href="http://apis.is/#phone" target="_blank">APIs.is<small>...símaskrár demó</small></a></h1>
+                    <h1><a href="/">APIs.is<small>...símaskrár demó</small></a></h1>
                 </div>
                 <div class="search span6">
                     <form method="POST" class="form-search" action="">
@@ -134,18 +135,17 @@
                 <p><b><a href="http://apis.is#phone">Símaskrá</a></b></p>
 
                 <p>
-                    Þetta er sýnissíða fyrir data scraper sem að <a href="http://www.twitter.com/kristjanmik" target="_blank">Kristjáns Inga Mikaelssonar</a> en scraperinn nýtir gögn frá <a href="http://www.ja.is" target="_blank">Já.is</a>.
+                    Þetta er sýningarsíðar fyrir einn af fjölmörgum endapunktum á <a href="http://apis.is">apis.is</a> Fyrir verkefninu fer <a href="http://www.twitter.com/kristjanmik" target="_blank">@kristjanmik</a>. Hægt er að finna upplýsingar um verkefnið á <a href="http://apis.is/#phone" target="_blank">forsíðu verkefnisins</a>.
                 </p>
 
                 <ul>
                     <li>Hægt að leita út frá nafni, heimili eða símanúmeri</li>
                     <li>Skilar slóð á .vcf upplýsingakort fyrir einstakling</li>
-                    <li>Þegar vélbúnaðarkostur verður uppfærður bætast nokkrir áhugaverðir hlutir hér.</li>
                 </ul>
 
-                <p><a href="http://www.twitter.com/rthor" target="_blank">Ragnar Þór Valgeirsson</a> setti upp þessa sýningarsíðu.</p>
+                <p><a href="http://www.twitter.com/rthor" target="_blank">@rthor</a> setti upp þessa sýningarsíðu.</p>
 
-                <p>Þú skalt endilega kíkja á <a href="http://github.com/kristjanmik/apis" target="_blank">Github síðu verkefnisins</a> og reyna að hjálpa til!</p>
+                <p><em>Þú skalt endilega kíkja á <a href="http://github.com/kristjanmik/apis" target="_blank">Github síðu verkefnisins</a> og reyna að hjálpa til!</em></p>
             </div>
             <div id="results" class="hidden">
                 <div>
@@ -178,9 +178,9 @@
 
     <a href="https://github.com/kristjanmik/apis"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
-    <script src="js/lib/jquery.js"></script>
-    <script src="js/lib/underscore.js"></script>
-    <script src="js/lib/backbone.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
