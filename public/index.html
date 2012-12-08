@@ -103,52 +103,84 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -H 'accept-versio
 					<div class="bs-docs-example">
 <pre class="prettyprint linenums">
 curl -X POST apis.is/bus/search -H 'Content-Type: application/json' -d '{
-	"from":"Kringlan",
-	"to":"Hlemmur", 
+	"from":"Hlemmur",
+	"to":"Kringlan", 
 	"hour":"20",
 	"min":"16",
 	"timetype":"T",
 	"day":"2012-11-28"
 }'
+
+/* eða */
+
+curl -X POST apis.is/bus/search -H 'Content-Type: application/json' -d '{
+	"from":"Hlemmur",
+	"toLat":"64.130888",
+	"toLng":"-21.894728",
+	"hour":"15",
+	"min":"30",
+	"timetype":"T",
+	"day":"2012-12-07"
+}'
+
+/* eða */
+
+curl -X POST apis.is/bus/search -H 'Content-Type: application/json' -d '{
+	"fromLat":"64.143328",
+	"fromLng":"-21.914638",
+	"toLat":"64.130888",
+	"toLng":"-21.894728",
+	"hour":"15",
+	"min":"30",
+	"timetype":"T",
+	"day":"2012-12-07"
+}'
+
 </pre>
+
 <p><span class="label label-info">ATH!</span> <strong>Timetype er "T" ef þú villt fá brottfaratíma en "F" ef að þú villt komutíma</strong></p>
 					</div>
 <pre class="prettyprint linenums">
 {
-    "results": [{
-        "name": "Tillaga 1:",
-        "vagons": "Vagn 13",
-        "totalTime": "10 mínútur",
-        "waypoints": [
-        	{
-	            "fromOrToName": "Frá:",
-	            "name": "Kringlan",
-	            "time": "20:43",
-	            "travelingType": "walk",
-	            "travelingValue": "Gengið 120 metra",
-	            "waitHere": true
-	        }, {
-	            "fromOrToName": "",
-	            "name": "Hamrahlíð",
-	            "time": "20:45",
-	            "travelingType": "bus",
-	            "travelingValue": "Leið 13",
-	            "waitHere": true
-	        }, {
-	            "fromOrToName": "",
-	            "name": "Hlemmur",
-	            "time": "20:53",
-	            "travelingType": "walk",
-	            "travelingValue": "Gengið 0 metra",
-	            "waitHere": true
-	        }, {
-	            "fromOrToName": "Til:",
-	            "name": "Hlemmur",
-	            "time": "20:53",
-	            "travelingType": ""
-	        }
-	    ]
-    }]
+    "results": [
+        {
+            "name": "Tillaga 1:",
+            "vagons": "Vagn 13",
+            "totalTime": "9 mínútur",
+            "waypoints": [
+                {
+                    "fromOrToName": "Frá:",
+                    "name": "Hlemmur",
+                    "time": "20:21",
+                    "travelingType": "walk",
+                    "travelingValue": "Gengið 0 metra",
+                    "waitHere": true
+                },
+                {
+                    "fromOrToName": "",
+                    "name": "Hlemmur",
+                    "time": "20:21",
+                    "travelingType": "bus",
+                    "travelingValue": "Leið 13",
+                    "waitHere": true
+                },
+                {
+                    "fromOrToName": "",
+                    "name": "Hamrahlíð",
+                    "time": "20:28",
+                    "travelingType": "walk",
+                    "travelingValue": "Gengið 100 metra",
+                    "waitHere": true
+                },
+                {
+                    "fromOrToName": "Til:",
+                    "name": "Kringlan",
+                    "time": "20:30",
+                    "travelingType": ""
+                }
+            ]
+        }
+    ]
 }
 </pre>
 
@@ -216,6 +248,11 @@ curl -X POST apis.is/bus/realtime -H 'Content-Type: application/json' -d '{
 
 					<h2>Sími</h2>
 
+					<p><span class="label label-info">ATH!</span> <strong>Það geta komið margar niðurstöður, en þó að hámarki 10</strong></p>
+					<p><span class="label label-info">ATH!</span> <strong><i>bCard</i> skilar slóð á skrá sem inniheldur upplýsingar um einstaklinginn á .vcf formi</strong></p>
+					<!--<p><span class="label label-info">ATH!</span> <strong></i>image</i> skilar mynd af heimilisfangi einstaklings</strong></p>-->
+					<!--<p><span class="label label-warning">ATH!</span> <strong>Það getur tekið nokkrar sek. að búa til bcard og myndina sérstaklega ef að niðurstöður eru margar. Hægt er að kalla í þennan endapunkt til þess að sjá hvort skráin sé til http://apis.is/data_ping/phone/image/nafn_a_png_skra.png og http://apis.is/data_ping/phone/image/nafn_a_vcf_skra.vcf</strong></p>-->
+
 					<h4>Leita að einstakling út frá nafni:</h4>
 					<a href="http://hurl.it/hurls/0dbe6dc863a93938e177e8498a2eebcaf73a6d11/afd6b1a8e3825ad32735da998df86d2545cb75ec" target="_blank">Dæmi á hurl.it</a>
 					
@@ -229,15 +266,15 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
 					</div>
 <pre class="prettyprint linenums">
 {
-  "results": [
-    {
-      "name": "Nafn einstaklings",
-      "number": "Númer einstaklings"
-    },
-  ]
+    "results": [
+        {
+            "name": "Nafn einstaklings",
+            "number": "Númer einstaklings",
+            "bCard": "http: //apis.is/data/phone/vcf/nafn_a_vcf_skra.vcf",<!--"image": "http: //apis.is/data/phone/image/nafn_a_png_skra.png"-->
+        }
+    ]
 }
 </pre>
-
 
 					<h4>Leita að einstakling út frá símanúmeri:</h4>
 					<a href="http://hurl.it/hurls/4d66246df75665620a7a7b095a05d6b0dc0bdd01/7bbd323682e667e30226fae4e6b7c408c59e5bf7" target="_blank">Dæmi á hurl.it</a>
@@ -251,16 +288,15 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
 					</div>
 <pre class="prettyprint linenums">
 {
-  "results": [
-    {
-      "name": "Nafn einstaklings",
-      "number": "Númer einstaklings"
-    },
-  ]
+    "results": [
+        {
+            "name": "Nafn einstaklings",
+            "number": "Númer einstaklings",
+            "bCard": "http: //apis.is/data/phone/vcf/nafn_a_vcf_skra.vcf",<!--"image": "http: //apis.is/data/phone/image/nafn_a_png_skra.png"-->
+        }
+    ]
 }
 </pre>
-
-					<p><span class="label label-info">ATH!</span> <strong>Það geta komið margar niðurstöður, en þó að hámarki 10</strong></p>
 
 				</div>
 
@@ -499,6 +535,6 @@ $('.sidebar-nav').scrollspy()
   })();
 
 </script>
-<!--Server version 0.0.0-44  - 07.12.12-->
+<!--Server version 0.0.0-46  - 08.12.12-->
 </body>
 </html>
