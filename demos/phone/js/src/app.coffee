@@ -5,9 +5,7 @@ window.APIs =
 
 window.template = (id) -> $('#' + id + 'Template').html()
 
-APIs.Models.Person = Backbone.Model.extend
-    defaults:
-        number: '-'
+APIs.Models.Person = Backbone.Model.extend {}
 
 APIs.Views.Person = Backbone.View.extend
     tagName: 'tr'
@@ -35,7 +33,7 @@ generateView = (data) ->
 
     if data.results.length is 0
         $('.wrapper').append $('<p>').addClass('no-results').html 'Ekkert fannst...'
-        $('p.no-results').delay(5000).slideUp()
+        $('p.no-results').delay(5000).slideUp -> $('.welcome').slideDown()
     else
         people = new APIs.Collections.Persons data.results
         persons = new APIs.Views.Persons collection: people
@@ -67,7 +65,7 @@ APIs.Views.Search = Backbone.View.extend
     submitForm: (e) ->
         e.preventDefault()
 
-        $('.welcome').remove()
+        $('.welcome').hide()
 
         $('#results').addClass 'hidden'
         $('.loader').toggleClass 'hidden'
@@ -79,5 +77,21 @@ APIs.Views.Search = Backbone.View.extend
         $(query).prop 'disabled', true
         getPeople query.val()
 
-
 search = new APIs.Views.Search()
+
+###*
+ * Google analytics
+###
+_gaq = _gaq || []
+_gaq.push ['_setAccount', 'UA-33726914-4']
+_gaq.push ['_setDomainName', 'apis.is']
+_gaq.push ['_trackPageview']
+(->
+    ga = document.createElement('script')
+    ga.type = 'text/javascript'
+    ga.async = true
+    if 'https:' is document.location.protocol then ga.src = 'https://ssl.google-analytics.com/ga.js';
+    else ga.src = 'http://www.google-analytics.com/ga.js'
+    s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore ga, s
+)()

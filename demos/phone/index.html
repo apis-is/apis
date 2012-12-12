@@ -10,108 +10,12 @@
     <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
     <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-    <style type="text/css">tu
-    body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-        background: url('/phone/img/cream_dust.png') repeat;
-        background-size: 100px 100px; /* size in px of image @1X */
-    }
-    .sidebar-nav {
-        padding: 9px 0;
-    }
-    .bs-docs-example::after{
-        content:"Dæmi";
-    }
-    .well{
-        margin-bottom:40px;
-    }
-    .com { color: #93a1a1; }
-    .lit { color: #195f91; }
-    .pun, .opn, .clo { color: #93a1a1; }
-    .fun { color: #dc322f; }
-    .str, .atv { color: #049cdb; }
-    .kwd, .prettyprint .tag { color: #1e347b; }
-    .typ, .atn, .dec, .var { color: teal; }
-    .pln { color: #48484c; }
 
-    .prettyprint {
-        padding: 8px;
-        background-color: #f7f7f9;
-        border: 1px solid #e1e1e8;
-    }
-    .prettyprint.linenums {
-        -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-        -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-        box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
-    }
+    <link rel="stylesheet" href="css/screen.css">
 
-    .loader {
-        width: 100%;
-        padding: 50px 0;
-        text-align: center;
-    }
-
-    .no-results {
-        width: 100%;
-        height: 100px;
-        line-height: 100px;
-        font-size: 32px;
-        text-align: center;
-        font-family: 'Iceland', cursive;
-        color: #cccccc;
-        background: #eeeeee;
-    }
-
-    /* Specify class=linenums on a pre to get line numbering */
-    ol.linenums {
-        margin: 0 0 0 33px; /* IE indents via margin-left */
-    }
-    ol.linenums li {
-        padding-left: 12px;
-        color: #bebec5;
-        line-height: 20px;
-        text-shadow: 0 1px 0 #fff;
-    }
-
-    .welcome  {
-        text-align: justify;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    h1 {
-        margin: 0;
-    }
-
-    h1 a {
-        font-size: 50px;
-        font-family: 'Iceland', cursive;
-        font-style: normal;
-    }
-
-    h1 a small {
-        color: #000;
-    }
-
-    h1 a:hover {
-        text-decoration: none;
-    }
-
-    h2 {
-        font-family: 'Iceland', cursive;
-        font-style: normal;
-        font-size: 32px;
-        color: #dddddd;
-        text-shadow: 0px 1px 0px #fff;
-        color: #000;
-    }
-
-    .hidden, input.hidden, *.hidden { display: none; }
-
-    </style>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body lang="is-IS">
@@ -178,24 +82,7 @@
 
     <a href="https://github.com/kristjanmik/apis"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
-    <script src="/phone/js/app.js"></script>
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-33726914-4']);
-      _gaq.push(['_setDomainName', 'apis.is']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
+    <script src="/phone/js/dependencies.min.js"></script>
+    <script src="/phone/js/app.min.js"></script>
 </body>
 </html>
