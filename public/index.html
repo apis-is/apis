@@ -67,11 +67,11 @@
 			<div class="span3 bs-docs-sidebar">
 				<div data-spy="affix" class="sidebar-nav">
 					<ul class="nav nav-list bs-docs-sidenav affix">
-            <li><a href="#phone">Sími</a></li>
 						<li><a href="#bus">Strætó</a></li>
 						<li><a href="#currency">Gjaldmiðlar</a></li>
 						<li><a href="#sms">Sms</a></li>
 						<li><a href="#company">Fyrirtæki</a></li>
+            <li><a href="#phone">Sími</a></li>
 					</ul>
 				</div><!--/.well -->
 			</div><!--/span-->
@@ -93,63 +93,6 @@ curl -X POST apis.is/phone -H 'Content-Type: application/json' -H 'accept-versio
 </pre>
 				<p>Til að prufa beiðnir getur þú notað <a href="http://www.hurl.it/hurls/0dbe6dc863a93938e177e8498a2eebcaf73a6d11/281d96545e488123b24e1d82191209b28205852d">Hurl.it</a>
 				</div>
-				
-<div class="well" id="phone">
-
-          <h2>Sími</h2>
-
-          <p>Hægt er að skoða flotta sýningarsíðu eftir <a href="http://twitter.com/rthor">@rthor</a> <a href="http://demo.apis.is/phone"><strong>hérna</strong></a>.</p>
-
-          <p><span class="label label-info">ATH!</span> <strong>Það geta komið margar niðurstöður, en þó að hámarki 10</strong></p>
-          <p><span class="label label-info">ATH!</span> <strong><i>bCard</i> skilar slóð á skrá sem inniheldur upplýsingar um einstaklinginn á .vcf formi</strong></p>
-          <!--<p><span class="label label-info">ATH!</span> <strong></i>image</i> skilar mynd af heimilisfangi einstaklings</strong></p>-->
-          <!--<p><span class="label label-warning">ATH!</span> <strong>Það getur tekið nokkrar sek. að búa til bcard og myndina sérstaklega ef að niðurstöður eru margar. Hægt er að kalla í þennan endapunkt til þess að sjá hvort skráin sé til http://apis.is/data_ping/phone/image/nafn_a_png_skra.png og http://apis.is/data_ping/phone/image/nafn_a_vcf_skra.vcf</strong></p>-->
-
-          <h4>Leita að einstakling út frá nafni:</h4>
-          
-          <div class="bs-docs-example">
-<pre class="prettyprint linenums">
-curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
-  "name":"gunnar"
-}'
-</pre>
-
-          </div>
-<pre class="prettyprint linenums">
-{
-    "results": [
-        {
-            "name": "Nafn einstaklings",
-            "number": "Númer einstaklings",
-            "address": "Heimilisfang einstaklings",
-            "bCard": "http: //apis.is/data/phone/vcf/nafn_a_vcf_skra.vcf",<!--"image": "http: //apis.is/data/phone/image/nafn_a_png_skra.png"-->
-        }
-    ]
-}
-</pre>
-
-          <h4>Leita að einstakling út frá símanúmeri:</h4>
-
-          <div class="bs-docs-example">
-<pre class="prettyprint linenums">
-curl -X POST apis.is/phone -H 'Content-Type: application/json' -d '{
-  "phone":"118"
-}'
-</pre>
-          </div>
-<pre class="prettyprint linenums">
-{
-    "results": [
-        {
-            "name": "Nafn einstaklings",
-            "number": "Númer einstaklings",
-            "bCard": "http: //apis.is/data/phone/vcf/nafn_a_vcf_skra.vcf",<!--"image": "http: //apis.is/data/phone/image/nafn_a_png_skra.png"-->
-        }
-    ]
-}
-</pre>
-
-        </div>
 
 				<div class="well" id="bus">
 
@@ -487,7 +430,13 @@ curl -X POST apis.is/company -H 'Content-Type: application/json' -d '{
 
 				</div>
 
+<div class="well" id="phone">
 
+          <h2>Sími</h2>
+
+          <p>Þessum endapunkti hefur verið lokað að beiðni <a href="http://ja.is">Já.is</a>. </p>
+
+        </div>
 
 	</div><!--/span-->
 </div><!--/row-->
