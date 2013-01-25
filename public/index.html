@@ -78,8 +78,8 @@
 			<div class="span9">
 				<div class="hero-unit">
 					<h1>Velkomin inn á API's.is</h1>
-					<p>Tilgangur þessara síðu er að veita forriturum og áhugamönnum aðgang að gögnum og upplýsingum á eins aðgengilegan hátt og völ er á. Allar upplýsingar eru sóttar af opnum vefsíðum og gerðar aðgengilegri fyrir þá sem vilja með json þjónustum. Ert þú með tillögu að einhverjum gögnum sem hægt er að bæta við? Hafðu þá samband!</p>
-					<p>Þú skalt endilega kíkja á <a href="https://github.com/kristjanmik/apis">Github síðu verkefnisins</a> og reyna að hjálpa til!</p>
+					<p>Tilgangur þessara síðu er að veita forriturum og áhugamönnum aðgang að gögnum og upplýsingum á eins aðgengilegan hátt og völ er á. Allar upplýsingar eru sóttar af opnum vefsíðum og gerðar aðgengilegri fyrir þá sem vilja með json þjónustum. Ert þú með tillögu að einhverjum gögnum sem hægt er að bæta við? Ekki hika við að hafa samband!</p>
+					<p>Þú skalt endilega kíkja á <a href="https://github.com/kristjanmik/apis">github síðu verkefnisins</a> og reyna að hjálpa til!</p>
 				</div>
 
 				<div class="well">
@@ -87,15 +87,20 @@
 					<p>Allir endapunktar eru nú í útgáfu 1 og þarf því ekki að senda accept-version header til að byrja með. Þegar endapunktarnir eru uppfærðir er tilgreint í hverjum endapunkti fyrir sig hvaða útgáfa er nýjust og hvort einhverjar breytingar hafi átt sér stað á notkun hans. Curl dæmi (<a href="https://httpkit.com/resources/HTTP-from-the-Command-Line/">Hvað er Curl?</a>) með accept-version header:</p>
 
 <pre class="prettyprint linenums">
-curl -X POST apis.is/phone -H 'Content-Type: application/json' -H 'accept-version: 1' -d '{
-	"name":"gunnar"
+curl -X POST apis.is/currency -H 'accept-version: 1' -H 'Content-Type: application/json'  -d '{
+  "provider":"arion"
 }'
 </pre>
-				<p>Til að prufa beiðnir getur þú notað <a href="http://www.hurl.it/hurls/0dbe6dc863a93938e177e8498a2eebcaf73a6d11/281d96545e488123b24e1d82191209b28205852d">Hurl.it</a>
 				</div>
 
 				<div class="well" id="bus">
 
+          <h2>Strætó</h2>
+
+          <h4>Leita að leiðum milli tveggja staða:</h4>
+
+          <p>Þessum endapunkti hefur verið lokað tímabundið vegna breytinga á síðu bus.is</p>
+<!--
 					<h2>Strætó</h2>
 
 					<h4>Leita að leiðum milli tveggja staða:</h4>
@@ -183,6 +188,8 @@ curl -X POST apis.is/bus/search -H 'Content-Type: application/json' -d '{
     ]
 }
 </pre>
+
+-->
 
 					<h4>Rauntímastaðsetningar strætóa:</h4>
 					

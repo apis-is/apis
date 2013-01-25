@@ -1,11 +1,12 @@
 demos/phone/codekit-config.json
 demos/phone/js/src/dependencies.js
 data
-demos/server.js
-demos/package.json
+demos/map
 endpoints
+fundir
 lib
 node_modules
+npm-debug.log
 package.json
 post.txt
 server.js
