@@ -40,7 +40,6 @@ Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum að
 	+ [bin.arnastofnun.is](http://bin.arnastofnun.is/)
 + Fjármálaupplýsingar:	
 	+ [arionbanki.is/markadir](http://www.arionbanki.is/markadir)
-	+ [m5.is](http://www.m5.is/)
 + Almennur fróðleikur:
 	+ [visindavefur.hi.is](http://www.visindavefur.hi.is/)
 + Hagnýtar upplýsingar:
@@ -53,6 +52,8 @@ Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum að
 	+ [skjarinn.is/einn](http://www.skjarinn.is/einn/)
 	+ [stod2.is/Dagskra/dagskra?stod=STOD2](http://stod2.is/Dagskra/dagskra?stod=STOD2)
 	+ [n4.is/page/dagskra](http://www.n4.is/page/dagskra)
++  Upplýsingar úr skráningu Icenic
+    + [https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is](https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is)
 
 ##Áhugaverðar síður:
 + [arnastofnun.is/page/gagnasofn](http://arnastofnun.is/page/gagnasofn)

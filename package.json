@@ -1,0 +1,18 @@
+{
+	"name": "apis.is",
+	"version": "0.1.0",
+	"author": "Kristján Ingi Mikaelsson <kristjanmik@gmail.com>",
+	"description": "A json api wraper around publicly open data in Iceland",
+	"main": "./lib/http-server",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kristjanmik/apis.git"
+	},
+	"dependencies" : {
+		"restify": "1.4.x",
+		"request": "2.11.x",
+		"jquery": "1.8.x",
+		"scraper" : "0.0.9",
+		"moment": "2.0.0"
+	}
+}
