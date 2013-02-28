@@ -52,7 +52,7 @@ Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum að
 	+ [skjarinn.is/einn](http://www.skjarinn.is/einn/)
 	+ [stod2.is/Dagskra/dagskra?stod=STOD2](http://stod2.is/Dagskra/dagskra?stod=STOD2)
 	+ [n4.is/page/dagskra](http://www.n4.is/page/dagskra)
-+  Upplýsingar úr skráningu Icenic
++  Upplýsingar úr skráningu Isnic
     + [https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is](https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is)
 
 ##Áhugaverðar síður:
