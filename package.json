@@ -3,7 +3,6 @@
 	"version": "0.1.0",
 	"author": "Kristján Ingi Mikaelsson <kristjanmik@gmail.com>",
 	"description": "A json api wraper around publicly open data in Iceland",
-	"main": "./lib/http-server",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/kristjanmik/apis.git"
