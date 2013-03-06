@@ -7,4 +7,6 @@ tests
 endpoints/sms.js
 endpoints/phone.js
 endpoints/phone2.js
+endpoints/phone
+endpoints/sms
 lib/phantom_daemon.js

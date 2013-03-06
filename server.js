@@ -14,6 +14,7 @@ exports.request = request = require('request');
 exports.fs = fs = require('fs');
 exports.$ = $ = require('jquery');
 exports.moment = moment = require('moment');
+exports.file = fileModule = require('file');
 
 /**
  * Global helpers
@@ -27,14 +28,19 @@ exports.e = e = require('./lib/errors.js');
  */
 
 //Load all endpoints in the endpoints folder
-//Readdir is blocking on purpose because the server can't listen yet
-require("fs").readdir("./endpoints",function(error,files){
-	files.forEach(function(file) {
-		var fileName = file.replace('.js',''),
-			requiredData = require("./endpoints/" + file);
-		//Register routes
-		h.startEndpointListener(fileName,requiredData);
-	})
+//walk is blocking on purpose because the server can't listen yet
+fileModule.walk('./endpoints', function(a, dirPath, dirs, files){
+	if(files){
+		files.forEach(function(file,key){
+			var fileName = file.replace('/index.js','')
+								.replace('.js','')
+								.replace('endpoints/','')
+								.replace('/','.'),
+ 				requiredData = require('./'+file);
+ 			h.startEndpointListener(fileName,requiredData);
+		})
+	}
+	
 });
 
 /**
