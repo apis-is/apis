@@ -1,4 +1,7 @@
-exports.slash = function(req, res, next){
+exports.setup = function(){
+	server.post({path: '/company', version: '1.0.0'}, slash);
+}
+slash = function(req, res, next){
 	res.charSet = 'utf8';
 	
 	var data = req.params;

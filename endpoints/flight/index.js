@@ -1,4 +1,8 @@
-exports.slash = function(req, res, next){
+exports.setup = function(){
+	server.post({path: '/flight', version: '1.0.0'}, slash);
+}
+
+slash = function(req, res, next){
 
 	var data = req.params;
 
@@ -17,6 +21,7 @@ exports.slash = function(req, res, next){
 		url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
 	}else{
 		res.json(200,{'error':'Wrong parameters given!'});
+		return next();
 	}
 
 	request.get({

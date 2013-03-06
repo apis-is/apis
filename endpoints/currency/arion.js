@@ -1,4 +1,8 @@
-exports.slash = function(req, res, next){
+exports.setup = function(){
+	server.get({path: '/currency/arion', version: '1.0.0'}, slash);
+}
+
+slash = function(req, res, next){
 	res.charSet = 'utf8';
 
 

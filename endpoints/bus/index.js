@@ -1,4 +1,9 @@
-exports.search = function(req, res, next) {
+exports.setup = function(){
+	server.post({path: '/bus/search', version: '1.0.0'}, search);
+	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime);
+}
+
+search = function(req, res, next) {
 	res.json(404,{error:"This api endpoint has been closed temporarily, because Bus.is changed it's markup."});
 	return next();
 
@@ -191,7 +196,7 @@ exports.search = function(req, res, next) {
 	
 }
 
-exports.realtime = function(req, res, next){
+realtime = function(req, res, next){
 	var data = req.params;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {

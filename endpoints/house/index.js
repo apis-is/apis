@@ -1,5 +1,10 @@
-//Ókl!
-exports.slash = function(req, res, next){
+//Incomplete
+
+exports.setup = function(){
+	server.post({path: '/house', version: '1.0.0'}, slash);
+}
+
+slash = function(req, res, next){
 	var data = req.params;
 	res.charSet = 'utf8';
 
