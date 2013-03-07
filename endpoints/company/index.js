@@ -1,7 +1,7 @@
 exports.setup = function(){
-	server.post({path: '/company', version: '1.0.0'}, slash);
+	server.post({path: '/company', version: '1.0.0'}, lookup);
 }
-slash = function(req, res, next){
+lookup = function(req, res, next){
 	res.charSet = 'utf8';
 	
 	var data = req.params;
