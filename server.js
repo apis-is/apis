@@ -19,6 +19,7 @@ exports.endpoints = endpoints = require('./lib/endpoints.js');
 
 //Enables the use of posted params
 server.use(restify.bodyParser({ mapParams: true }));
+server.use(restify.queryParser());
 
 /**
  * Endpoints setup
