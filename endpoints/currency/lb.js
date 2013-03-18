@@ -19,13 +19,13 @@ var getCurrency = function(req, res, next){
       var arr = result.GjaldmidillRow;
       for (var i = 0, currency; currency = arr[i]; i++) {
         currencies.push({
-          shortName: currency.Mynt,
-          longName: currency.Heiti,
-          value: currency.MidValue,
-          askValue: currency.Kaup,
-          bidValue: currency.Sala,
-          changeCur: currency.Breyting,
-          changePer: (parseFloat(currency.Breyting) / parseFloat(currency.Midgengi)).toFixed(2)
+          shortName: currency.Mynt[0],
+          longName: currency.Heiti[0],
+          value: parseFloat(currency.Midgengi),
+          askValue: parseFloat(currency.Kaup),
+          bidValue: parseFloat(currency.Sala),
+          changeCur: parseFloat(currency.Breyting[0]),
+          changePer: parseFloat((parseFloat(currency.Breyting) / parseFloat(currency.Midgengi)).toFixed(2))
         });
       }
       res.json(200, { results: currencies });
