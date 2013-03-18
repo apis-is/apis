@@ -14,6 +14,7 @@
 		"scraper" : "0.0.9",
 		"moment": "2.0.0",
 		"file": "0.1.x",
-		"nodeunit": "0.7.x"
+		"nodeunit": "0.7.x",
+    "xml2js": "0.2.x"
 	}
 }
