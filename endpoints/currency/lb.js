@@ -1,6 +1,6 @@
 var parseString = require('xml2js').parseString;
 
-var getCurrency = function(req, res, next){
+var getCurrencies = function(req, res, next){
   res.charSet = 'utf8';
 
   // A = Almennt gengi, S = Seðlagengi
@@ -35,5 +35,5 @@ var getCurrency = function(req, res, next){
 };
 
 exports.setup = function(){
-  server.get({path: '/currency/lb', version: '1.0.0'}, getCurrency);
+  server.get({path: '/currency/lb', version: '1.0.0'}, getCurrencies);
 };
