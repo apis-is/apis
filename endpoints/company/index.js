@@ -1,5 +1,7 @@
 exports.setup = function(){
-	server.post({path: '/company', version: '1.0.0'}, lookup);
+	server.post({path: '/company', version: '1.0.0'}, lookup); //Old
+
+	server.get({path: '/company', version: '1.0.0'}, lookup);
 }
 lookup = function(req, res, next){
 	res.charSet = 'utf8';
@@ -94,11 +96,8 @@ lookup = function(req, res, next){
 			});	
 		}
 		
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/company', obj,true);
-		}else{
-			h.logVisit('/company', obj,false);
-		}
+		h.logVisit('/company', obj,false);
+		
 		res.json(200,obj)
 		return next();
 

@@ -10,6 +10,7 @@ exports.fs = fs = require('fs');
 exports.$ = $ = require('jquery');
 exports.moment = moment = require('moment');
 exports.file = fileModule = require('file');
+exports.parseString = parseString = require('xml2js').parseString;
 
 /**
  * Global helpers

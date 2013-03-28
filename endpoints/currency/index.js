@@ -18,7 +18,7 @@ slash = function(req, res, next){
 			url: 'http://www.m5.is/?gluggi=forsida'
 		}, function(error, response, body){
 			if(error){
-				res.json(500,{error:"Something went wrong"});
+				res.json(500,{error:"Something went wrong on the server"});
 				return next();
 			}
 
@@ -86,11 +86,8 @@ slash = function(req, res, next){
 
 			});
 
-			if(req.header('Uptime-Test') == 'true'){
-				h.logVisit('/currency', obj,true);
-			}else{
-				h.logVisit('/currency', obj,false);
-			}
+			h.logVisit('/currency', obj,false);
+			
 			res.json(200,obj);
 			return next();
 
@@ -105,7 +102,7 @@ slash = function(req, res, next){
 			body: toSend
 		}, function(error, response, body){
 			if(error){
-				res.json(500,{error:"Something went wrong"});
+				res.json(500,{error:"Something went wrong on the server"});
 				return next();
 			}
 
@@ -129,11 +126,9 @@ slash = function(req, res, next){
 
 				obj.results.push(currency)
 			});
-			if(req.header('Uptime-Test') == 'true'){
-				h.logVisit('/currency', obj,true);
-			}else{
-				h.logVisit('/currency', obj,false);
-			}
+
+			h.logVisit('/currency', obj,false);
+			
 			res.json(200,obj);
 			return next();
 

@@ -13,12 +13,12 @@ slash = function(req, res, next){
 		body: toSend
 	}, function(error, response, body){
 		if(error){
-			res.json(500,{error:"Something went wrong"});
+			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
 
 		var jsonObject = JSON.parse(body),
-			obj = { results: []};
+			obj = { results: [] };
 
 		jsonObject.forEach(function(object,i){
 			var changePer = parseFloat(object.LastValueChange)/parseFloat(object.MidValue),
@@ -37,11 +37,9 @@ slash = function(req, res, next){
 
 			obj.results.push(currency)
 		});
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/currency', obj,true);
-		}else{
-			h.logVisit('/currency', obj,false);
-		}
+
+		h.logVisit('/currency', obj,false);
+		
 		res.json(200,obj);
 		return next();
 	});

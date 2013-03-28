@@ -1,5 +1,7 @@
 exports.setup = function(){
-	server.post({path: '/car', version: '1.0.0'}, lookup);
+	server.post({path: '/car', version: '1.0.0'}, lookup); //Old
+
+	server.get({path: '/car', version: '1.0.0'}, lookup);
 }
 
 lookup = function(req, res, next){
@@ -16,7 +18,7 @@ lookup = function(req, res, next){
 		url: 'http://www.us.is/upplysingar_um_bil?vehinumber='+data.number
 	}, function(error, response, body){
 		if(error){
-			res.json(500,{error:"Something went wrong"});
+			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
 		var data = $(body),
@@ -35,9 +37,11 @@ lookup = function(req, res, next){
 				'weight': 0
 			}
 
-		var fields = ['registryNumber','number','factoryNumber','type','subType','color','registeredAt','status','nextCheck','pollution','weight'];
-		var nothingFound = data.find('table tr td').html();
-		if( nothingFound.indexOf('Ekkert ökutæki fannst') == -1){
+		var fields = ['registryNumber','number','factoryNumber','type','subType','color','registeredAt','status','nextCheck','pollution','weight'],
+
+			nothingFound = data.find('table tr td').html();
+
+		if(nothingFound.indexOf('Ekkert ökutæki fannst') == -1){
 			//Found something
 			data.find('table tr').each(function(key){
 				var val = $(this).find('b').html();
@@ -48,11 +52,8 @@ lookup = function(req, res, next){
 			obj.results.push(car);
 		}
 		
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/car', obj,true);
-		}else{
-			h.logVisit('/car', obj,false);
-		}
+		h.logVisit('/car', obj,false);
+
 		res.json(200,obj)
 		return next();
 	});

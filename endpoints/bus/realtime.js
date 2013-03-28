@@ -1,5 +1,7 @@
 exports.setup = function(){
-	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime);
+	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
+
+	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);
 }
 
 realtime = function(req, res, next){
@@ -8,12 +10,12 @@ realtime = function(req, res, next){
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
 		if(error) {
 			h.logError(error,error.stack);
-			res.json(500,{error:'Something went wrong',code:3});
+			res.json(500,{error:'Something went wrong on the server'});
 			return next();
 		}
 		if(response.statusCode !== 200){
 			h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
-			res.json(500,{error:"Something went wrong code 1",code:4});
+			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
 
@@ -56,14 +58,14 @@ realtime = function(req, res, next){
 			}
 			if(response.statusCode !== 200){
 				h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
-				res.json(500,{error:"Something went wrong code 1",code:4});
+				res.json(500,{error:"Something went wrong on the server"});
 				return next();
 			}
 
 			try{
     			var data = JSON.parse(body);
 			}catch(e){
-				res.json(500,{error:"Something went wrong"});
+				res.json(500,{error:"Something went wrong on the server"});
 				return next();
 			}
 
@@ -97,11 +99,8 @@ realtime = function(req, res, next){
     			objRoutes.results.push(objRoute);
     		});
 
-    		if(req.header('Uptime-Test') == 'true'){
-				h.logVisit('/bus/search', objRoutes,true);
-			}else{
-				h.logVisit('/bus/search', objRoutes,false);
-			}
+			h.logVisit('/bus/search', objRoutes,false);
+			
     		res.json(200,objRoutes)
     		return next();
 	    });

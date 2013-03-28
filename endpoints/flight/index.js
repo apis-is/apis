@@ -1,15 +1,16 @@
 exports.setup = function(){
+	server.post({path: '/flight', version: '1.0.0'}, slash); //Old
+
 	server.post({path: '/flight', version: '1.0.0'}, slash);
 }
 
 slash = function(req, res, next){
 
-	var data = req.params;
+	var data = req.params,
+		url = '';
 
 	if(!data.type) data.type = '';
 	if(!data.language) data.language = '';
-
-	var url = '';
 
 	if(data.type == 'departures' && data.language == 'is'){
 		url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/';
@@ -20,7 +21,7 @@ slash = function(req, res, next){
 	}else if(data.type == 'arrivals' && data.language == 'en'){
 		url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
 	}else{
-		res.json(200,{'error':'Wrong parameters given!'});
+		res.json(431,{'error':'Wrong parameters given!'});
 		return next();
 	}
 
@@ -29,7 +30,7 @@ slash = function(req, res, next){
 		url: url
 	}, function(error, response, body){
 		if(error){
-			res.json(500,{error:"Something went wrong"});
+			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
 		var data = $(body),
@@ -58,11 +59,8 @@ slash = function(req, res, next){
 			}
 		});
 
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/flight', obj,true);
-		}else{
-			h.logVisit('/flight', obj,false);
-		}
+		h.logVisit('/flight', obj,false);
+		
 		res.json(200,obj)
 		return next();
 	});

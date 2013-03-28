@@ -9,4 +9,8 @@ endpoints/phone.js
 endpoints/phone2.js
 endpoints/phone
 endpoints/sms
+endpoints/closed_endpoints
 lib/phantom_daemon.js
+index.php
+docs
+test
