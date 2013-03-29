@@ -11,6 +11,8 @@ exports.$ = $ = require('jquery');
 exports.moment = moment = require('moment');
 exports.file = fileModule = require('file');
 exports.parseString = parseString = require('xml2js').parseString;
+exports.cheerio = cheerio = require("cheerio");
+exports.isn2wgs = isn2wgs = require('isn2wgs');
 
 /**
  * Global helpers

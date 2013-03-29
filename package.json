@@ -24,7 +24,9 @@
 		"file": "0.1.x",
 		"nodeunit": "0.7.x",
     	"xml2js": "0.2.x",
-        "mocha": "~1.8.2"
+        "mocha": "~1.8.2",
+       	"cheerio": "0.10.x",
+       	"isn2wgs": "0.0.1"
     },
     "scripts":{
     	"test": "find ./test -name '*.js' | xargs mocha -R spec"

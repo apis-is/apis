@@ -8,7 +8,6 @@ lookup = function(req, res, next){
 	var data = req.params;
 	
 	if(!data.number){
-		h.logError(error,error.stack);
 		res.json(431,{error:'Please provide a valid number to lookup'});
 		return next();
 	}

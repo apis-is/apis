@@ -1,109 +1,260 @@
 //Incomplete
 
 exports.setup = function(){
-	server.post({path: '/house', version: '1.0.0'}, slash);
+	server.get({path: '/house', version: '1.0.0'}, slash);
 }
 
 slash = function(req, res, next){
-	var data = req.params;
 	res.charSet = 'utf8';
-
-	var houseUrl = 'https://www.skra.is/default.aspx?pageid=1000&selector=streetname&streetname='+encodeURIComponent(data.search)+'&submitbutton=Leita';
-
-	console.log(houseUrl)
-	scraper(
-	{
-		'uri': houseUrl,
-		'headers': {
-			'User-Agent': h.browser()
-		}
-	}, function(err, $) {
-		if (err) {
-			//h.logError(err,err.stack)
-
+	var fnr = req.params.house;
+	
+	general_info(fnr,function(error,general) {
+		if (error == "not found"){
+			res.json(200,{found:false});
+			return next();
+		} else if(error){
+			console.log(error.stack)
+			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
 
-		//console.log($('.resulttable').html())
+		extended_info(fnr,function(error,extended){
+			if(error){
+				console.log(error.stack);
+				res.json(500,{error:"Something went wrong on the server"});
+				return next();
+			}
 
-		$('.resulttable').find('tbody').find('tr').each(function(){
-			//console.log($(this).html())
+			geocode(general.land.land_id,function(error,geo){
+				if(error){
+					console.log(error.stack);
+					res.json(500,{error:"Something went wrong on the server"});
+					return next();
+				}
 
-			$(this).find('tr').each(function(){
-				console.log($(this).html())
-			})
-		})
-		var obj = { results: []},
-			outerCount = 1;
+				var obj = {
+					found: true,
+					location: {
+						x: geo.center.x,
+						y: geo.center.y,
+						latitude: geo.center.latitude,
+						longitude: geo.center.longitude
+					}, 
+					land: {
+						area: parseFloat(general.land.area,10), 
+						type: general.land.land_type, 
+						bbox: geo.bbox, 
+						id: general.land.land_id
+					}, 
+					property: {
+						year: parseInt(extended.year,10), 
+						build_material: extended.building_material, 
+						street: geo.properties.HEITI_NF,
+						street_number: ""+geo.properties.HUSNR, 
+						address: extended.name.substr(0,extended.name.length -8), 
+						valuation_estimate: parseInt(general.house.property_value),
+						id: parseInt(extended.id,10), 
+						//"toilet_count": 1, 
+						floor_count: extended.floor_count, 
+						area: parseFloat(general.house.size), 
+						insurance_estimate: parseFloat(general.house.fire_insurance_value,10),
+						//"shower_count": 1, 
+						status: extended.state, 
+						//"elevator": false, 
+						//"apartment_count": 3, 
+						postal_code: geo.properties.POSTNR
+					}, 
+					
+					map: {
+						url: "http://geo.skra.is/geoserver/vefur/heinum/"+geo.properties.HEINUM, 
+						id: geo.properties.HEINUM
+					}, 
+				}
 
-		// if($('.resultnote').length == 0){
-		// 	$('body').find('.boxbody > .nozebra').find('tbody').find('tr').each(function() {
+				res.json(200,obj);
+			});
 
-		// 		if(outerCount == 1){
-		// 			var name = $('body').find('.boxbody > h1').html(),
-		// 			sn = $('body').find('.boxbody > h1').html();
+		});
+	});
+}
 
-		// 			var company = {
-		// 				name: name.substring(0,name.indexOf('(')-1),
-		// 					sn: sn.substring(sn.length-11,sn.length-1),
-		// 					active: 1,
-		// 					address: ''
-		// 				};
+function general_info(fastanr,callback) {
 
-		// 				var count = 1;
+	if (fastanr[3] && fastanr[3] !=='-') fastanr = fastanr.slice(0,3)+'-'+fastanr.slice(3);
 
-		// 				$(this).find('td').each(function() {
-		// 					if(count == 1){
-		// 						company.address = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
-		// 					}
+	var url = "http://skra.is/default.aspx?pageid=1000&streetname="+fastanr;
 
-		// 					count++;
-		// 				});
+	request(url,function(error,res,body) {
+		if (error) return callback(err);
 
-		// 				obj.results.push(company);
-		// 			}
-		// 			outerCount++
-		// 		});
-		// }else{
-		// 	$('table').find('tr').each(function() {
+		try {
+			var $ = cheerio.load(body),
+				ret = {house:{},land:{}};
 
-		// 		var count = 1,
-		// 			company = {
-		// 				name: '',
-		// 				sn: '',
-		// 				active: 1,
-		// 				address: 0
-		// 			};
-		// 		if(outerCount != 1){
+			// Parse house/apartment
+			var next = $('td:contains("'+fastanr+'")');
 
-		// 			$(this).find('td').each(function() {
+			while ( next != (next = next.next())) {
+				var text = next.text()
+				.replace(/\r/g,"")
+				.replace(/\n/g,"")
+				.trim();
+				ret.house[next.attr("header")] = text;
+			}
 
-		// 				if(count == 1){
-		// 					company.sn = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
-		// 				}else if(count == 2){
-		// 					var val = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
+			var th = $(".resulttable.small th"),
+				td = $(".resulttable.small td");
 
-		// 					if(val.indexOf('(Félag afskráð)') > 0){
-		// 						company.active = 0;
-		// 					}
+			// Parse land
+			th.each(function(i) {
+				ret.land[$(this).text()] = $(td[i]).text().trim();
+			});
 
-		// 					company.name = val.replace("\n","").replace("(Félag afskráð)","").replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-		// 				}else if(count == 3){
-		// 					company.address = $(this).html().replace(/<(?:.|\n)*?>/gm, '')
-		// 				}
+			var keyMap = {
+				"merking": "flag",
+				"notkun": "facility_type",
+				"byggar": "built",
+				"birtst": "size",
+				"fastmat": "property_value",
+				"lodahlmat": "lodahlmat",
+				"brunabotamat": "fire_insurance_value",
+				"fasteignamat": "fasteignamat",
+				//Land
+				"Land": "land_id",
+				"Notkun": "land_type",
+				"Stærð": "area",
+				"Staðgreinir": "location_id"
+			};
 
-		// 				count++;
+			for(key in ret.house){
+				ret.house.renameProperty(key,keyMap[key])
+			}
+			for(key in ret.land){
+				ret.land.renameProperty(key,keyMap[key])
+			}
 
-		// 			});
+			if(Object.keys(ret.house).length){
+				ret.land.area = ret.land.area.substr(0,ret.land.area.length -3);
+				ret.house.size = ret.house.size.substr(0,ret.house.size.length -3);
+				ret.house.property_value = ret.house.property_value.replace(/\./g,"");
+				ret.house.fire_insurance_value = ret.house.fire_insurance_value.replace(/\./g,"");
+			}
 
-		// 			obj.results.push(company);
-		// 		}
-		// 		outerCount++;
+			callback(!Object.keys(ret.house).length && !Object.keys(ret.land).length && "not found",ret);
+		} catch(e) { 
+			callback(e); 
+		}
+	});
+}
 
-		// 	});	
-		// }
-		res.json(200,obj);
-		//h.logVisit('/company', obj);
-	}
-	);
+function extended_info(fastanr,callback) {
+
+	if (fastanr[3] && fastanr[3] !=='-') fastanr = fastanr.slice(0,3)+'-'+fastanr.slice(3);
+
+	var url = 'http://www.skra.is/default.aspx?pageid=957&fnum='+fastanr.replace("-","");
+
+	request.post(url,function(error,res,body) {
+
+		if (error) return callback(error);
+
+		try {
+			var $ = cheerio.load(body),
+			ret = {};
+
+			$("th").each(function() {
+				if (this.next) {
+					ret[$(this).text()] = $(this).next().text();
+				}
+			});
+
+			var keyMap = {
+				"Eign": "property_type",
+				"Fastanúmer": "id",
+				"Heiti": "name",
+				"Flokkun": "flokkun",
+				"Bygging": 'bygging',
+				"Staða": "state",
+				"Metið afskriftarár": "year",
+				"Byggingarefni": "building_material",
+				"Flatarmál (m2)": "area",
+				"Íbúð í kjallara": "basement_apartment",
+				"Geymsla o.fl.": "storage_space",
+				"Aðstaða o.fl.": "facility_space",
+				"Fjöldi sturta": "shower_count",
+				"Fjöldi klósetta": "toilet_count",
+				"Er lyfta í húsi?": "elevator",
+				"Aðalhæð íbúðar": "main_floor",
+				"Fjöldi hæða í íbúð": "floor_count",
+				"Fjöldi íbúða í húsi": "appartment_count",
+				"Matssvæði": "evaluation_area",
+				"Undirmatssvæði": "sub_evaluation_area"
+			};
+
+			for(key in ret){
+				ret.renameProperty(key,keyMap[key]);
+			}
+
+			callback(!Object.keys(ret).length && "Not Found",ret);
+
+		} catch(e) { 
+			callback(e); 
+		}
+	});
+}
+
+function geocode(landnr,callback) {
+	var req = {
+		url : "http://geo.skra.is/geoserver/wfs",
+		method: "POST",
+		form : {
+			'service':'wfs',
+			'version':'1.1.0',
+			'request':'GetFeature',
+			'typename':'fasteignaskra:VSTADF',
+			'outputformat':'json',
+			'filter':'<Filter><PropertyIsLike wildCard="*" singleChar="#" escapeChar="!"><PropertyName>fasteignaskra:LANDNR</PropertyName><Literal>'+landnr+'</Literal></PropertyIsLike></Filter>'
+		}
+	};
+	request(req,function(error,res,body) {
+
+		if (error) return callback(error);
+
+		try {
+			var ret = {};
+			body = JSON.parse(body);
+
+			var center = isn2wgs.apply(this,body.features[0].geometry.coordinates);
+
+			ret.center = {
+				x: body.features[0].geometry.coordinates[0],
+				y: body.features[0].geometry.coordinates[1],
+				latitude: center.latitude,
+				longitude: center.longitude
+			};
+
+			var box = [isn2wgs(body.bbox[0],body.bbox[1]),isn2wgs(body.bbox[2],body.bbox[3])];
+
+			ret.bbox = [
+				{
+					x: body.bbox[0],
+					y: body.bbox[1],
+					latitude: box[0].latitude,
+					longitude: box[0].longitude
+				},
+				{
+					x: body.bbox[2],
+					y: body.bbox[3],
+					lat: box[1].latitude,
+					longitude: box[1].longitude
+				},
+			];
+
+			ret.properties = body.features[0].properties;
+
+			callback(null,ret);
+
+		} catch(e) { 
+			callback(e); 
+		}
+	});
 }
