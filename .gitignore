@@ -10,7 +10,9 @@ endpoints/phone2.js
 endpoints/phone
 endpoints/sms
 endpoints/closed_endpoints
+endpoints/kosningar
 lib/phantom_daemon.js
 index.php
 docs
 test
+kosningar.js
