@@ -33,3 +33,4 @@ endpoints.load();
  * Start the server
  */
 server.listen(3100);
+console.log('Server running at port: 3100');

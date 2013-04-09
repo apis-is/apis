@@ -1,11 +1,3 @@
-Object.prototype.renameProperty = function (oldName, newName) {
-    // Check for the old property name to avoid a ReferenceError in strict mode.
-    if (this.hasOwnProperty(oldName)) {
-        this[newName] = this[oldName];
-        delete this[oldName];
-    }
-    return this;
-};
 //Incomplete
 
 exports.setup = function(){
@@ -99,25 +91,6 @@ function general_info(fastanr,callback) {
 			var $ = cheerio.load(body),
 				ret = {house:{},land:{}};
 
-			// Parse house/apartment
-			var next = $('td:contains("'+fastanr+'")');
-
-			while ( next != (next = next.next())) {
-				var text = next.text()
-				.replace(/\r/g,"")
-				.replace(/\n/g,"")
-				.trim();
-				ret.house[next.attr("header")] = text;
-			}
-
-			var th = $(".resulttable.small th"),
-				td = $(".resulttable.small td");
-
-			// Parse land
-			th.each(function(i) {
-				ret.land[$(this).text()] = $(td[i]).text().trim();
-			});
-
 			var keyMap = {
 				"merking": "flag",
 				"notkun": "facility_type",
@@ -134,12 +107,27 @@ function general_info(fastanr,callback) {
 				"Staðgreinir": "location_id"
 			};
 
-			for(key in ret.house){
-				ret.house.renameProperty(key,keyMap[key])
+			// Parse house/apartment
+			var next = $('td:contains("'+fastanr+'")');
+
+			while ( next != (next = next.next())) {
+				var text = next.text()
+				.replace(/\r/g,"")
+				.replace(/\n/g,"")
+				.trim();
+
+				var key = next.attr("header");
+				ret.house[keyMap[key] || key] = text;
 			}
-			for(key in ret.land){
-				ret.land.renameProperty(key,keyMap[key])
-			}
+
+			var th = $(".resulttable.small th"),
+				td = $(".resulttable.small td");
+
+			// Parse land
+			th.each(function(i) {
+				var key = $(this).text();
+				ret.land[keyMap[key] || key] = $(td[i]).text().trim();
+			});
 
 			if(Object.keys(ret.house).length){
 				ret.land.area = ret.land.area.substr(0,ret.land.area.length -3);
@@ -169,18 +157,12 @@ function extended_info(fastanr,callback) {
 			var $ = cheerio.load(body),
 			ret = {};
 
-			$("th").each(function() {
-				if (this.next) {
-					ret[$(this).text()] = $(this).next().text();
-				}
-			});
-
 			var keyMap = {
 				"Eign": "property_type",
 				"Fastanúmer": "id",
 				"Heiti": "name",
-				"Flokkun": "flokkun",
-				"Bygging": 'bygging',
+				"Flokkun": "property_sub_type",
+				"Bygging": "building",
 				"Staða": "state",
 				"Metið afskriftarár": "year",
 				"Byggingarefni": "building_material",
@@ -195,12 +177,20 @@ function extended_info(fastanr,callback) {
 				"Fjöldi hæða í íbúð": "floor_count",
 				"Fjöldi íbúða í húsi": "appartment_count",
 				"Matssvæði": "evaluation_area",
-				"Undirmatssvæði": "sub_evaluation_area"
+				"Undirmatssvæði": "sub_evaluation_area",
+				"Fjöldi stæða í bílageymslu": "garage_parking_spot_count",
+				"Fjöldi íbúða í fasteign": "appartments_count_in_property",
+				"Lóð (hlutdeild eignar)": "land_area",
+				"Íbúð á hæð": "apartment_on_floor",
+				"Fjöldi baðkara": "number_of_bathtubs"
 			};
 
-			for(key in ret){
-				ret.renameProperty(key,keyMap[key]);
-			}
+			$("th").each(function() {
+				if (this.next) {
+					var key = $(this).text();
+					ret[keyMap[key] || key] = $(this).next().text();
+				}
+			});
 
 			callback(!Object.keys(ret).length && "Not Found",ret);
 
