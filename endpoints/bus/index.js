@@ -6,7 +6,7 @@ exports.setup = function(server){
 	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime);
 }
 
-search = function(req, res, next) {
+var search = function(req, res, next) {
 	res.json(404,{error:"This api endpoint has been closed temporarily, because Bus.is changed it's markup."});
 	return next();
 

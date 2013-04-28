@@ -7,7 +7,7 @@ exports.setup = function(server){
 	server.post({path: '/word', version: '1.0.0'}, slash);
 }
 
-slash = function(req, res, next){
+var slash = function(req, res, next){
 
 	var data = req.params;
 

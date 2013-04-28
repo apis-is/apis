@@ -3,13 +3,13 @@ exports.setup = function(server){
 	server.post({path: '/'}, postFrontpage);
 }
 
-getFrontpage = function(req, res, next) {
+var getFrontpage = function(req, res, next) {
 	res.header('Location', 'http://docs.apis.is');
     res.send(302);
     return next(false);
 }
 
-postFrontpage = function(req, res, next) {
+var postFrontpage = function(req, res, next) {
 	var obj = {
 			    "info": {
 			        "english": "Hey there! Check out docs.apis.is in your browser for mor info",

@@ -6,7 +6,7 @@ exports.setup = function(server){
 	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);
 }
 
-realtime = function(req, res, next){
+var realtime = function(req, res, next){
 	var data = req.params;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {

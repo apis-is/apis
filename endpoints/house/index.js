@@ -7,7 +7,7 @@ exports.setup = function(server){
 	server.get({path: '/house', version: '1.0.0'}, slash);
 }
 
-slash = function(req, res, next){
+var slash = function(req, res, next){
 	res.charSet = 'utf8';
 	var fnr = req.params.house;
 	

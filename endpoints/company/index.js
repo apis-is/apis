@@ -7,7 +7,7 @@ exports.setup = function(server){
 
 	server.get({path: '/company', version: '1.0.0'}, lookup);
 }
-lookup = function(req, res, next){
+var lookup = function(req, res, next){
 	res.charSet = 'utf8';
 	
 	var data = req.params;

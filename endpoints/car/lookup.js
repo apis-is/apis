@@ -8,7 +8,7 @@ exports.setup = function(server){
 	server.get({path: '/car', version: '1.0.0'}, lookup);
 }
 
-lookup = function(req, res, next){
+var lookup = function(req, res, next){
 	var data = req.params;
 	
 	if(!data.number){

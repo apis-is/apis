@@ -3,7 +3,7 @@ exports.setup = function(server){
 	server.post({path: '/'}, postSlash);
 }
 
-getSlash = function(req, res, next) {
+var getSlash = function(req, res, next) {
 	// fs.readFile('public/index.html', 'utf8', function (err,data) {
 	// 	if (err) {
 	// 		h.logError(err,err.stack);
@@ -25,7 +25,7 @@ getSlash = function(req, res, next) {
     return next(false);
 }
 
-postSlash = function(req, res, next) {
+var postSlash = function(req, res, next) {
 	res.json(200,{"info":"Velkominn á apis.is! Kíktu á docs.apis.is í vafranum þínum fyrir frekari upplýsingar!"});
 	return next();
 }
