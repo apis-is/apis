@@ -58,3 +58,8 @@ Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum að
 ##Áhugaverðar síður:
 + [arnastofnun.is/page/gagnasofn](http://arnastofnun.is/page/gagnasofn)
 + [opingogn.net/wiki](http://opingogn.net/wiki/)
+
+##Prófanir
+Hægt er að keyra integration tests fyrir hluta af vefþjónustunum með því að nota skipunina:
+
+    node_modules/mocha/bin/mocha test/integration
