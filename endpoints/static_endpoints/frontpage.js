@@ -1,4 +1,4 @@
-exports.setup = function(){
+exports.setup = function(server){
 	server.get({path: '/'}, getFrontpage);
 	server.post({path: '/'}, postFrontpage);
 }

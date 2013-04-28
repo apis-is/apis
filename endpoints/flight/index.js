@@ -1,4 +1,8 @@
-exports.setup = function(){
+var request = require('request');
+var $ = require('jquery');
+var h = require('../../lib/helpers.js');
+
+exports.setup = function(server){
 	server.post({path: '/flight', version: '1.0.0'}, slash); //Old
 
 	server.post({path: '/flight', version: '1.0.0'}, slash);

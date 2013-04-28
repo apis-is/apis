@@ -1,5 +1,9 @@
+var request = require('request');
+var $ = require('jquery');
+var h = require('../../lib/helpers.js');
+
 //Very incomplete
-exports.setup = function(){
+exports.setup = function(server){
 	server.post({path: '/word', version: '1.0.0'}, slash);
 }
 
