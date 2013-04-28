@@ -8,6 +8,8 @@ exports.setup = function(server) {
 
 var getCurrencies = function (req, res, next) {
 	res.charSet = 'utf8';
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
 	var currencyNames = {
 		s: ['USD','DKK','EUR','JPY','CAD','NOK','GBP','CHF','SEK','TWI','XDR','ISK'],

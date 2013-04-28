@@ -7,6 +7,9 @@ exports.setup = function(server){
 }
 
 var slash = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  	
 	var data = req.params;
 	
 	if(!data.number){

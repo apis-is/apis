@@ -8,6 +8,8 @@ exports.setup = function(server){
 	server.get({path: '/company', version: '1.0.0'}, lookup);
 }
 var lookup = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.charSet = 'utf8';
 	
 	var data = req.params;

@@ -6,6 +6,8 @@ exports.setup = function(server){
 
 var getCurrencies = function(req, res, next){
 	res.charSet = 'utf8';
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
 	// A = Almennt gengi, S = Seðlagengi
 	var type = req.params['type'] || 'A';

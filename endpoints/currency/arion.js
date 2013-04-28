@@ -7,6 +7,8 @@ exports.setup = function(server){
 }
 
 var slash = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.charSet = 'utf8';
 
 	var toSend = 'm=GetCurrencies&beginDate='+moment().subtract('days', 1).format('YYYY-MM-DD')+'&finalDate='+moment().format('YYYY-MM-DD')+'&currencyType=AlmenntGengi&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR';

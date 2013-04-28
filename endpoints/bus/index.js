@@ -7,6 +7,8 @@ exports.setup = function(server){
 }
 
 var search = function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.json(404,{error:"This api endpoint has been closed temporarily, because Bus.is changed it's markup."});
 	return next();
 
@@ -200,6 +202,9 @@ var search = function(req, res, next) {
 }
 
 realtime = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  	
 	var data = req.params;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {

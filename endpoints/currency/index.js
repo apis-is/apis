@@ -9,6 +9,8 @@ exports.setup = function(server){
 
 var slash = function(req, res, next){
 	var data = req.params;
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.charSet = 'utf8';
 
 	var currencyNames = {

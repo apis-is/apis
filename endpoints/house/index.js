@@ -8,6 +8,8 @@ exports.setup = function(server){
 }
 
 var slash = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.charSet = 'utf8';
 	var fnr = req.params.house;
 	
@@ -81,7 +83,7 @@ var slash = function(req, res, next){
 	});
 }
 
-function general_info(fastanr,callback) {
+var general_info = function(fastanr,callback) {
 
 	if (fastanr[3] && fastanr[3] !=='-') fastanr = fastanr.slice(0,3)+'-'+fastanr.slice(3);
 
@@ -146,7 +148,7 @@ function general_info(fastanr,callback) {
 	});
 }
 
-function extended_info(fastanr,callback) {
+var extended_info = function(fastanr,callback) {
 
 	if (fastanr[3] && fastanr[3] !=='-') fastanr = fastanr.slice(0,3)+'-'+fastanr.slice(3);
 
@@ -203,7 +205,7 @@ function extended_info(fastanr,callback) {
 	});
 }
 
-function geocode(landnr,callback) {
+var geocode = function(landnr,callback) {
 	var req = {
 		url : "http://geo.skra.is/geoserver/wfs",
 		method: "POST",

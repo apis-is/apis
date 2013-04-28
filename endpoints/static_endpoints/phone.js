@@ -1,4 +1,6 @@
 var phone = function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.json(410,{error:"This api endpoint has been closed and it will not be available in the foreseeable future."});
 	return next();
 }
