@@ -1,4 +1,4 @@
-exports.setup = function(){
+exports.setup = function(server){
 	server.get({path: '/'}, getSlash);
 	server.post({path: '/'}, postSlash);
 }

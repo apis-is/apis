@@ -1,4 +1,4 @@
-exports.setup = function(){
+exports.setup = function(server){
 	//Search function is broken at this point
 	//server.post({path: '/bus/search', version: '1.0.0'}, search);
 }

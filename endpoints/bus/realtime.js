@@ -1,4 +1,6 @@
-exports.setup = function(){
+var h = require('../../lib/helpers.js');
+
+exports.setup = function(server){
 	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
 
 	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);

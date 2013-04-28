@@ -1,4 +1,4 @@
-exports.setup = function(){
+exports.setup = function(server){
 	server.post({path: '/help_out', version: '1.0.0'}, helpOut);
 	server.get({path: '/help_out', version: '1.0.0'}, helpOut);
 	server.post({path: '/help', version: '1.0.0'}, helpOut);

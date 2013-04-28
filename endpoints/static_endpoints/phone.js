@@ -3,7 +3,7 @@ var phone = function(req, res, next){
 	return next();
 }
 
-exports.setup = function(){
+exports.setup = function(server){
 	server.post({path: '/phone', version: '1.0.0'}, phone);
 	server.get({path: '/phone', version: '1.0.0'}, phone);
 	server.post({path: '/phone', version: '2.0.0'}, phone);
