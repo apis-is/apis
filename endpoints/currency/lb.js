@@ -1,4 +1,6 @@
-exports.setup = function(){
+var request = require('request');
+
+exports.setup = function(server){
  	server.get({path: '/currency/lb', version: '1.0.0'}, getCurrencies);
 };
 

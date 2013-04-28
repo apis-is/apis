@@ -1,6 +1,9 @@
 //Incomplete
 
-exports.setup = function(){
+var request = require('request');
+var $ = require('jquery');
+
+exports.setup = function(server){
 	server.get({path: '/house', version: '1.0.0'}, slash);
 }
 

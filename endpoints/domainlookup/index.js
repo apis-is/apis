@@ -1,6 +1,10 @@
+var request = require('request');
+var $ = require('jquery');
+var h = require('../../lib/helpers.js');
+
 //Possible endpoint:
 //https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is
-exports.setup = function(){
+exports.setup = function(server){
 	server.get({path: '/whois', version: '1.0.0'}, slash);
 }
 

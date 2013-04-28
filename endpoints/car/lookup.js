@@ -1,4 +1,8 @@
-exports.setup = function(){
+var request = require('request');
+var $ = require('jquery');
+var h = require('../../lib/helpers.js');
+
+exports.setup = function(server){
 	server.post({path: '/car', version: '1.0.0'}, lookup); //Old
 
 	server.get({path: '/car', version: '1.0.0'}, lookup);
