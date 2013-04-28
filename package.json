@@ -1,6 +1,6 @@
 {
 	"name": "apis.is",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"author": {
 	    "name": "Kristján Ingi Mikaelsson",
 	    "email": "kristjanmik@gmail.com"
@@ -22,7 +22,6 @@
 		"scraper" : "0.0.9",
 		"moment": "2.0.0",
 		"file": "0.1.x",
-		"nodeunit": "0.7.x",
     	"xml2js": "0.2.x",
         "mocha": "~1.8.2",
        	"cheerio": "0.10.x",

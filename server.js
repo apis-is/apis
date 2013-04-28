@@ -1,5 +1,5 @@
 /**
- * Global npm modules
+ * The server module
  */
 var restify = require('restify'),
     server = restify.createServer();
