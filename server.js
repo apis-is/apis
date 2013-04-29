@@ -8,6 +8,11 @@ var restify = require('restify'),
 server.use(restify.bodyParser({ mapParams: true }));
 server.use(restify.queryParser());
 
+server.on('uncaughtException', function (req, res, route, err) {
+    console.log(err.stack);
+    res.send(new restify.InternalError(err, 'Internal error in endpoint, please let us know.'));
+    return (true);
+});
 /**
  * Endpoints setup
  */
