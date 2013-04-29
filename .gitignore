@@ -1,14 +1,11 @@
 .DS_Store
 .gitignore
-fundir
 node_modules
-post.md
 endpoints/sms.js
 endpoints/phone.js
 endpoints/phone2.js
 endpoints/phone
 endpoints/sms
 endpoints/closed_endpoints
-lib/phantom_daemon.js
 index.php
 docs

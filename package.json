@@ -11,12 +11,12 @@
 		"url": "https://github.com/kristjanmik/apis.git"
 	},
 	"contributors": [
-	    {
-	      "name": "Ragnar Þór Valgeirsson"
-	    },
-	    {
+		{
             "name": "Arnór Heiðar Sigurðsson",
             "email": "arnorhs@gmail.com"
+	    },
+	    {
+	      "name": "Ragnar Þór Valgeirsson"
 	    }
     ],
 	"dependencies" : {
