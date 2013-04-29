@@ -3,7 +3,6 @@
 fundir
 node_modules
 post.md
-tests
 endpoints/sms.js
 endpoints/phone.js
 endpoints/phone2.js
@@ -13,4 +12,3 @@ endpoints/closed_endpoints
 lib/phantom_daemon.js
 index.php
 docs
-test
