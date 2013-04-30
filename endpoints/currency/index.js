@@ -5,6 +5,7 @@ var h = require('../../lib/helpers.js');
 
 exports.setup = function(server){
 	server.post({path: '/currency', version: '1.0.0'}, slash);
+	server.get({path: '/currency', version: '1.0.0'}, slash);
 }
 
 var slash = function(req, res, next){
