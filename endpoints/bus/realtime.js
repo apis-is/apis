@@ -1,4 +1,5 @@
-var h = require('../../lib/helpers.js');
+var h = require('../../lib/helpers.js'),
+	request = require('request');
 
 exports.setup = function(server){
 	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
