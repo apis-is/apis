@@ -32,6 +32,6 @@
        	"isn2wgs": "0.0.1"
     },
     "scripts":{
-    	"test": "find ./test -name '*.js' | xargs mocha -R spec"
+    	"test": "node_modules/mocha/bin/mocha test/integration"
     }
 }
