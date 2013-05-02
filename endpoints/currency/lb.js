@@ -1,4 +1,5 @@
 var request = require('request');
+var parseString = require('xml2js').parseString;
 
 exports.setup = function(server){
  	server.get({path: '/currency/lb', version: '1.0.0'}, getCurrencies);
