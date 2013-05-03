@@ -41,3 +41,5 @@ var getCurrencies = function(req, res, next){
 		}
 	);
 };
+
+exports.getCurrencies = getCurrencies;
