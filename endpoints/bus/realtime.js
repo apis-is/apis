@@ -15,12 +15,10 @@ var realtime = function(req, res, next){
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
 		if(error) {
-			h.logError(error,error.stack);
 			res.json(500,{error:'Something went wrong on the server'});
 			return next();
 		}
 		if(response.statusCode !== 200){
-			h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
 			res.json(500,{error:"Something went wrong on the server"});
 			return next();
 		}
@@ -28,7 +26,6 @@ var realtime = function(req, res, next){
 		try{
 			obj = JSON.parse(body);
 		}catch(error){
-			h.logError('Something is wrong with the data provided from the data source');
 			res.json(500,{error:"Something is wrong with the data provided from the data source"});
 			return next();
 		}
@@ -58,12 +55,10 @@ var realtime = function(req, res, next){
 	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 
 	    	if(error) {
-				h.logError(error,error.stack);
 				res.json(500,{error:'Something went wrong',code:3});
 				return next();
 			}
 			if(response.statusCode !== 200){
-				h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
 				res.json(500,{error:"Something went wrong on the server"});
 				return next();
 			}
@@ -108,8 +103,6 @@ var realtime = function(req, res, next){
 
     		});
 
-			h.logVisit('/bus/search', objRoutes,false);
-			
     		res.json(200,objRoutes)
     		return next();
 	    });

@@ -44,8 +44,6 @@ var getCurrencies = function(req, res, next){
 			obj.results.push(currency)
 		});
 
-		h.logVisit('/currency', obj,false);
-		
 		res.json(200,obj);
 		return next();
 	});

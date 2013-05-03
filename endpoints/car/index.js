@@ -13,7 +13,6 @@ var slash = function(req, res, next){
 	var data = req.params;
 	
 	if(!data.number){
-		h.logError(error,error.stack);
 		res.json(431,{error:'Please provide a valid number to lookup'});
 		return next();
 	}
@@ -53,12 +52,6 @@ var slash = function(req, res, next){
 				}
 			});
 			obj.results.push(car);
-		}
-		
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/car', obj,true);
-		}else{
-			h.logVisit('/car', obj,false);
 		}
 		res.json(200,obj)
 		return next();

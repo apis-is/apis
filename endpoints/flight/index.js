@@ -64,8 +64,6 @@ var slash = function(req, res, next){
 				obj.results.push(flight);
 			}
 		});
-
-		h.logVisit('/flight', obj,false);
 		
 		res.json(200,obj)
 		return next();

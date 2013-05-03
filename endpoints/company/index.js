@@ -65,8 +65,6 @@ var lookup = function(req, res, next){
 			});	
 		}
 		
-		h.logVisit('/company', obj,false);
-		
 		res.json(200,obj)
 		return next();
 
