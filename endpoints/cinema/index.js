@@ -16,7 +16,7 @@ var getMovies = function (req, res, next) {
 	var url = 'http://kvikmyndir.is/bio/syningatimar/';
 
 	request(url, function (error, response, body) {
-		if (error) return exports.logError( error );
+		if (error) throw new Error( url + ' not responding correctly...' );
 
 		// Cheerio declared and then attemted to load.
 		var $;
@@ -24,7 +24,7 @@ var getMovies = function (req, res, next) {
 		try {
 			$ = cheerio.load( body );
 		} catch (e) {
-			throw new Error( e );
+			throw new Error( 'Could not load the body with cherrio.' );
 		}
 
 		// Base object to be added to
