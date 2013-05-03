@@ -24,7 +24,7 @@ var getMovies = function (req, res, next) {
 		try {
 			$ = cheerio.load( body );
 		} catch (e) {
-			exports.logError( e );
+			throw new Error( e );
 		}
 
 		// Base object to be added to
