@@ -3,10 +3,10 @@ var moment = require('moment');
 var h = require('../../lib/helpers.js');
 
 exports.setup = function(server){
-	server.get({path: '/currency/arion', version: '1.0.0'}, slash);
+	server.get({path: '/currency/arion', version: '1.0.0'}, getCurrencies);
 }
 
-var slash = function(req, res, next){
+var getCurrencies = function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
   	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	res.charSet = 'utf8';
@@ -49,4 +49,6 @@ var slash = function(req, res, next){
 		res.json(200,obj);
 		return next();
 	});
-}
+};
+
+exports.getCurrencies = getCurrencies;
