@@ -8,13 +8,9 @@ $.fn.cleanHtml = function() {
 
 exports.setup = function(server){
 	server.post({path: '/company', version: '1.0.0'}, lookup); //Old
-
 	server.get({path: '/company', version: '1.0.0'}, lookup);
 }
 var lookup = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.charSet = 'utf8';
 	
     var queryString = {
         nafn: req.params.name || '',
@@ -28,9 +24,9 @@ var lookup = function(req, res, next){
         url: 'http://www.rsk.is/fyrirtaekjaskra/leit',
         qs: queryString
 	}, function(error, response, body){
-		if (error) {
-            throw new Error(error);
-		}
+		if(error || response.statusCode !== 200) {
+            throw new Error("www.rsk.is refuses to respond or give back data");
+        }
 
 		var obj = { results: [] },
 			data = $(body);
@@ -67,6 +63,5 @@ var lookup = function(req, res, next){
 		
 		res.json(200,obj)
 		return next();
-
 	});
 };

@@ -9,7 +9,7 @@ exports.setup = function(server){
 }
 
 var slash = function(req, res, next){
-    var provider = req.params.provider || 'm5';
+    var provider = req.params.provider || 'm5'; //m5 determined by a fair dice roll
     var providers = ['m5', 'arion', 'lb'];
     if (providers.indexOf(provider) >= 0) {
         require('./'+provider+'.js').getCurrencies(req, res, next);

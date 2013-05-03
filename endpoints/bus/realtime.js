@@ -3,31 +3,21 @@ var h = require('../../lib/helpers.js'),
 
 exports.setup = function(server){
 	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
-
 	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);
 }
 
 var realtime = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  	
 	var data = req.params;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
-		if(error) {
-			res.json(500,{error:'Something went wrong on the server'});
-			return next();
-		}
-		if(response.statusCode !== 200){
-			res.json(500,{error:"Something went wrong on the server"});
-			return next();
+		if(error || response.statusCode !== 200) {
+			throw new Error("The bus api is down or refuses to respond");
 		}
 
 		try{
 			obj = JSON.parse(body);
 		}catch(error){
-			res.json(500,{error:"Something is wrong with the data provided from the data source"});
-			return next();
+			throw new Error("Something is wrong with the data provided from the data source");
 		}
 
 		var activeBusses = [],
@@ -54,23 +44,15 @@ var realtime = function(req, res, next){
 
 	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 
-	    	if(error) {
-				res.json(500,{error:'Something went wrong',code:3});
-				return next();
-			}
-			if(response.statusCode !== 200){
-				res.json(500,{error:"Something went wrong on the server"});
-				return next();
+	    	if(error || response.statusCode !== 200) {
+				throw new Error("The bus api is down or refuses to respond");
 			}
 
 			try{
     			var data = JSON.parse(body);
 			}catch(e){
-				res.json(500,{error:"Something went wrong on the server"});
-				return next();
+				throw new Error("Something is wrong with the data provided from the data source");
 			}
-
-
 
     		var routes = data.routes;
 
@@ -103,7 +85,7 @@ var realtime = function(req, res, next){
 
     		});
 
-    		res.json(200,objRoutes)
+    		res.json(200,objRoutes);
     		return next();
 	    });
 	});

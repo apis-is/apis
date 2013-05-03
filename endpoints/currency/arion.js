@@ -7,9 +7,6 @@ exports.setup = function(server){
 }
 
 var getCurrencies = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.charSet = 'utf8';
 
 	var toSend = 'm=GetCurrencies&beginDate='+moment().subtract('days', 1).format('YYYY-MM-DD')+'&finalDate='+moment().format('YYYY-MM-DD')+'&currencyType=AlmenntGengi&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR';
 
@@ -18,9 +15,8 @@ var getCurrencies = function(req, res, next){
 		url: 'http://www.arionbanki.is/Webservice/PortalCurrency.ashx',
 		body: toSend
 	}, function(error, response, body){
-		if(error){
-			res.json(500,{error:"Something went wrong on the server"});
-			return next();
+		if(error || response.statusCode !== 200) {
+			throw new Error("www.arionbanki.is refuses to respond or give back data");
 		}
 
 		var jsonObject = JSON.parse(body),

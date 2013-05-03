@@ -7,10 +7,6 @@ exports.setup = function(server) {
 };
 
 var getCurrencies = function (req, res, next) {
-	res.charSet = 'utf8';
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
 	var currencyNames = {
 		s: ['USD','DKK','EUR','JPY','CAD','NOK','GBP','CHF','SEK','TWI','XDR','ISK'],
 		l: ['Bandarískur dalur','Dönsk króna','Evra','Japanskt jen','Kanadískur dalur','Norsk króna','Sterlingspund','Svissneskur franki','Sænsk króna','Gengisvísitala','SDR','Íslensk króna']
@@ -20,9 +16,8 @@ var getCurrencies = function (req, res, next) {
 		headers: { 'User-Agent': h.browser() },
 		url: 'http://www.m5.is/?gluggi=gjaldmidlar'
 	}, function(err, response, body) {
-		if (err) {
-			res.json(500, { error:"Something went wrong on the server" });
-			return next();
+		if(err || response.statusCode !== 200) {
+			throw new Error("www.m5.is refuses to respond or give back data");
 		}
 
 		var data = $(body),

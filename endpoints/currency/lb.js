@@ -6,19 +6,14 @@ exports.setup = function(server){
 };
 
 var getCurrencies = function(req, res, next){
-	res.charSet = 'utf8';
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
 	// A = Almennt gengi, S = Seðlagengi
 	var type = req.params['type'] || 'A';
 
 	request.get({
 		url: 'http://www.landsbankinn.is/modules/markets/services/XMLGengi.asmx/NyjastaGengiByType?strTegund=' + type
 		}, function(err, response, xml) {
-			if (err) {
-			  res.json(500, { error: 'Something went wrong' });
-			  return next();
+			if(err || response.statusCode !== 200) {
+				throw new Error("www.landsbankinn.is refuses to respond or give back data");
 			}
 
 			var currencies = [];
