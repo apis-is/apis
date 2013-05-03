@@ -2,7 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var h = require('../../lib/helpers.js');
 
-exports.setup = function (server) {
+exports.setup = function ( server ) {
 	server.get({path: '/cinema', version: '1.0.0'}, getMovies);
 };
 
@@ -16,11 +16,10 @@ var getMovies = function (req, res, next) {
 	var url = 'http://kvikmyndir.is/bio/syningatimar/';
 
 	request(url, function (error, response, body) {
-		if (error) return callback(err);
+		if (error) return exports.logError( error );
 
-		var $, obj = {
-			results: []
-		};
+		// Cheerio declared and then attemted to load.
+		var $;
 
 		try {
 			$ = cheerio.load( body );
@@ -28,33 +27,51 @@ var getMovies = function (req, res, next) {
 			exports.logError( e );
 		}
 
+		// Base object to be added to
+		// and eventually sent as a JSON response.
+		var obj = {
+			results: []
+		};
+
+		// DOM elements array containing all movies.
 		var movies = $('.Kvikmyndir_TimeTable #divbox').find('.utanumMynd_new');
 
+		// Loop through movies
 		movies.each(function() {
+			// This movie.
 			var movie = $(this);
-			var st = [];
-			var showtimes = movie.find('[id^="myndbio"]');
 
-			showtimes.each(function() {
-				var showtime = {
+			// Showtimes for JSON
+			var showtimes = [];
+
+			// Find all theaters and loop through them.
+			var theaters = movie.find('[id^="myndbio"]');
+			theaters.each(function() {
+				// Single theater
+				var theater = {
 					theater: $(this).find('#bio a').text().trim(),
 					schedule: []
 				};
 
+				// Loop through each showtime and
+				// add them to the theater schedule.
 				$(this).find('.syningartimi_item').each(function() {
-					showtime.schedule.push( $(this).text().trim() );
+					theater.schedule.push( $(this).text().trim() );
 				});
 
-				st.push( showtime );
+				// Add theater to showtimes array.
+				showtimes.push( theater );
 			});
 
+			// Create an object of info
+			// and add it to the 'results' array.
 			obj.results.push({
 				title: movie.find('#mynd_titill a').html().trim(),
 				released: movie.find('.mynd_titill_artal').text().match(/\d+/g)[0].trim(),
 				restricted: movie.find('.mynd_aldurstakmark img').attr('alt').trim(),
 				imdb: movie.find('.imdbEinkunn').text().trim(),
 				image: 'http://kvikmyndir.is' + movie.find('img.poster').attr('src').trim(),
-				showtimes: st
+				showtimes: showtimes
 			});
 		});
 
