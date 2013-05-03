@@ -6,6 +6,10 @@ exports.setup = function (server) {
 	server.get({path: '/cinema', version: '1.0.0'}, getMovies);
 };
 
+/**
+ * Fetches movies for show today in Icelandic cinemas.
+ * response - JSON: Movie data within an 'results' array.
+ */
 var getMovies = function (req, res, next) {
 	res.charSet = 'utf8';
 
