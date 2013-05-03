@@ -2,110 +2,66 @@ var request = require('request');
 var $ = require('jquery');
 var h = require('../../lib/helpers.js');
 
+$.fn.cleanHtml = function() {
+    return $.trim(this.html().replace(/<(?:.|\n)*?>/gm, ''));
+};
+
 exports.setup = function(server){
 	server.post({path: '/company', version: '1.0.0'}, lookup); //Old
-
 	server.get({path: '/company', version: '1.0.0'}, lookup);
 }
 var lookup = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.charSet = 'utf8';
 	
-	var data = req.params;
-
-	if(!data.name) data.name = '';
-	if(!data.address) data.address = '';
-	if(!data.socialnumber) data.socialnumber = '';
-	if(!data.vsknr) data.vsknr = '';
-
-	var companyUrl = 'http://www.rsk.is/fyrirtaekjaskra/leit?nafn='+data.name+'&heimili='+data.address+'&kt='+data.socialnumber+'&vsknr='+data.vsknr; 
+    var queryString = {
+        nafn: req.params.name || '',
+        heimili: req.params.address || '',
+        kt: req.params.socialnumber || '',
+        vsknr: req.params.vsknr || ''
+    };
 
 	request.get({
-		headers: {'User-Agent': h.browser()},
-		url: companyUrl
+        headers: {'User-Agent': h.browser()},
+        url: 'http://www.rsk.is/fyrirtaekjaskra/leit',
+        qs: queryString
 	}, function(error, response, body){
-		if (error) {
-			h.logError(error,error.stack)
-			res.json(500,{'error':'Something went wrong'})
-			return next();
-		}
+		if(error || response.statusCode !== 200) {
+            throw new Error("www.rsk.is refuses to respond or give back data");
+        }
 
-		var obj = { results: []},
-			outerCount = 1,
+		var obj = { results: [] },
 			data = $(body);
 
 		if(data.find('.resultnote').length == 0){
-			data.find('.boxbody > .nozebra').find('tbody').find('tr').each(function() {
+            var tr = data.find('.boxbody > .nozebra tbody tr:first');
+            if (tr.length > 0) {
+                var name = data.find('.boxbody > h1').html(),
+                    sn = data.find('.boxbody > h1').html();
 
-			if(outerCount == 1){
-				var name = data.find('.boxbody > h1').html(),
-				sn = data.find('.boxbody > h1').html();
-
-				var company = {
-					name: name.substring(0,name.indexOf('(')-1),
-						sn: sn.substring(sn.length-11,sn.length-1),
-						active: 1,
-						address: ''
-					};
-
-					var count = 1;
-
-					$(this).find('td').each(function() {
-						if(count == 1){
-							company.address = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
-						}
-
-						count++;
-					});
-
-					obj.results.push(company);
-				}
-				outerCount++
-			});
+                obj.results.push({
+                    name: name.substring(0,name.indexOf('(')-1),
+                    sn: sn.substring(sn.length-11,sn.length-1),
+                    active: 1,
+                    address: tr.find('td').eq(0).cleanHtml()
+                });
+            }
 		}else{
-			data.find('table').find('tr').each(function() {
+			data.find('table tr:not(:first)').each(function() {
 
-				var count = 1,
-					company = {
-						name: '',
-						sn: '',
-						active: 1,
-						address: 0
-					};
-				if(outerCount != 1){
+                var td = $(this).find('td');
+                var nameRoot = td.eq(1).cleanHtml();
+                var felagAfskrad = "(Félag afskráð)";
 
-					$(this).find('td').each(function() {
-
-						if(count == 1){
-							company.sn = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
-						}else if(count == 2){
-							var val = $(this).html().replace(/<(?:.|\n)*?>/gm, '');
-
-							if(val.indexOf('(Félag afskráð)') > 0){
-								company.active = 0;
-							}
-
-							company.name = val.replace("\n","").replace("(Félag afskráð)","").replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-						}else if(count == 3){
-							company.address = $(this).html().replace(/<(?:.|\n)*?>/gm, '')
-						}
-
-						count++;
-
-					});
-
-					obj.results.push(company);
-				}
-				outerCount++;
+                obj.results.push({
+                    name: nameRoot.replace("\n","").replace(felagAfskrad,"").replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
+                    sn: td.eq(0).cleanHtml(),
+                    active: nameRoot.indexOf(felagAfskrad) > 0 ? 0 : 1, // should this be >= 0 or is this by design?
+                    address: td.eq(2).cleanHtml()
+                });
 
 			});	
 		}
 		
-		h.logVisit('/company', obj,false);
-		
 		res.json(200,obj)
 		return next();
-
 	});
-}
+};

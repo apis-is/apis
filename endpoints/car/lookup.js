@@ -59,8 +59,6 @@ var lookup = function(req, res, next){
 			obj.results.push(car);
 		}
 		
-		h.logVisit('/car', obj,false);
-
 		res.json(200,obj)
 		return next();
 	});

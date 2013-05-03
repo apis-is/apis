@@ -3,34 +3,21 @@ var h = require('../../lib/helpers.js'),
 
 exports.setup = function(server){
 	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
-
 	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);
 }
 
 var realtime = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  	
 	var data = req.params;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
-		if(error) {
-			h.logError(error,error.stack);
-			res.json(500,{error:'Something went wrong on the server'});
-			return next();
-		}
-		if(response.statusCode !== 200){
-			h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
-			res.json(500,{error:"Something went wrong on the server"});
-			return next();
+		if(error || response.statusCode !== 200) {
+			throw new Error("The bus api is down or refuses to respond");
 		}
 
 		try{
 			obj = JSON.parse(body);
 		}catch(error){
-			h.logError('Something is wrong with the data provided from the data source');
-			res.json(500,{error:"Something is wrong with the data provided from the data source"});
-			return next();
+			throw new Error("Something is wrong with the data provided from the data source");
 		}
 
 		var activeBusses = [],
@@ -57,25 +44,15 @@ var realtime = function(req, res, next){
 
 	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 
-	    	if(error) {
-				h.logError(error,error.stack);
-				res.json(500,{error:'Something went wrong',code:3});
-				return next();
-			}
-			if(response.statusCode !== 200){
-				h.logError('Wrong status code in /bus/realtime:'+res.statusCode,'');
-				res.json(500,{error:"Something went wrong on the server"});
-				return next();
+	    	if(error || response.statusCode !== 200) {
+				throw new Error("The bus api is down or refuses to respond");
 			}
 
 			try{
     			var data = JSON.parse(body);
 			}catch(e){
-				res.json(500,{error:"Something went wrong on the server"});
-				return next();
+				throw new Error("Something is wrong with the data provided from the data source");
 			}
-
-
 
     		var routes = data.routes;
 
@@ -85,9 +62,13 @@ var realtime = function(req, res, next){
     		routes.forEach(function(route, key){
 
     			var objRoute = {
-    				busNr: route.id,
+                    busNr: route.id || "", // will be undefined if none are active
     				busses: []
     			}; 
+                objRoutes.results.push(objRoute);
+
+                if (!route.busses) return; // No busses active, eg. after schedule
+
     			route.busses.forEach(function(bus, key){
 
     				var location = h.ISN93_To_WGS84(bus.X,bus.Y),
@@ -102,12 +83,9 @@ var realtime = function(req, res, next){
 
     			});
 
-    			objRoutes.results.push(objRoute);
     		});
 
-			h.logVisit('/bus/search', objRoutes,false);
-			
-    		res.json(200,objRoutes)
+    		res.json(200,objRoutes);
     		return next();
 	    });
 	});

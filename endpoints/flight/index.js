@@ -9,9 +9,6 @@ exports.setup = function(server){
 }
 
 var slash = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
 	var data = req.params,
 		url = '';
 
@@ -35,12 +32,16 @@ var slash = function(req, res, next){
 		headers: {'User-Agent': h.browser()},
 		url: url
 	}, function(error, response, body){
-		if(error){
-			res.json(500,{error:"Something went wrong on the server"});
-			return next();
+		if(error || response.statusCode !== 200) {
+			throw new Error("www.kefairport.is refuses to respond or give back data");
 		}
-		var data = $(body),
-			obj = { results: []};
+		try{
+			var data = $(body);	
+		}catch(error){
+			throw new Error("Could not parse body");;
+		}
+
+		var	obj = { results: []};
 
 		var fields = ['date','flightNumber','to','plannedArrival','realArrival','status'];
 		
@@ -64,8 +65,6 @@ var slash = function(req, res, next){
 				obj.results.push(flight);
 			}
 		});
-
-		h.logVisit('/flight', obj,false);
 		
 		res.json(200,obj)
 		return next();

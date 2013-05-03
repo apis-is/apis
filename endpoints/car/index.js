@@ -3,17 +3,14 @@ var $ = require('jquery');
 var h = require('../../lib/helpers.js');
 
 exports.setup = function(server){
-	server.post({path: '/car', version: '1.0.0'}, slash);
+	server.get({path: '/car', version: '1.0.0'}, lookup);
+	server.post({path: '/car', version: '1.0.0'}, lookup);
 }
 
-var slash = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  	
+var lookup = function(req, res, next){
 	var data = req.params;
 	
 	if(!data.number){
-		h.logError(error,error.stack);
 		res.json(431,{error:'Please provide a valid number to lookup'});
 		return next();
 	}
@@ -22,9 +19,8 @@ var slash = function(req, res, next){
 		headers: {'User-Agent': h.browser()},
 		url: 'http://www.us.is/upplysingar_um_bil?vehinumber='+data.number
 	}, function(error, response, body){
-		if(error){
-			res.json(500,{error:"Something went wrong"});
-			return next();
+		if(error || response.statusCode !== 200) {
+			throw new Error("www.us.is refuses to respond or give back data");
 		}
 		var data = $(body),
 			obj = { results: []},
@@ -53,12 +49,6 @@ var slash = function(req, res, next){
 				}
 			});
 			obj.results.push(car);
-		}
-		
-		if(req.header('Uptime-Test') == 'true'){
-			h.logVisit('/car', obj,true);
-		}else{
-			h.logVisit('/car', obj,false);
 		}
 		res.json(200,obj)
 		return next();
