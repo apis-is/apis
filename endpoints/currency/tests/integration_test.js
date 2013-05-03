@@ -9,14 +9,14 @@ describe('currency', function() {
     describe('searching using provider "m5"', function() {
         this.timeout(6000); // This endpoint is SLOW, need more time
         it("should return an array of objects containing correct fields", function(done) {
-            var params = helpers.testRequestParams("/currency", { provider: "m5" });
+            var params = helpers.testRequestParams("/currency/m5");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
             request(params, resultHandler);
         });
     });
     describe('searching using provider "arion"', function() {
         it("should return an array of objects containing correct fields", function(done) {
-            var params = helpers.testRequestParams("/currency", { provider: "arion" });
+            var params = helpers.testRequestParams("/currency/arion");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
             request(params, resultHandler);
         });
