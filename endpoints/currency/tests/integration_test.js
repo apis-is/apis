@@ -21,4 +21,11 @@ describe('currency', function() {
             request(params, resultHandler);
         });
     });
+    describe('searching using provider "lb"', function() {
+        it("should return an array of objects containing correct fields", function(done) {
+            var params = helpers.testRequestParams("/currency/lb");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request(params, resultHandler);
+        });
+    });
 });
