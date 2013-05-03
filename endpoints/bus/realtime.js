@@ -85,9 +85,13 @@ var realtime = function(req, res, next){
     		routes.forEach(function(route, key){
 
     			var objRoute = {
-    				busNr: route.id,
+                    busNr: route.id || "", // will be undefined if none are active
     				busses: []
     			}; 
+                objRoutes.results.push(objRoute);
+
+                if (!route.busses) return; // No busses active, eg. after schedule
+
     			route.busses.forEach(function(bus, key){
 
     				var location = h.ISN93_To_WGS84(bus.X,bus.Y),
@@ -102,7 +106,6 @@ var realtime = function(req, res, next){
 
     			});
 
-    			objRoutes.results.push(objRoute);
     		});
 
 			h.logVisit('/bus/search', objRoutes,false);
