@@ -29,8 +29,8 @@ var getCurrencies = function(req, res, next){
 						shortName: currency.Mynt[0],
 						longName: currency.Heiti[0],
 						value: parseFloat(currency.Midgengi),
-						askValue: parseFloat(currency.Kaup),
-						bidValue: parseFloat(currency.Sala),
+						askValue: parseFloat(currency.Sala),
+						bidValue: parseFloat(currency.Kaup),
 						changeCur: parseFloat(currency.Breyting[0]),
 						changePer: parseFloat((parseFloat(currency.Breyting) / parseFloat(currency.Midgengi)).toFixed(2))
 					});
