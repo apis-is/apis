@@ -1,11 +1,8 @@
 //The server module
 var restify = require('restify'),
     server = restify.createServer(),
-<<<<<<< HEAD
     util = require('util');
-=======
     config = require('./config');
->>>>>>> 72965207e20f39a0a450178c3d169e4d7a22e639
 
 //Enables the use of posted params
 server.use(restify.bodyParser({ mapParams: true }));
