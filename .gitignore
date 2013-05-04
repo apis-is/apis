@@ -9,3 +9,4 @@ endpoints/sms
 endpoints/closed_endpoints
 index.php
 docs
+config/*.config.json

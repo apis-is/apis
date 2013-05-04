@@ -1,7 +1,11 @@
 //The server module
 var restify = require('restify'),
     server = restify.createServer(),
+<<<<<<< HEAD
     util = require('util');
+=======
+    config = require('./config');
+>>>>>>> 72965207e20f39a0a450178c3d169e4d7a22e639
 
 //Enables the use of posted params
 server.use(restify.bodyParser({ mapParams: true }));
@@ -32,5 +36,5 @@ server.pre(function(req, res, next) {
 require('./lib/endpoints.js').load(server);
 
 //Start the listener for incoming connections
-server.listen(3100);
-console.log('Server running at port: 3100');
+server.listen(config.port);
+console.log('Server running at port: ' + config.port);
