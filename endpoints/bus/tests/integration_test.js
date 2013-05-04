@@ -9,7 +9,7 @@ describe('bus', function() {
 
     var customCheck = function(json) {
         var busses = json.results[0].busses;
-        assert(busses.length > 0, "The array of busses should not be empty!");
+        if (busses.length > 0) return;
         helpers.assertPresenceOfFields(["unixTime","x","y","from","to"], busses);
     };
 
