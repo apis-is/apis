@@ -29,7 +29,8 @@
     	"xml2js": "0.2.x",
         "mocha": "~1.8.2",
        	"cheerio": "0.10.x",
-       	"isn2wgs": "0.0.1"
+        "isn2wgs": "0.0.1",
+        "xtend": "2.x"
     },
     "scripts":{
     	"test": "node_modules/mocha/bin/mocha test/integration"
