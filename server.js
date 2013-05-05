@@ -25,7 +25,7 @@ server.on('uncaughtException', function (req, res, route, err) {
 server.pre(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.charSet = 'utf8';
+	res.header("Content-type", "application/json; charset=utf-8");
 	return next();
 });
 
