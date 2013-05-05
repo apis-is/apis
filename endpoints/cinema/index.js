@@ -65,7 +65,7 @@ var getMovies = function (req, res, next) {
 			});
 
 			// Clean up image URL
-			var imgURL = movie.find('img.poster').attr('src').match(/\/images\/poster\/.+\.jpg|jpeg|png/ig)[0];
+			var imgURL = movie.find('img.poster').attr('src').match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig)[0];
 
 			// Create an object of info
 			// and add it to the 'results' array.
