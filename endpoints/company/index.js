@@ -40,7 +40,7 @@ var lookup = function(req, res, next){
                 obj.results.push({
                     name: name.substring(0,name.indexOf('(')-1),
                     sn: sn.substring(sn.length-11,sn.length-1),
-                    active: 1,
+                    active: data.find('p.highlight').text().length === 0 ? 1 : 0,
                     address: tr.find('td').eq(0).cleanHtml()
                 });
             }
@@ -54,7 +54,7 @@ var lookup = function(req, res, next){
                 obj.results.push({
                     name: nameRoot.replace("\n","").replace(felagAfskrad,"").replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
                     sn: td.eq(0).cleanHtml(),
-                    active: nameRoot.indexOf(felagAfskrad) > 0 ? 0 : 1, // should this be >= 0 or is this by design?
+                    active: nameRoot.indexOf(felagAfskrad) == 0 ? 0 : 1,
                     address: td.eq(2).cleanHtml()
                 });
 
