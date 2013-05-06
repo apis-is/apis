@@ -54,7 +54,7 @@ var lookup = function(req, res, next){
                 obj.results.push({
                     name: nameRoot.replace("\n","").replace(felagAfskrad,"").replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
                     sn: td.eq(0).cleanHtml(),
-                    active: nameRoot.indexOf(felagAfskrad) == 0 ? 0 : 1,
+                    active: nameRoot.indexOf(felagAfskrad) > -1 ? 0 : 1,
                     address: td.eq(2).cleanHtml()
                 });
 
