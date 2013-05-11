@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Apis.is</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+
+    <link rel="stylesheet" href="css/screen.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body lang="is-IS">
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="row">
+                <div class="span6">
+                    <h1><a href="http://demo.apis.is/phone">APIs.is<small>...símaskrár demó</small></a></h1>
+                </div>
+                <div class="search span6">
+                    <form method="POST" class="form-search" action="">
+                        <input type="text" x-webkit-speech="x-webkit-speech" autofocus="autofocus" placeholder="Nafn eða símanúmer" name="query" id="query" class="search-query span5 pull-right">
+                        <input type="submit" value="Leita" class="hidden">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="loader hidden"><img src="/phone/img/loader.gif" /></div>
+            <div class="welcome">
+                <p><b><a href="http://apis.is#phone">Símaskrá</a></b></p>
+
+                <p>
+                    Þetta er sýningarsíðar fyrir einn af fjölmörgum endapunktum á <a href="http://apis.is">apis.is</a> Fyrir verkefninu fer <a href="http://www.twitter.com/kristjanmik" target="_blank">@kristjanmik</a>. Hægt er að finna upplýsingar um verkefnið á <a href="http://apis.is/#phone" target="_blank">APIs.is</a>.
+                </p>
+
+                <ul>
+                    <li>Hægt að leita út frá nafni, heimili eða símanúmeri</li>
+                    <li>Skilar slóð á .vcf upplýsingakort fyrir einstakling</li>
+                </ul>
+
+                <p><a href="http://www.twitter.com/rthor" target="_blank">@rthor</a> setti upp þessa sýningarsíðu.</p>
+
+                <p><em>Þú skalt endilega kíkja á <a href="http://github.com/kristjanmik/apis" target="_blank">Github síðu verkefnisins</a> og reyna að hjálpa til!</em></p>
+            </div>
+            <div id="results" class="hidden">
+                <div>
+                    <h2>Niðurstöður</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nafn</th>
+                                <th>Heimilisfang</th>
+                                <th>Sími</th>
+                                <th>Nafnspjald</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="json">
+                    <h2>JSON</h2>
+                    <pre class="prettyprint linenums"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="personTemplate">
+        <td><%= name %></td>
+        <td><%= address %></td>
+        <td class="number"><%= number %></td>
+        <td><a href="<%= bCard %>">Sækja</a></td>
+    </script>
+
+    <a href="https://github.com/kristjanmik/apis"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
+    <script src="/phone/js/dependencies.min.js"></script>
+    <script src="/phone/js/app.min.js"></script>
+</body>
+</html>
