@@ -10,7 +10,7 @@ exports.setup = function(server){
 var lookup = function(req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
   	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  	
+
 	var data = req.params;
 	
 	if(!data.number){
@@ -20,7 +20,7 @@ var lookup = function(req, res, next){
 
 	request.get({
 		headers: {'User-Agent': h.browser()},
-		url: 'http://www.us.is/upplysingar_um_bil?vehinumber='+data.number
+		url: 'http://ww2.us.is/upplysingar_um_bil?vehinumber='+data.number
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200) {
 			throw new Error("www.us.is refuses to respond or give back data");
