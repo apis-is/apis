@@ -1,38 +1,39 @@
 {
-	"name": "apis.is",
-	"version": "0.3.0",
-	"author": {
-	    "name": "Kristján Ingi Mikaelsson",
-	    "email": "kristjanmik@gmail.com"
-	},
-	"description": "A json wraper around publicly open data in Iceland",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/kristjanmik/apis.git"
-	},
-	"contributors": [
-		{
-            "name": "Arnór Heiðar Sigurðsson",
-            "email": "arnorhs@gmail.com"
-	    },
-	    {
-	      "name": "Ragnar Þór Valgeirsson"
-	    }
-    ],
-	"dependencies" : {
-		"restify": "2.4.x",
-		"request": "2.11.x",
-		"jquery": "1.8.x",
-		"scraper" : "0.0.9",
-		"moment": "2.0.0",
-		"file": "0.1.x",
-    	"xml2js": "0.2.x",
-        "mocha": "~1.8.2",
-       	"cheerio": "0.10.x",
-        "isn2wgs": "0.0.1",
-        "xtend": "2.x"
+  "name": "apis.is",
+  "version": "0.3.0",
+  "author": {
+    "name": "Kristján Ingi Mikaelsson",
+    "email": "kristjanmik@gmail.com"
+  },
+  "description": "A json wraper around publicly open data in Iceland",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kristjanmik/apis.git"
+  },
+  "contributors": [
+    {
+      "name": "Arnór Heiðar Sigurðsson",
+      "email": "arnorhs@gmail.com"
     },
-    "scripts":{
-    	"test": "node_modules/mocha/bin/mocha test/integration"
+    {
+      "name": "Ragnar Þór Valgeirsson"
     }
+  ],
+  "dependencies": {
+    "restify": "2.4.x",
+    "request": "2.11.x",
+    "jquery": "1.8.x",
+    "scraper": "0.0.9",
+    "moment": "2.0.0",
+    "file": "0.1.x",
+    "xml2js": "0.2.x",
+    "mocha": "~1.8.2",
+    "cheerio": "0.10.x",
+    "isn2wgs": "0.0.1",
+    "xtend": "2.x",
+    "underscore": "~1.5.1"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test/integration"
+  }
 }

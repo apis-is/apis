@@ -1,4 +1,4 @@
-var xtend = require('xtend'),
+var _ = require('underscore'),
     env = process.env.NODE_ENV || 'dev',
     defaultConfig = require('./default.json'),
     envConfig = {};
@@ -9,4 +9,4 @@ try{
 	console.log(e.code == 'MODULE_NOT_FOUND' ? 'Please create a dev.config.json file in the config folder' : e);
 }
 
-module.exports = xtend({}, defaultConfig, envConfig);
+module.exports = _.extend(defaultConfig, envConfig);
