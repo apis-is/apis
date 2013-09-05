@@ -20,17 +20,18 @@
     }
   ],
   "dependencies": {
-    "request": "2.11.x",
-    "jquery": "1.8.x",
-    "scraper": "0.0.9",
-    "moment": "2.0.0",
-    "file": "0.1.x",
-    "xml2js": "0.2.x",
-    "mocha": "~1.8.2",
-    "cheerio": "0.10.x",
+    "file": "~0.2.1",
     "isn2wgs": "0.0.1",
     "underscore": "~1.5.1",
-    "express": "~3.3.8"
+    "moment": "~2.1.0",
+    "xml2js": "~0.2.8",
+    "express": "~3.3.8",
+    "cheerio": "~0.12.2",
+    "request": "~2.27.0",
+    "mocha": "~1.12.1",
+    "scraper": "0.0.9",
+    "jquery": "~1.8.3",
+    "cluster-master": "~0.1.2"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/integration"
