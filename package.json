@@ -31,7 +31,8 @@
     "mocha": "~1.12.1",
     "scraper": "0.0.9",
     "jquery": "~1.8.3",
-    "cluster-master": "~0.1.2"
+    "cluster-master": "~0.1.2",
+    "redis": "~0.8.4"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/integration"

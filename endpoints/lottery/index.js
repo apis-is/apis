@@ -5,7 +5,7 @@ var request = require('request'),
 
 var getLotto = function (req, res) {
     getLottery(function(body) {
-        return res.json({
+        return res.cache(3600).json({
             results: parseList(body)
         });
     });
@@ -16,14 +16,14 @@ app.get('/lottery/lotto', getLotto);
 
 app.get('/lottery/vikingslotto', function(req, res) {
     getLottery(function(body) {
-        return res.json({
+        return res.cache(3600).json({
             results: parseList(body)
         });
     }, 'https://games.lotto.is/lottoleikir/urslit/vikingalotto/');
 });
 app.get('/lottery/eurojackpot', function(req, res) {
     getLottery(function(body) {
-        return res.json({
+        return res.cache(3600).json({
             results: parseList(body)
         });
     }, 'https://games.lotto.is/lottoleikir/urslit/eurojackpot/');

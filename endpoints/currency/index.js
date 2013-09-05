@@ -1,5 +1,5 @@
 var request = require('request'),
-    moment = require('moment')
+    moment = require('moment'),
     app = require('../../server');
 
 app.get('/currency', function(req, res){

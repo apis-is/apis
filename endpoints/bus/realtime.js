@@ -36,7 +36,7 @@ app.get('/bus/realtime', function(req, res){
 	    	requestedBusses = activeBusses;
 	    }
 
-	    objString = requestedBusses.join('%2C');
+	    var objString = requestedBusses.join('%2C');
 
 	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 

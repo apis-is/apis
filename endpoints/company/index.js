@@ -58,6 +58,6 @@ app.get('/company', function(req, res, next){
             }); 
         }
         
-        return res.json(obj);
+        return res.cache(86400).json(obj);
     });
 });

@@ -3,6 +3,7 @@ var request = require('request'),
 	h = require('../../lib/helpers.js'),
 	app = require('../../server');
 
+
 app.get('/car', function(req, res){
 	var carPlate = req.query.number || req.query.carPlate || '';
 	
@@ -44,6 +45,6 @@ app.get('/car', function(req, res){
 			});
 			obj.results.push(car);
 		}
-		return res.json(obj);
+		return res.cache().json(obj);
 	});
 });

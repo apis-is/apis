@@ -60,6 +60,6 @@ app.get('/flight', function(req, res){
 			}
 		});
 		
-		return res.json(obj);
+		return res.cache(3600).json(obj);
 	});
 });

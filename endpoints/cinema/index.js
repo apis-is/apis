@@ -71,7 +71,7 @@ app.get('/cinema', function (req, res, next) {
 			});
 		});
 
-		return res.json(obj);
+		return res.cache().json(obj);
 	});
 });
 
@@ -142,6 +142,6 @@ app.get('/cinema/theaters', function (req, res, next) {
 			});
 		});
 
-		return res.json(obj);
+		return res.cache().json(obj);
 	});
 });

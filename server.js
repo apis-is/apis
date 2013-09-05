@@ -1,28 +1,34 @@
 var express = require('express'),
     app = module.exports = express(),
 	config = require('./config'),
-    fileModule = require('file');
+    fileModule = require('file'),
+    cache = require('./lib/cache'),
+    cors = require('./lib/cors'),
+    EE = require('events').EventEmitter;
 
-//Get the posted params with req.body.KEY
+/**
+ * Create an event listener for app
+ */
+EE.call(app);
+
+/*
+ * Built in parser to acces the body values
+ */
 app.use(express.bodyParser());
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Mindflash-SessionID');
+/**
+ * Cross-origin resource sharing
+ */
+app.use(cors());
 
-    if(req.method !== 'OPTIONS')
-        return next();
+/**
+ * Caching layer
+ */
+app.use(cache());
 
-    return res.send(200);
-});
-
-app.use(function(err, req, res, next){
-    console.error(err);
-    res.send('Fail Whale, yo.');
-});
-
-//Load all endpoints in the endpoints folder
+/**
+ * Set up endpoints
+ */
 fileModule.walkSync('./endpoints', function(dirPath, dirs, files){
     if(files && dirPath.indexOf("/test") < 0){
         files.forEach(function(file,key){
@@ -31,5 +37,13 @@ fileModule.walkSync('./endpoints', function(dirPath, dirs, files){
     }
 });
 
-app.listen(config.port);
-console.log('Server running at port: ' + config.port);
+/**
+ * Start the server
+ */
+app.listen(config.port,function(){
+    app.emit('ready');
+});
+
+app.on('ready',function(){
+    if(!config.testing) console.log('Server running at port: ' + config.port);
+});

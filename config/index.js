@@ -1,5 +1,5 @@
 var _ = require('underscore'),
-    env = process.env.NODE_ENV || 'dev',
+    env = process.env.INTEGRATION ? 'integration' : process.env.NODE_ENV || 'dev',
     defaultConfig = require('./default.json'),
     envConfig = {};
 

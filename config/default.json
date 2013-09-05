@@ -1,4 +1,5 @@
 {
     "host": "localhost",
-    "port": 3100
+    "port": 3100,
+    "testing": false
 }
