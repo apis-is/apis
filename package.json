@@ -20,7 +20,6 @@
     }
   ],
   "dependencies": {
-    "restify": "2.4.x",
     "request": "2.11.x",
     "jquery": "1.8.x",
     "scraper": "0.0.9",
@@ -30,8 +29,8 @@
     "mocha": "~1.8.2",
     "cheerio": "0.10.x",
     "isn2wgs": "0.0.1",
-    "xtend": "2.x",
-    "underscore": "~1.5.1"
+    "underscore": "~1.5.1",
+    "express": "~3.3.8"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/integration"

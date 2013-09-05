@@ -1,40 +1,33 @@
-var request = require('request');
-var $ = require('jquery');
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+    $ = require('jquery'),
+    app = require('../../server');
 
-exports.setup = function(server) {
-    server.get({path: '/lottery', version: '1.0.0'}, getLotto);
-	server.get({path: '/lottery/lotto', version: '1.0.0'}, getLotto);
-	server.get({path: '/lottery/vikingslotto', version: '1.0.0'}, getViking);
-	server.get({path: '/lottery/eurojackpot', version: '1.0.0'}, getEurojackpot);
-};
 
-var getLotto = function (req, res, next) {
+var getLotto = function (req, res) {
     getLottery(function(body) {
-        res.json(200, {
+        return res.json({
             results: parseList(body)
         });
-        return next();
     });
 };
 
-var getViking = function (req, res, next) {
-    getLottery(function(body) {
-        res.json(200, {
-            results: parseList(body)
-        });
-        return next();
-    }, 'https://games.lotto.is/lottoleikir/urslit/vikingalotto/');
-};
+app.get('/lottery', getLotto);
+app.get('/lottery/lotto', getLotto);
 
-var getEurojackpot = function (req, res, next) {
+app.get('/lottery/vikingslotto', function(req, res) {
     getLottery(function(body) {
-        res.json(200, {
+        return res.json({
             results: parseList(body)
         });
-        return next();
+    }, 'https://games.lotto.is/lottoleikir/urslit/vikingalotto/');
+});
+app.get('/lottery/eurojackpot', function(req, res) {
+    getLottery(function(body) {
+        return res.json({
+            results: parseList(body)
+        });
     }, 'https://games.lotto.is/lottoleikir/urslit/eurojackpot/');
-};
+});
 
 var getLottery = function(callback, url) {
     url = url || 'https://igvefur.lotto.is/lottoleikir/urslit/lotto/';

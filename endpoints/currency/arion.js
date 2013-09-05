@@ -1,12 +1,9 @@
-var request = require('request');
-var moment = require('moment');
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+	moment = require('moment'),
+	h = require('../../lib/helpers.js'),
+	app = require('../../server');
 
-exports.setup = function(server){
-	server.get({path: '/currency/arion', version: '1.0.0'}, getCurrencies);
-}
-
-var getCurrencies = function(req, res, next){
+app.get('/currency/arion', function(req, res){
 
 	var toSend = 'm=GetCurrencies&beginDate='+moment().subtract('days', 1).format('YYYY-MM-DD')+'&finalDate='+moment().format('YYYY-MM-DD')+'&currencyType=AlmenntGengi&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR';
 
@@ -16,11 +13,11 @@ var getCurrencies = function(req, res, next){
 		body: toSend
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200) {
-			throw new Error("www.arionbanki.is refuses to respond or give back data");
+			return res.json(500,{error:'www.arionbanki.is refuses to respond or give back data'});
 		}
 
 		var jsonObject = JSON.parse(body),
-			obj = { results: [] };
+			currencies = [];
 
 		jsonObject.forEach(function(object,i){
 			var changePer = parseFloat(object.LastValueChange)/parseFloat(object.MidValue),
@@ -37,12 +34,9 @@ var getCurrencies = function(req, res, next){
 			if(currency.changePer == '-0.00')
 				currency.changePer = 0;
 
-			obj.results.push(currency)
+			currencies.push(currency)
 		});
 
-		res.json(200,obj);
-		return next();
+		return res.json({ results: currencies });
 	});
-};
-
-exports.getCurrencies = getCurrencies;
+});

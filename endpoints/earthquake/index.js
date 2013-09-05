@@ -1,19 +1,17 @@
 var request = require('request'),
     cheerio = require('cheerio'),
-    browser = require('../../lib/helpers.js').browser;
+    browser = require('../../lib/helpers.js').browser,
+    app = require('../../server');
 
-exports.setup = function ( server ) {
-    server.get({path: '/earthquake/is', version: '1.0.0'}, getResults);
-};
+app.get('/earthquake/is', function (req, res, next) {
+    getEarthquakes(function(error,body) {
+        if(error) return res.json(500,{error:error.toString()});
 
-var getResults = function (req, res, next) {
-    getEarthquakes(function(body) {
-        res.json(200, {
+        return res.json({
             results: parseList(body)
         });
-        return next();
     });
-};
+});
 
 /*
    This function only handles the request part and calls callback with
@@ -26,14 +24,11 @@ var getEarthquakes = function(callback) {
         encoding: "binary" // needed for some reason.. defaulting to ISO-8859-1
     };
 
-    request(params, function (error, res, body) {
-        if (error) throw new Error(error);
+    request(params, function (error,res, body) {
+        if (res.statusCode != 200) 
+            return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
 
-        if (res.statusCode != 200) {
-            throw new Error("HTTP error from endpoint, status code " + res.statusCode);
-        }
-
-        return callback(body);
+        return callback(error,body);
     });
 };
 

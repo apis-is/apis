@@ -1,15 +1,10 @@
-var request = require('request');
-var $ = require('jquery');
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+	$ = require('jquery'),
+	h = require('../../lib/helpers.js'),
+	app = require('../../server');
 
-exports.setup = function(server){
-	server.post({path: '/flight', version: '1.0.0'}, slash); //Old
-
-	server.get({path: '/flight', version: '1.0.0'}, slash);
-}
-
-var slash = function(req, res, next){
-	var data = req.params,
+app.get('/flight', function(req, res){
+	var data = req.query,
 		url = '';
 
 	if(!data.type) data.type = '';
@@ -24,21 +19,20 @@ var slash = function(req, res, next){
 	}else if(data.type == 'arrivals' && data.language == 'en'){
 		url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
 	}else{
-		res.json(431,{'error':'Wrong parameters given!'});
-		return next();
+		return res.json(431,{'error':'Wrong parameters given!'});
 	}
 
 	request.get({
 		headers: {'User-Agent': h.browser()},
 		url: url
 	}, function(error, response, body){
-		if(error || response.statusCode !== 200) {
-			throw new Error("www.kefairport.is refuses to respond or give back data");
-		}
+		if(error || response.statusCode !== 200)
+			return res.json(500,{error:'www.kefairport.is refuses to respond or give back data'});
+
 		try{
 			var data = $(body);	
 		}catch(error){
-			throw new Error("Could not parse body");;
+			return res.json(500,{error:'Could not parse body'});
 		}
 
 		var	obj = { results: []};
@@ -66,7 +60,6 @@ var slash = function(req, res, next){
 			}
 		});
 		
-		res.json(200,obj)
-		return next();
+		return res.json(obj);
 	});
-}
+});

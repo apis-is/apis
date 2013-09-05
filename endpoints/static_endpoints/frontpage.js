@@ -1,18 +1,9 @@
-exports.setup = function(server){
-	server.get({path: '/'}, getFrontpage);
-	server.post({path: '/'}, postFrontpage);
-}
+var app = require('../../server');
 
-var getFrontpage = function(req, res, next) {
-	res.header('Location', 'http://docs.apis.is');
-    res.send(302);
-    return next(false);
-}
-
-var postFrontpage = function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  	
+app.get('/', function(req,res){
+	return res.redirect(301,'http://docs.apis.is')
+});
+app.post('/', function(req, res, next) {
 	var obj = {
 	    "info": {
 	        "english": "Hey there! Check out docs.apis.is in your browser for mor info",
@@ -20,6 +11,5 @@ var postFrontpage = function(req, res, next) {
 	    }
 	};
 
-	res.json(200,obj);
-	return next();
-}
+	return res.json(obj);
+});

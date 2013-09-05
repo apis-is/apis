@@ -1,6 +1,6 @@
-var request = require('request');
-var assert = require('assert');
-var helpers = require('../../../lib/test_helpers.js');
+var request = require('request'),
+    assert = require('assert'),
+    helpers = require('../../../lib/test_helpers.js');
 
 describe('bus', function() {
     this.timeout(0); // this endpoint is slow

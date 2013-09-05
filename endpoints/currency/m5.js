@@ -1,12 +1,9 @@
-var request = require('request');
-var $ = require('jquery');
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+	$ = require('jquery'),
+	h = require('../../lib/helpers.js'),
+	app = require('../../server');
 
-exports.setup = function(server) {
-	server.get({path: '/currency/m5', version: '1.0.0'}, getCurrencies);
-};
-
-var getCurrencies = function (req, res, next) {
+app.get('/currency/m5', function (req, res) {
 	var currencyNames = {
 		s: ['USD','DKK','EUR','JPY','CAD','NOK','GBP','CHF','SEK','TWI','XDR','ISK'],
 		l: ['Bandarískur dalur','Dönsk króna','Evra','Japanskt jen','Kanadískur dalur','Norsk króna','Sterlingspund','Svissneskur franki','Sænsk króna','Gengisvísitala','SDR','Íslensk króna']
@@ -17,7 +14,7 @@ var getCurrencies = function (req, res, next) {
 		url: 'http://www.m5.is/?gluggi=gjaldmidlar'
 	}, function(err, response, body) {
 		if(err || response.statusCode !== 200) {
-			throw new Error("www.m5.is refuses to respond or give back data");
+			return res.json(500,{error:'www.m5.is refuses to respond or give back data'});
 		}
 
 		var data = $(body),
@@ -38,9 +35,6 @@ var getCurrencies = function (req, res, next) {
 			});
 		});
 
-		res.json(200, { results: currencies });
-		return next();
+		return res.json({ results: currencies });
 	});
-};
-
-exports.getCurrencies = getCurrencies;
+});

@@ -1,13 +1,3 @@
 .DS_Store
-.gitignore
 node_modules
-endpoints/sms.js
-endpoints/phone.js
-endpoints/phone2.js
-endpoints/phone
-endpoints/sms
-endpoints/closed_endpoints
-index.php
-docs
 config/*.config.json
-repos

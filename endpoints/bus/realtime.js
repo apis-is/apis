@@ -1,23 +1,19 @@
 var h = require('../../lib/helpers.js'),
-	request = require('request');
+	request = require('request'),
+	app = require('../../server');
 
-exports.setup = function(server){
-	server.post({path: '/bus/realtime', version: '1.0.0'}, realtime); //Old
-	server.get({path: '/bus/realtime', version: '1.0.0'}, realtime);
-}
-
-var realtime = function(req, res, next){
-	var data = req.params;
+app.get('/bus/realtime', function(req, res){
+	var data = req.query;
 
 	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
-		if(error || response.statusCode !== 200) {
-			throw new Error("The bus api is down or refuses to respond");
-		}
+		if(error || response.statusCode !== 200)
+			return res.json(500,{error:'The bus api is down or refuses to respond'});
 
+		var obj;
 		try{
 			obj = JSON.parse(body);
 		}catch(error){
-			throw new Error("Something is wrong with the data provided from the data source");
+			return res.json(500,{error:'Something is wrong with the data provided from the data source'});
 		}
 
 		var activeBusses = [],
@@ -44,14 +40,13 @@ var realtime = function(req, res, next){
 
 	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 
-	    	if(error || response.statusCode !== 200) {
-				throw new Error("The bus api is down or refuses to respond");
-			}
+	    	if(error || response.statusCode !== 200)
+				return res.json(500,{error:'The bus api is down or refuses to respond'});
 
 			try{
     			var data = JSON.parse(body);
 			}catch(e){
-				throw new Error("Something is wrong with the data provided from the data source");
+				return res.json(500,{error:'Something is wrong with the data provided from the data source'});
 			}
 
     		var routes = data.routes;
@@ -84,9 +79,7 @@ var realtime = function(req, res, next){
     			});
 
     		});
-
-    		res.json(200,objRoutes);
-    		return next();
+    		return res.json(objRoutes);
 	    });
 	});
-}
+});

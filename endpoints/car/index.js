@@ -1,29 +1,20 @@
-var request = require('request');
-var $ = require('jquery');
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+	$ = require('jquery'),
+	h = require('../../lib/helpers.js'),
+	app = require('../../server');
 
-exports.setup = function(server){
-	server.get({path: '/car', version: '1.0.0'}, lookup);
-	server.post({path: '/car', version: '1.0.0'}, lookup);
-}
-
-var lookup = function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-	var data = req.params;
+app.get('/car', function(req, res){
+	var carPlate = req.query.number || req.query.carPlate || '';
 	
-	if(!data.number){
-		res.json(431,{error:'Please provide a valid number to lookup'});
-		return next();
-	}
+	if(!carPlate)
+		return res.json(431,{error:'Please provide a valid carPlate to lookup'});
 
 	request.get({
 		headers: {'User-Agent': h.browser()},
-		url: 'http://ww2.us.is/upplysingar_um_bil?vehinumber='+data.number
+		url: 'http://ww2.us.is/upplysingar_um_bil?vehinumber='+carPlate
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200) {
-			throw new Error("www.us.is refuses to respond or give back data");
+			return res.json(500,{error:'www.us.is refuses to respond or give back data'});
 		}
 		var data = $(body),
 			obj = { results: []},
@@ -53,7 +44,6 @@ var lookup = function(req, res, next){
 			});
 			obj.results.push(car);
 		}
-		res.json(200,obj)
-		return next();
+		return res.json(obj);
 	});
-}
+});

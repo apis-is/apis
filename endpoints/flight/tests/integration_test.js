@@ -10,6 +10,6 @@ describe('flight', function() {
             type: "departures"
         });
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.post(params, resultHandler);
+        request.get(params, resultHandler);
     });
 });

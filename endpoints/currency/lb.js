@@ -1,20 +1,16 @@
-var request = require('request');
-var parseString = require('xml2js').parseString;
+var request = require('request'),
+	parseString = require('xml2js').parseString,
+	app = require('../../server');
 
-exports.setup = function(server){
- 	server.get({path: '/currency/lb', version: '1.0.0'}, getCurrencies);
-};
-
-var getCurrencies = function(req, res, next){
+app.get('/currency/lb', function(req, res){
 	// A = Almennt gengi, S = Seðlagengi
 	var type = req.params['type'] || 'A';
 
 	request.get({
 		url: 'http://www.landsbankinn.is/modules/markets/services/XMLGengi.asmx/NyjastaGengiByType?strTegund=' + type
 		}, function(err, response, xml) {
-			if(err || response.statusCode !== 200) {
-				throw new Error("www.landsbankinn.is refuses to respond or give back data");
-			}
+			if(err || response.statusCode !== 200)
+				return res.json(500,{error: 'www.landsbankinn.is refuses to respond or give back data'});
 
 			var currencies = [];
 			parseString(xml, { explicitRoot: false }, function(err, result) {
@@ -30,11 +26,8 @@ var getCurrencies = function(req, res, next){
 						changePer: parseFloat((parseFloat(currency.Breyting) / parseFloat(currency.Midgengi)).toFixed(2))
 					});
 				}
-				res.json(200, { results: currencies });
-				return next();
+				return res.json({ results: currencies });
 			});
 		}
 	);
-};
-
-exports.getCurrencies = getCurrencies;
+});

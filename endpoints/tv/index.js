@@ -1,7 +1,8 @@
-var request = require('request');
-var moment = require('moment');
-var parseString = require('xml2js').parseString;
-var h = require('../../lib/helpers.js');
+var request = require('request'),
+    moment = require('moment'),
+    parseString = require('xml2js').parseString,
+    h = require('../../lib/helpers.js'),
+    app = require('../../server');
 
 var schedStruct = {
     title: '',
@@ -20,21 +21,34 @@ var schedStruct = {
     actors: ''
 };
 
-exports.setup = function (server) {
-    server.get({path: '/tv', version: '1.0.0'}, getTV);
-    server.get({path: '/tv/ruv', version: '1.0.0'}, getRuv);
-    server.get({path: '/tv/stod2', version: '1.0.0'}, getStod2);
-};
+app.get('/tv', function (req, res) {
+    return getRuv(req, res);
+});
+app.get('/tv/ruv', function (req, res) {
+    var url = 'http://muninn.ruv.is/files/xml/ruv/';
 
+    if (req.params.date) {
+        if (moment(req.params.date).isValid()) {
+            var date = moment(req.params.date);
+            // Example : http://muninn.ruv.is/files/xml/ruv/2013-06-11/
+            url += date.format('YYYY-MM-DD');
+        }
+    }
 
-var getTV = function (req, res, next) {
-    // This redirects to the default for time being.
-    getRuv(req, res, next);
-    return next();
-};
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
 
-
-var getStod2 = function (req, res, next) {
+        parseRuv(function (data) {
+            res.json(200, {
+                results: data
+            })
+        }, body);
+    });
+});
+app.get('/tv/stod2', function (req, res) {
     var url = 'http://stod2.is/XML--dagskrar-feed/XML-Stod-2-dagurinn';
 
     request.get({
@@ -49,7 +63,7 @@ var getStod2 = function (req, res, next) {
             })
         }, body);
     })
-};
+});
 
 var parseStod2 = function (callback, data) {
     parseString(data, function (err, result, title) {
@@ -75,40 +89,9 @@ var parseStod2 = function (callback, data) {
                 }
             })
         }
-
         return callback(schedule);
-
     });
 };
-
-var getRuv = function (req, res, next) {
-    var url = 'http://muninn.ruv.is/files/xml/ruv/';
-
-    if (req.params.date) {
-        if (moment(req.params.date).isValid()) {
-            var date = moment(req.params.date);
-            // Example : http://muninn.ruv.is/files/xml/ruv/2013-06-11/
-            url += date.format('YYYY-MM-DD');
-        }
-    }
-
-    request.get({
-        headers: {'User-Agent': h.browser()},
-        url: url
-    }, function (error, response, body) {
-        if (error) throw new Error(url + ' did not respond');
-
-        parseRuv(function (data) {
-            res.json(200, {
-                results: data
-            })
-        }, body);
-
-        return next();
-
-    });
-};
-
 
 var parseRuv = function (callback, data) {
 

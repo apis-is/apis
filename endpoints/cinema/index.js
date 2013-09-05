@@ -1,31 +1,23 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var h = require('../../lib/helpers.js');
-
-exports.setup = function ( server ) {
-	server.get({path: '/cinema', version: '1.0.0'}, getMovies);
-	server.get({path: '/cinema/theaters', version: '1.0.0'}, getTheaters);
-};
+var request = require('request'),
+	cheerio = require('cheerio'),
+	app = require('../../server');
 
 /**
  * Fetches movies for show today in Icelandic cinemas.
  * response - JSON: Movie data within an 'results' array.
  */
-var getMovies = function (req, res, next) {
-	res.charSet = 'utf8';
-
+app.get('/cinema', function (req, res, next) {
 	var url = 'http://kvikmyndir.is/bio/syningatimar/';
 
 	request(url, function (error, response, body) {
-		if (error) throw new Error( url + ' not responding correctly...' );
+		if (error) return res.json(500,{error: url + ' not responding correctly...' });
 
 		// Cheerio declared and then attemted to load.
 		var $;
-
 		try {
 			$ = cheerio.load( body );
 		} catch (e) {
-			throw new Error( 'Could not load the body with cherrio.' );
+			return res.json(500,{error:'Could not load the body with cherrio.'});
 		}
 
 		// Base object to be added to
@@ -79,21 +71,19 @@ var getMovies = function (req, res, next) {
 			});
 		});
 
-		res.json(200, obj);
-		return next();
+		return res.json(obj);
 	});
-};
+});
 
 /**
  * Fetches theaters that are showing movies today.
  * response - JSON: Theater data within an 'results' array.
  */
-var getTheaters = function (req, res, next) {
-	res.charSet = 'utf8';
+app.get('/cinema/theaters', function (req, res, next) {
 	var url = 'http://kvikmyndir.is/bio/syningatimar_bio/';
 
 	request(url, function (error, response, body) {
-		if (error) throw new Error( url + ' not responding correctly...' );
+		if (error) return res.json(500,{error: url + ' not responding correctly...' });
 
 		// Cheerio declared and then attemted to load.
 		var $;
@@ -101,7 +91,7 @@ var getTheaters = function (req, res, next) {
 		try {
 			$ = cheerio.load( body );
 		} catch (e) {
-			throw new Error( 'Could not load the body with cherrio.' );
+			return res.json(500,{error:'Could not load the body with cherrio.'});
 		}
 
 		// Base object to be added to
@@ -152,7 +142,6 @@ var getTheaters = function (req, res, next) {
 			});
 		});
 
-		res.json(200, obj);
-		return next();
+		return res.json(obj);
 	});
-};
+});
