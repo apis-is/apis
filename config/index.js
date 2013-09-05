@@ -1,10 +1,14 @@
 var _ = require('underscore'),
-    env = process.env.INTEGRATION ? 'integration' : process.env.NODE_ENV || 'dev',
+    env = process.env.NODE_ENV ? process.env.NODE_ENV + '.config' : 'dev.config',
     defaultConfig = require('./default.json'),
     envConfig = {};
 
+if(process.env.INTEGRATION)
+	env = 'integration'
+
+console.log(env)
 try{
-	envConfig = require('./' + env + '.config.json');
+	envConfig = require('./' + env + '.json');
 }catch(e){
 	console.log(e.code == 'MODULE_NOT_FOUND' ? 'Please create a dev.config.json file in the config folder' : e);
 }
