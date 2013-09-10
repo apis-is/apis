@@ -6,7 +6,6 @@ var _ = require('underscore'),
 if(process.env.INTEGRATION)
 	env = 'integration'
 
-console.log(env)
 try{
 	envConfig = require('./' + env + '.json');
 }catch(e){
