@@ -65,8 +65,6 @@ app.get('/weather/:type/:lang?', function (req, res, next) {
   // handle both ';' and ',' between stations, types and measurements
   if(req.query.stations)
     req.query.stations = req.query.stations.split(',').join(';');
-  // if(req.query.measurements)
-  //   req.query.measurements = req.query.measurements.split(',').join(';');
   if(req.query.types)
     req.query.types = req.query.types.split(',').join(';');
 
@@ -81,7 +79,6 @@ app.get('/weather/:type/:lang?', function (req, res, next) {
 app.get('/weather/forecasts/:lang?', function (req, res) {
   var lang     = req.params.lang || 'is',
   stations     = req.query.stations,
-  // measurements = req.query.measurements,
   url          = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=forec&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
   syntax       = '/weather/forecasts[/(is|en)]?stations=<station1(,|;)...>',
   example      = '/weather/forecasts/is?stations=1,422';
