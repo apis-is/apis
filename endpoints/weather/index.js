@@ -45,7 +45,6 @@ var descriptions = {
 
 /* Fetches the weather data and returns a JS object in a callback */
 function getData(url, callback){
-  console.log(url);
   request.get({
       headers: {'User-Agent': h.browser()},
       url: url
@@ -58,6 +57,7 @@ function getData(url, callback){
     });
   });
 }
+
 /* Initial weather handler */
 app.get('/weather/:type/:lang?', function (req, res, next) {
   var lang = req.params.lang;
@@ -65,63 +65,72 @@ app.get('/weather/:type/:lang?', function (req, res, next) {
   // handle both ';' and ',' between stations, types and measurements
   if(req.query.stations)
     req.query.stations = req.query.stations.split(',').join(';');
-  if(req.query.measurements)
-    req.query.measurements = req.query.measurements.split(',').join(';');
+  // if(req.query.measurements)
+  //   req.query.measurements = req.query.measurements.split(',').join(';');
   if(req.query.types)
     req.query.types = req.query.types.split(',').join(';');
 
   // make sure lang is correct
   if (lang && ['is','en'].indexOf(lang) == -1)
-    return res.json(400, { error: "incorrect language -- only 'is' or 'en' allowed" });
+    return res.json(400, {results: [{ error: "incorrect language -- only 'is' or 'en' allowed" }]});
 
   next();
 });
 
+/* Forecasts */
 app.get('/weather/forecasts/:lang?', function (req, res) {
   var lang     = req.params.lang || 'is',
   stations     = req.query.stations,
-  measurements = req.query.measurements,
-  url          = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=forec&lang='+lang+'&ids='+stations,
-  syntax       = '/weather/forecasts[/(is|en)]?stations=<station1(,|;)...>[&measurements=<measurement1(,|;)...>]',
-  example      = '/weather/forecasts/is?stations=1,422&measurements=F,D';
+  // measurements = req.query.measurements,
+  url          = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=forec&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
+  syntax       = '/weather/forecasts[/(is|en)]?stations=<station1(,|;)...>',
+  example      = '/weather/forecasts/is?stations=1,422';
 
   if (!stations) {
-    return res.json(400, {error             : 'stations missing',
-                          syntax            : syntax,
-                          example           : example,
-                          validMeasurements : Object.keys(descriptions),
-                          moreInfo          : 'http://www.vedur.is/um-vi/vefurinn/xml/' });
-  };
+    return res.json(400,
+      {results:
+        [{error    : 'stations missing',
+          syntax   : syntax,
+          example  : example,
+          moreInfo : 'http://www.vedur.is/um-vi/vefurinn/xml/'
+        }]
+      });
+  }; 
 
-  if (measurements) {
-    url += '&params=' + measurements;
-  };  
-
-  getData(url, function(jsonData){
-    return res.cache(1800).json(jsonData);
+  getData(url, function(forecasts){
+    forecasts.results = forecasts.forecasts.station;
+    delete forecasts.forecasts.station;
+    delete forecasts.forecasts;
+    h.deArrayfy(forecasts.results);
+    for (var i = forecasts.results.length - 1; i >= 0; i--) {
+      var forecast = forecasts.results[i];
+      forecast.id = forecast.$.id;
+      forecast.valid = forecast.$.valid;
+      delete forecast.$;
+    };
+    return res.cache(600).json(forecasts);
   });
 });
 
+/* Observations */
 app.get('/weather/observations/:lang?', function (req, res) {
   var lang     = req.params.lang || 'is',
   stations     = req.query.stations,
   time         = req.query.time,
   anytime      = req.query.anytime,
-  measurements = req.query.measurements,
-  syntax       = '/weather/observations[/(is|en)]?stations=<station1(,|;)...>[&measurements=<measurement1(,|;)...>][&time=(1h|3h)][&anytime=(0|1)]',
-  example      = '/weather/observations/is?stations=1,422&measurements=F,D&time=1h&anytime=0]';
+  url = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=obs&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
+  syntax       = '/weather/observations[/(is|en)]?stations=<station1(,|;)...>[&time=(1h|3h)][&anytime=(0|1)]',
+  example      = '/weather/observations/is?stations=1,422&time=1h&anytime=0]';
 
   if (!stations) {
-    return res.json(400, {error             : 'stations missing',
-                          syntax            : syntax,
-                          example           : example,
-                          validMeasurements : Object.keys(descriptions),
-                          moreInfo          : 'http://www.vedur.is/um-vi/vefurinn/xml/' });
-  };
-
-  url = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=obs&lang='+lang+'&ids='+stations;
-  if (measurements) {
-    url += '&params=' + measurements;
+    return res.json(400,
+      {results:
+        [{error    : 'stations missing',
+          syntax   : syntax,
+          example  : example,
+          moreInfo : 'http://www.vedur.is/um-vi/vefurinn/xml/'
+        }]
+      });
   };
   if (time) {
       url += '&time=' + time;
@@ -130,11 +139,22 @@ app.get('/weather/observations/:lang?', function (req, res) {
       url += '&anytime=' + anytime;
   };
 
-  getData(url, function(jsonData){
-    return res.cache(1800).json(jsonData);
+  getData(url, function(observations){
+    observations.results = observations.observations.station;
+    delete observations.observations.station;
+    delete observations.observations;
+    h.deArrayfy(observations.results);
+    for (var i = observations.results.length - 1; i >= 0; i--) {
+      var observation = observations.results[i];
+      observation.id = observation.$.id;
+      observation.valid = observation.$.valid;
+      delete observation.$;
+    };
+    return res.cache(600).json(observations);
   });
 });
 
+/* Texts */
 app.get('/weather/texts/:lang?', function (req, res) {
   var lang = req.params.lang || 'is',
   types    = req.query.types,
@@ -143,20 +163,34 @@ app.get('/weather/texts/:lang?', function (req, res) {
   url      = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=txt&lang='+lang+'&ids='+types;
 
   if (!types) {
-    return res.json(400, {error      : 'types missing',
-                          syntax     : syntax,
-                          example    : example,
-                          validTypes : validTypes,
-                          moreInfo   : 'http://www.vedur.is/um-vi/vefurinn/xml/' });
+    return res.json(400,
+      {results:
+        [{error      : 'types missing',
+          syntax     : syntax,
+          example    : example,
+          validTypes : validTypes,
+          moreInfo   : 'http://www.vedur.is/um-vi/vefurinn/xml/'
+        }]
+      });
   };
 
-  getData(url, function(jsonData){
-    return res.cache(1800).json(jsonData);
+  getData(url, function(texts){
+    texts.results = texts.texts.text;
+    delete texts.texts.text;
+    delete texts.texts;
+    h.deArrayfy(texts.results);
+    for (var i = texts.results.length - 1; i >= 0; i--) {
+      var text = texts.results[i];
+      text.id = text.$.id;
+      delete text.$;
+      if (text.content instanceof Object) {
+        delete text.content.br;
+      text.content = text.content._;
+      };
+    };
+    return res.cache(600).json(texts);
   });
 });
-
-
-
 
 
 /*
