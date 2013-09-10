@@ -1,5 +1,4 @@
 var request = require('request'),
-    //moment = require('moment'),
     parseString = require('xml2js').parseString,
     h = require('../../lib/helpers.js'),
     app = require('../../server');
