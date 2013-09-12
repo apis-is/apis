@@ -57,6 +57,20 @@ function getData(url, callback){
   });
 }
 
+/* Root weather handler */
+app.get('/weather', function (req, res, next) {
+
+  return res.json(400, {results: [{ info: "This is an api for Icelandic weather reports and observations",
+                                    endpoints: {
+                                      forecasts: "/weather/forecasts/",
+                                      observations: "/weather/observations/",
+                                      texts: "/weather/texts/"
+                                    } }]});
+
+  next();
+});
+
+
 /* Initial weather handler */
 app.get('/weather/:type/:lang?', function (req, res, next) {
   var lang = req.params.lang;
@@ -181,7 +195,7 @@ app.get('/weather/texts/:lang?', function (req, res) {
       delete text.$;
       if (text.content instanceof Object) {
         delete text.content.br;
-      text.content = text.content._;
+        text.content = text.content._;
       };
     };
     return res.cache(600).json(texts);
