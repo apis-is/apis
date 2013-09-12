@@ -58,7 +58,7 @@ function getData(url, callback){
 }
 
 /* Root weather handler */
-app.get('/weather/', function (req, res, next) {
+app.get('/weather', function (req, res, next) {
 
   return res.json(400, {results: [{ info: "This is an api for Icelandic weather reports and observations",
                                     endpoints: {
