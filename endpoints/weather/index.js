@@ -1,13 +1,26 @@
-var request = require('request'),
-    parseString = require('xml2js').parseString,
-    h = require('../../lib/helpers.js'),
-    app = require('../../server');
+/******************************
+ * Name:     Weather API
+ * Author:   Baldur Már Helgason
+ * Created:  Sep 2013
+ * Modified: 16 Sep 2013
+ */
+
+var request, parseString, h, app, cheerio, Q, xregexp, validTypes, descriptions, stationListURL;
+
+/** Requires **/
+request = require('request'),
+parseString = require('xml2js').parseString,
+h = require('../../lib/helpers.js'),
+app = require('../../server'),
+cheerio = require('cheerio'),
+xregexp = require('xregexp').XRegExp;
+
+/** Variable initialization **/
 
 /* ids (tegundir textaspáa) */
-var validTypes = ['2','3','5','6','7','9','10','11','12','14','27','30','31','32','33','34','35','36','37','38','39','42'];
-
+validTypes = ['2','3','5','6','7','9','10','11','12','14','27','30','31','32','33','34','35','36','37','38','39','42'];
 /* can later be used to include a readable version of the measurement names*/
-var descriptions = {
+descriptions = {
   'F'   : { 'is': 'Vindhraði (m/s)',
             'en': 'Wind speed (m/s)'},
   'FX'  : { 'is': 'Mesti vindhraði (m/s)', 
@@ -42,8 +55,12 @@ var descriptions = {
             'en': 'Cumulative precipitation (mm/h) from automatic measuring units'}
 };
 
+stationListURL = 'http://www.vedur.is/vedur/stodvar?t=3';
+
+/** Methods **/
+
 /* Fetches the weather data and returns a JS object in a callback */
-function getData(url, callback){
+function getJsonData(url, callback){
   request.get({
       headers: {'User-Agent': h.browser()},
       url: url
@@ -57,10 +74,12 @@ function getData(url, callback){
   });
 }
 
+/** Routes **/
+
 /* Root weather handler */
 app.get('/weather', function (req, res, next) {
 
-  return res.json(400, {results: [{ info: "This is an api for Icelandic weather reports and observations",
+  return res.json(200, {results: [{ info: "This is an api for Icelandic weather reports and observations",
                                     endpoints: {
                                       forecasts: "/weather/forecasts/",
                                       observations: "/weather/observations/",
@@ -70,6 +89,41 @@ app.get('/weather', function (req, res, next) {
   next();
 });
 
+/* Available stations handler */
+app.get('/weather/getAvailableStations', function (req, res, next) {
+  request(stationListURL, function (error, response, body) {
+
+    if (error) throw new Error( stationListURL + ' not responding correctly...' );
+
+    var $, idRegex, titleRegex, stations, hrefs;
+    try {
+      $ = cheerio.load( body );
+    } catch (e) {
+      throw new Error( 'Error loading DOM' );
+    }
+    idRegex = 'station=(\\d*)'
+    titleRegex = '^(([\\p{L}0-9-]*[\\s-]?)*)\\s-';
+    stations = [];
+    hrefs = $(".listtable td a:contains('A')");
+
+    for (var i = 0; i < hrefs.length; i++) {
+
+      var elem, idMatch, titleMatch;
+
+      elem = $(hrefs[i]);
+
+      // get the station title and id
+      titleMatch = xregexp.cache(titleRegex).exec(elem.attr('title'));
+      idMatch = xregexp.cache(idRegex).exec(elem.attr('href'));
+      
+      if (!idMatch || !titleMatch) {
+        throw new Error("Parsing error -- Source is changed");
+      }
+      stations.push({name: titleMatch[1], id: idMatch[1]});
+    };
+    return res.cache(86400).json(200, {results: stations});
+  });
+});
 
 /* Initial weather handler */
 app.get('/weather/:type/:lang?', function (req, res, next) {
@@ -90,11 +144,12 @@ app.get('/weather/:type/:lang?', function (req, res, next) {
 
 /* Forecasts */
 app.get('/weather/forecasts/:lang?', function (req, res) {
-  var lang     = req.params.lang || 'is',
-  stations     = req.query.stations,
-  url          = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=forec&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
-  syntax       = '/weather/forecasts[/(is|en)]?stations=<station1(,|;)...>',
-  example      = '/weather/forecasts/is?stations=1,422';
+  var
+  lang     = req.params.lang || 'is',
+  stations = req.query.stations,
+  url      = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=forec&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
+  syntax   = '/weather/forecasts[/(is|en)]?stations=<station1(,|;)...>',
+  example  = '/weather/forecasts/is?stations=1,422';
 
   if (!stations) {
     return res.json(400,
@@ -107,7 +162,8 @@ app.get('/weather/forecasts/:lang?', function (req, res) {
       });
   }; 
 
-  getData(url, function(forecasts){
+  getJsonData(url, function(forecasts){
+    // make some nice changes to the object for cleaner JSON
     forecasts.results = forecasts.forecasts.station;
     delete forecasts.forecasts.station;
     delete forecasts.forecasts;
@@ -124,13 +180,14 @@ app.get('/weather/forecasts/:lang?', function (req, res) {
 
 /* Observations */
 app.get('/weather/observations/:lang?', function (req, res) {
-  var lang     = req.params.lang || 'is',
-  stations     = req.query.stations,
-  time         = req.query.time,
-  anytime      = req.query.anytime,
-  url = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=obs&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
-  syntax       = '/weather/observations[/(is|en)]?stations=<station1(,|;)...>[&time=(1h|3h)][&anytime=(0|1)]',
-  example      = '/weather/observations/is?stations=1,422&time=1h&anytime=0]';
+  var
+  lang     = req.params.lang || 'is',
+  stations = req.query.stations,
+  time     = req.query.time,
+  anytime  = req.query.anytime,
+  url      = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=obs&lang='+lang+'&ids='+stations+'&params='+Object.keys(descriptions).join(';'),
+  syntax   = '/weather/observations[/(is|en)]?stations=<station1(,|;)...>[&time=(1h|3h)][&anytime=(0|1)]',
+  example  = '/weather/observations/is?stations=1,422&time=1h&anytime=0]';
 
   if (!stations) {
     return res.json(400,
@@ -149,7 +206,8 @@ app.get('/weather/observations/:lang?', function (req, res) {
       url += '&anytime=' + anytime;
   };
 
-  getData(url, function(observations){
+  getJsonData(url, function(observations){
+    // make some nice changes to the object for cleaner JSON
     observations.results = observations.observations.station;
     delete observations.observations.station;
     delete observations.observations;
@@ -166,11 +224,12 @@ app.get('/weather/observations/:lang?', function (req, res) {
 
 /* Texts */
 app.get('/weather/texts/:lang?', function (req, res) {
-  var lang = req.params.lang || 'is',
+  var
+  lang     = req.params.lang || 'is',
   types    = req.query.types,
+  url      = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=txt&lang='+lang+'&ids='+types,
   syntax   = '/weather/texts[/(is|en)]?types=<type1(,|;)...>',
-  example  = '/weather/texts/is?types=5,6',
-  url      = 'http://xmlweather.vedur.is/?op_w=xml&view=xml&type=txt&lang='+lang+'&ids='+types;
+  example  = '/weather/texts/is?types=5,6';
 
   if (!types) {
     return res.json(400,
@@ -184,7 +243,8 @@ app.get('/weather/texts/:lang?', function (req, res) {
       });
   };
 
-  getData(url, function(texts){
+  getJsonData(url, function(texts){
+    // make some nice changes to the object for cleaner JSON
     texts.results = texts.texts.text;
     delete texts.texts.text;
     delete texts.texts;

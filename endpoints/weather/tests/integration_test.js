@@ -9,6 +9,14 @@ describe('weather', function(){
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request.get(params, resultHandler);
     });
+    describe('getAvailableStations', function () {
+        it("should return an array of objects containing correct fields", function (done) {
+            var fieldsToCheckFor = ["name", "id"];
+            var params = helpers.testRequestParams("/weather/getAvailableStations");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
+    });
     describe('forecasts', function () {
         it("should return an error", function (done) {
             var fieldsToCheckFor = ["error"];
