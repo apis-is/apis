@@ -14,7 +14,7 @@ var getLotto = function (req, res) {
 app.get('/lottery', getLotto);
 app.get('/lottery/lotto', getLotto);
 
-app.get('/lottery/vikingslotto', function(req, res) {
+app.get('/lottery/vikingalotto', function(req, res) {
     getLottery(function(body) {
         return res.cache(3600).json({
             results: parseList(body)
