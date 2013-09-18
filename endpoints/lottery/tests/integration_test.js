@@ -22,12 +22,12 @@ describe('lotto', function() {
         request(params, resultHandler);
     });
 });
-describe('vikingslotto', function() {
+describe('vikingalotto', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
 
     it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/lottery/vikingslotto");
+        var params = helpers.testRequestParams("/lottery/vikingalotto");
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request(params, resultHandler);
     });
