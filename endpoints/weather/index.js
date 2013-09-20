@@ -2,7 +2,6 @@
  * Name:     Weather API
  * Author:   Baldur Már Helgason
  * Created:  Sep 2013
- * Modified: 16 Sep 2013
  */
 
 var request, parseString, h, app, cheerio, Q, xregexp, validTypes, descriptions, stationListURL;
