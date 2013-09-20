@@ -24,12 +24,26 @@ describe('weather', function(){
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
             request.get(params, resultHandler);
         });
+        it("should return an error", function (done) {
+            var fieldsToCheckFor = ["error"];
+            var params = helpers.testRequestParams("/weather/forecasts/se?stations=1");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
         it("should return an array of objects containing correct fields", function (done) {
             var fieldsToCheckFor = ["name", "atime", "link", "forecast", "id", "valid"];
             var params = helpers.testRequestParams("/weather/forecasts?stations=1");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, function(json){
                 var forecasts = json.results[0].forecast;
                 helpers.assertPresenceOfFields(["ftime","F","D","T","W"], forecasts);
+            });
+            request.get(params, resultHandler);
+        });
+        it("should return an array of objects containing correct fields and descriptions", function (done) {
+            var fieldsToCheckFor = ["name", "atime", "link", "forecast", "id", "valid"];
+            var params = helpers.testRequestParams("/weather/forecasts?stations=1&descriptions");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, function(json){
+                helpers.assertPresenceOfFields(["descriptions"], [json]); // helper function only works on arrays
             });
             request.get(params, resultHandler);
         });
@@ -70,10 +84,24 @@ describe('weather', function(){
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
             request.get(params, resultHandler);
         });
+        it("should return an error", function (done) {
+            var fieldsToCheckFor = ["error"];
+            var params = helpers.testRequestParams("/weather/observations/fi?stations=1");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
         it("should return an array of objects containing correct fields", function (done) {
             var fieldsToCheckFor = ["name", "time", "link", "F", "D", "FX", "FG", "T", "W", "V", "R", "id", "valid"];
             var params = helpers.testRequestParams("/weather/observations?stations=1");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
+        it("should return an array of objects containing correct fields and descriptions", function (done) {
+            var fieldsToCheckFor = ["name", "time", "link", "F", "D", "FX", "FG", "T", "W", "V", "R", "id", "valid"];
+            var params = helpers.testRequestParams("/weather/observations?stations=1&descriptions");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, function(json){
+                helpers.assertPresenceOfFields(["descriptions"], [json]); // helper function only works on arrays
+            });
             request.get(params, resultHandler);
         });
         it("should return an array with 1 result", function (done) {
@@ -110,6 +138,12 @@ describe('weather', function(){
         it("should return an error", function (done) {
             var fieldsToCheckFor = ["error"];
             var params = helpers.testRequestParams("/weather/texts/");
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
+        it("should return an error", function (done) {
+            var fieldsToCheckFor = ["error"];
+            var params = helpers.testRequestParams("/weather/texts/nk?types=5");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
             request.get(params, resultHandler);
         });
