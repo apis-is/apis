@@ -84,7 +84,11 @@ app.get('/weather', function (req, res, next) {
                                       forecasts: "/weather/forecasts/",
                                       observations: "/weather/observations/",
                                       texts: "/weather/texts/"
-                                    } }]});
+                                    },
+                                    other: {
+                                      availableStations: "/weather/getAvailableStations"
+                                    }
+                                     }]});
 
   next();
 });
@@ -117,11 +121,11 @@ app.get('/weather/getAvailableStations', function (req, res, next) {
       idMatch = xregexp.cache(idRegex).exec(elem.attr('href'));
       
       if (!idMatch || !titleMatch) {
-        throw new Error("Parsing error -- Source is changed");
+        throw new Error( 'Parsing error -- Source is changed' );
       }
       stations.push({name: titleMatch[1], id: idMatch[1]});
     };
-    return res.cache(86400).json(200, {results: stations});
+    return res.cache(86400).json({results: stations});
   });
 });
 
@@ -174,7 +178,7 @@ app.get('/weather/forecasts/:lang?', function (req, res) {
       forecast.valid = forecast.$.valid;
       delete forecast.$;
     };
-    return res.cache(600).json(forecasts);
+    return res.cache(300).json(forecasts);
   });
 });
 
@@ -218,7 +222,7 @@ app.get('/weather/observations/:lang?', function (req, res) {
       observation.valid = observation.$.valid;
       delete observation.$;
     };
-    return res.cache(600).json(observations);
+    return res.cache(300).json(observations);
   });
 });
 
@@ -258,7 +262,7 @@ app.get('/weather/texts/:lang?', function (req, res) {
         text.content = text.content._;
       };
     };
-    return res.cache(600).json(texts);
+    return res.cache(300).json(texts);
   });
 });
 
