@@ -1,4 +1,4 @@
-var helpers = require('../../../lib/helpers.js');
+var helpers = require('../../lib/helpers.js');
 var assert = require('assert');
 
 describe('deArrayfy', function () {

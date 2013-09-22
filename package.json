@@ -5,7 +5,7 @@
     "name": "Kristján Ingi Mikaelsson",
     "email": "kristjanmik@gmail.com"
   },
-  "description": "A json wraper around publicly open data in Iceland",
+  "description": "A json wrapper around publicly open data in Iceland",
   "repository": {
     "type": "git",
     "url": "https://github.com/kristjanmik/apis.git"
@@ -36,9 +36,11 @@
     "scraper": "0.0.9",
     "jquery": "~1.8.3",
     "cluster-master": "~0.1.2",
-    "redis": "~0.8.4"
+    "redis": "~0.8.4",
+    "xregexp": "~2.0.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test/integration"
+    "test": "node_modules/mocha/bin/mocha test/integration",
+    "unit-test": "node_modules/mocha/bin/mocha test/unit"
   }
 }

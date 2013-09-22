@@ -1,6 +1,7 @@
 var h = require('../../lib/helpers.js'),
 	request = require('request'),
-	app = require('../../server');
+	app = require('../../server'),
+	isn2wgs = require('isn2wgs');
 
 app.get('/bus/realtime', function(req, res){
 	var data = req.query;
@@ -66,7 +67,7 @@ app.get('/bus/realtime', function(req, res){
 
     			route.busses.forEach(function(bus, key){
 
-    				var location = h.ISN93_To_WGS84(bus.X,bus.Y),
+    				var location = isn2wgs(bus.X,bus.Y),
     					oneRoute = {
     					'unixTime': Date.parse(bus.TIMESTAMPREAL)/1000,
     					'x': location.lat,
