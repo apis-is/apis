@@ -12,6 +12,8 @@ The code that is running the service is open source under the MIT licence so it 
 
 [@arnorhs](https://github.com/arnorhs/)
 
+[@benediktvaldez](https://github.com/benediktvaldez)
+
 ## Tests
 
 Currently there are two types of tests, integration and unit tests. All tests are created using [Mocha](http://visionmedia.github.io/mocha/).
