@@ -1,75 +1,69 @@
-# [Apis.is](http://apis.is) - Endapunktar fyrir alla!
+# [APIs.is](http://apis.is) - Making data pretty since 2012!
 
-*[Click here for an english README](https://github.com/kristjanmik/apis/blob/master/README_EN.md)*
+The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped fron open public websites.
 
-Tilgangur [Apis.is](http://apis.is) er að veita forriturum og áhugamönnum aðgang að gögnum og upplýsingum á eins aðgengilegan hátt og völ er á. Allar upplýsingar eru sóttar af opnum vefsíðum og gerðar aðgengilegri fyrir þá sem vilja með json þjónustum.
+The code that is running the service is open source under the MIT licence so it can be used freely. The platform itself is hosted on a load balanced setup by [GreenQloud](http://www.greenqloud.com) to be as antifragile as possible. The hosted service does not store any information so that all data is gathered on runtime and is then disregarded immediately.
 
-**Ekki hika við að hjálpa til, öll þekking og hjálp er vel þegin!**
+**Don't hesitate to lend a hand - All knowledge and help is much appreciated!**
 
-##Prófanir
-Hægt er að keyra integration tests fyrir hluta af vefþjónustunum með því að nota skipunina:
+##Maintainers
 
+[@kristjanmik](https://github.com/kristjanmik/)
+
+[@arnorhs](https://github.com/arnorhs/)
+
+## Tests
+
+Currently there are two types of tests, integration and unit tests. All tests are created using [Mocha](http://visionmedia.github.io/mocha/).
+
+To run the integration tests:
 ```sh
-$ node_modules/mocha/bin/mocha test/integration
+ node_modules/mocha/bin/mocha test/integration
+
+ or
+
+ mocha test/integration
 ```
 
-##Hvað þarf að gera til að bæta við endapunkt?
-Endapunktar virka allir núna eingöngu þannig að um leið og það er kallað í hann þá sækir hann og parsar viðeigandi síðu eða API annarsstaðar og skilar útkomu.
+To run the unit tests:
+```sh
+ node_modules/mocha/bin/mocha test/unit
+ 
+ or
+ 
+ mocha test/unit
+```
 
-###Skref fyrir skref:
-+ Best er að skoða einn endapunktinn til að sjá hvernig aðrir hafa verið innleiddir
-+ Bæta við möppu í `endpoints/` undir viðeigandi nafni
-+ Þar ætti að vera `index.js` skrá, sem exportar function sem heitir `setup`, hann tekur við einu argumenti `server`. Þar þarftu að binda þá slóð sem þú vilt að endapunkturinn hlusti á.
+## Adding a new Endpoint
 
-####Dæmi (í endpoints/kaboom):
+### Step by Step
+
+1. View current endpoints for structure and hierarchy.
+2. Add a new folder to the `endpoints/` directory with the name of your endpoint.
+3. The file will be loaded automatically. Remember to require the server. Bare minimum example endpoint:
 
 ```javascript
-exports.setup = function (server) {
-	server.get({
-		path: '/kaboom',
-		version: '1.0.0'
-	}, function (request, response, next) {
-		// hér gerast galdrarnir
-	});
-};
+var app = require('../../server');
+
+app.get('/path',function(req,res){
+    return res.json({}); //Sends out empty json object
+});
 ```
 
-####Hægt er að lesa um hvernig hægt er að meðhöndla bæði request og response [hérna](http://mcavage.github.io/node-restify)
+### Additional Requirement
 
-+ Endapunktum er, enn sem komið er, frjálst að bæta við requires() modulum að þörf.
-+ Best væri ef hver endapunktur mundi skrásetja hvernig maður notar endapunktinn, ss. hvaða parameters hann tekur við osfrv
-+ Það væri frábært að bæta við unit testum fyrir parta úr endapunktunum, en enn sem komið er gerir enginn annar endapunktur það.
-+ Lágmark er að bæta við [integration testi](http://en.wikipedia.org/wiki/Integration_testing) fyrir endapunktinn. Það er gert með því að bæta við möppu inn í endapunktinum sem heitir `tests/`, og þar inni skal vera skrá sem heitir `integration_test.js`. Hægt er að líta á aðra endapunkta fyrir dæmi um hvernig það er gert.
+Add [integration tests](http://en.wikipedia.org/wiki/Integration_testing) to the endpoint by creating a file called `integration_test.js` inside a `tests/` folder within your endpoint directory. For reference, please take a look add one of the integration tests.
 
-## Gögn sem hægt er að vinna úr og hugsanlega bæta við sem endapunkt:
+Add [documentation](https://github.com/kristjanmik/apis-docs) for your endpoint
 
-+ Flug:
-	+ [kefairport.is](http://www.kefairport.is/)
-+ Veður:
-	+ [m.vegagerdin.is](http://m.vegagerdin.is/)
-+ Póstnúmer og götuheiti:
-	+ [postur.is/desktopdefault.aspx/tabid-452/186_read-329](http://www.postur.is/desktopdefault.aspx/tabid-452/186_read-329/)
-+ Orðasöfn og tungumálagagnabankar:
-	+ [snara.is/bls/um/_staf.aspx](http://snara.is/bls/um/_staf.aspx)
-	+ [bin.arnastofnun.is](http://bin.arnastofnun.is/)
-+ Fjármálaupplýsingar:
-	+ [arionbanki.is/markadir](http://www.arionbanki.is/markadir)
-+ Almennur fróðleikur:
-	+ [visindavefur.hi.is](http://www.visindavefur.hi.is/)
-+ Hagnýtar upplýsingar:
-	+ [hagstofa.is](http://www.hagstofa.is/)
-+ Bíóupplýsingar:
-	+ [midi.is/forsida](http://midi.is/forsida/)
-	+ [m.kvikmyndir.is/bio](http://m.kvikmyndir.is/bio/)
-+  Sjónvarpsdagskrá allra stöðva
-	+ [dagskra.ruv.is/dagskra](http://dagskra.ruv.is/dagskra/)
-	+ [skjarinn.is/einn](http://www.skjarinn.is/einn/)
-	+ [stod2.is/Dagskra/dagskra?stod=STOD2](http://stod2.is/Dagskra/dagskra?stod=STOD2)
-	+ [n4.is/page/dagskra](http://www.n4.is/page/dagskra)
-+  Upplýsingar úr skráningu Isnic
-    + [https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is](https://www.isnic.is/is/whois/mini.php?type=all&query=apis.is)
+### More servers
 
-##Áhugaverðar síður:
-+ [arnastofnun.is/page/gagnasofn](http://arnastofnun.is/page/gagnasofn)
-+ [opingogn.net/wiki](http://opingogn.net/wiki/)
+To have close to zero downtime it is in the pipeline to start up more workers/servers around the world so that stuff relying on the apis.is service will not get affected. Want to help out with that? Feel free to send us a [line](mailto:apis@apis.is)!
 
+### Helpful Pointers
+
+- Endpoints can implement any node module.
+- Information on how to handle requests and responses can be found [here](http://expressjs.com/api.html).
+- It is much appreciated that endpoints are thoroughly documented and written with care.
+- Issues are  managed by the [GitHub issue tracker](https://github.com/kristjanmik/apis/issues).
+- Enjoy!
