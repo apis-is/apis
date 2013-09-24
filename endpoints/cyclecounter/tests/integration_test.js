@@ -3,6 +3,7 @@ var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('cyclecounter', function() {
+	this.timeout(4000);
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ["DayCount", "YearCount", "Time", "Date"];
 

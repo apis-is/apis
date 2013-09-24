@@ -3,7 +3,6 @@ var request = require('request'),
   app = require('../../server');
 
 app.get('/cyclecounter', function(req, res){
-  this.timeout(4000);
   request.get({
     url: 'http://www.bicyclecounter.dk/BicycleCounter/GetCycleInfo?ran=1379500208853&StationId=235&LaneId=0'
     }, function(err, response, xml) {
