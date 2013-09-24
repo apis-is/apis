@@ -1,8 +1,8 @@
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
-The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped fron open public websites.
+The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
 
-The code that is running the service is open source under the MIT licence so it can be used freely. The platform itself is hosted on a load balanced setup by [GreenQloud](http://www.greenqloud.com) to be as antifragile as possible. The hosted service does not store any information so that all data is gathered on runtime and is then disregarded immediately.
+The code that is running the service is open source under the [MIT licence](https://en.wikipedia.org/wiki/MIT_License). The platform itself is hosted on a load balanced setup by [GreenQloud](http://www.greenqloud.com) to be as antifragile as possible. The hosted service does not store any information, so all data is gathered on runtime and disregarded immediately afterwards.
 
 **Don't hesitate to lend a hand - All knowledge and help is much appreciated!**
 
@@ -56,20 +56,20 @@ app.get('/path',function(req,res){
 });
 ```
 
-### Additional Requirement
+### Additional requirements
 
-Add [integration tests](http://en.wikipedia.org/wiki/Integration_testing) to the endpoint by creating a file called `integration_test.js` inside a `tests/` folder within your endpoint directory. For reference, please take a look add one of the integration tests.
+Add [integration tests](http://en.wikipedia.org/wiki/Integration_testing) to the endpoint by creating a file called `integration_test.js` inside a `tests/` folder within your endpoint directory. For reference, please take a look at one of the integration tests.
 
 Add [documentation](https://github.com/kristjanmik/apis-docs) for your endpoint
 
 ### More servers
 
-To have close to zero downtime it is in the pipeline to start up more workers/servers around the world so that stuff relying on the apis.is service will not get affected. Want to help out with that? Feel free to send us a [line](mailto:apis@apis.is)!
+To ensure close to zero downtime, the plan is to start up more workers/servers around the world so that projects relying on this service will not be affected. Want to help out with that? Feel free to send us a [line](mailto:apis@apis.is)!
 
-### Helpful Pointers
+### Helpful pointers
 
 - Endpoints can implement any node module.
 - Information on how to handle requests and responses can be found [here](http://expressjs.com/api.html).
 - It is much appreciated that endpoints are thoroughly documented and written with care.
-- Issues are  managed by the [GitHub issue tracker](https://github.com/kristjanmik/apis/issues).
-- Enjoy!
+- Issues are managed by the [GitHub issue tracker](https://github.com/kristjanmik/apis/issues).
+- Have fun and eat some cake! (preferrably chocolate, but whatever floats your boat)
