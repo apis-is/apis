@@ -14,6 +14,10 @@ The code that is running the service is open source under the MIT licence so it 
 
 [@benediktvaldez](https://github.com/benediktvaldez)
 
+
+[![Build Status](https://travis-ci.org/kristjanmik/apis.png?branch=master)](https://travis-ci.org/kristjanmik/apis)
+
+
 ## Tests
 
 Currently there are two types of tests, integration and unit tests. All tests are created using [Mocha](http://visionmedia.github.io/mocha/).
