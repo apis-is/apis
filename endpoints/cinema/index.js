@@ -66,6 +66,7 @@ app.get('/cinema', function (req, res, next) {
 				released: movie.find('.mynd_titill_artal').text().match(/\d+/g)[0].trim(),
 				restricted: movie.find('.mynd_aldurstakmark img').attr('alt').trim(),
 				imdb: movie.find('.imdbEinkunn').text().trim(),
+				imdbLink: movie.find('.imdbEinkunn a').attr('href').trim(),
 				image: 'http://kvikmyndir.is' + imgURL,
 				showtimes: showtimes
 			});
