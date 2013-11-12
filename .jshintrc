@@ -31,7 +31,6 @@
     "undef": true,
     "trailing": true,
     "globals": {
-        /* MOCHA */
         "describe": false,
         "it": false,
         "before": false,
