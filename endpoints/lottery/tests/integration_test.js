@@ -2,42 +2,42 @@ var request = require('request');
 var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
-describe('lotto', function() {
+describe('lotto', function () {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
+    var fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link'];
 
-    it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/lottery");
+    it('should return an array of objects containing correct fields', function (done) {
+        var params = helpers.testRequestParams('/lottery');
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request(params, resultHandler);
     });
 });
-describe('lotto', function() {
+describe('lotto', function () {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
+    var fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link'];
 
-    it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/lottery/lotto");
+    it('should return an array of objects containing correct fields', function (done) {
+        var params = helpers.testRequestParams('/lottery/lotto');
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request(params, resultHandler);
     });
 });
-describe('vikingalotto', function() {
+describe('vikingalotto', function () {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
+    var fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link'];
 
-    it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/lottery/vikingalotto");
+    it('should return an array of objects containing correct fields', function (done) {
+        var params = helpers.testRequestParams('/lottery/vikingalotto');
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request(params, resultHandler);
     });
 });
-describe('eurojackpot', function() {
+describe('eurojackpot', function () {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
+    var fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link'];
 
-    it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/lottery/eurojackpot");
+    it('should return an array of objects containing correct fields', function (done) {
+        var params = helpers.testRequestParams('/lottery/eurojackpot');
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request(params, resultHandler);
     });

@@ -1,86 +1,115 @@
 var h = require('../../lib/helpers.js'),
-	request = require('request'),
-	app = require('../../server'),
-	isn2wgs = require('isn2wgs');
+    request = require('request'),
+    app = require('../../server'),
+    isn2wgs = require('isn2wgs');
 
-app.get('/bus/realtime', function(req, res){
-	var data = req.query;
+app.get('/bus/realtime', function (req, res) {
+    var data = req.query;
 
-	request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
-		if(error || response.statusCode !== 200)
-			return res.json(500,{error:'The bus api is down or refuses to respond'});
+    request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
+        if (error || response.statusCode !== 200) {
+            return res.json(500, {
+                error: 'The bus api is down or refuses to respond'
+            });
+        }
 
-		var obj;
-		try{
-			obj = JSON.parse(body);
-		}catch(error){
-			return res.json(500,{error:'Something is wrong with the data provided from the data source'});
-		}
+        var obj;
+        try {
+            obj = JSON.parse(body);
+        } catch (error) {
+            return res.json(500, {
+                error: 'Something is wrong with the data provided from the data source'
+            });
+        }
 
-		var activeBusses = [],
-			requestedBusses = [];
+        var activeBuses = [],
+            requestedBuses = [];
 
-		obj.routes.forEach(function(object, key){
-    		activeBusses.push(object.id);
-    	});
+        obj.routes.forEach(function (object) {
+            activeBuses.push(object.id);
+        });
 
-	    if(data.busses){ //Post busses = 1,2,3,4,5
-	    	requestedBusses = data.busses.split(",");
+        // provide backwards compatibility in the query and the result, this is
+        // something that breaks a version, so should probably be adressed in v2
+        var busstring = 'buses';
+        if (data.busses) {
+            data.buses = data.busses;
+            busstring = 'busses';
+        }
 
-	    	for(var i in requestedBusses){ //Prevent requested to busses that are not available
-	    		if(activeBusses.indexOf(requestedBusses[i]) == -1){
-					requestedBusses.splice(requestedBusses.indexOf(requestedBusses[i]),1);
-				}
-	    	}
-	    }else{
-	    	//No bus was posted, use all active busses
-	    	requestedBusses = activeBusses;
-	    }
 
-	    var objString = requestedBusses.join('%2C');
+        if (data.buses) { //Post buses = 1,2,3,4,5
+            requestedBuses = data.buses.split(',');
 
-	    request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
+            for (var i in requestedBuses) { //Prevent requested to buses that are not available
+                if (activeBuses.indexOf(requestedBuses[i]) === -1) {
+                    requestedBuses.splice(requestedBuses.indexOf(requestedBuses[i]), 1);
+                }
+            }
+        } else {
+            //No bus was posted, use all active buses
+            requestedBuses = activeBuses;
+        }
 
-	    	if(error || response.statusCode !== 200)
-				return res.json(500,{error:'The bus api is down or refuses to respond'});
 
-			try{
-    			var data = JSON.parse(body);
-			}catch(e){
-				return res.json(500,{error:'Something is wrong with the data provided from the data source'});
-			}
 
-    		var routes = data.routes;
+        var objString = requestedBuses.join('%2C');
 
-    		var objRoutes = {
-    			results: []
-    		};
-    		routes.forEach(function(route, key){
+        request('http://straeto.is/bitar/bus/livemap/json.jsp?routes=' + objString, function (error, response, body) {
 
-    			var objRoute = {
-                    busNr: route.id || "", // will be undefined if none are active
-    				busses: []
-    			}; 
+            if (error || response.statusCode !== 200) {
+                return res.json(500, {
+                    error: 'The bus api is down or refuses to respond'
+                });
+            }
+
+            var data;
+            try {
+                data = JSON.parse(body);
+            } catch (e) {
+                return res.json(500, {
+                    error: 'Something is wrong with the data provided from the data source'
+                });
+            }
+
+
+            var routes = data.routes;
+
+            var objRoutes = {
+                results: []
+            };
+            routes.forEach(function (route) {
+
+                var objRoute = {
+                    busNr: route.id || '' // will be undefined if none are active
+                };
+                objRoute[busstring] = [];
                 objRoutes.results.push(objRoute);
 
-                if (!route.busses) return; // No busses active, eg. after schedule
+                var straetoBuses = route.busses;
 
-    			route.busses.forEach(function(bus, key){
+                // straeto returns their data with the outdated 'busses' spelling
+                if (!straetoBuses) {
+                    return; // No buses active, eg. after schedule
+                }
 
-    				var location = isn2wgs(bus.X,bus.Y),
-    					oneRoute = {
-    					'unixTime': Date.parse(bus.TIMESTAMPREAL)/1000,
-    					'x': location.lat,
-    					'y': location.lng,
-    					'from': bus.FROMSTOP,
-    					'to': bus.TOSTOP
-    				};
-    				objRoute.busses.push(oneRoute);
+                //
+                straetoBuses.forEach(function (bus) {
 
-    			});
+                    var location = isn2wgs(bus.X, bus.Y),
+                        oneRoute = {
+                            'unixTime': Date.parse(bus.TIMESTAMPREAL) / 1000,
+                            'x': location.lat,
+                            'y': location.lng,
+                            'from': bus.FROMSTOP,
+                            'to': bus.TOSTOP
+                        };
+                    objRoute[busstring].push(oneRoute);
 
-    		});
-    		return res.json(objRoutes);
-	    });
-	});
+                });
+
+            });
+            return res.json(objRoutes);
+        });
+    });
 });

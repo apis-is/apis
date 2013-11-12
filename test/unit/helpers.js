@@ -2,70 +2,118 @@ var helpers = require('../../lib/helpers.js');
 var assert = require('assert');
 
 describe('deArrayfy', function () {
-  it("should not change single item variables in objects", function () {
 
-    var object = {foo: "foo"};
+    it('should not change single item variables in objects', function () {
 
-    helpers.deArrayfy(object);
-    assert.equal("foo", object.foo);
-  });
-  it("should change 1 item array member to single item variables", function () {
+        var object = {
+            foo: 'foo'
+        };
 
-    var object = {foo: [ 1 ]};
+        helpers.deArrayfy(object);
+        assert.equal('foo', object.foo);
+    });
 
-    helpers.deArrayfy(object);
-    assert.equal(false, Array.isArray(object.foo));
-  });
-  it("should not change two item array members", function () {
+    it('should change 1 item array member to single item variables', function () {
 
-    var object = {foo: [ 1, 2 ]};
+        var object = {
+            foo: [1]
+        };
 
-    helpers.deArrayfy(object);
-    assert.equal(true, Array.isArray(object.foo));
-  });
-  it("should change 1 item array member in sub-objects to single item variables", function () {
+        helpers.deArrayfy(object);
+        assert.equal(false, Array.isArray(object.foo));
+    });
 
-    var object = {foo: {bar: [ 1 ]}};
+    it('should not change two item array members', function () {
 
-    helpers.deArrayfy(object);
-    assert.equal(false, Array.isArray(object.foo.bar));
-  });
-  it("should not change two item array members in sub-objects", function () {
+        var object = {
+            foo: [1, 2]
+        };
 
-    var object = {foo: {bar: [ 1, 2 ]}};
+        helpers.deArrayfy(object);
+        assert.equal(true, Array.isArray(object.foo));
+    });
 
-    helpers.deArrayfy(object);
-    assert.equal(true, Array.isArray(object.foo.bar));
-  });
-  it("should change 1 item array member in sub-arrays to single item variables", function () {
+    it('should change 1 item array member in sub-objects to single item variables', function () {
 
-    var object = {foo: {bar: [ { baz: [ 1 ] } ]}};
+        var object = {
+            foo: {
+                bar: [1]
+            }
+        };
 
-    helpers.deArrayfy(object);
-    assert.equal(false, Array.isArray(object.foo.bar));
-    assert.equal(false, Array.isArray(object.foo.bar.baz));
-  });
-  it("should not change two item array members in sub-arrays", function () {
+        helpers.deArrayfy(object);
+        assert.equal(false, Array.isArray(object.foo.bar));
+    });
 
-    var object = {foo: {bar: [ { baz: [ 1, 2 ] }, { baz : [ 1, 2 ]} ]}};
+    it('should not change two item array members in sub-objects', function () {
 
-    helpers.deArrayfy(object);
-    assert.equal(true, Array.isArray(object.foo.bar));
-    assert.equal(true, Array.isArray(object.foo.bar[0].baz));
-    assert.equal(true, Array.isArray(object.foo.bar[1].baz));
-  });
-  it("should change all 1 item arrays in the object to single item variables and leave single item variables unchanged", function () {
+        var object = {
+            foo: {
+                bar: [1, 2]
+            }
+        };
 
-    var object = {foo: "foo", bar: [ 1 ], baz: [ 1, 2 ], qux: { foo : "foo", bar : [ [ 1, 2 ], [ 1 ] ], baz: [ 1 ]  }};
+        helpers.deArrayfy(object);
+        assert.equal(true, Array.isArray(object.foo.bar));
+    });
 
-    helpers.deArrayfy(object);
-    assert.equal(false, Array.isArray(object.bar));
-    assert.equal(true, Array.isArray(object.baz));
+    it('should change 1 item array member in sub-arrays to single item variables', function () {
 
-    assert.equal(true, Array.isArray(object.qux.bar));
-    assert.equal(false, Array.isArray(object.qux.baz));
+        var object = {
+            foo: {
+                bar: [{
+                    baz: [1]
+                }]
+            }
+        };
 
-    assert.equal("foo", object.qux.foo);
-  });
-    
+        helpers.deArrayfy(object);
+        assert.equal(false, Array.isArray(object.foo.bar));
+        assert.equal(false, Array.isArray(object.foo.bar.baz));
+    });
+
+    it('should not change two item array members in sub-arrays', function () {
+
+        var object = {
+            foo: {
+                bar: [{
+                    baz: [1, 2]
+                }, {
+                    baz: [1, 2]
+                }]
+            }
+        };
+
+        helpers.deArrayfy(object);
+        assert.equal(true, Array.isArray(object.foo.bar));
+        assert.equal(true, Array.isArray(object.foo.bar[0].baz));
+        assert.equal(true, Array.isArray(object.foo.bar[1].baz));
+    });
+
+    it('should change all 1 item arrays in the object to single item variables and leave single item variables unchanged', function () {
+
+        var object = {
+            foo: 'foo',
+            bar: [1],
+            baz: [1, 2],
+            qux: {
+                foo: 'foo',
+                bar: [
+                    [1, 2],
+                    [1]
+                ],
+                baz: [1]
+            }
+        };
+
+        helpers.deArrayfy(object);
+        assert.equal(false, Array.isArray(object.bar));
+        assert.equal(true, Array.isArray(object.baz));
+
+        assert.equal(true, Array.isArray(object.qux.bar));
+        assert.equal(false, Array.isArray(object.qux.baz));
+
+        assert.equal('foo', object.qux.foo);
+    });
+
 });
