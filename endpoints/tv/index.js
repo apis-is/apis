@@ -21,9 +21,47 @@ var schedStruct = {
     actors: ''
 };
 
-app.get('/tv', function (req, res) {
-    return getRuv(req, res);
-});
+// TODO: Implement this route
+// app.get('/tv', function (req, res) {
+//     return getRuv(req, res);
+// });
+
+var parseRuv = function (callback, data) {
+
+    parseString(data, function (err, result, title) {
+        if (err) {
+            throw new Error('Parsing of XML failed');
+        }
+
+        var schedule = [];
+
+        if (result.schedule.error) {
+            return (callback(schedule));
+        }
+
+
+        for (var i = 0; i < result.schedule.service[0].event.length; ++i) {
+            var event = result.schedule.service[0].event[i];
+            schedule.push(schedStruct = {
+                title: event.title[0],
+                originalTitle: event['original-title'][0],
+                duration: event.$.duration,
+                description: event.description[0],
+                shortDescription: event['short-description'][0],
+                live: event.live[0] === 'yes' ? true : false,
+                premier: event.rerun[0] === 'yes' ? false : true,
+                startTime: event.$['start-time'],
+                aspectRatio: event['aspect-ratio'][0].size[0],
+                series: {
+                    episode: event.episode[0].$.number,
+                    series: event.episode[0].$['number-of-episodes']
+                }
+            });
+        }
+        return callback(schedule);
+    });
+};
+
 app.get('/tv/ruv', function (req, res) {
     var url = 'http://muninn.ruv.is/files/xml/ruv/';
 
@@ -36,38 +74,28 @@ app.get('/tv/ruv', function (req, res) {
     }
 
     request.get({
-        headers: {'User-Agent': h.browser()},
+        headers: {
+            'User-Agent': h.browser()
+        },
         url: url
     }, function (error, response, body) {
-        if (error) throw new Error(url + ' did not respond');
+        if (error) {
+            throw new Error(url + ' did not respond');
+        }
 
         parseRuv(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
     });
-});
-app.get('/tv/stod2', function (req, res) {
-    var url = 'http://stod2.is/XML--dagskrar-feed/XML-Stod-2-dagurinn';
-
-    request.get({
-        headers: {'User-Agent': h.browser()},
-        url: url
-    }, function (error, response, body) {
-        if (error) throw new Error(url + ' did not respond');
-
-        parseStod2(function (data) {
-            res.cache(1800).json(200, {
-                results: data
-            })
-        }, body);
-    })
 });
 
 var parseStod2 = function (callback, data) {
     parseString(data, function (err, result, title) {
-        if (err) throw new Error("Parsing of XML failed");
+        if (err) {
+            throw new Error('Parsing of XML failed');
+        }
 
         var schedule = [];
 
@@ -84,45 +112,32 @@ var parseStod2 = function (callback, data) {
                 startTime: event.$.starttime,
                 aspectRatio: event.aspectratio[0].$.value,
                 series: {
-                    episode: event.series ? event.series[0].$.episode : "",
-                    series: event.series ? event.series[0].$.series : ""
+                    episode: event.series ? event.series[0].$.episode : '',
+                    series: event.series ? event.series[0].$.series : ''
                 }
-            })
+            });
         }
         return callback(schedule);
     });
 };
 
-var parseRuv = function (callback, data) {
+app.get('/tv/stod2', function (req, res) {
+    var url = 'http://stod2.is/XML--dagskrar-feed/XML-Stod-2-dagurinn';
 
-    parseString(data, function (err, result, title) {
-        if (err) throw new Error("Parsing of XML failed");
-
-        var schedule = [];
-
-        if (result.schedule.error) {
-            return(callback(schedule))
+    request.get({
+        headers: {
+            'User-Agent': h.browser()
+        },
+        url: url
+    }, function (error, response, body) {
+        if (error) {
+            throw new Error(url + ' did not respond');
         }
 
-
-        for (var i = 0; i < result.schedule.service[0].event.length; ++i) {
-            var event = result.schedule.service[0].event[i];
-            schedule.push(schedStruct = {
-                title: event.title[0],
-                originalTitle: event['original-title'][0],
-                duration: event.$.duration,
-                description: event.description[0],
-                shortDescription: event['short-description'][0],
-                live: event.live[0] == "yes" ? true : false,
-                premier: event.rerun[0] == "yes" ? false : true,
-                startTime: event.$['start-time'],
-                aspectRatio: event['aspect-ratio'][0].size[0],
-                series: {
-                    episode: event.episode[0].$.number,
-                    series: event.episode[0].$['number-of-episodes']
-                }
-            })
-        }
-        return callback(schedule);
+        parseStod2(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            });
+        }, body);
     });
-};
+});
