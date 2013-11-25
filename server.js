@@ -7,6 +7,11 @@ var express = require('express'),
     EE = require('events').EventEmitter;
 
 /**
+ * Set the spacing to 0 for shorter output
+ */
+app.set('json spaces',0);
+
+/**
  * Create an event listener for app
  */
 EE.call(app);
