@@ -37,21 +37,37 @@ app.get('/flight', function(req, res){
 
 		var	obj = { results: []};
 
-		var fields = ['date','flightNumber','to','plannedArrival','realArrival','status'];
+		var fields = ['date','flightNumber','airline','to','plannedArrival','realArrival','status'];
 		
 		data.find('table tr').each(function(key){
 			if(key !== 0){
-				var flight = {
-					'date': '',
-					'flightNumber':'',
-					'to': '',
-					'plannedArrival': '',
-					'realArrival': '',
-					'status': ''
+				var flight = {};
+				if(data.type === 'departures') {
+					flight = {
+						'date': '',
+						'flightNumber':'',
+						'airline':'',
+						'to': '',
+						'plannedArrival': '',
+						'realArrival': '',
+						'status': ''
+					}
 				}
+				else {
+					flight = {
+						'date': '',
+						'flightNumber':'',
+						'airline':'',
+						'from': '',
+						'plannedArrival': '',
+						'realArrival': '',
+						'status': ''
+					}
+				}
+				
 				$(this).find('td').each(function(key){
 					var val = $(this).html();
-					if(val != '' && val != 0){ //Perform check and add to car array if it passes
+					if(val != '' && val != 0){ // Perform check and add to flight array if it passes
 						flight[fields[key]] = val;
 
 					}
