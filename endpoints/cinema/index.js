@@ -57,7 +57,13 @@ app.get('/cinema', function (req, res, next) {
 			});
 
 			// Clean up image URL
-			var imgURL = movie.find('img.poster').attr('src').match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig)[0];
+			var imgURL;
+
+			try{
+				imgURL = movie.find('img.poster').attr('src').match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig)[0];
+			}catch(e){
+				console.log('Could not grab the image poster',e);
+			}
 
 			// Create an object of info
 			// and add it to the 'results' array.

@@ -30,7 +30,7 @@
     "moment": "~2.1.0",
     "xml2js": "~0.2.8",
     "express": "~3.3.8",
-    "cheerio": "~0.12.2",
+    "cheerio": "~0.12.3",
     "request": "~2.27.0",
     "mocha": "~1.12.1",
     "scraper": "0.0.9",
