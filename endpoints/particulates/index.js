@@ -5,14 +5,13 @@ var request = require('request'),
 app.get('/particulates', function(req, res){
 
   request.get({
-    url: 'http://www.loft.rvk.is/xml/svifryk.xml'
+    url: 'http://www.loft.rvk.is/xml/Xsvifryk.xml'
     }, function(err, response, xml) {
       if(err || response.statusCode !== 200)
         return res.json(500,{error: 'www.loft.rvk.is refuses to respond or give back data'});
 
       var particulates = [];
       parseString(xml, { explicitRoot: false }, function(err, result) {
-
         particulates.push({
           PM10nuna: result.PM10nuna[0],
           PM10medaltal: result.PM10medaltal[0],

@@ -11,7 +11,7 @@ describe('tv - stod2', function () {
 });
 
 describe('tv - ruv', function () {
-    this.timeout(4000);
+    this.timeout(8000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruv");
