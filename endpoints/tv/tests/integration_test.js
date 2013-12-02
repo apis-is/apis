@@ -1,7 +1,7 @@
 var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
-describe('stod2', function () {
+describe('tv - stod2', function () {
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/stod2");
@@ -10,7 +10,7 @@ describe('stod2', function () {
     });
 });
 
-describe('ruv', function () {
+describe('tv - ruv', function () {
     this.timeout(4000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
