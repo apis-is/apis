@@ -19,7 +19,7 @@ app.get('/flight', function(req, res){
 	}else if(data.type == 'arrivals' && data.language == 'en'){
 		url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
 	}else{
-		return res.json(431,{'error':'Wrong parameters given!'});
+		url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
 	}
 
 	request.get({
@@ -37,7 +37,7 @@ app.get('/flight', function(req, res){
 
 		var	obj = { results: []};
 
-		var fields = ['date','flightNumber','airline','to','plannedArrival','realArrival','status'];
+		var fields = ['date','flightNumber','airline','to','from','plannedArrival','realArrival','status'];
 		
 		data.find('table tr').each(function(key){
 			if(key !== 0){

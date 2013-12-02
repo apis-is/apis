@@ -37,7 +37,8 @@ app.use(cache());
 fileModule.walkSync('./endpoints', function(dirPath, dirs, files){
     if(files && dirPath.indexOf("/test") < 0){
         files.forEach(function(file,key){
-            require('./'+dirPath+'/'+file);
+            if(file.indexOf('.DS_Store') === -1)
+                require('./'+dirPath+'/'+file);
         });
     }
 });

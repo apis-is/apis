@@ -4,7 +4,7 @@ var helpers = require('../../../lib/test_helpers.js');
 
 describe('flight', function() {
     it("should return an array of objects containing correct fields", function(done) {
-        var fieldsToCheckFor = ["date","flightNumber","airline","to","plannedArrival","realArrival","status"];
+        var fieldsToCheckFor = ["date","flightNumber","airline","to","from","plannedArrival","realArrival","status"];
         var params = helpers.testRequestParams("/flight", {
             language: "en",
             type: "departures"
