@@ -21,48 +21,48 @@ app.get('/declension/:word', function(req, res) {
 	};
 
 	getDeclensions(function(body) {
-	  return res.json(parseTable(body));
+		return res.json(parseTable(body));
   }, params);
 });
 
 // return permutation of a given word
-var getDeclensions = function(callback, params) {
-  request.get(params, function(err, res, body) {
+function getDeclensions(callback, params) {
+	request.get(params, function(err, res, body) {
 
-	  if (err || res.statusCode != 200) {
-		  throw new Error(err);
-	  }
+		if (err || res.statusCode != 200) {
+			throw new Error(err);
+		}
 
-	  var $;
+		var $;
 
-	  try {
-		  $ = cheerio.load(body);
-	  } catch(error) {
-		  throw new Error(error);
-	  }
+		try {
+			$ = cheerio.load(body);
+		} catch(error) {
+			throw new Error(error);
+		}
 
-	  var result = $("#main ul li a");
+		var result = $("#main ul li a");
 
-	  // more than 1 result from request (ex: 'hús')
-	  if (result.length > 1) {
+		// more than 1 result from request (ex: 'hús')
+		if (result.length > 1) {
 
-		  // call recursively again with new url
-		  params.url = baseUrl.concat(result[0].attribs.href);
-		  getDeclensions(callback, params);
-		  return;
-	  };
+		// call recursively again with new url
+		params.url = baseUrl.concat(result[0].attribs.href);
+			getDeclensions(callback, params);
+			return;
+		};
 
-	  // else just call func to return data
-	  return callback($("#main"));
+		// else just call func to return data
+		return callback($("#main"));
 
-  });
+	});
 };
 
 
 // Creates a sequence of integers, each iteration creates a value and increments that value by 1
 // step: specify how often to run the iteration
 // increment: how much to increment after each iteration
-var generateSequence = function(start, step, increment) {
+function generateSequence(start, step, increment) {
 	// ex:
 	// input: start: 0, step: 4, increment: 3
 	// output: [ 0, 1, 4, 5, 8, 9, 12, 13 ]
@@ -78,12 +78,12 @@ var generateSequence = function(start, step, increment) {
 };
 
 
-var parseTable = function(data) {
+function parseTable(data) {
 	var type = data.find('center:first-child').contents().eq(2).text().trim();
 
 	// create a sequence which is the same as the index of 'Eintala' of the td's in the HTML table.
 	var singular = generateSequence(0, 4, 3),
-				   results = [];
+		results = [];
 
 	data.find('table tr td span').each(function(i) {
 		var parent = this.parent();
