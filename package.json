@@ -26,18 +26,17 @@
   "dependencies": {
     "file": "~0.2.1",
     "isn2wgs": "0.0.2",
-    "underscore": "~1.5.1",
+    "underscore": "~1.5.2",
     "moment": "~2.1.0",
     "xml2js": "~0.2.8",
-    "express": "~3.3.8",
     "request": "~2.27.0",
-    "mocha": "~1.12.1",
     "scraper": "0.0.9",
     "jquery": "~1.8.3",
-    "cluster-master": "~0.1.2",
     "redis": "~0.8.4",
     "xregexp": "~2.0.0",
-    "cheerio": "~0.12.4"
+    "cheerio": "~0.12.4",
+    "mocha": "~1.15.1",
+    "express": "~3.4.7"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/integration",
