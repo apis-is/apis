@@ -1,6 +1,6 @@
 var express = require('express'),
     app = module.exports = express(),
-	config = require('./config'),
+    config = require('./config'),
     fileModule = require('file'),
     cache = require('./lib/cache'),
     cors = require('./lib/cors'),
@@ -35,9 +35,9 @@ app.use(cache());
  * Set up endpoints
  */
 fileModule.walkSync('./endpoints', function iterateEndpoints(dirPath, dirs, endpoints) {
-    if (endpoints && dirPath.indexOf("/test") < 0) endpoints.forEach( requireEndpoint );
+    if (endpoints && dirPath.indexOf('/test') < 0) endpoints.forEach(requireEndpoint);
 
-    function requireEndpoint (endpoint) {
+    function requireEndpoint(endpoint) {
         if (endpoint.indexOf('.DS_Store') === -1) require('./' + dirPath + '/' + endpoint);
     }
 });
@@ -45,10 +45,10 @@ fileModule.walkSync('./endpoints', function iterateEndpoints(dirPath, dirs, endp
 /**
  * Start the server
  */
-app.listen(config.port,function() {
+app.listen(config.port, function () {
     app.emit('ready');
 });
 
-app.on('ready',function() {
+app.on('ready', function () {
     if (!config.testing) console.log('Server running at port: ' + config.port);
 });
