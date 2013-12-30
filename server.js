@@ -1,7 +1,6 @@
 var express = require('express'),
-    app = module.exports = express(),
+    app = express(),
     config = require('./config'),
-    fileModule = require('file'),
     cache = require('./lib/cache'),
     cors = require('./lib/cors'),
     EE = require('events').EventEmitter;
@@ -19,7 +18,7 @@ EE.call(app);
 /*
  * Built in parser to acces the body values
  */
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
 /**
  * Cross-origin resource sharing
@@ -31,24 +30,50 @@ app.use(cors());
  */
 app.use(cache());
 
-/**
- * Set up endpoints
- */
-fileModule.walkSync('./endpoints', function iterateEndpoints(dirPath, dirs, endpoints) {
-    if (endpoints && dirPath.indexOf('/test') < 0) endpoints.forEach(requireEndpoint);
+function setup() {
+    app.listen(config.port, function () {
+        app.emit('ready');
+    });
 
-    function requireEndpoint(endpoint) {
-        if (endpoint.indexOf('.DS_Store') === -1) require('./' + dirPath + '/' + endpoint);
+    app.on('ready', function () {
+        if (!config.testing) console.log('Server running at port: ' + config.port);
+    });
+}
+
+var endpoints = [];
+
+function mock(type, args) {
+
+    endpoints.push({
+        type: type,
+        args: args
+    })
+
+    console.log('ENDPOINTS', endpoints)
+}
+
+module.exports = {
+    standalone: function (endpoint) {
+
+        endpoints.forEach(function (endpoint) {
+            //Pass the arguments onto the app
+            app.get.apply(app, endpoint.args);
+        });
+
+        setup();
+    },
+    appMock: {
+        get: function () {
+            mock('get', Array.prototype.slice.call(arguments))
+        },
+        post: function () {
+            mock('post', Array.prototype.slice.call(arguments))
+        },
+        put: function () {
+            mock('put', Array.prototype.slice.call(arguments))
+        },
+        delete: function () {
+            mock('delete', Array.prototype.slice.call(arguments))
+        }
     }
-});
-
-/**
- * Start the server
- */
-app.listen(config.port, function () {
-    app.emit('ready');
-});
-
-app.on('ready', function () {
-    if (!config.testing) console.log('Server running at port: ' + config.port);
-});
+}
