@@ -89,19 +89,12 @@ var shared = module.exports = {
             setupServerListener();
         }
     },
-    setup: function (type) {
-
-        if (!type) {
-            type = 'main';
-        }
-
+    setup: function () {
         config.endpoints.forEach(function (endpoint) {
-            require(endpoint).setup(type);
+            require(endpoint).setup();
         });
 
-        if (type === 'main') {
-            setupServerListener();
-        }
+        setupServerListener();
     }
 }
 
