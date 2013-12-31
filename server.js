@@ -71,17 +71,14 @@ Mock.prototype.delete = function () {
     this.addRoute('delete', Array.prototype.slice.call(arguments))
 }
 
-
-function createMock() {
-    return (function () {
-        return new Mock;
-    })()
-
-}
-
 module.exports = {
 
-    appMock: createMock,
+    appMock: function () {
+        return (function () {
+            return new Mock;
+        })()
+
+    },
     done: function (endpointData, type) {
         endpointData.routes.forEach(function (endpoint) {
             //Pass the arguments onto the app
