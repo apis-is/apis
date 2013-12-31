@@ -1,16 +1,23 @@
-var apis = require('../../server.js'),
-	app = apis.appMock, //We only expose some part of the express app
-	name = require('./package.json').name;
+exports.setup = function (apis) {
+	console.log('Running endpoint setup');
 
-app.get('/test', function (req, res) {
-	res.json({
-		worked: true
+	var app = apis.appMock(); //We only expose some part of the express app
+
+
+	app.get('/test', function (req, res) {
+		res.json({
+			worked: true
+		});
 	});
-});
 
-module.exports = {
-	name: name,
-	tests: './tests/test.js',
-	endpoint: app,
-	docs: './docs/docs.js'
+	app.post('/test2', function (req, res) {
+		res.json({
+			worked: true
+		});
+	});
+
+	apis.done(app);
 }
+
+exports.tests = './tests/test.js';
+exports.docs = './docs/docs.js';

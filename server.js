@@ -30,7 +30,7 @@ app.use(cors());
  */
 app.use(cache());
 
-function setup() {
+function setupServerListener() {
     app.listen(config.port, function () {
         app.emit('ready');
     });
@@ -40,40 +40,79 @@ function setup() {
     });
 }
 
-var endpoints = [];
 
-function mock(type, args) {
 
-    endpoints.push({
-        type: type,
-        args: args
-    })
+function appMock() {
+    return new(function () {
+        return {
+            routes: [], //Holds all routes exported by the endpoint
+            addRoute: function (type, args) {
+                var route = {
+                    type: type,
+                    args: args
+                };
 
-    console.log('ENDPOINTS', endpoints)
+                this.routes.push(route)
+
+                console.log('Route added', route);
+            },
+            get: function () {
+                this.addRoute('get', Array.prototype.slice.call(arguments))
+            },
+            post: function () {
+                this.addRoute('post', Array.prototype.slice.call(arguments))
+            },
+            put: function () {
+                this.addRoute('put', Array.prototype.slice.call(arguments))
+            },
+            delete: function () {
+                this.addRoute('delete', Array.prototype.slice.call(arguments))
+            }
+        }
+    })()
+
 }
 
+// config.endpoints.forEach(function (endpoint) {
+
+// });
+
 module.exports = {
-    standalone: function (endpoint) {
+    standalone: function () {
+        console.log('Executing standalone apis server')
 
-        endpoints.forEach(function (endpoint) {
-            //Pass the arguments onto the app
-            app.get.apply(app, endpoint.args);
-        });
+        config.standalone = true;
 
-        setup();
-    },
-    appMock: {
-        get: function () {
-            mock('get', Array.prototype.slice.call(arguments))
-        },
-        post: function () {
-            mock('post', Array.prototype.slice.call(arguments))
-        },
-        put: function () {
-            mock('put', Array.prototype.slice.call(arguments))
-        },
-        delete: function () {
-            mock('delete', Array.prototype.slice.call(arguments))
+        return {
+            done: function (endpointData) {
+                endpointData.routes.forEach(function (endpoint) {
+                    //Pass the arguments onto the app
+                    app[endpoint.type].apply(app, endpoint.args);
+                });
+
+                setupServerListener();
+            },
+            appMock: appMock
         }
+    },
+    setup: function () {
+        return new function () {
+            this.appMock = appMock;
+            this.done = function (endpointData) {
+                endpointData.routes.forEach(function (endpoint) {
+                    //Pass the arguments onto the app
+                    app[endpoint.type].apply(app, endpoint.args);
+                });
+            }
+
+            var self = this;
+            config.endpoints.forEach(function (endpoint) {
+                require(endpoint).setup(self);
+            });
+
+            setupServerListener();
+
+        }
+
     }
 }
