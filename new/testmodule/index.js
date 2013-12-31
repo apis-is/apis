@@ -1,31 +1,29 @@
-var setup = exports.setup = function (type) {
-	console.log('Running endpoint setup');
+console.log('Running test endpoint setup');
 
-	var apis = require('../../server');
+var apis = require('../../server'),
 	app = apis.appMock(); //We only expose some part of the express app
 
 
-	app.get('/test', function (req, res) {
-		res.json({
-			worked: true
-		});
+app.get('/test', function (req, res) {
+	res.json({
+		worked: true
 	});
+});
 
-	app.post('/test2', function (req, res) {
-		res.json({
-			worked2: true
-		});
+app.post('/test2', function (req, res) {
+	res.json({
+		worked2: true
 	});
-
-	apis.done(app, type);
-}
-
-exports.tests = './tests/test.js';
-exports.docs = './docs/docs.js';
+});
 
 
 //If we are going to run this module as a standalone server
 //we have to run the setup function
-if (!module.parent) {
-	setup('standalone')
+if (module.parent) {
+	apis.done(app);
+} else {
+	apis.done(app, 'standalone');
 }
+
+exports.tests = './tests/test.js';
+exports.docs = './docs/docs.js';
