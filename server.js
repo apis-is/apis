@@ -71,7 +71,7 @@ Mock.prototype.delete = function () {
     this.addRoute('delete', Array.prototype.slice.call(arguments))
 }
 
-module.exports = {
+var shared = module.exports = {
 
     appMock: function () {
         return (function () {
@@ -103,4 +103,8 @@ module.exports = {
             setupServerListener();
         }
     }
+}
+
+if (!module.parent) {
+    shared.setup()
 }

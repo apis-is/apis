@@ -1,4 +1,4 @@
-exports.setup = function (type) {
+var setup = exports.setup = function (type) {
 	console.log('Running endpoint setup');
 
 	var apis = require('../../server');
@@ -22,3 +22,7 @@ exports.setup = function (type) {
 
 exports.tests = './tests/test.js';
 exports.docs = './docs/docs.js';
+
+if (!module.parent) {
+	setup('standalone')
+}
