@@ -105,6 +105,8 @@ var shared = module.exports = {
     }
 }
 
+//If we are loading this from the command line then we have to
+//run the setup function
 if (!module.parent) {
     shared.setup()
 }

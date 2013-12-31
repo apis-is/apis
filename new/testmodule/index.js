@@ -23,6 +23,9 @@ var setup = exports.setup = function (type) {
 exports.tests = './tests/test.js';
 exports.docs = './docs/docs.js';
 
+
+//If we are going to run this module as a standalone server
+//we have to run the setup function
 if (!module.parent) {
 	setup('standalone')
 }
