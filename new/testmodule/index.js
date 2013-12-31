@@ -1,7 +1,8 @@
-exports.setup = function (apis) {
+exports.setup = function (type) {
 	console.log('Running endpoint setup');
 
-	var app = apis.appMock(); //We only expose some part of the express app
+	var apis = require('../../server');
+	app = apis.appMock(); //We only expose some part of the express app
 
 
 	app.get('/test', function (req, res) {
@@ -16,7 +17,7 @@ exports.setup = function (apis) {
 		});
 	});
 
-	apis.done(app);
+	apis.done(app, type);
 }
 
 exports.tests = './tests/test.js';

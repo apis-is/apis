@@ -73,46 +73,31 @@ function appMock() {
 
 }
 
-// config.endpoints.forEach(function (endpoint) {
-
-// });
-
 module.exports = {
-    standalone: function () {
-        console.log('Executing standalone apis server')
 
-        config.standalone = true;
+    appMock: appMock,
+    done: function (endpointData, type) {
+        endpointData.routes.forEach(function (endpoint) {
+            //Pass the arguments onto the app
+            app[endpoint.type].apply(app, endpoint.args);
+        });
 
-        return {
-            done: function (endpointData) {
-                endpointData.routes.forEach(function (endpoint) {
-                    //Pass the arguments onto the app
-                    app[endpoint.type].apply(app, endpoint.args);
-                });
-
-                setupServerListener();
-            },
-            appMock: appMock
+        if (type === 'standalone') {
+            setupServerListener();
         }
     },
-    setup: function () {
-        return new function () {
-            this.appMock = appMock;
-            this.done = function (endpointData) {
-                endpointData.routes.forEach(function (endpoint) {
-                    //Pass the arguments onto the app
-                    app[endpoint.type].apply(app, endpoint.args);
-                });
-            }
+    setup: function (type) {
 
-            var self = this;
-            config.endpoints.forEach(function (endpoint) {
-                require(endpoint).setup(self);
-            });
-
-            setupServerListener();
-
+        if (!type) {
+            type = 'main';
         }
 
+        config.endpoints.forEach(function (endpoint) {
+            require(endpoint).setup(type);
+        });
+
+        if (type === 'main') {
+            setupServerListener();
+        }
     }
 }
