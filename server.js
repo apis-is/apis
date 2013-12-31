@@ -40,42 +40,48 @@ function setupServerListener() {
     });
 }
 
+function Mock() {
+    this.routes = [];
+}
+
+Mock.prototype.addRoute = function (type, args) {
+    var route = {
+        type: type,
+        args: args
+    };
+
+    this.routes.push(route)
+
+    console.log('Route added', route);
+}
+
+Mock.prototype.get = function () {
+    this.addRoute('get', Array.prototype.slice.call(arguments))
+}
+
+Mock.prototype.post = function () {
+    this.addRoute('post', Array.prototype.slice.call(arguments))
+}
+
+Mock.prototype.put = function () {
+    this.addRoute('put', Array.prototype.slice.call(arguments))
+}
+
+Mock.prototype.delete = function () {
+    this.addRoute('delete', Array.prototype.slice.call(arguments))
+}
 
 
-function appMock() {
-    return new(function () {
-        return {
-            routes: [], //Holds all routes exported by the endpoint
-            addRoute: function (type, args) {
-                var route = {
-                    type: type,
-                    args: args
-                };
-
-                this.routes.push(route)
-
-                console.log('Route added', route);
-            },
-            get: function () {
-                this.addRoute('get', Array.prototype.slice.call(arguments))
-            },
-            post: function () {
-                this.addRoute('post', Array.prototype.slice.call(arguments))
-            },
-            put: function () {
-                this.addRoute('put', Array.prototype.slice.call(arguments))
-            },
-            delete: function () {
-                this.addRoute('delete', Array.prototype.slice.call(arguments))
-            }
-        }
+function createMock() {
+    return (function () {
+        return new Mock;
     })()
 
 }
 
 module.exports = {
 
-    appMock: appMock,
+    appMock: createMock,
     done: function (endpointData, type) {
         endpointData.routes.forEach(function (endpoint) {
             //Pass the arguments onto the app

@@ -13,7 +13,7 @@ exports.setup = function (type) {
 
 	app.post('/test2', function (req, res) {
 		res.json({
-			worked: true
+			worked2: true
 		});
 	});
 
