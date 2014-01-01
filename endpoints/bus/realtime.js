@@ -1,4 +1,4 @@
-var h = require('../../lib/helpers.js'),
+var h = require('apis-helpers'),
 	request = require('request'),
 	app = require('../../server'),
 	isn2wgs = require('isn2wgs');

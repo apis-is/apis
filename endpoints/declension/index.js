@@ -2,7 +2,7 @@
 // dependencies
 var app = require('../../server'),
 	request = require('request'),
-	helper = require('../../lib/helpers.js'),
+	helper = require('apis-helpers'),
 	cheerio = require('cheerio'),
 	_ = require('underscore');
 

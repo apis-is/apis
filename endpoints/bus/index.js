@@ -1,5 +1,5 @@
 var request = require('request'),
-	h = require('../../lib/helpers.js'),
+	h = require('apis-helpers'),
 	app = require('../../server');
 
 app.post('/bus/search', function(req, res) {

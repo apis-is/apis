@@ -9,7 +9,7 @@ var request, parseString, h, app, cheerio, Q, xregexp, validTypes, measurements,
 /** Requires **/
 request = require('request'),
 parseString = require('xml2js').parseString,
-h = require('../../lib/helpers.js'),
+h = require('apis-helpers'),
 app = require('../../server'),
 cheerio = require('cheerio'),
 xregexp = require('xregexp').XRegExp;

@@ -1,6 +1,6 @@
 var request = require('request'),
     cheerio = require('cheerio'),
-    browser = require('../../lib/helpers.js').browser,
+    browser = require('apis-helpers').browser,
     app = require('../../server');
 
 app.get('/earthquake/is', function (req, res, next) {

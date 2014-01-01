@@ -1,7 +1,7 @@
 var request = require('request'),
     moment = require('moment'),
     parseString = require('xml2js').parseString,
-    h = require('../../lib/helpers.js'),
+    h = require('apis-helpers'),
     app = require('../../server');
 
 var schedStruct = {
