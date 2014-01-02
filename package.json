@@ -1,6 +1,5 @@
 {
-  "name": "apis.is",
-  "version": "2.0",
+  "name": "new.apis.is",
   "author": {
     "name": "Kristján Ingi Mikaelsson",
     "email": "kristjanmik@gmail.com"
@@ -14,6 +13,6 @@
     "underscore": "~1.5.2",
     "redis": "~0.8.4",
     "mocha": "~1.15.1",
-    "express": "~3.4.7"
+    "express": "*"
   }
 }

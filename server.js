@@ -30,26 +30,11 @@ app.use(cors());
  */
 app.use(cache());
 
+app.on('ready', function () {
+    if (!config.testing) console.log('Server running at port: ' + config.port);
+});
 
-//Here we have to hijack the current stuff that is sent to the function
-//e.g. req,res,next and convert it into something like platform
-app.use(function (req, res, next) {
-    //console.log(next.toString())
-
-    next()
-})
-
-function setupServerListener() {
-    app.listen(config.port, function () {
-        app.emit('ready');
-    });
-
-    app.on('ready', function () {
-        if (!config.testing) console.log('Server running at port: ' + config.port);
-    });
-}
-
-function Mock() {
+function Mock(type) {
     this.routes = [];
 }
 
@@ -72,40 +57,30 @@ Mock.prototype.post = function () {
     this.addRoute('post', Array.prototype.slice.call(arguments))
 }
 
-Mock.prototype.put = function () {
-    this.addRoute('put', Array.prototype.slice.call(arguments))
+Mock.prototype.setup = function () {
+    this.routes.forEach(function (endpoint) {
+        //Pass the arguments onto the app
+        app[endpoint.type].apply(app, endpoint.args);
+    });
+
+    app.listen(config.port, function () {
+        app.emit('ready');
+    });
 }
 
-Mock.prototype.delete = function () {
-    this.addRoute('delete', Array.prototype.slice.call(arguments))
-}
-
-var shared = module.exports = {
-    appMock: function () {
-        return new Mock;
-    },
-    done: function (endpointData, type) {
-
-        endpointData.routes.forEach(function (endpoint) {
+if (!module.parent) {
+    config.endpoints.forEach(function (endpoint) {
+        require(endpoint).app.routes.forEach(function (endpoint) {
             //Pass the arguments onto the app
             app[endpoint.type].apply(app, endpoint.args);
         });
+    });
 
-        if (type === 'standalone') {
-            setupServerListener();
-        }
-    },
-    setup: function () {
-        config.endpoints.forEach(function (endpoint) {
-            require(endpoint);
-        });
-
-        setupServerListener();
-    }
+    app.listen(config.port, function () {
+        app.emit('ready');
+    });
 }
 
-//If we are loading this from the command line then we have to
-//run the setup function
-if (!module.parent) {
-    shared.setup()
+module.exports = function (standalone) {
+    return new Mock;
 }

@@ -1,8 +1,6 @@
 console.log('Running test endpoint setup');
 
-var apis = require('../../server'),
-	app = apis.appMock(); //We only expose some part of the express app
-
+var app = require('../../server')();
 
 app.get('/test', function (req, res) {
 	res.json({
@@ -16,14 +14,6 @@ app.post('/test2', function (req, res) {
 	});
 });
 
-
-//If we are going to run this module as a standalone server
-//we have to run the setup function
-if (module.parent) {
-	apis.done(app);
-} else {
-	apis.done(app, 'standalone');
-}
-
 exports.tests = './tests/test.js';
 exports.docs = './docs/docs.js';
+exports.app = !! module.parent ? app : app.setup();
