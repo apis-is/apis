@@ -1,6 +1,6 @@
 var request = require('request'),
 	moment = require('moment'),
-	h = require('../../lib/helpers.js'),
+	h = require('apis-helpers'),
 	app = require('../../server');
 
 app.get('/currency/arion', function(req, res){

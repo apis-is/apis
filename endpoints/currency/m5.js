@@ -1,6 +1,6 @@
 var request = require('request'),
 	$ = require('jquery'),
-	h = require('../../lib/helpers.js'),
+	h = require('apis-helpers'),
 	app = require('../../server');
 
 app.get('/currency/m5', function (req, res) {
