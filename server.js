@@ -1,42 +1,79 @@
 var express = require('express'),
-    config = require('./config'),
     app = express(),
-    once = require('once');
+    config = require('./config'),
+    once = require('once'),
+    dive = require('dive'),
+    cors = require('express-simple-cors'),
+    cache = require('express-cache');
+
+/**
+ * Set the spacing to 0 for shorter output
+ */
+app.set('json spaces', 0);
+
+/*
+ * Built in parser to acces the body values
+ */
+app.use(express.bodyParser());
+
+/**
+ * Cross-origin resource sharing
+ */
+app.use(cors());
+
+/**
+ * Caching layer
+ */
+app.use(cache());
 
 function createMock(prefix) {
     prefix = '/' + prefix;
 
-    var cb = function (res, err, result) {
-        if (err) return res.json({
-            success: false,
-            error: err.message
-        });
+    var cb = function(wrapper, error, result) {
+        var res = wrapper.res;
+        if (error) {
 
-        res.json(result);
+            if (typeof error === 'string') {
+                return res.json(500, {
+                    success: false,
+                    error: error
+                });
+            } else {
+                return res.json(error.code || 500, {
+                    success: false,
+                    error: error.message
+                });
+            }
+        }
+
+        res.cache(wrapper.ttl).json(result);
     };
 
     var mock = {
-        get: function (path, fn) {
-            app.get(prefix + path, function (req, res) {
+        get: function(path, ttl, fn) {
+            if (typeof ttl === 'function') {
+                fn = ttl;
+                ttl = 0;
+            }
+
+            app.get(prefix + path, function(req, res) {
                 //If this function is called more than once we  
                 //have to bubble up error
-                fn(req, once(cb.bind(this, res)));
-            });
+                fn(req, once(cb.bind(this, {
+                    res: res,
+                    ttl: ttl
+                })));
+            })
         }
     };
 
     return mock;
 }
 
-var endpoints = {
-    //Prefix : Location
-    'example': './new/testmodule'
-};
-
-Object.keys(endpoints).forEach(function (endpoint) {
+['car', 'flight'].forEach(function(endpoint) {
     var mock = createMock(endpoint);
 
-    require(endpoints[endpoint]).setup(mock);
+    require('./endpoints/' + endpoint)(mock)
 });
 
 app.listen(config.port);

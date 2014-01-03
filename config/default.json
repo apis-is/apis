@@ -1,7 +1,3 @@
 {
-	"host": "localhost",
-	"port": 3100,
-	"testing": false,
-	"endpoints": ["./new/testmodule"],
-	"standalone": false
+    "port": 3100
 }
