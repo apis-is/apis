@@ -1,5 +1,3 @@
-console.log('Running test endpoint setup');
-
 var app = require('../../server')();
 
 app.get('/test', function (req, res) {
@@ -14,6 +12,8 @@ app.post('/test2', function (req, res) {
 	});
 });
 
-exports.tests = './tests/test.js';
-exports.docs = './docs/docs.js';
-exports.app = !! module.parent ? app : app.setup();
+module.exports = {
+	tests: './tests/test.js',
+	docs: './docs/docs.js',
+	app: !! module.parent ? app : app.setup()
+}
