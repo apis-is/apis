@@ -1,1 +1,3 @@
-console.log('Ran the test!');
+module.exports = {
+	foo: 'bar'
+}

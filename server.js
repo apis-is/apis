@@ -1,73 +1,42 @@
 var express = require('express'),
-    app = express(),
     config = require('./config'),
-    EE = require('events').EventEmitter;
+    app = express(),
+    once = require('once');
 
-/**
- * Create an event listener for app
- */
-EE.call(app);
+function createMock(prefix) {
+    prefix = '/' + prefix;
 
-/*
- * Built in parser to acces the body values
- */
-app.use(express.bodyParser());
+    var cb = function (res, err, result) {
+        if (err) return res.json({
+            success: false,
+            error: err
+        });
 
-
-
-app.on('ready', function () {
-    if (!config.testing) console.log('Server running at port: ' + config.port);
-});
-
-function Mock(type) {
-    this.routes = [];
-}
-
-Mock.prototype.addRoute = function (type, args) {
-    var route = {
-        type: type,
-        args: args
+        res.json(result);
     };
 
-    this.routes.push(route)
+    var mock = {
+        get: function (path, fn) {
+            app.get(prefix + path, function (req, res) {
+                //If this function is called more than once we
+                //have to bubble up error
+                fn(req, once(cb.bind(this, res)));
+            });
+        }
+    };
 
-    console.log('Route added', route);
+    return mock;
 }
 
-Mock.prototype.get = function () {
-    this.addRoute('get', Array.prototype.slice.call(arguments))
-}
+var endpoints = {
+    //Prefix : Location
+    'example': './new/testmodule'
+};
 
-Mock.prototype.post = function () {
-    this.addRoute('post', Array.prototype.slice.call(arguments))
-}
+Object.keys(endpoints).forEach(function (endpoint) {
+    var mock = createMock(endpoint);
 
-Mock.prototype.setup = function () {
-    this.routes.forEach(function (endpoint) {
-        //Pass the arguments onto the app
-        app[endpoint.type].apply(app, endpoint.args);
-    });
+    require(endpoints[endpoint]).setup(mock);
+});
 
-    app.listen(config.port, function () {
-        app.emit('ready');
-    });
-}
-
-module.exports = function (standalone) {
-    return new Mock;
-}
-
-if (!module.parent) {
-    config.endpoints.forEach(function (endpoint) {
-        require(endpoint)
-        /*.app.routes.forEach(function (endpoint) {
-            //Pass the arguments onto the app
-            app[endpoint.type].apply(app, endpoint.args);
-        })*/
-        ;
-    });
-
-    app.listen(config.port, function () {
-        app.emit('ready');
-    });
-}
+app.listen(config.port);

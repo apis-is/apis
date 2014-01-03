@@ -1,19 +1,18 @@
-var app = require('../../server')();
-
-app.get('/test', function (req, res) {
-	res.json({
-		worked: true
+exports.setup = function (app) {
+	app.get('/my-route/:id', function (req, callback) {
+		myRoute(req.params.id, callback);
 	});
-});
+};
 
-app.post('/test2', function (req, res) {
-	res.json({
-		worked2: true
-	});
-});
+var myRoute = exports.myRoute = function (id, callback) {
+	console.log('Given ID was:', id);
 
-module.exports = {
-	tests: './tests/test.js',
-	docs: './docs/docs.js',
-	app: !! module.parent ? app : app.setup()
+	setTimeout(callback.bind(null, {
+		message: 'This came from successfull callback'
+	}), 500);
+
+	setTimeout(callback.bind(null, {
+		message: 'This came from repeated successfull callback'
+	}), 700);
+
 }
