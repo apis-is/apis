@@ -1,7 +1,6 @@
 var express = require('express'),
     app = express(),
     config = require('./config'),
-    cors = require('./lib/cors'),
     EE = require('events').EventEmitter;
 
 /**
@@ -14,10 +13,6 @@ EE.call(app);
  */
 app.use(express.bodyParser());
 
-/**
- * Cross-origin resource sharing
- */
-app.use(cors());
 
 
 app.on('ready', function () {
@@ -58,19 +53,21 @@ Mock.prototype.setup = function () {
     });
 }
 
+module.exports = function (standalone) {
+    return new Mock;
+}
+
 if (!module.parent) {
     config.endpoints.forEach(function (endpoint) {
-        require(endpoint).app.routes.forEach(function (endpoint) {
+        require(endpoint)
+        /*.app.routes.forEach(function (endpoint) {
             //Pass the arguments onto the app
             app[endpoint.type].apply(app, endpoint.args);
-        });
+        })*/
+        ;
     });
 
     app.listen(config.port, function () {
         app.emit('ready');
     });
-}
-
-module.exports = function (standalone) {
-    return new Mock;
 }
