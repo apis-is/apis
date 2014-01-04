@@ -1,35 +1,41 @@
 {
-    "name": "new.apis.is",
-    "author": {
-        "name": "Kristján Ingi Mikaelsson",
-        "email": "kristjanmik@gmail.com"
+  "name": "new.apis.is",
+  "author": {
+    "name": "Kristján Ingi Mikaelsson",
+    "email": "kristjanmik@gmail.com"
+  },
+  "description": "A json wrapper around publicly open data in Iceland",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kristjanmik/apis.git"
+  },
+  "contributors": [
+    {
+      "name": "Arnór Heiðar Sigurðsson",
+      "email": "arnorhs@gmail.com"
     },
-    "description": "A json wrapper around publicly open data in Iceland",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/kristjanmik/apis.git"
+    {
+      "name": "Ragnar Þór Valgeirsson"
     },
-    "contributors": [{
-        "name": "Arnór Heiðar Sigurðsson",
-        "email": "arnorhs@gmail.com"
-    }, {
-        "name": "Ragnar Þór Valgeirsson"
-    }, {
-        "name": "Baldur Már Helgason",
-        "email": "baldur.helgason@gmail.com"
-    }, {
-        "name": "Kristjan Broder Lund",
-        "email": "kristjan.1234@gmail.com"
-    }],
-    "dependencies": {
-        "underscore": "~1.5.2",
-        "redis": "~0.8.4",
-        "mocha": "~1.15.1",
-        "express": "*",
-        "once": "~1.3.0",
-        "car": "~0.1.0",
-        "dive": "~0.3.0",
-        "express-simple-cors": "~0.1.0",
-        "express-cache": "~0.1.1"
+    {
+      "name": "Baldur Már Helgason",
+      "email": "baldur.helgason@gmail.com"
+    },
+    {
+      "name": "Kristjan Broder Lund",
+      "email": "kristjan.1234@gmail.com"
     }
+  ],
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "redis": "~0.8.4",
+    "mocha": "~1.15.1",
+    "express": "*",
+    "once": "~1.3.0",
+    "car": "~0.1.0",
+    "dive": "~0.3.0",
+    "express-simple-cors": "~0.1.0",
+    "express-cache": "~0.1.1",
+    "firm": "~0.1.0"
+  }
 }

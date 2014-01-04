@@ -24,12 +24,14 @@ app.use(cors());
 /**
  * Caching layer
  */
-app.use(cache());
+app.use(cache({
+    testMode: true
+}));
 
 function createMock(prefix) {
     prefix = '/' + prefix;
 
-    var cb = function(wrapper, error, result) {
+    var cb = function (wrapper, error, result) {
         var res = wrapper.res;
         if (error) {
 
@@ -50,13 +52,13 @@ function createMock(prefix) {
     };
 
     var mock = {
-        get: function(path, ttl, fn) {
+        get: function (path, ttl, fn) {
             if (typeof ttl === 'function') {
                 fn = ttl;
                 ttl = 0;
             }
 
-            app.get(prefix + path, function(req, res) {
+            app.get(prefix + path, function (req, res) {
                 //If this function is called more than once we  
                 //have to bubble up error
                 fn(req, once(cb.bind(this, {
@@ -70,7 +72,7 @@ function createMock(prefix) {
     return mock;
 }
 
-['car', 'flight'].forEach(function(endpoint) {
+['car', 'flight', 'firm'].forEach(function (endpoint) {
     var mock = createMock(endpoint);
 
     require('./endpoints/' + endpoint)(mock)
