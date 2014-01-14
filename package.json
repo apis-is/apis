@@ -36,6 +36,7 @@
     "dive": "~0.3.0",
     "express-simple-cors": "~0.1.0",
     "express-cache": "~0.1.1",
-    "firm": "~0.1.0"
+    "firm": "~0.1.0",
+    "flights": "~0.1.0"
   }
 }
