@@ -24,20 +24,12 @@ Currently there are two types of tests, integration and unit tests. All tests ar
 
 To run the integration tests:
 ```sh
- node_modules/mocha/bin/mocha test/integration
-
- or
-
- mocha test/integration
+$ npm test
 ```
 
 To run the unit tests:
 ```sh
- node_modules/mocha/bin/mocha test/unit
- 
- or
- 
- mocha test/unit
+$ npm run unit-test
 ```
 
 ## Adding a new Endpoint
