@@ -70,8 +70,8 @@ app.get('/bus/realtime', function(req, res){
     				var location = isn2wgs(bus.X,bus.Y),
     					oneRoute = {
     					'unixTime': Date.parse(bus.TIMESTAMPREAL)/1000,
-    					'x': location.lat,
-    					'y': location.lng,
+    					'x': location.latitude,
+    					'y': location.longitude,
     					'from': bus.FROMSTOP,
     					'to': bus.TOSTOP
     				};
