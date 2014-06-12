@@ -43,7 +43,7 @@ app.get('/sports', function (req, res, next) {
           info: 'This is an api for Ielandic sports events',
           endpoints: {
             football: '/sports/football/',
-            basketball: '/sports/basketball/'
+            handball: '/sports/handball/'
           }
         }
       ]
