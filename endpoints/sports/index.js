@@ -79,7 +79,10 @@ app.get('/sports/football', function (req, res) {
                   game[fields[key2]] = val;
                 }
             });
-            obj.results.push(game);
+
+            // Checking whether it has the necessary fields
+            if (!$.isEmptyObject(game) && game.counter && game.date && game.time && game.tournament && game.location && game.homeTeam && game.awayTeam)
+              obj.results.push(game);
           }
         });
       } catch(error) {
@@ -117,7 +120,9 @@ app.get('/sports/handball', function (req, res) {
                 game[fields[key2]] = val;
               }
             });
-            obj.results.push(game);
+
+            if (!$.isEmptyObject(game) && game.Date && game.Time && game.Tournament && game.Venue && game.Teams)
+              obj.results.push(game);
           }
         });
       } catch(error) {
