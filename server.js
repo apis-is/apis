@@ -72,7 +72,7 @@ function createMock(prefix) {
     return mock;
 }
 
-['car', 'flight', 'firm'].forEach(function (endpoint) {
+['car', 'cinema', 'flight', 'firm'].forEach(function (endpoint) {
     var mock = createMock(endpoint);
 
     require('./endpoints/' + endpoint)(mock)
