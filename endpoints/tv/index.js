@@ -42,7 +42,7 @@ app.get('/tv/ruv', function (req, res) {
         parseRuv(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
     });
 });
@@ -60,7 +60,7 @@ app.get('/tv/ruvithrottir', function (req, res) {
         parseRuv(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
     });
 });
@@ -78,9 +78,9 @@ app.get('/tv/stod2', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Stod 2 Sport*/
@@ -96,9 +96,9 @@ app.get('/tv/stod2sport', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Stod 2 Sport 2*/
@@ -114,9 +114,9 @@ app.get('/tv/stod2sport2', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Stod 3*/
@@ -132,9 +132,9 @@ app.get('/tv/stod3', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Stod 2 Bio */
@@ -150,9 +150,9 @@ app.get('/tv/stod2bio', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Stod 2 Gull */
@@ -168,9 +168,9 @@ app.get('/tv/stod2gull', function (req, res) {
         parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Skjar 1 */
@@ -186,9 +186,9 @@ app.get('/tv/skjar1', function (req, res) {
         parseSkjar1(function (data) {
             res.cache(1800).json(200, {
                 results: data
-            })
+            });
         }, body);
-    })
+    });
 });
 
 /* Parse feed from Skjarinn */
@@ -215,7 +215,7 @@ var parseSkjar1 = function (callback, data) {
                         episode: event.episode[0].$.number,
                         series: event.episode[0].$['number-of-episodes']
                     }
-                })
+                });
             }
         }
         return callback(schedule);
@@ -245,7 +245,7 @@ var parse365 = function (callback, data) {
                     episode: event.series ? event.series[0].$.episode : "",
                     series: event.series ? event.series[0].$.series : ""
                 }
-            })
+            });
         }
         return callback(schedule);
     });
@@ -259,7 +259,7 @@ var parseRuv = function (callback, data) {
         var schedule = [];
 
         if (result.schedule.error) {
-            return(callback(schedule))
+            return(callback(schedule));
         }
 
         for (var i = 0; i < result.schedule.service[0].event.length; ++i) {
@@ -278,7 +278,7 @@ var parseRuv = function (callback, data) {
                     episode: event.episode[0].$.number,
                     series: event.episode[0].$['number-of-episodes']
                 }
-            })
+            });
         }
         return callback(schedule);
     });
