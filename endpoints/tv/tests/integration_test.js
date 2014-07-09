@@ -2,6 +2,7 @@ var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('tv - skjar1', function () {
+    this.timeout(8000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/skjar1");
