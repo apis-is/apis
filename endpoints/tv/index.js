@@ -21,9 +21,7 @@ var schedStruct = {
     actors: ''
 };
 
-app.get('/tv', function (req, res) {
-    return getRuv(req, res);
-});
+/* RUV */
 app.get('/tv/ruv', function (req, res) {
     var url = 'http://muninn.ruv.is/files/xml/ruv/';
 
@@ -48,6 +46,26 @@ app.get('/tv/ruv', function (req, res) {
         }, body);
     });
 });
+
+/* RUV Ithrottir*/
+app.get('/tv/ruvithrottir', function (req, res) {
+    var url = 'http://muninn.ruv.is/files/xml/ruvithrottir/';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parseRuv(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    });
+});
+
+/* Stod 2 */
 app.get('/tv/stod2', function (req, res) {
     var url = 'http://stod2.is/XML--dagskrar-feed/XML-Stod-2-dagurinn';
 
@@ -57,13 +75,105 @@ app.get('/tv/stod2', function (req, res) {
     }, function (error, response, body) {
         if (error) throw new Error(url + ' did not respond');
 
-        parseStod2(function (data) {
+        parse365(function (data) {
             res.cache(1800).json(200, {
                 results: data
             })
         }, body);
     })
 });
+
+/* Stod 2 Sport*/
+app.get('/tv/stod2sport', function (req, res) {
+    var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-dagurinn';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parse365(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+/* Stod 2 Sport 2*/
+app.get('/tv/stod2sport2', function (req, res) {
+    var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-2-dagurinn';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parse365(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+/* Stod 3*/
+app.get('/tv/stod3', function (req, res) {
+    var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-3-dagurinn';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parse365(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+/* Stod 2 Bio */
+app.get('/tv/stod2bio', function (req, res) {
+    var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Bio-dagurinn';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parse365(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+/* Stod 2 Gull */
+app.get('/tv/stod2gull', function (req, res) {
+    var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Extra-dagurinn';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parse365(function (data) {
+            res.cache(1800).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+/* Skjar 1 */
 app.get('/tv/skjar1', function (req, res) {
     var url = 'http://www.skjarinn.is/einn/dagskrarupplysingar/?channel_id=7&output_format=xml';
 
@@ -81,6 +191,7 @@ app.get('/tv/skjar1', function (req, res) {
     })
 });
 
+/* Parse feed from Skjarinn */
 var parseSkjar1 = function (callback, data) {
     parseString(data, function (err, result, title) {
         if (err) throw new Error("Parsing of XML failed");
@@ -111,7 +222,8 @@ var parseSkjar1 = function (callback, data) {
     });
 };
 
-var parseStod2 = function (callback, data) {
+/* Parse feed's from 365 midlar */
+var parse365 = function (callback, data) {
     parseString(data, function (err, result, title) {
         if (err) throw new Error("Parsing of XML failed");
 
@@ -139,8 +251,8 @@ var parseStod2 = function (callback, data) {
     });
 };
 
+/* Parse feed's from RUV */
 var parseRuv = function (callback, data) {
-
     parseString(data, function (err, result, title) {
         if (err) throw new Error("Parsing of XML failed");
 
