@@ -74,7 +74,7 @@ app.get('/tv/skjar1', function (req, res) {
         if (error) throw new Error(url + ' did not respond');
 
         parseSkjar1(function (data) {
-            res.cache(10).json(200, {
+            res.cache(1800).json(200, {
                 results: data
             })
         }, body);
