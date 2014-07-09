@@ -92,8 +92,6 @@ var parseSkjar1 = function (callback, data) {
             if (moment().add('d',1).startOf('day').hour(6) > moment(event.$['start-time'])) {
                 schedule.push(schedStruct = {
                     title: event.title[0],
-                    momentToday: moment().add('d',1).startOf('day').hour(6),
-                    momentItem: moment(event.$['start-time']),
                     originalTitle: event['original-title'][0],
                     duration: event.$.duration,
                     description: event.description[0],
