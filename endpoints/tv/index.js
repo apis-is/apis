@@ -64,6 +64,54 @@ app.get('/tv/stod2', function (req, res) {
         }, body);
     })
 });
+app.get('/tv/skjar1', function (req, res) {
+    var url = 'http://www.skjarinn.is/einn/dagskrarupplysingar/?channel_id=7&output_format=xml';
+
+    request.get({
+        headers: {'User-Agent': h.browser()},
+        url: url
+    }, function (error, response, body) {
+        if (error) throw new Error(url + ' did not respond');
+
+        parseSkjar1(function (data) {
+            res.cache(10).json(200, {
+                results: data
+            })
+        }, body);
+    })
+});
+
+var parseSkjar1 = function (callback, data) {
+    parseString(data, function (err, result, title) {
+        if (err) throw new Error("Parsing of XML failed");
+
+        var schedule = [];
+        
+        for (var i = 0; i < result.schedule.service[0].event.length; ++i) {
+            var event = result.schedule.service[0].event[i];
+            if (moment().add('d',1).startOf('day').hour(6) > moment(event.$['start-time'])) {
+                schedule.push(schedStruct = {
+                    title: event.title[0],
+                    momentToday: moment().add('d',1).startOf('day').hour(6),
+                    momentItem: moment(event.$['start-time']),
+                    originalTitle: event['original-title'][0],
+                    duration: event.$.duration,
+                    description: event.description[0],
+                    shortDescription: event['short-description'][0],
+                    live: event.live[0] == "yes" ? true : false,
+                    premier: event.rerun[0] == "yes" ? false : true,
+                    startTime: event.$['start-time'],
+                    aspectRatio: event['aspect-ratio'][0].size[0],
+                    series: {
+                        episode: event.episode[0].$.number,
+                        series: event.episode[0].$['number-of-episodes']
+                    }
+                })
+            }
+        }
+        return callback(schedule);
+    });
+};
 
 var parseStod2 = function (callback, data) {
     parseString(data, function (err, result, title) {
@@ -79,8 +127,8 @@ var parseStod2 = function (callback, data) {
                 originalTitle: event.org_title[0],
                 duration: event.$.duration,
                 description: event.description[0],
-                live: event.live[0].$.value,
-                premier: event.premier[0].$.value,
+                live: event.live[0].$.value == "true" ? true : false,
+                premier: event.premier[0].$.value == "true" ? true : false,
                 startTime: event.$.starttime,
                 aspectRatio: event.aspectratio[0].$.value,
                 series: {
@@ -103,7 +151,6 @@ var parseRuv = function (callback, data) {
         if (result.schedule.error) {
             return(callback(schedule))
         }
-
 
         for (var i = 0; i < result.schedule.service[0].event.length; ++i) {
             var event = result.schedule.service[0].event[i];
