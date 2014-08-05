@@ -6,9 +6,8 @@ var app = require('../../server'),
 	cheerio = require('cheerio'),
 	_ = require('underscore');
 
-
-var baseUrl = 'http://www.bin.arnastofnun.is/',
-	query = 'leit.php?q=';
+var baseUrl = 'http://bin.arnastofnun.is/',
+ query = 'leit/?q=';
 
 
 app.get('/declension/:word', function(req, res) {
