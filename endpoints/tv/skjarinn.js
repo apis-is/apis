@@ -5,7 +5,7 @@ var request = require('request'),
     app = require('../../server');
 
 /* Skjar 1 */
-app.get('/tv/skjar1', function (req, res) {
+app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {
   var url = 'http://www.skjarinn.is/einn/dagskrarupplysingar/?channel_id=7&output_format=xml';
 
   request.get({
