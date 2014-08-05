@@ -18,6 +18,13 @@ app.get('/declension/:word', function(req, res) {
 		url: baseUrl.concat(query, word),
 		headers: { 'User-Agent': helper.browser() }
 	};
+	
+	
+	return res.json(502,{
+		results: [], type: '',
+		error: "This API endpoint has been temporarily disabled, due to changes in markup at the remote location. Feel free to contribute!",
+		moreinfo: "https://github.com/kristjanmik/apis/issues/96"
+	});
 
 	getDeclensions(function(body) {
 		return res.json(parseTable(body));
