@@ -14,6 +14,12 @@ var HTMLObject = {};
 var HTMLString = "";
 
 app.get('/concerts', function (req, res, next) {
+  return res.json(502,{
+    results: [],
+    error: "This API endpoint has been temporarily disabled, due to changes in markup at the remote location. Feel free to contribute!",
+    moreinfo: "https://github.com/kristjanmik/apis/issues/90"
+  });
+
   while (page < numberOfPagesToFetch){
   	request('http://midi.is/atburdir/?c=1&p='+page, function (error, response, body) {
   
