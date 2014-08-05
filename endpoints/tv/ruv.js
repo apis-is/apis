@@ -56,7 +56,7 @@ var parseFeed = function (callback, data) {
 
     var schedule = [];
 
-    if (result.schedule.error) {
+    if (result.schedule.error || !result.schedule.service[0].hasOwnProperty('event')) {
       return(callback(schedule));
     }
 
