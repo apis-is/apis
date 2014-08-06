@@ -29,27 +29,27 @@ app.get('/names', function (req, res) {
 });
 
 /* Get all legal names for males */
-app.get('/names/males', function(req, res){
+app.get('/names/males/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Get all legal names for females */
-app.get('/names/females', function(req, res){
+app.get('/names/females/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Get all legal middle names */
-app.get('/names/middlenames', function(req, res){
+app.get('/names/middlenames/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Handles the request for a specific request URL */
 function handleRequest(url, req, res) {
-	// Check for the filter query string parameter
-	var filter = req.query.filter || req.query.search || '';
+	// Check for the filter parameter
+	var filter = req.params.filter || req.query.filter || req.query.search || '';
 
 	// Add name filtering if it is requested
 	if (filter !== ''){
