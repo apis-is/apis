@@ -11,7 +11,7 @@ var request = require('request'),
 	app = require('../../server');
 
 /* Root names handler - only returns a list of resources */
-app.get('/names', function (req, res, next) {
+app.get('/names', function (req, res) {
   return res.json(
     {
       results: [
@@ -26,7 +26,6 @@ app.get('/names', function (req, res, next) {
       ]
     }
   );
-  next();
 });
 
 /* Get all legal names for males */
