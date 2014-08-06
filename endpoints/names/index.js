@@ -52,7 +52,7 @@ function handleRequest(url, req, res) {
 	var filter = req.query.filter || req.query.search || '';
 
 	// Add name filtering if it is requested
-	if (filter != ''){
+	if (filter !== ''){
 		url += '&Nafn=' + filter;
 	}
 	
