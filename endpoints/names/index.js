@@ -11,7 +11,7 @@ var request = require('request'),
 	app = require('../../server');
 
 /* Root names handler - only returns a list of resources */
-app.get('/names', function (req, res, next) {
+app.get('/names', function (req, res) {
   return res.json(
     {
       results: [
@@ -26,34 +26,57 @@ app.get('/names', function (req, res, next) {
       ]
     }
   );
-  next();
 });
 
 /* Get all legal names for males */
-app.get('/names/males', function(req, res){
+app.get('/names/males/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
 });
 
 /* Get all legal names for females */
-app.get('/names/females', function(req, res){
+app.get('/names/females/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
 });
 
 /* Get all legal middle names */
-app.get('/names/middlenames', function(req, res){
+app.get('/names/middlenames/:filter?', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
+});
+
+/* Get all rejected names for males */
+app.get('/names/rejected/males/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected names for females */
+app.get('/names/rejected/females/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected middle names */
+app.get('/names/rejected/middlenames/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected names */
+app.get('/names/rejected/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no';
+  return handleRequest(url, req, res);
 });
 
 /* Handles the request for a specific request URL */
 function handleRequest(url, req, res) {
-	// Check for the filter query string parameter
-	var filter = req.query.filter || req.query.search || '';
+	// Check for the filter parameter
+	var filter = req.params.filter || req.query.filter || req.query.search || '';
 
 	// Add name filtering if it is requested
-	if (filter != ''){
+	if (filter !== ''){
 		url += '&Nafn=' + filter;
 	}
 	
@@ -64,8 +87,9 @@ function handleRequest(url, req, res) {
 		if(error || response.statusCode !== 200)
 			return res.json(500,{error:'www.island.is refuses to respond or give back data'});
 
+    var data;
 		try{
-			var data = $(body);	
+			data = $(body);	
 		}catch(error){
 			return res.json(500,{error:'Could not parse body'});
 		}
