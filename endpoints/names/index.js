@@ -31,19 +31,19 @@ app.get('/names', function (req, res) {
 /* Get all legal names for males */
 app.get('/names/males', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
 });
 
 /* Get all legal names for females */
 app.get('/names/females', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
 });
 
 /* Get all legal middle names */
 app.get('/names/middlenames', function(req, res){
 	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=yes';
-	return handleRequest(url, req, res)
+	return handleRequest(url, req, res);
 });
 
 /* Handles the request for a specific request URL */
