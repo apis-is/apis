@@ -63,8 +63,9 @@ function handleRequest(url, req, res) {
 		if(error || response.statusCode !== 200)
 			return res.json(500,{error:'www.island.is refuses to respond or give back data'});
 
+    var data;
 		try{
-			var data = $(body);	
+			data = $(body);	
 		}catch(error){
 			return res.json(500,{error:'Could not parse body'});
 		}
