@@ -46,6 +46,30 @@ app.get('/names/middlenames/:filter?', function(req, res){
 	return handleRequest(url, req, res);
 });
 
+/* Get all rejected names for males */
+app.get('/names/rejected/males/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected names for females */
+app.get('/names/rejected/females/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected middle names */
+app.get('/names/rejected/middlenames/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
+/* Get all rejected names */
+app.get('/names/rejected/:filter?', function(req, res){
+  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no';
+  return handleRequest(url, req, res);
+});
+
 /* Handles the request for a specific request URL */
 function handleRequest(url, req, res) {
 	// Check for the filter parameter
