@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/kristjanmik/apis.png?label=ready&title=Ready)](https://waffle.io/kristjanmik/apis)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
 The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
