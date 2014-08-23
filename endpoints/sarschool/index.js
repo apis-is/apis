@@ -12,7 +12,7 @@ String.prototype.replaceArray = function(find, replace) {
 function pad(n){return n<10 ? '0'+n : n}
 
 
-app.get('/bjorgunarskoli', function(req, res) {
+app.get('/sarschool', function(req, res) {
 
 
     getRequest(function(body) {
@@ -82,15 +82,15 @@ var parseList = function ( body ) {
 		var replace = ["", ""];
 		
         results.push({
-             id: (td.eq(3).text().trim()==""?"":td.eq(3).text().trim()),
+             id: (td.eq(3).text().trim()==""?"":parseFloat(td.eq(3).text().trim())),
              name: (td.eq(4).text().trim()==""?"":td.eq(4).text().trim()),
              time_start: start_date_final,
              time_end: end_date_final,
              sar_members_only: (td.eq(0).find('img').length > 0 ? 1:0),
              host: (td.eq(5).find('input').prop('checked')?'Squad':'Other'),
              location: (td.eq(8).text().trim()==""?"":td.eq(8).text().trim()),
-             price_regular: (td.eq(9).text().trim()==""?"":td.eq(9).text().trim().replaceArray(find,replace)),
-             price_members: (td.eq(10).text().trim()==""?"":td.eq(10).text().trim().replaceArray(find,replace)),
+             price_regular: (td.eq(9).text().trim()==""?"":parseFloat(td.eq(9).text().trim().replace(".",""))),
+             price_members: (td.eq(10).text().trim()==""?"":parseFloat(td.eq(10).text().trim().replace(".",""))),
              link:  'http://skoli.landsbjorg.is/Open/Course.aspx?Id=' + td.eq(3).text().trim()
         });
     });
