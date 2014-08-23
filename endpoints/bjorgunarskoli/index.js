@@ -2,10 +2,21 @@ var request = require('request'),
     $ = require('jquery'),
     app = require('../../server');
 
+String.prototype.replaceArray = function(find, replace) {
+  var replaceString = this;
+  for (var i = 0; i < find.length; i++) {
+    replaceString = replaceString.replace(find[i], replace[i]);
+  }
+  return replaceString;
+};
+function pad(n){return n<10 ? '0'+n : n}
+
 
 app.get('/bjorgunarskoli', function(req, res) {
+
+
     getRequest(function(body) {
-        return res.cache(3600).json({
+        return res.json({
             results: parseList(body)
         });
     });
@@ -40,24 +51,46 @@ var parseList = function ( body ) {
 	}
 
     var results = [];
+    
 
-    var tr = site.find('table.rgMasterTable tbody').eq(1).find('tr');
+    var tr = site.find('.rgMasterTable').find('tbody').find('tr');
 
     tr.each(function (i) {
-        if ( i === 0 ) return;
         var td = $(this).find('td');
-
+        
+        // Change start time from d.m.YYYY to YYYY-mm-dd
+        var start_date = td.eq(6).text().trim();
+        if(start_date=="") {
+        	var start_date_final = "n/a";
+        } else {
+      		var sd_split = start_date.split(".");
+	  		var sd = new Date(sd_split[2],sd_split[1],sd_split[0]);
+	  		var start_date_final = sd.getFullYear()+"-"+pad(sd.getMonth())+"-"+pad(sd.getDate());
+		}
+       
+        // Change end time from d.m.YYYY to YYYY-mm-dd
+        var end_date = td.eq(7).text().trim();
+        if(end_date=="") {
+        	var end_date_final = "n/a";
+        } else {
+      		var ed_split = end_date.split(".");
+	  		var ed = new Date(ed_split[2],ed_split[1],ed_split[0]);
+	  		var end_date_final = ed.getFullYear()+"-"+pad(ed.getMonth())+"-"+pad(ed.getDate());
+		}
+		
+		var find = [".", " kr."];
+		var replace = ["", ""];
+		
         results.push({
-             availability:  (td.eq(0).find('img').length > 0 ? 'Limited':'Open'),
-             id: td.eq(3).text().trim(),
-             name: td.eq(4).text().trim(),
-             sveit: (td.eq(5).find('input').prop('checked')?'Squad':'SAR'),
-             start: td.eq(6).text().trim(),
-             end: td.eq(7).text().trim(),
-             location: td.eq(8).text().trim(),
-             price_regular: td.eq(9).text().trim(),
-             price_members: td.eq(10).text().trim(),
-             status:  (td.eq(11).text().trim() == 'Ekki hafið' ? 'Not started':'Started'),
+             id: (td.eq(3).text().trim()==""?"":td.eq(3).text().trim()),
+             name: (td.eq(4).text().trim()==""?"":td.eq(4).text().trim()),
+             time_start: start_date_final,
+             time_end: end_date_final,
+             sar_members_only: (td.eq(0).find('img').length > 0 ? 1:0),
+             host: (td.eq(5).find('input').prop('checked')?'Squad':'Other'),
+             location: (td.eq(8).text().trim()==""?"":td.eq(8).text().trim()),
+             price_regular: (td.eq(9).text().trim()==""?"":td.eq(9).text().trim().replaceArray(find,replace)),
+             price_members: (td.eq(10).text().trim()==""?"":td.eq(10).text().trim().replaceArray(find,replace)),
              link:  'http://skoli.landsbjorg.is/Open/Course.aspx?Id=' + td.eq(3).text().trim()
         });
     });
