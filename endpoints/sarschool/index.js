@@ -16,7 +16,7 @@ app.get('/sarschool', function(req, res) {
 
 
     getRequest(function(body) {
-        return res.json({
+        return res.cache().json({
             results: parseList(body)
         });
     });
