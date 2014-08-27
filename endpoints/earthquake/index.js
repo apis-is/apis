@@ -3,6 +3,9 @@ var request = require('request'),
     browser = require('apis-helpers').browser,
     app = require('../../server');
 
+/*
+ * Hraun table parse
+ */
 app.get('/earthquake/is', function (req, res, next) {
     getEarthquakes(function(error,body) {
         if(error) return res.json(500,{error:error.toString()});
@@ -14,18 +17,34 @@ app.get('/earthquake/is', function (req, res, next) {
 });
 
 /*
-   This function only handles the request part and calls callback with
-   the body
-*/
-var getEarthquakes = function(callback) {
-    var params = {
+ * Main vedur.is website (JS variable included in the source) (secondary source of information).
+ */
+app.get('/earthquake/is/sec', function (req, res, next) {
+    getEarthquakes(function(error,body) {
+        if(error) return res.json(500,{error:error.toString()});
+        return res.json({
+            results: parseJavaScriptVariable(body)
+        });
+    },{
+        url: 'http://www.vedur.is/skjalftar-og-eldgos/jardskjalftar',
+        headers: { 'User-Agent': browser() },
+        encoding: "utf-8" // needed for some reason.. defaulting to ISO-8859-1
+    });
+});
+
+/*
+ This function only handles the request part and calls callback with
+ the body
+ */
+var getEarthquakes = function(callback,params) {
+    var req_params = (params == null) ? {
         url: 'http://hraun.vedur.is/ja/skjalftar/skjlisti.html',
         headers: { 'User-Agent': browser() },
         encoding: "binary" // needed for some reason.. defaulting to ISO-8859-1
-    };
+    } : params;
 
-    request(params, function (error,res, body) {
-        if (res.statusCode != 200) 
+    request(req_params, function (error,res, body) {
+        if (res.statusCode != 200)
             return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
 
         return callback(error,body);
@@ -33,13 +52,62 @@ var getEarthquakes = function(callback) {
 };
 
 /*
-   This function only handles the DOM traversal part, and returns a
-   fully formed list (synchronous).
+ * This function traverses the DOM, and looks for a JS variable that is included
+ * in the source of vedur.is.
+ * Note that it is synchronous.
+ */
+var parseJavaScriptVariable;
+parseJavaScriptVariable = function (body) {
+    var jsonString = ""; // Work with empty string if scraping fails.
+    // Create a cheerio object from response body.
+    var $ = cheerio.load(body);
 
-   It should be pretty easy to split out each part of this parser into standalone
-   functions, that could be unit tested (to make sure the data looks exactly like
-   it's supposed to look like)
-*/
+    // Find the variable inside one of the <script> elements in the response body.
+    $('script').each(function (i, elem) {
+        if (/(VI\.quakeInfo = .+);/.test($(this).text())) {
+            jsonString = $(elem).html().match(/(VI\.quakeInfo = )(.+);/)[2];
+        }
+    });
+
+    // Convert the variable to JavaScript Object Notation and fix seperators in values.
+    res_string = jsonString.replace(/(:\'[-0-9][0-9]*)(,)([0-9]*)/g, '$1.$3');
+
+    // Create a Regular expression and change date representation.
+    regex_date = /(\'t\':)new Date\((([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+))\)(,\'a\')/g;
+    var dateReplace = function (match, p1, p2, p3, p4, p5, p6, p7, p8, p9, offset, stringg) {
+        parsed_date = new Date(parseInt(p3), parseInt(p4.split("-")[0]) - 1, parseInt(p5), parseInt(p6), parseInt(p7), parseInt(p8));
+        return p1 + '\'' + parsed_date.toISOString() + '\'' + p9;
+    }
+
+    // Create semi-final JSON string.
+    res = JSON.parse(res_string.replace(regex_date, dateReplace).replace(/\'/g, '"'));
+
+    // rename fields to match current specs
+    res_fields = [];
+    res.forEach(function (element) {
+        var tmpRow = {};
+        tmpRow["timestamp"] = element.t;
+        tmpRow["latitude"] = element.lat;
+        tmpRow["longitude"] = element.lon;
+        tmpRow["depth"] = element.dep;
+        tmpRow["size"] = element.s;
+        tmpRow["quality"] = element.q;
+        tmpRow["humanReadableLocation"] = element.dL + " km " + element.dD + " af " + element.dR;
+        res_fields.push(tmpRow);
+    });
+
+    return res_fields;
+
+};
+
+/*
+ This function only handles the DOM traversal part, and returns a
+ fully formed list (synchronous).
+
+ It should be pretty easy to split out each part of this parser into standalone
+ functions, that could be unit tested (to make sure the data looks exactly like
+ it's supposed to look like)
+ */
 var parseList = function(body) {
     var $ = cheerio.load(body);
 
