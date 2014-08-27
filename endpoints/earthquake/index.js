@@ -79,9 +79,12 @@ parseJavaScriptVariable = function (body) {
         return p1 + '\'' + parsed_date.toISOString() + '\'' + p9;
     }
 
+	try {
     // Create semi-final JSON string.
     res = JSON.parse(res_string.replace(regex_date, dateReplace).replace(/\'/g, '"'));
-
+    } catch(ex) {
+      return JSON.parse([{error:"Error parsing source."}]);  
+    }
     // rename fields to match current specs
     res_fields = [];
     res.forEach(function (element) {
