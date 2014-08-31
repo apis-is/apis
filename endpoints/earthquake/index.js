@@ -44,8 +44,11 @@ var getEarthquakes = function(callback,params) {
     } : params;
 
     request(req_params, function (error,res, body) {
-        if (res.statusCode != 200)
-            return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
+        if (res != null)
+            if(res.statusCode != 200)
+                return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
+        else
+            return callback(new Error("HTTP error from endpoint. Unknown status code."));
 
         return callback(error,body);
     });
