@@ -5,6 +5,7 @@ var helpers = require('../../../lib/test_helpers.js');
 describe('particulates', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ["PM10nuna", "PM10medaltal", "Counter", "Dags", "nanariuppl"];
+    this.timeout(4000);
 
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/particulates");
