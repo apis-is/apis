@@ -15,6 +15,7 @@ describe('handball', function() {
 });
 
 describe('football', function() {
+    this.timeout(4000);
 	it("should return an array of objects containing correct fields", function(done) {
 		var fieldsToCheckFor = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
 		var params = helpers.testRequestParams("/sports/football", {
