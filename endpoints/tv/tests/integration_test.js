@@ -1,7 +1,8 @@
 var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
-describe('tv root', function(){
+describe('tv root', function() {
+    this.timeout(4000);
     it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/tv/");
