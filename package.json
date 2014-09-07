@@ -47,6 +47,7 @@
     "apis-helpers": "0.0.1"
   },
   "scripts": {
+    "test travis": "node_modules/mocha/bin/mocha --invert --grep particulates test/integration",
     "test": "node_modules/mocha/bin/mocha test/integration",
     "unit-test": "node_modules/mocha/bin/mocha test/unit"
   }
