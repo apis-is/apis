@@ -36,7 +36,7 @@ app.get('/earthquake/is/sec', function (req, res, next) {
  This function only handles the request part and calls callback with
  the body
  */
-var getEarthquakes = function(callback,params) {
+function getEarthquakes(callback,params) {
     var req_params = (params == null) ? {
         url: 'http://hraun.vedur.is/ja/skjalftar/skjlisti.html',
         headers: { 'User-Agent': browser() },
@@ -44,11 +44,9 @@ var getEarthquakes = function(callback,params) {
     } : params;
 
     request(req_params, function (error,res, body) {
-        if (res != null)
-            if(res.statusCode != 200)
-                return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
-        else
-            return callback(new Error("HTTP error from endpoint. Unknown status code."));
+        if(error || res.statusCode !== 200){
+            return callback(new Error("Could not retrieve the data from the data source"));
+        }
 
         return callback(error,body);
     });
@@ -59,8 +57,7 @@ var getEarthquakes = function(callback,params) {
  * in the source of vedur.is.
  * Note that it is synchronous.
  */
-var parseJavaScriptVariable;
-parseJavaScriptVariable = function (body) {
+function parseJavaScriptVariable(body) {
     var jsonString = ""; // Work with empty string if scraping fails.
     // Create a cheerio object from response body.
     var $ = cheerio.load(body);
@@ -114,7 +111,7 @@ parseJavaScriptVariable = function (body) {
  functions, that could be unit tested (to make sure the data looks exactly like
  it's supposed to look like)
  */
-var parseList = function(body) {
+function parseList(body) {
     var $ = cheerio.load(body);
 
     // currying of a function that parses a <td> with an icelandic number as a JS Number
