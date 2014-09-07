@@ -1,7 +1,8 @@
 var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
-describe('tv root', function(){
+describe('tv root', function() {
+    this.timeout(4000);
     it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/tv/");
@@ -78,7 +79,7 @@ describe('tv - ruv ithrottir', function () {
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruvithrottir");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, undefined, true);
         request.get(params, resultHandler);
     });
 });
