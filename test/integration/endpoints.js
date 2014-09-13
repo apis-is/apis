@@ -1,5 +1,5 @@
 var fs = require('fs'),
-  path = require('path'),
+  	path = require('path'),
 	fileModule = require('file'),
 	testDir = '/tests',
 	testFileName = 'integration_test.js';
@@ -20,7 +20,7 @@ describe('endpoint', function() {
 		            if (file != testFileName) return;
 		            var fullPath = dirPath + '/' + file;
 		            if (!fs.existsSync(fullPath)) return;
-                if (path.extname(fullPath) !== '.js') return;
+                	    if (path.extname(fullPath) !== '.js') return;
 		            require('../../' + fullPath);
 		        });
 			});
