@@ -1,7 +1,9 @@
 var fs = require('fs'),
+  path = require('path'),
 	fileModule = require('file'),
 	testDir = '/tests',
 	testFileName = 'integration_test.js';
+
 	
 process.env.INTEGRATION = true;
 
@@ -16,9 +18,10 @@ describe('endpoint', function() {
 		        if (dirPath.indexOf(testDir) < 0) return;
 		        files.forEach(function(file){
 		            if (file != testFileName) return;
-		            var path = dirPath + '/' + file;
-		            if (!fs.existsSync(path)) return;
-		            require('../../' + path);
+		            var fullPath = dirPath + '/' + file;
+		            if (!fs.existsSync(fullPath)) return;
+                if (path.extname(fullPath) !== '.js') return;
+		            require('../../' + fullPath);
 		        });
 			});
 			done();
