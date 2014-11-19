@@ -1,5 +1,6 @@
 language: node_js
 node_js:
+  - "0.11"
   - "0.10"
   - "0.8"
 script: ./node_modules/mocha/bin/mocha --invert --grep particulates test/integration
