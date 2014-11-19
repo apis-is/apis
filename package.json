@@ -48,7 +48,7 @@
     "xregexp": "~2.0.0",
     "cheerio": "~0.12.4",
     "mocha": "~1.15.1",
-    "express": "~3.4.7",
+    "express": "~3.4.8",
     "apis-helpers": "0.0.1"
   },
   "scripts": {
