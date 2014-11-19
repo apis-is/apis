@@ -1,10 +1,11 @@
-var express = require('express'),
-    app = module.exports = express(),
-    config = require('./config'),
-    fileModule = require('file'),
-    cache = require('./lib/cache'),
-    cors = require('./lib/cors'),
-    EE = require('events').EventEmitter;
+var express = require('express');
+var app = module.exports = express();
+
+var config = require('./config');
+var fileModule = require('file');
+var cache = require('./lib/cache');
+var cors = require('./lib/cors');
+var EE = require('events').EventEmitter;
 
 /**
  * Set the spacing to 0 for shorter output
@@ -15,11 +16,6 @@ app.set('json spaces', 0);
  * Create an event listener for app
  */
 EE.call(app);
-
-/*
- * Built in parser to acces the body values
- */
-app.use(express.bodyParser());
 
 /**
  * Cross-origin resource sharing
@@ -50,5 +46,5 @@ app.listen(config.port, function () {
 });
 
 app.on('ready', function () {
-    if (!config.testing) console.log('Server running at port: ' + config.port);
+    if (!config.testing) console.log('Server running at port:', config.port);
 });
