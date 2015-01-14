@@ -28,7 +28,7 @@ app.get('/tv', function (req, res) {
             {name: 'Stöð 2 Gull', endpoint: '/tv/stod2gull'},
             {name: 'Stöð 2 Bíó', endpoint: '/tv/stod2bio'},
             {name: 'Stöð 2', endpoint: '/tv/stod3'},
-            {name: 'Skjár 1', endpoint: '/tv/skjar1}'
+            {name: 'Skjár 1', endpoint: '/tv/skjar1'}
           ]
         }
       ]
