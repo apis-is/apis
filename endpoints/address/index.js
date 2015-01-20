@@ -3,12 +3,14 @@ var h = require('apis-helpers');
 var app = require('../../server');
 var _ = require('underscore');
 
-app.get('/address', function(req, res) {
-    var address = (req.query.address || '').replace(' ', '+');
+app.get('/address/:address?', function(req, res) {
+    var address = req.query.address || req.params.address || '';
 
     if(address === '') {
       return res.json(431, {error: 'Please provide a valid address to lookup'});
     }
+
+    address = address.replace(' ', '+');
 
     request.get({
       headers: {'User-Agent': h.browser()},
