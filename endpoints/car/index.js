@@ -4,8 +4,8 @@ var request = require('request'),
 	app = require('../../server');
 
 
-app.get('/car', function(req, res){
-	var carPlate = req.query.number || req.query.carPlate || '';
+app.get('/car/:number?', function(req, res){
+	var carPlate = req.query.number || req.query.carPlate || req.params.number || '';
 	
 	if(!carPlate)
 		return res.json(431,{error:'Please provide a valid carPlate to lookup'});
