@@ -2,10 +2,11 @@
 var request = require('request'),
   app = require('../../server');
 
-app.get('/price/kronan', function(req, res){
+app.get('/price/kronan/:barcode?', function(req, res){
 
-  var data = req.query;
-  if(!data.barcode) {
+  var barcode = req.query.barcode || req.params.barcode;
+  
+  if(!barcode) {
     return res.json(400, {error: 'You must supply a barcode parameter!'})
   }
   
