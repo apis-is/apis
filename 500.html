@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="no-js lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]>   <html class="no-js lt-ie10 ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="loading no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>apis.is</title>
+    <link href="/img/favicon.png" rel="shortcut icon" type="image/png">
+    <script type="text/javascript" src="/js/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <loader>
+      <shadow></shadow>
+      <box></box>
+    </loader>
+    <header>
+      <toggle data-sidebar="endpoints">
+        <bar class="bar1"></bar>
+        <bar class="bar2"></bar>
+        <bar class="bar3"></bar>
+      </toggle>
+    </header>
+    <sidebar class="blue">
+      <nav>
+        <ul>
+          <li><a href="#about">About APIs</a></li>
+          <li><a href="#endpoints">Endpoints</a>
+            <ul class="endpoints"></ul>
+          </li>
+        </ul>
+      </nav>
+    </sidebar>
+    <pagewrap>
+      <section class="section full dark">
+        <div class="inner">
+          <div class="limit padding tight text-center">
+            <h1>Oops..!</h1>
+            <h3>This time it's our fault :(</h3>
+            <p class="large"><a href="javascript:window.location.reload()">Try again</a>in a little while</p>
+          </div>
+        </div>
+      </section>
+      <main>
+      </main>
+      <div class="limit padding">
+        <p>
+          If you're still here, we must be having some problems!<br/>
+          Perhaps you should check out our
+          <a href="https://github.com/kristjanmik/apis" target="_blank">github repo</a>
+          for now.
+        </p>
+      </div>
+    </pagewrap>
+    <script src="/js/main.js"></script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-33726914-3']);
+      _gaq.push(['_setDomainName', 'docs.apis.is']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="no-js lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]>   <html class="no-js lt-ie10 ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="loading no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>apis.is</title>
+    <link href="img/favicon.png" rel="shortcut icon" type="image/png">
+    <script type="text/javascript" src="js/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <loader>
+      <shadow></shadow>
+      <box></box>
+    </loader>
+    <header>
+      <toggle data-sidebar="endpoints">
+        <bar class="bar1"></bar>
+        <bar class="bar2"></bar>
+        <bar class="bar3"></bar>
+      </toggle>
+    </header>
+    <sidebar class="blue">
+      <nav>
+        <ul>
+          <li><a href="#about">About APIs</a></li>
+          <li><a href="#endpoints">Endpoints</a>
+            <ul class="endpoints"></ul>
+          </li>
+        </ul>
+      </nav>
+    </sidebar>
+    <pagewrap>
+      <hero window-height="force:true,subtract:40" scrolltrigger class="blue">
+        <inner>
+          <row>
+            <column>
+              <h1 class="logo">{apis.is}</h1>
+              <div class="limit padding text-center">
+                <p class="large">Our purpose is to make data readily available to anyone interested</p>
+                <p>Would you like to suggest a new endpoint to be implemented?<br/>Don't hesitate to <a class="light" href="mailto:apis@apis.is">contact us</a>, or contribute to our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repository</a>.</p>
+                <div class="arrows">
+                  <icon class="icon-down one"></icon>
+                  <icon class="icon-down two"></icon>
+                  <icon class="icon-down three"></icon>
+                </div>
+              </div>
+            </column>
+          </row>
+        </inner>
+      </hero>
+      <main>
+        <section scrolltrigger id="about" class="section dark">
+          <article>
+            <row>
+              <column class="large-6 medium-10 medium-centered">
+                <div class="text-center">
+                  <h2>What the..?</h2>
+                  <p>
+                    <strong>API</strong> stands for 'Application Programming Interface',
+                    literally specifying how software components should interact with each other.
+                    In our context, this means we have endpoints that return different kinds
+                    of data to developers using
+                    <a class="light" href="https://en.wikipedia.org/wiki/JSON" target="_blank" title="JavaScript Object Notation">JSON</a>
+                    objects, allowing them to use and manipulate it for their own applications.
+                  </p>
+                  <p>
+                    Bottom line is; this service creates a lot of opportunities for developers
+                    that don't necessarily have the know-how, time or resources to get the data
+                    themselves, but are full of ideas for using it.
+                    So if you have an idea that only needs a little more data to become a reality,
+                    don't hesitate to <a class="light" href="mailto:apis@apis.is">contact us</a> or even
+                    contribute yourself to our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repository</a>.
+
+                  </p>
+                </div>
+              </column>
+              <column class="large-6 medium-10 medium-centered">
+                <div class="text-center">
+                  <h3>How does it all work?</h3>
+                  <p>
+                    Our servers <a class="light" href="https://en.wikipedia.org/wiki/Web_scraping" type="_blank">scrape</a>
+                    various websites for the desired information. For more detailed information
+                    on individual endpoints visit our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repository</a>
+                    and look at the source code.
+
+                  </p>
+                </div>
+              </column>
+              <column class="large-6 medium-10 medium-centered">
+                <div class="text-center">
+                  <h3>How to get started?</h3>
+                  <p>
+                    This documentation includes simple
+                    <a class="light" href="http://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a>
+                    demos. Feel free to copy these to your projects, but remember that they
+                    are provided as is, and you will most certainly have to adjust
+                    them to your own needs.
+                  </p>
+                </div>
+              </column>
+            </row>
+          </article>
+          <row>
+            <column class="large-6 medium-10 medium-centered">
+              <div class="text-center">
+                <h3>What about version control?</h3>
+                <p>
+                  At the moment, including an <code>accept-version</code> header is not
+                  necessary, since all endpoints are at version 1, <strong>but we strongly
+                  recommend it</strong>, especially in production environments. Once an
+                  endpoint has been updated, the default version to be returned is the most
+                  recent, and this documentation will be updated accordingly. Changes in
+                  functionality between versions will be outlisted.
+
+                </p>
+              </div>
+            </column>
+            <column class="large-6 medium-10 medium-centered">
+              <div class="text-center">
+                <h3>How is all this possible? And for free?</h3>
+                <p>
+                  <strong>APIs.is</strong> is completely open source and developed by several
+                  <a class="light" href="https://github.com/kristjanmik/apis/graphs/contributors" target="_blank">contributors</a>
+                  working on their own personal time. All this runs in the cloud, available
+                  to you at all times.
+                </p>
+              </div>
+            </column>
+          </row>
+        </section>
+        <section scrolltrigger id="endpoints" class="section blue">
+          <row id="endpoints-wrap" equalize-wrap="above:480"></row>
+        </section>
+        <article id="endpoint-address" shortname="address" title="Icelandic Addresses" icon="home" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-home"></icon>
+                <h3><a href="#endpoint-address">
+                    <icon class="fa fa-link"></icon>Icelandic Addresses</a></h3>
+                <h4>Source:&nbsp;<a href="http://postur.is" target="_blank">Iceland Post</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/address</path>
+                </titlebar>
+                <div class="content">
+                  <p>Lookup addresses in Iceland through the Icelandic Post API</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">address</dt>
+                    <dd>Valid address</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/address',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'address': 'laugavegur 1'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "street": "laugavegur",
+      "house": 1,
+      "zip": "101",
+      "city": "Reykjavík",
+      "apartment": "",
+      "letter": ""
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-bus" shortname="bus" title="Icelandic Bus System" icon="bus" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-bus"></icon>
+                <h3><a href="#endpoint-bus">
+                    <icon class="fa fa-link"></icon>Icelandic Bus System</a></h3>
+                <h4>Source:&nbsp;<a href="http://bus.is" target="_blank">bus.is</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/bus/realtime" target="_blank">/bus/realtime</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Real-time location of busses. Results are only shown for active busses.</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt>busses</dt>
+                    <dd>Comma seperated list of numbers. <b>Good to know:</b> If not declared, the endpoint will return location of all available busses.</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/bus/realtime',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'busses': '1,5'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+        {
+            "busNr": "1",
+            "busses": [
+                {
+                    "unixTime": 1354618575,
+                    "x": 64.090668,
+                    "y": -21.92904,
+                    "from": "Hlemmur",
+                    "to": "Klukkuvellir"
+                },
+                {
+                    "unixTime": 1354618575,
+                    "x": 64.086315,
+                    "y": -21.937813,
+                    "from": "Klukkuvellir",
+                    "to": "Hlemmur"
+                }
+            ]
+        },
+        {
+            "busNr": "5",
+            "busses": [
+                {
+                    "unixTime": 1354618563,
+                    "x": 64.135644,
+                    "y": -21.850126,
+                    "from": "Hlemmur",
+                    "to": "Elliðabraut / Árvað"
+                },
+                {
+                    "unixTime": 1354618577,
+                    "x": 64.143989,
+                    "y": -21.913048,
+                    "from": "Elliðabraut / Árvað",
+                    "to": "Hlemmur"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-car" shortname="car" title="Cars in Iceland" icon="car" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-car"></icon>
+                <h3><a href="#endpoint-car">
+                    <icon class="fa fa-link"></icon>Cars in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="http://ww2.us.is/node/928" target="_blank">The Road Traffic Directorate</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/car?number=aa031" target="_blank">/car?number=aa031</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Search the icelandic vehicle registry</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">number</dt>
+                    <dd>Registry number</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/car',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'number': 'aa031'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+        {
+            "registryNumber": "AA031",
+            "number": "AA031",
+            "factoryNumber": "VF37ENFZE32286866",
+            "type": "PEUGEOT",
+            "subType": "306",
+            "color": "Blár",
+            "registeredAt": "26.02.1998",
+            "status": "Í lagi",
+            "nextCheck": "01.01.2013",
+            "pollution": "",
+            "weight": "1120"
+        }
+    ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-company" shortname="company" title="Icelandic companies" icon="building" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-building"></icon>
+                <h3><a href="#endpoint-company">
+                    <icon class="fa fa-link"></icon>Icelandic companies</a></h3>
+                <h4>Source:&nbsp;<a href="http://rsk.is" target="_blank">Directorate of Internal Revenue in Iceland</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/company?name=blendin" target="_blank">/company?name=blendin</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Search the icelandic company registry<br><b>NB: At least one parameter is required.</b></p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt>name</dt>
+                    <dd>Company name</dd>
+                    <dt>address</dt>
+                    <dd>Company's address</dd>
+                    <dt>socialnumber</dt>
+                    <dd>Company's social security number / ID number</dd>
+                    <dt>vsknr</dt>
+                    <dd>Company's VAT-number (VSK in icelandic)</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/company',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'name': 'blendin'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "name": "Blendin ehf.",
+      "sn": "6304141720",
+      "active": 1,
+      "address": "Hamrahlíð 9  105 Reykjavík"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-concerts" shortname="concerts" title="Concerts in Iceland" icon="music" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-music"></icon>
+                <h3><a href="#endpoint-concerts">
+                    <icon class="fa fa-link"></icon>Concerts in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="http://midi.is" target="_blank">midi.is</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/concerts" target="_blank">/concerts</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get a list of all the concerts in Iceland sorted by date</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/concerts',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "eventDateName": "Vínartónleikar 2015",
+      "name": "Græn - tónleikaröð",
+      "dateOfShow": "2015-01-08T19:30:00",
+      "userGroupName": "Harpa",
+      "eventHallName": "Eldborg                                           ",
+      "imageSource": "http://midi.is/images/medium/15.759.jpg"
+    },
+    {
+      "eventDateName": "Föstudagsfreistingar 09.01",
+      "name": "",
+      "dateOfShow": "2015-01-09T12:00:00",
+      "userGroupName": "Miðasala MAk",
+      "eventHallName": "Hamrar                                            ",
+      "imageSource": "http://midi.is/images/medium/1.8394.jpg"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-currency" shortname="currency" title="Currency in relation to ISK" icon="dollar" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-dollar"></icon>
+                <h3><a href="#endpoint-currency">
+                    <icon class="fa fa-link"></icon>Currency in relation to ISK</a></h3>
+                <h4>Sources:&nbsp;<a href="http://m5.is" target="_blank">m5.is</a>,&nbsp;<a href="http://arionbanki.is" target="_blank">Arion banki</a> and&nbsp;<a href="http://landsbankinn.is" target="_blank">Landsbankinn</a></h4>
+              </hgroup>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/currency/:source</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get currency data in relation to ISK</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">/:source</dt>
+                    <dd>Which source to use (m5|arion|lb)</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/currency/m5',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (m5)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "shortName": "USD",
+      "longName": "Bandarískur dalur",
+      "value": 121.53,
+      "askValue": 0,
+      "bidValue": 0,
+      "changeCur": 0.055,
+      "changePer": 0.05
+    },
+    {
+      "shortName": "EUR",
+      "longName": "Evra",
+      "value": 162.2,
+      "askValue": 0,
+      "bidValue": 0,
+      "changeCur": 0.015,
+      "changePer": 0.01
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (arion)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "shortName": "USD",
+      "longName": "Bandarískur dalur",
+      "value": 121.515,
+      "askValue": 121.88,
+      "bidValue": 121.15,
+      "changeCur": -0.40857,
+      "changePer": 0
+    },
+    {
+      "shortName": "EUR",
+      "longName": "Evra",
+      "value": 162.185,
+      "askValue": 162.67,
+      "bidValue": 161.7,
+      "changeCur": 0.09845,
+      "changePer": "0.00"
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (lb)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "shortName": "USD",
+      "longName": "Bandaríkjadalur",
+      "value": 121.47,
+      "askValue": 121.83,
+      "bidValue": 121.11,
+      "changeCur": 0.01,
+      "changePer": 0
+    },
+    {
+      "shortName": "EUR",
+      "longName": "Evra",
+      "value": 162.3,
+      "askValue": 162.78,
+      "bidValue": 161.82,
+      "changeCur": 0.09,
+      "changePer": 0
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-cyclecounter" shortname="cyclecounter" title="Bicyclecounter in Reykjavik" icon="bicycle" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-bicycle"></icon>
+                <h3><a href="#endpoint-cyclecounter">
+                    <icon class="fa fa-link"></icon>Bicyclecounter in Reykjavik</a></h3>
+                <h4>Source:&nbsp;<a href="http://bicyclecounter.dk" target="_blank">Bicycle Counter</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/cyclecounter" target="_blank">/cyclecounter</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>
+                    Get current status of bicycle counters in Iceland, currently only one
+                    located by Sudurlandsbraut in Reykjavik.
+
+                  </p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/cyclecounter',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "DayCount": "154",
+      "YearCount": "31853",
+      "Time": "16:48",
+      "Date": "18. Sep 2013"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-earthquake" shortname="earthquake" title="Earthquakes in Iceland" icon="cube" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-cube"></icon>
+                <h3><a href="#endpoint-earthquake">
+                    <icon class="fa fa-link"></icon>Earthquakes in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="http://vedur.is" target="_blank">Icelandic Meteorological Office</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/earthquake/is" target="_blank">/earthquake/is</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get earthquake monitoring data for the last 48 hours.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/earthquake/is',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "timestamp": "2013-09-17T10:35:46.000Z",
+      "latitude": 66.181,
+      "longitude": -17.764,
+      "depth": 11.3,
+      "size": 0.9,
+      "quality": 54.02,
+      "humanReadableLocation": "3,8 km ANA af Flatey"
+    },
+    {
+      "timestamp": "2013-09-17T04:52:13.000Z",
+      "latitude": 63.684,
+      "longitude": -19.282,
+      "depth": 4.7,
+      "size": 1.7,
+      "quality": 35.9,
+      "humanReadableLocation": "5,1 km NNV af Goðabungu"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-flight" shortname="flight" title="International flights in Iceland" icon="plane" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-plane"></icon>
+                <h3><a href="#endpoint-flight">
+                    <icon class="fa fa-link"></icon>International flights in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="http://kefairport.is" target="_blank">Keflavik Airport</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/flight?language=en&amp;type=departures" target="_blank">/flight?language=en&amp;type=departures</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get a list of all international flights departing and arriving at <a href="http://kefairport.is" target="_blank">Keflavik Airport</a> today.</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">language</dt>
+                    <dd>'en' or 'is'</dd>
+                    <dt class="required">type</dt>
+                    <dd>'departures' or 'arrivals'</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/flight',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'language': 'en', 'type': 'departures'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+        {
+            "date": "26. Jan",
+            "flightNumber": "FI671",
+            "to": "Denver Intl",
+            "plannedArrival": "17:00",
+            "realArrival": "17:23",
+            "status": "Departed 17:12"
+        },
+        {
+            "date": "26. Jan",
+            "flightNumber": "FI615",
+            "to": "New York JFK",
+            "plannedArrival": "17:05",
+            "realArrival": "17:26",
+            "status": "Departed 17:17"
+        }
+    ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-hospital" shortname="hospital" title="Status of icelandic hospitals" icon="stethoscope" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-stethoscope"></icon>
+                <h3><a href="#endpoint-hospital">
+                    <icon class="fa fa-link"></icon>Status of icelandic hospitals</a></h3>
+                <h4>Source:&nbsp;<a href="http://landspitali.is" target="_blank">The National University Hospital of Iceland</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/hospital</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get the current status of the National University Hospital of Iceland.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/hospital',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "birthNumbers": 2,
+      "surgeries": 3,
+      "dischargedNumbers": 2,
+      "hospitalizedNumbers": 15,
+      "atwork": 2193,
+      "patients-child": 13,
+      "patients-er": 25,
+      "patients-walk": 17,
+      "patients-icu": 15,
+      "patients-hotel": 33,
+      "donors": 3,
+      "patients-skilun": 7,
+      "patients-heart2": 3
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-lottery" shortname="lottery" title="Icelandic lottery" icon="ticket" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-ticket"></icon>
+                <h3><a href="#endpoint-lottery">
+                    <icon class="fa fa-link"></icon>Icelandic lottery</a></h3>
+                <h4>Source:&nbsp;<a href="http://lotto.is" target="_blank">lotto.is</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/lottery" target="_blank">/lottery</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get the most recent numbers for the icelandic lottery.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/lottery',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "date": "14.09.2013",
+      "lotto": "13 14 28 37 39 (29)",
+      "joker": "0 7 6 6 9",
+      "prize": "6.091.360 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/lotto?_date=14.09.2013"
+    },
+    {
+      "date": "07.09.2013",
+      "lotto": "10 15 34 35 39 (27)",
+      "joker": "6 5 1 7 4",
+      "prize": "13.287.850 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/lotto?_date=07.09.2013"
+    }
+  ]
+}
+</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/lottery/vikingalotto" target="_blank">/lottery/vikingalotto</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get the most recent numbers for Vikingalotto.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/lottery/vikingalotto',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "date": "11.09.2013",
+      "lotto": "3 8 25 32 34 45 20 22 (27)",
+      "joker": "2 2 0 4 0",
+      "prize": "316.866.390 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/vikingalotto?_date=11.09.2013"
+    },
+    {
+      "date": "04.09.2013",
+      "lotto": "8 12 13 14 33 47 27 48 (3)",
+      "joker": "9 5 8 0 1",
+      "prize": "206.822.330 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/vikingalotto?_date=04.09.2013"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/lottery/eurojackpot" target="_blank">/lottery/eurojackpot</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get the most recent numbers for EuroJackpot</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/lottery/eurojackpot',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "date": "13.09.2013",
+      "lotto": "3 10 18 31 43 1 (7)",
+      "joker": "1 8 3 1 3",
+      "prize": "2.456.318.720 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/eurojackpot?_date=13.09.2013"
+    },
+    {
+      "date": "06.09.2013",
+      "lotto": "3 7 20 32 44 4 (5)",
+      "joker": "0 5 5 5 8",
+      "prize": "2.137.751.150 kr.",
+      "link": "http://lotto.is/lottoleikir/urslit/eurojackpot?_date=06.09.2013"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-particulates" shortname="particulates" title="Particulates in Reykjavik" icon="cube" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-cube"></icon>
+                <h3><a href="#endpoint-particulates">
+                    <icon class="fa fa-link"></icon>Particulates in Reykjavik</a></h3>
+                <h4>Source:&nbsp;<a href="http://reykjavik.is" target="_blank">Reykjavik City</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/particulates" target="_blank">/particulates</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get current status of <a href="https://en.wikipedia.org/wiki/Particulates" target="_blank">particulates</a> in <a href="http://reykjavik.is" target="_blank">Reykjavik City</a></p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/particulates',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "PM10nuna": "0",
+      "PM10medaltal": "9.1",
+      "Counter": "29",
+      "Dags": "2013-09-18",
+      "nanariuppl": "http://www.rvk.is/desktopdefault.aspx/tabid-1007"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-price" shortname="price" title="Prices by barcode" icon="barcode" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-barcode"></icon>
+                <h3><a href="#endpoint-price">
+                    <icon class="fa fa-link"></icon>Prices by barcode</a></h3>
+                <h4>Source:&nbsp;<a href="http://kronan.is" target="_blank">Krónan</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/price/kronan</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get prices from Krónan by barcode</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">barcode</dt>
+                    <dd>Valid barcode</dd>
+                  </dl>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-rides" shortname="rides" title="Carpooling in Iceland" icon="cab" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-cab"></icon>
+                <h3><a href="#endpoint-rides">
+                    <icon class="fa fa-link"></icon>Carpooling in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="http://samferda.net" target="_blank">samferda.net</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/rides/samferda-drivers/" target="_blank">/rides/samferda-drivers/</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get a list of drivers requesting passengers, sorted by departure date.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/rides/samferda-drivers/',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "link": "http://www.samferda.net/en/detail/12345",
+      "from": "Akureyri",
+      "to":   "Reykjavík",
+      "date": "2014-09-30",
+      "time": "After 14:30"
+    }
+  ]
+}
+</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/rides/samferda-passengers/" target="_blank">/rides/samferda-passengers/</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get a list of passengers requesting rides, sorted by preferred departure date</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/rides/samferda-passengers/',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "link": "http://www.samferda.net/en/detail/54321",
+      "to":   "Reykjavík",
+      "from": "Akureyri",
+      "date": "2014-09-30",
+      "time": "Any"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-sarschool" shortname="sarschool" title="Landsbjörg SAR School course schedule" icon="cube" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-cube"></icon>
+                <h3><a href="#endpoint-sarschool">
+                    <icon class="fa fa-link"></icon>Landsbjörg SAR School course schedule</a></h3>
+                <h4>Source:&nbsp;<a href="http://skoli.landsbjorg.is" target="_blank">SAR School</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/sarschool" target="_blank">/sarschool</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Get a list of all courses scheduled by the Search and Rescue school for training of SAR Squad members.</p>
+                  <h5 class="params">No parameters available</h5>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/sarschool',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "id": 2753,
+      "name": "Snjóflóð 2",
+      "time_start": "2015-01-08",
+      "time_end": "2015-01-11",
+      "sar_members_only": 0,
+      "host": "Squad",
+      "location": "Siglufjörður",
+      "price_regular": 54000,
+      "price_members": 21600,
+      "link": "http://skoli.landsbjorg.is/Open/Course.aspx?Id=2753"
+    },
+    {
+      "id": 3017,
+      "name": "Snjóflóð 1",
+      "time_start": "2015-01-08",
+      "time_end": "2015-01-11",
+      "sar_members_only": 0,
+      "host": "Squad",
+      "location": "Siglufjörður",
+      "price_regular": 42280,
+      "price_members": 15100,
+      "link": "http://skoli.landsbjorg.is/Open/Course.aspx?Id=3017"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-sports" shortname="sports" title="Sport events in Iceland" icon="soccer-ball-o" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-soccer-ball-o"></icon>
+                <h3><a href="#endpoint-sports">
+                    <icon class="fa fa-link"></icon>Sport events in Iceland</a></h3>
+                <h4>Sources:&nbsp;<a href="http://ksi.is" target="_blank">KSÍ</a> and&nbsp;<a href="http://hsi.is" target="_blank">HSÍ</a></h4>
+              </hgroup>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/sports/:sport</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get events for icelandic football and/or handball</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">/:sport</dt>
+                    <dd>Which sport events to get (football|handball)</dd>
+                  </dl>
+                  <h5 toggle-next class="response">Response (no sport)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "info": "This is an api for Ielandic sports events",
+      "endpoints": {
+        "football": "/sports/football/",
+        "handball": "/sports/handball/"
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/football)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "counter": "2",
+      "date": "fös. 09. jan",
+      "time": "19:15",
+      "tournament": "Innimót - Úrslitakeppni mfl. karla",
+      "location": "Fylkishöll",
+      "homeTeam": "Fylkir",
+      "awayTeam": "Stál-úlfur"
+    },
+    {
+      "counter": "3",
+      "date": "fös. 09. jan",
+      "time": "19:30",
+      "tournament": "Innimót - Úrslitakeppni mfl. karla",
+      "location": "Álftanes",
+      "homeTeam": "Víkingur Ó.",
+      "awayTeam": "KFG"
+    },
+    {
+      "counter": "4",
+      "date": "fös. 09. jan",
+      "time": "20:30",
+      "tournament": "Innimót - Úrslitakeppni mfl. karla",
+      "location": "Laugardalshöll",
+      "homeTeam": "Fjölnir",
+      "awayTeam": "Grundarfjörður"
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/handball)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "Date": "�ri.  9.sep.2014",
+      "Time": "18.00",
+      "Tournament": "RVK m�t karla",
+      "Venue": "�M Grafarvogi",
+      "Teams": "Fj�lnir - KR"
+    },
+    {
+      "Date": "�ri.  9.sep.2014",
+      "Time": "19.30",
+      "Tournament": "RVK m�t karla",
+      "Venue": "Framh�s",
+      "Teams": "Fram - V�kingur"
+    },
+    {
+      "Date": "Mi�. 10.sep.2014",
+      "Time": "19.30",
+      "Tournament": "RVK m�t kvenna",
+      "Venue": "Vodafone h�llin",
+      "Teams": "Valur - Fram"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-tv" shortname="tv" title="Icelandic television schedules" icon="cube" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-cube"></icon>
+                <h3><a href="#endpoint-tv">
+                    <icon class="fa fa-link"></icon>Icelandic television schedules</a></h3>
+                <h4>Sources:&nbsp;<a href="http://ruv.is" target="_blank">RÚV</a>,&nbsp;<a href="http://stod2.is" target="_blank">Stöð 2</a> and&nbsp;<a href="http://skjarinn.is/einn" target="_blank">SkjárEinn</a></h4>
+              </hgroup>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/tv/:channel</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get schedules for icelandic tv stations.</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">/:channel</dt>
+                    <dd>Which channel's schedule to get</dd>
+                  </dl>
+                  <h5 toggle-next class="response">Response (no channel)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "info": "This is an api for Icelandic tv channel schedules",
+      "endpoints": {
+        "ruv": "/tv/ruv/",
+        "ruvithrottir": "/tv/ruvithrottir/",
+        "stod2": "/tv/stod2/",
+        "stod2sport": "/tv/stod2sport",
+        "stod2sport2": "/tv/stod2sport2",
+        "stod2gull": "/tv/stod2gull",
+        "stod2bio": "/tv/stod2bio",
+        "stod3": "/tv/stod3",
+        "skjar1": "/tv/skjar1"
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/ruv)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Sm\u00e6lki",
+      "originalTitle": "Small Potatoes",
+      "duration": "00:03:00",
+      "description": "",
+      "shortDescription": "",
+      "live": false,
+      "premier": true,
+      "startTime": "2014-07-05 07:01:00",
+      "aspectRatio": "16:9",
+      "series": {
+        "episode": "24",
+        "series": "26"
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/ruvithrottir)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "HM \u00ed f\u00f3tbolta",
+      "originalTitle": "Holland - Argent\u00edna",
+      "duration": "00:25:00",
+      "description": "Upptaka fr\u00e1 leik \u00ed undan\u00farslitum HM \u00ed f\u00f3tbolta sem fram fer \u00ed Brasil\u00edu.",
+      "shortDescription": "",
+      "live": false,
+      "premier": true,
+      "startTime": "2014-07-09 22:45:00",
+      "aspectRatio": "16:9",
+      "series": {
+        "episode": "1",
+        "series": "1"
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod2)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Fr\u00e9ttir",
+      "originalTitle": "",
+      "duration": "0:45",
+      "description": "Fr\u00e9ttir St\u00f6\u00f0var 2 endurs\u00fdndar fr\u00e1 \u00fev\u00ed fyrr \u00ed kv\u00f6ld.",
+      "live": "false",
+      "premier": "true",
+      "startTime": "2014-07-06 05:25:00",
+      "aspectRatio": "4\/3",
+      "series": {
+        "episode": "",
+        "series": ""
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod2sport)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Arsenal -  Liverpool",
+      "originalTitle": "FA bikarinn",
+      "duration": "1:55",
+      "description": "\u00datsending fr\u00e1 leik Arsenal og Liverpool \u00ed FA bikarnum.",
+      "live": false,
+      "premier": false,
+      "startTime": "2014-07-09 18:20:00",
+      "aspectRatio": "16\/9",
+      "series": {
+        "episode": "",
+        "series": ""
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod2sport2)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Brasil\u00eda - \u00de\u00fdskaland",
+      "originalTitle": "HM 2014",
+      "duration": "1:40",
+      "description": "\u00datsending fr\u00e1 leik Brasil\u00edu og \u00de\u00fdskalands \u00ed undan\u00farslitum \u00e1 HM 2014.",
+      "live": false,
+      "premier": false,
+      "startTime": "2014-07-09 07:00:00",
+      "aspectRatio": "16\/9",
+      "series": {
+        "episode": "",
+        "series": ""
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod2gull)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Str\u00e1karnir",
+      "originalTitle": "",
+      "duration": "0:25",
+      "description": "Sveppi, Auddi og P\u00e9tur halda uppteknum h\u00e6tti og sprella sem aldrei fyrr me\u00f0 \u00f3borganlegum upp\u00e1t\u00e6kjum.",
+      "live": false,
+      "premier": false,
+      "startTime": "2014-07-09 17:55:00",
+      "aspectRatio": "4\/3",
+      "series": {
+        "episode": "",
+        "series": ""
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod2bio)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Argo",
+      "originalTitle": "",
+      "duration": "2:00",
+      "description": "Fr\u00e1b\u00e6r mynd sem hlaut \u00d3skarsver\u00f0launin fyrr \u00e1 \u00feessu \u00e1ri sem besta myndin auk \u00feess sem h\u00fan hlaut ver\u00f0laun fyrir handriti\u00f0 og klippingu. Alls var myndin tilnefnd til sj\u00f6 \u00d3skarsver\u00f0launa. Myndin gerist \u00e1ri\u00f0 1980 \u00feegar bylting var ger\u00f0 \u00ed \u00cdran og starfsmenn bandar\u00edska sendir\u00e1\u00f0sins voru teknir \u00ed g\u00edslingu. L\u00edtill h\u00f3pur n\u00e1\u00f0i a\u00f0 l\u00e6\u00f0ast \u00fat og leita skj\u00f3ls \u00ed kanad\u00edska sendiherrab\u00fasta\u00f0num og bandar\u00edsk yfirv\u00f6ld \u00feurftu a\u00f0 beita frumlegum a\u00f0fer\u00f0um til a\u00f0 frelsa h\u00f3pinn. Leikstj\u00f3ri myndarinnar er Ben Affleck sem einnig leikur a\u00f0alhlutverki\u00f0.",
+      "live": false,
+      "premier": false,
+      "startTime": "2014-07-09 03:15:00",
+      "aspectRatio": "16\/9",
+      "series": {
+        "episode": "",
+        "series": ""
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/stod3)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Malibu Country",
+      "originalTitle": "",
+      "duration": "0:25",
+      "description": "Skemmtilegir gaman\u00fe\u00e6ttir um konu \u00e1 besta aldri \u00ed Nashville sem skilur vi\u00f0 eiginmann sinn og flyst me\u00f0 fj\u00f6lskyldu s\u00edna til Malibu. \u00dear reynir \u00e1 a\u00f0l\u00f6gunarh\u00e6fni \u00feeirra allra en h\u00fan reynir fyrir s\u00e9r sem s\u00f6ngkona og b\u00f6rnin reyna a\u00f0 tapa s\u00e9r ekki \u00ed efnishyggjunni sem vir\u00f0ist yfirr\u00e1\u00f0andi.",
+      "live": false,
+      "premier": false,
+      "startTime": "2014-07-09 18:10:00",
+      "aspectRatio": "16\/9",
+      "series": {
+        "episode": "14",
+        "series": "18"
+      }
+    }
+  ]
+}
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response (/skjar1)</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Leverage",
+      "originalTitle": "Leverage 5",
+      "duration": "00:46:00",
+      "description": "\u00deetta er fimmta \u00fe\u00e1ttar\u00f6\u00f0in af Leverage, \u00e6sispennandi \u00fe\u00e1ttar\u00f6\u00f0 \u00ed anda Ocean\u2019s Eleven um \u00fej\u00f3fah\u00f3p sem r\u00e6nir \u00fe\u00e1 sem misnota vald sitt og r\u00edkid\u00e6mi og n\u00ed\u00f0ast \u00e1 minnim\u00e1ttar.",
+      "shortDescription": "Nate ver\u00f0ur a\u00f0 hreinsa mannor\u00f0 Sophie \u00feegar h\u00fan er grunu\u00f0 um \u00fej\u00f3fna\u00f0 \u00e1 \u00f3metanlegu m\u00e1lverki.",
+      "live": false,
+      "premier": true,
+      "startTime": "2014-07-09 23:54",
+      "aspectRatio": "",
+      "series": {
+        "episode": "10",
+        "series": "15"
+      }
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-weather" shortname="weather" title="Icelandic Weather" icon="sun-o" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-sun-o"></icon>
+                <h3><a href="#endpoint-weather">
+                    <icon class="fa fa-link"></icon>Icelandic Weather</a></h3>
+                <h4>Source:&nbsp;<a href="http://vedur.is" target="_blank">Icelandic Meteorological Office</a></h4>
+              </hgroup>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/weather/:source/:lang</path>
+                </titlebar>
+                <div class="content">
+                  <p>Get weather information for Iceland.<br>Under 'Descriptions' you will find a list that will help you understand the output of the following endpoints.</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="req">/:type</dt>
+                    <dd>Type of information to get (forecasts|observations|texts)</dd>
+                    <dt>/:lang</dt>
+                    <dd>Language of output ('en' or 'is'), defaults to 'is'</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="descriptions">Descriptions</h5>
+                  <pre class="descriptions"><code class="javascript">var descriptions = {
+  'F'   : { 'is': 'Vindhraði (m/s)',
+            'en': 'Wind speed (m/s)'},
+  'FX'  : { 'is': 'Mesti vindhraði (m/s)',
+            'en': 'Top wind speed (m/s)'},
+  'FG'  : { 'is': 'Mesta vindhviða (m/s)',
+            'en': 'Top wind gust (m/s)'},
+  'D'   : { 'is': 'Vindstefna',
+            'en': 'Wind direction'},
+  'T'   : { 'is': 'Hiti (°C)',
+            'en': 'Air temperature (°C)'},
+  'W'   : { 'is': 'Veðurlýsing',
+            'en': 'Weather description'},
+  'V'   : { 'is': 'Skyggni (km)',
+            'en': 'Visibility (km)'},
+  'N'   : { 'is': 'Skýjahula (%)',
+            'en': 'Cloud cover (%)'},
+  'P'   : { 'is': 'Loftþrýstingur (hPa)',
+            'en': 'Air pressure'},
+  'RH'  : { 'is': 'Rakastig (%)',
+            'en': 'Humidity (%)'},
+  'SNC' : { 'is': 'Lýsing á snjó',
+            'en': 'Snow description'},
+  'SND' : { 'is': 'Snjódýpt',
+            'en': 'Snow depth'},
+  'SED' : { 'is': 'Snjólag',
+            'en': 'Snow type'},
+  'RTE' : { 'is': 'Vegahiti (°C)',
+            'en': 'Road temperature (°C)'},
+  'TD'  : { 'is': 'Daggarmark (°C)',
+            'en': 'Dew limit (°C)'},
+  'R'   : { 'is': 'Uppsöfnuð úrkoma (mm/klst) úr sjálfvirkum mælum',
+            'en': 'Cumulative precipitation (mm/h) from automatic measuring units'}
+};
+</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/weather/forecasts/:lang</path>
+                </titlebar>
+                <div class="content">
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt>/:lang</dt>
+                    <dd>Language of output ('en' or 'is'), defaults to 'is'</dd>
+                    <dt class="required">stations</dt>
+                    <dd>
+                      List of station numbers seperated by commas(,) or semicolons(;).<br/>See links below for more information.<br/>
+                      <a href="http://www.vedur.is/vedur/stodvar" target="_blank">Weather stations (icelandic)</a> | <a href="http://en.vedur.is/weather/stations/" type="_blank">Weather stations (english)</a>
+                    </dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/weather/forecasts/en',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'stations': '1,422'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "name": "Reykjavík",
+      "atime": "2013-09-17 12:00:00",
+      "err": "",
+      "link": "http://en.vedur.is/WeatherServlet/weather/forecasts/areas/reykjavik/#group=100&station=1",
+      "forecast": [
+        {
+          "ftime": "2013-09-17 15:00:00",
+          "F": "9",
+          "D": "N",
+          "T": "7",
+          "W": "Clear sky",
+          "N": "0",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-17 18:00:00",
+          "F": "8",
+          "D": "N",
+          "T": "7",
+          "W": "Clear sky",
+          "N": "0",
+          "TD": "-4",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-17 21:00:00",
+          "F": "8",
+          "D": "N",
+          "T": "6",
+          "W": "Partly cloudy",
+          "N": "20",
+          "TD": "-4",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 00:00:00",
+          "F": "6",
+          "D": "NNW",
+          "T": "5",
+          "W": "Partly cloudy",
+          "N": "40",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 03:00:00",
+          "F": "6",
+          "D": "N",
+          "T": "5",
+          "W": "Cloudy",
+          "N": "70",
+          "TD": "-4",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 06:00:00",
+          "F": "5",
+          "D": "NNW",
+          "T": "4",
+          "W": "Partly cloudy",
+          "N": "30",
+          "TD": "-2",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 09:00:00",
+          "F": "5",
+          "D": "N",
+          "T": "5",
+          "W": "Clear sky",
+          "N": "0",
+          "TD": "-2",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 12:00:00",
+          "F": "4",
+          "D": "NNW",
+          "T": "6",
+          "W": "Clear sky",
+          "N": "0",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 15:00:00",
+          "F": "3",
+          "D": "NNW",
+          "T": "7",
+          "W": "Clear sky",
+          "N": "0",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 18:00:00",
+          "F": "3",
+          "D": "N",
+          "T": "8",
+          "W": "Partly cloudy",
+          "N": "0",
+          "TD": "-2",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-18 21:00:00",
+          "F": "3",
+          "D": "NE",
+          "T": "6",
+          "W": "Cloudy",
+          "N": "100",
+          "TD": "0",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 00:00:00",
+          "F": "2",
+          "D": "E",
+          "T": "4",
+          "W": "Overcast",
+          "N": "90",
+          "TD": "0",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 03:00:00",
+          "F": "3",
+          "D": "ESE",
+          "T": "4",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "1",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 06:00:00",
+          "F": "4",
+          "D": "ESE",
+          "T": "5",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "3",
+          "R": "0.4"
+        },
+        {
+          "ftime": "2013-09-19 09:00:00",
+          "F": "4",
+          "D": "ESE",
+          "T": "5",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "4",
+          "R": "0.4"
+        },
+        {
+          "ftime": "2013-09-19 12:00:00",
+          "F": "5",
+          "D": "SE",
+          "T": "7",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "5",
+          "R": "0.8"
+        },
+        {
+          "ftime": "2013-09-19 15:00:00",
+          "F": "7",
+          "D": "ESE",
+          "T": "7",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "5",
+          "R": "0.6"
+        },
+        {
+          "ftime": "2013-09-19 18:00:00",
+          "F": "7",
+          "D": "ESE",
+          "T": "5",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "4",
+          "R": "1.7"
+        },
+        {
+          "ftime": "2013-09-20 00:00:00",
+          "F": "7",
+          "D": "ESE",
+          "T": "5",
+          "W": "Rain",
+          "N": "100",
+          "TD": "4",
+          "R": "2.2"
+        },
+        {
+          "ftime": "2013-09-20 06:00:00",
+          "F": "2",
+          "D": "SE",
+          "T": "3",
+          "W": "Rain",
+          "N": "100",
+          "TD": "3",
+          "R": "8.1"
+        },
+        {
+          "ftime": "2013-09-20 12:00:00",
+          "F": "2",
+          "D": "NW",
+          "T": "6",
+          "W": "Rain showers",
+          "N": "30",
+          "TD": "2",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-20 18:00:00",
+          "F": "5",
+          "D": "W",
+          "T": "6",
+          "W": "Rain",
+          "N": "100",
+          "TD": "3",
+          "R": "1.3"
+        },
+        {
+          "ftime": "2013-09-21 00:00:00",
+          "F": "3",
+          "D": "WSW",
+          "T": "5",
+          "W": "Rain",
+          "N": "100",
+          "TD": "5",
+          "R": "8.7"
+        },
+        {
+          "ftime": "2013-09-21 06:00:00",
+          "F": "3",
+          "D": "WSW",
+          "T": "6",
+          "W": "Light rain",
+          "N": "80",
+          "TD": "5",
+          "R": "1.0"
+        },
+        {
+          "ftime": "2013-09-21 12:00:00",
+          "F": "3",
+          "D": "WSW",
+          "T": "7",
+          "W": "Light rain",
+          "N": "90",
+          "TD": "5",
+          "R": "0.5"
+        },
+        {
+          "ftime": "2013-09-21 18:00:00",
+          "F": "2",
+          "D": "W",
+          "T": "8",
+          "W": "Rain showers",
+          "N": "60",
+          "TD": "5",
+          "R": "0.8"
+        },
+        {
+          "ftime": "2013-09-22 00:00:00",
+          "F": "3",
+          "D": "E",
+          "T": "4",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "3",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-22 06:00:00",
+          "F": "4",
+          "D": "ENE",
+          "T": "6",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "2",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-22 12:00:00",
+          "F": "6",
+          "D": "E",
+          "T": "8",
+          "W": "Rain",
+          "N": "100",
+          "TD": "2",
+          "R": "0.3"
+        },
+        {
+          "ftime": "2013-09-22 18:00:00",
+          "F": "7",
+          "D": "ESE",
+          "T": "8",
+          "W": "Rain",
+          "N": "100",
+          "TD": "7",
+          "R": "5.2"
+        },
+        {
+          "ftime": "2013-09-23 00:00:00",
+          "F": "8",
+          "D": "SSE",
+          "T": "9",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "9",
+          "R": "1.1"
+        }
+      ],
+      "id": "1",
+      "valid": "1"
+    },
+    {
+      "name": "Akureyri",
+      "atime": "2013-09-17 12:00:00",
+      "err": "",
+      "link": "http://en.vedur.is/WeatherServlet/weather/forecasts/areas/northeast/#group=15&station=422",
+      "forecast": [
+        {
+          "ftime": "2013-09-17 15:00:00",
+          "F": "5",
+          "D": "NNW",
+          "T": "2",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "0",
+          "R": "0.4"
+        },
+        {
+          "ftime": "2013-09-17 18:00:00",
+          "F": "5",
+          "D": "NNW",
+          "T": "2",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "0",
+          "R": "0.5"
+        },
+        {
+          "ftime": "2013-09-17 21:00:00",
+          "F": "4",
+          "D": "NW",
+          "T": "1",
+          "W": "Sleet",
+          "N": "100",
+          "TD": "0",
+          "R": "1.1"
+        },
+        {
+          "ftime": "2013-09-18 00:00:00",
+          "F": "3",
+          "D": "NW",
+          "T": "1",
+          "W": "Sleet",
+          "N": "100",
+          "TD": "-1",
+          "R": "1.5"
+        },
+        {
+          "ftime": "2013-09-18 03:00:00",
+          "F": "2",
+          "D": "NW",
+          "T": "1",
+          "W": "Sleet",
+          "N": "100",
+          "TD": "-1",
+          "R": "1.7"
+        },
+        {
+          "ftime": "2013-09-18 06:00:00",
+          "F": "2",
+          "D": "NW",
+          "T": "2",
+          "W": "Light sleet",
+          "N": "100",
+          "TD": "-1",
+          "R": "0.9"
+        },
+        {
+          "ftime": "2013-09-18 09:00:00",
+          "F": "2",
+          "D": "NW",
+          "T": "2",
+          "W": "Light rain",
+          "N": "80",
+          "TD": "-1",
+          "R": "0.6"
+        },
+        {
+          "ftime": "2013-09-18 12:00:00",
+          "F": "1",
+          "D": "NNW",
+          "T": "3",
+          "W": "Light rain",
+          "N": "90",
+          "TD": "0",
+          "R": "0.3"
+        },
+        {
+          "ftime": "2013-09-18 15:00:00",
+          "F": "2",
+          "D": "NNE",
+          "T": "4",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "1",
+          "R": "0.2"
+        },
+        {
+          "ftime": "2013-09-18 18:00:00",
+          "F": "2",
+          "D": "NNE",
+          "T": "2",
+          "W": "Cloudy",
+          "N": "80",
+          "TD": "1",
+          "R": "0.2"
+        },
+        {
+          "ftime": "2013-09-18 21:00:00",
+          "F": "1",
+          "D": "NE",
+          "T": "1",
+          "W": "Cloudy",
+          "N": "50",
+          "TD": "0",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-19 00:00:00",
+          "F": "1",
+          "D": "NNE",
+          "T": "1",
+          "W": "Cloudy",
+          "N": "60",
+          "TD": "0",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-19 03:00:00",
+          "F": "0",
+          "D": "Calm",
+          "T": "1",
+          "W": "Cloudy",
+          "N": "50",
+          "TD": "-1",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 06:00:00",
+          "F": "1",
+          "D": "ESE",
+          "T": "1",
+          "W": "Cloudy",
+          "N": "80",
+          "TD": "-1",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 09:00:00",
+          "F": "2",
+          "D": "SE",
+          "T": "2",
+          "W": "Overcast",
+          "N": "90",
+          "TD": "0",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 12:00:00",
+          "F": "2",
+          "D": "SE",
+          "T": "6",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 15:00:00",
+          "F": "2",
+          "D": "ESE",
+          "T": "8",
+          "W": "Overcast",
+          "N": "90",
+          "TD": "3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-19 18:00:00",
+          "F": "1",
+          "D": "SE",
+          "T": "1",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "-1",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-20 00:00:00",
+          "F": "1",
+          "D": "ESE",
+          "T": "1",
+          "W": "Light sleet",
+          "N": "100",
+          "TD": "-1",
+          "R": "0.5"
+        },
+        {
+          "ftime": "2013-09-20 06:00:00",
+          "F": "1",
+          "D": "E",
+          "T": "1",
+          "W": "Light sleet",
+          "N": "100",
+          "TD": "0",
+          "R": "0.4"
+        },
+        {
+          "ftime": "2013-09-20 12:00:00",
+          "F": "1",
+          "D": "SSE",
+          "T": "1",
+          "W": "Light sleet",
+          "N": "100",
+          "TD": "0",
+          "R": "1.2"
+        },
+        {
+          "ftime": "2013-09-20 18:00:00",
+          "F": "1",
+          "D": "SW",
+          "T": "2",
+          "W": "Cloudy",
+          "N": "30",
+          "TD": "0",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-21 00:00:00",
+          "F": "2",
+          "D": "SW",
+          "T": "-1",
+          "W": "Cloudy",
+          "N": "90",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-21 06:00:00",
+          "F": "2",
+          "D": "SSW",
+          "T": "0",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "-2",
+          "R": "0.3"
+        },
+        {
+          "ftime": "2013-09-21 12:00:00",
+          "F": "2",
+          "D": "SW",
+          "T": "3",
+          "W": "Overcast",
+          "N": "100",
+          "TD": "0",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-21 18:00:00",
+          "F": "1",
+          "D": "SSW",
+          "T": "3",
+          "W": "Cloudy",
+          "N": "60",
+          "TD": "1",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-22 00:00:00",
+          "F": "1",
+          "D": "SSW",
+          "T": "-1",
+          "W": "Cloudy",
+          "N": "70",
+          "TD": "-1",
+          "R": "0.1"
+        },
+        {
+          "ftime": "2013-09-22 06:00:00",
+          "F": "1",
+          "D": "SSE",
+          "T": "-3",
+          "W": "Overcast",
+          "N": "90",
+          "TD": "-3",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-22 12:00:00",
+          "F": "1",
+          "D": "ESE",
+          "T": "0",
+          "W": "Light snow",
+          "N": "100",
+          "TD": "-1",
+          "R": "0.0"
+        },
+        {
+          "ftime": "2013-09-22 18:00:00",
+          "F": "1",
+          "D": "ESE",
+          "T": "1",
+          "W": "Light sleet",
+          "N": "100",
+          "TD": "0",
+          "R": "1.2"
+        },
+        {
+          "ftime": "2013-09-23 00:00:00",
+          "F": "1",
+          "D": "SSE",
+          "T": "3",
+          "W": "Light rain",
+          "N": "100",
+          "TD": "1",
+          "R": "1.4"
+        }
+      ],
+      "id": "422",
+      "valid": "1"
+    }
+  ]
+}
+</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/weather/observations/:lang</path>
+                </titlebar>
+                <div class="content">
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt>/:lang</dt>
+                    <dd>Language of output ('en' or 'is'), defaults to 'is'</dd>
+                    <dt class="required">stations</dt>
+                    <dd>
+                      List of station numbers seperated by commas(,) or semicolons(;).<br/>See links below for more information.<br/>
+                      <a href="http://www.vedur.is/vedur/stodvar" target="_blank">Weather stations (icelandic)</a> | <a href="http://en.vedur.is/weather/stations/" type="_blank">Weather stations (english)</a>
+                    </dd>
+                    <dt>time</dt>
+                    <dd>1h (default) = Fetch data from automatic weather stations that are updated on the hour.<br/>3h = Only fetch mixed data from manned and automatic weather stations that is updated every 3 hours.</dd>
+                    <dt>anytime</dt>
+                    <dd>0 (default) = an error will be returned if current data is not available.<br/>1 = last available numbers will be displayed, regardless of date.</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/weather/observations/en',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'stations': '1,422', 'time': '1h', 'anytime': '0'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "name": "Reykjavík",
+      "time": "2013-09-17 16:00:00",
+      "err": "",
+      "link": "http://en.vedur.is/WeatherServlet/weather/observations/areas/reykjavik/#group=100&station=1",
+      "F": "8",
+      "FX": "9",
+      "FG": "16",
+      "D": "NNE",
+      "T": "5.6",
+      "W": "",
+      "V": "",
+      "N": "",
+      "P": "1003",
+      "RH": "58",
+      "SNC": "",
+      "SND": "",
+      "SED": "",
+      "RTE": "",
+      "TD": "-2.0",
+      "R": "0.1",
+      "id": "1",
+      "valid": "1"
+    },
+    {
+      "name": "Akureyri",
+      "time": "2013-09-17 16:00:00",
+      "err": "",
+      "link": "http://en.vedur.is/WeatherServlet/weather/observations/areas/northeast/#group=15&station=422",
+      "F": "10",
+      "FX": "11",
+      "FG": "15",
+      "D": "NNW",
+      "T": "3.3",
+      "W": "",
+      "V": "",
+      "N": "",
+      "P": "1001",
+      "RH": "79",
+      "SNC": "",
+      "SND": "",
+      "SED": "",
+      "RTE": "",
+      "TD": "0.0",
+      "R": "0.0",
+      "id": "422",
+      "valid": "1"
+    }
+  ]
+}
+</code></pre>
+                </div>
+              </box>
+              <box class="light endpoint disabled">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path>/weather/texts</path>
+                </titlebar>
+                <div class="content">
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">types</dt>
+                    <dd>List of types seperated by commas(,) or semicolons(;).<br/>See 'Valid types' below for full list of valid type numbers and what they stand for.</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="valid-types">Valid types</h5>
+                  <pre class="valid-types"><code class="javascript">"2" = "Veðurhorfur á landinu"
+"3" = "Veðurhorfur á höfuðborgarsvæðinu"
+"5" = "Veðurhorfur á landinu næstu daga"
+"6" = "Veðurhorfur á landinu næstu daga"
+"7" = "Weather outlook"
+"9" = "Veðuryfirlit"
+"10" = "Veðurlýsing"
+"11" = "Íslenskar viðvaranir fyrir land"
+"12" = "Veðurhorfur á landinu"
+"14" = "Enskar viðvaranir fyrir land"
+"27" = "Weather forecast for the next several days"
+"30" = "Miðhálendið"
+"31" = "Suðurland"
+"32" = "Faxaflói"
+"33" = "Breiðafjörður"
+"34" = "Vestfirðir"
+"35" = "Strandir og Norðurland vestra"
+"36" = "Norðurlandi eystra"
+"37" = "Austurland að Glettingi"
+"38" = "Austfirðir"
+"39" = "Suðausturland"
+"42" = "General synopsis
+</code></pre>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/weather/texts',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'types': '5,6'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+    {
+      "title": "Veðurhorfur á landinu næstu daga",
+      "creation": "2013-09-17 09:16:29",
+      "valid_from": "2013-09-19 12:00:00",
+      "valid_to": "2013-09-24 12:00:00",
+      "content": "Á fimmtudag: Suðaustan 8-13 m/s S- og V-lands og rigning með köflum, en hægari og bjartviðri á NA- og A-landi. Hiti 2 til 10 stig, kaldast í innsveitum NA-lands. Á föstudag: Suðaustlæg eða breytileg átt, 3-10 m/s. Rigning eða skúrir í flestum landshlutum. Hiti 3 til 8 stig. Á laugardag: Vestan- og norðvestanátt, víða 3-8 m/s. Skýjað að mestu en úrkomulítið um V- og N-vert landið, en bjartviðri annars staðar. Hiti 3 til 10 stig, hlýjast á SA-landi. Á sunnudag: Útlit fyrir vaxandi suðaustanátt með rigningu, einkum S-til á landinu. Hlýnar í veðri. Á mánudag: Horfur á suðvestanátt með rigningu eða skúrum, en þurrt og bjart eystra.",
+      "id": "5"
+    },
+    {
+      "title": "Veðurhorfur á landinu næstu daga",
+      "creation": "2013-09-17 09:19:17",
+      "valid_from": "2013-09-19 12:00:00",
+      "valid_to": "2013-09-24 12:00:00",
+      "content": "Suðaustan 8-13 m/s á fimmtudag S- og V-lands og rigning með köflum, en hægari og þurrt annars staðar. Breytileg átt 5-10 á föstudag og víða væta, en 3-8 á laugardag og úrkomulítið. Horfur á vaxandi suðaustanátt á sunnudag með rigningu og hlýnandi veðri.",
+      "id": "6"
+    }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+      </main>
+      <footer>
+        <section class="dark">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <box>
+                <p class="text-large">Would you like to suggest a new endpoint to be implemented?<br/>Don't hesitate to <a class="light" href="mailto:apis@apis.is">contact us</a>, or contribute to our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repo</a>.</p>
+              </box>
+            </column>
+          </row>
+        </section>
+      </footer>
+    </pagewrap>
+    <script src="js/main.js"></script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-33726914-3']);
+      _gaq.push(['_setDomainName', 'docs.apis.is']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
