@@ -10,4 +10,4 @@ app.get('/torrents', function (req, res, next) {
 		return response;
 	}
 
-}
+});
