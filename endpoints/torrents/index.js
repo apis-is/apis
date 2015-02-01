@@ -8,6 +8,6 @@ app.get('/torrents', function (req, res, next) {
 
 	request(url, function (error, response, body) {
 		return response;
-	}
+	});
 
 });
