@@ -3,6 +3,7 @@ var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('hospital', function() {
+    this.timeout(4000); // This endpoint is a bit slow
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ['birthNumbers', 'surgeries', 'dischargedNumbers',
 			    'hospitalizedNumbers', 'atwork', 'patients-child',
