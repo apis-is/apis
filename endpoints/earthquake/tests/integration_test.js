@@ -3,8 +3,6 @@ var request = require('request'),
     helpers = require('../../../lib/test_helpers.js');
 
 describe('earthquake/is', function() {
-    this.timeout(8000); // This endpoint is a bit slow
-
     // Which fields we expect and of which type they should be
     var fieldsToCheckFor = {
         "timestamp": Date,
@@ -24,8 +22,6 @@ describe('earthquake/is', function() {
 });
 
 describe('earthquake/is/sec', function() {
-    this.timeout(8000); // This endpoint is a bit slow
-
     // Which fields we expect and of which type they should be
     var fieldsToCheckFor = {
         "timestamp": Date,

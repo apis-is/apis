@@ -2,7 +2,6 @@ var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('tv root', function() {
-    this.timeout(4000);
     it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/tv/");
@@ -11,7 +10,6 @@ describe('tv root', function() {
     });
 });
 describe('tv - skjar1', function () {
-    this.timeout(8000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/skjar1");
@@ -75,7 +73,6 @@ describe('tv - stod2', function () {
 });
 
 describe('tv - ruv ithrottir', function () {
-    this.timeout(8000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruvithrottir");
@@ -85,7 +82,6 @@ describe('tv - ruv ithrottir', function () {
 });
 
 describe('tv - ruv', function () {
-    this.timeout(8000);
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruv");

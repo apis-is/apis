@@ -3,8 +3,6 @@ var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe.skip('company', function() {
-    this.timeout(10000); // This endpoint is sometimes SLOW, need more time
-
     var fieldsToCheckFor = ["name","sn","active","address"];
 
     describe('searching by name', function() {
