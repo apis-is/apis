@@ -4,17 +4,11 @@
  * Created:  March 2014
  */
 
-var request, parseString, h, app, cheerio;
-
-/** Requires **/
-request = require('request'),
-parseString = require('xml2js').parseString,
-h = require('apis-helpers'),
-app = require('../../server'),
-cheerio = require('cheerio'),
-$ = require('jquery'),
-
-/** Variable initialization **/
+var request = require('request');
+var parseString = require('xml2js').parseString;
+var h = require('apis-helpers');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 /* Fetches the sports data and returns a JS object in a callback */
 function getJsonData(url, callback){
@@ -61,8 +55,10 @@ app.get('/sports/football', function (req, res) {
         return res.json(500,{error:'www.ksi.is refuses to respond or give back data'});
       }
 
+      var $;
+
       try {
-        var data = $(body);	
+        $ = cheerio.load(body);	
       } catch(error) {
         return res.json(500,{error:'Could not parse body'});
       }
@@ -70,7 +66,7 @@ app.get('/sports/football', function (req, res) {
       var obj = { results: []};
       var fields = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
       try {
-        data.find('#leikir-tafla tr').not(':first').each(function(key) {
+        $('#leikir-tafla tr').not(':first').each(function(key) {
           if (key !== 0) {
             var game = {};
         	  $(this.cells).each(function(key2) {
@@ -102,7 +98,7 @@ app.get('/sports/handball', function (req, res) {
       }
 
       try {
-        var data = $(body);
+        var $ = cheerio.load(body);
       } catch(error) {
         return res.json(500, {error:'Could not parse body'});
       }
@@ -111,7 +107,7 @@ app.get('/sports/handball', function (req, res) {
       var fields = ['Date', 'Time', 'Tournament', 'Venue', 'Teams'];
 
       try {
-        data.find('table').eq(1).find('tr').not(':first').each(function(key) {
+        $('table').eq(1).find('tr').not(':first').each(function(key) {
           if (key !== 0) {
             var game = {};
             $(this.cells).each(function(key2) {

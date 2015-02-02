@@ -1,6 +1,6 @@
 var request = require('request'),
-    $ = require('jquery'),
-    app = require('../../server');
+    app = require('../../server'),
+    cheerio = require('cheerio');
 
 String.prototype.replaceArray = function(find, replace) {
   var replaceString = this;
@@ -42,10 +42,9 @@ var getRequest = function(callback, url) {
 };
 
 var parseList = function ( body ) {
-	var site;
 
 	try {
-		site = $(body);
+		var $ = cheerio.load(body);
 	} catch(error) {
 		throw new Error("Could not parse body");
 	}
@@ -53,7 +52,7 @@ var parseList = function ( body ) {
     var results = [];
     
 
-    var tr = site.find('.rgMasterTable').find('tbody').find('tr');
+    var tr = $('.rgMasterTable').find('tbody').find('tr');
 
     tr.each(function (i) {
         var td = $(this).find('td');
@@ -87,7 +86,7 @@ var parseList = function ( body ) {
              time_start: start_date_final,
              time_end: end_date_final,
              sar_members_only: (td.eq(0).find('img').length > 0 ? 1:0),
-             host: (td.eq(5).find('input').prop('checked')?'Squad':'Other'),
+             host: (td.eq(5).find('input').attr('checked') == 'checked' ? 'Squad' : 'Other'),
              location: (td.eq(8).text().trim()==""?"":td.eq(8).text().trim()),
              price_regular: (td.eq(9).text().trim()==""?"":parseFloat(td.eq(9).text().trim().replace(".",""))),
              price_members: (td.eq(10).text().trim()==""?"":parseFloat(td.eq(10).text().trim().replace(".",""))),

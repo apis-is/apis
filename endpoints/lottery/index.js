@@ -1,6 +1,6 @@
 var request = require('request'),
-    $ = require('jquery'),
-    app = require('../../server');
+    app = require('../../server'),
+    cheerio = require('cheerio');
 
 
 var getLotto = function (req, res) {
@@ -48,17 +48,15 @@ var getLottery = function(callback, url) {
 };
 
 var parseList = function ( body ) {
-	var site;
-
 	try {
-		site = $(body);
+		var $ = cheerio.load(body);
 	} catch(error) {
 		throw new Error("Could not parse body");
 	}
 
     var results = [];
 
-    var tr = site.find('table').eq(1).find('tr');
+    var tr = $('table').eq(1).find('tr');
 
     tr.each(function (i) {
         if ( i === 0 ) return;
