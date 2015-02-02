@@ -22,7 +22,7 @@ describe('currency', function() {
         });
     });
     describe('searching using provider "lb"', function() {
-        this.timeout(3000);
+        this.timeout(4000);
         it("should return an array of objects containing correct fields", function(done) {
             var params = helpers.testRequestParams("/currency/lb");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
