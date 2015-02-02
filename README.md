@@ -22,11 +22,6 @@ To run the integration tests:
 $ npm test
 ```
 
-To run the unit tests:
-```sh
-$ npm run unit-test
-```
-
 ## Adding a new Endpoint
 
 ### Step by Step
