@@ -37,41 +37,32 @@ app.get('/flight', function(req, res){
 
         var obj = { results: []};
 
-        var fields = ['date','flightNumber','airline','to','from','plannedArrival','realArrival','status'];
-        
         $('table tr').each(function(key){
             if(key !== 0){
                 var flight = {};
                 if(data.type === 'departures') {
                     flight = {
-                        'date': '',
-                        'flightNumber':'',
-                        'airline':'',
-                        'to': '',
-                        'plannedArrival': '',
-                        'realArrival': '',
-                        'status': ''
-                    }
+                        'date': $(this).children('td').slice(0).html(),
+                        'flightNumber': $(this).children('td').slice(1).html(),
+                        'airline': $(this).children('td').slice(2).html(),
+                        'to': $(this).children('td').slice(3).html(),
+                        'plannedArrival': $(this).children('td').slice(4).html(),
+                        'realArrival': $(this).children('td').slice(5).html(),
+                        'status': $(this).children('td').slice(6).html()
+                    };
                 }
                 else {
                     flight = {
-                        'date': '',
-                        'flightNumber':'',
-                        'airline':'',
-                        'from': '',
-                        'plannedArrival': '',
-                        'realArrival': '',
-                        'status': ''
-                    }
+                        'date': $(this).children('td').slice(0).html(),
+                        'flightNumber': $(this).children('td').slice(1).html(),
+                        'airline': $(this).children('td').slice(2).html(),
+                        'from': $(this).children('td').slice(3).html(),
+                        'plannedArrival': $(this).children('td').slice(4).html(),
+                        'realArrival': $(this).children('td').slice(5).html(),
+                        'status': $(this).children('td').slice(6).html()
+                    };
                 }
                 
-                $(this).find('td').each(function(key){
-                    var val = $(this).html();
-                    if(val != '' && val != 0){ // Perform check and add to flight array if it passes
-                        flight[fields[key]] = val;
-
-                    }
-                });
                 obj.results.push(flight);
             }
         });
