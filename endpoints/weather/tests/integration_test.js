@@ -3,6 +3,7 @@ var helpers = require('../../../lib/test_helpers.js');
 var assert = require('assert');
 
 describe('weather', function(){
+    this.timeout(4000);
     it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/weather/");
@@ -10,7 +11,6 @@ describe('weather', function(){
         request.get(params, resultHandler);
     });
     describe('getAvailableStations', function () {
-        this.timeout(4000);
         it("should return an array of objects containing correct fields", function (done) {
             var fieldsToCheckFor = ["name", "id"];
             var params = helpers.testRequestParams("/weather/getAvailableStations");
