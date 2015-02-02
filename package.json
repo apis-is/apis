@@ -42,8 +42,6 @@
     "moment": "~2.1.0",
     "xml2js": "~0.2.8",
     "request": "~2.27.0",
-    "scraper": "0.0.9",
-    "jquery": "~1.8.3",
     "redis": "~0.8.4",
     "xregexp": "~2.0.0",
     "cheerio": "~0.12.4",

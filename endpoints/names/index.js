@@ -6,9 +6,9 @@ Created: August 2014
 */
 
 var request = require('request'),
-	$ = require('jquery'),
 	h = require('apis-helpers'),
-	app = require('../../server');
+	app = require('../../server'),
+    cheerio = require('cheerio');
 
 /* Root names handler - only returns a list of resources */
 app.get('/names', function (req, res) {
@@ -87,9 +87,8 @@ function handleRequest(url, req, res) {
 		if(error || response.statusCode !== 200)
 			return res.json(500,{error:'www.island.is refuses to respond or give back data'});
 
-    var data;
 		try{
-			data = $(body);	
+			var $ = cheerio.load(body);	
 		}catch(error){
 			return res.json(500,{error:'Could not parse body'});
 		}
@@ -97,12 +96,12 @@ function handleRequest(url, req, res) {
 		var	obj = { results: []};
 		
 		// Clear data regarding the acceptance date of the name (not needed)
-		data.find('.dir li i').each(function(key) {
+		$('.dir li i').each(function(key) {
 			$(this).remove();
 		});
 
 		// Loop through all the names in the list and add them to our array
-		data.find('.dir li').each(function(key){
+		$('.dir li').each(function(key){
 			var name = $(this).text();
 			obj.results.push(name.trim());
 		});
