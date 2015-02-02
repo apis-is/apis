@@ -5,7 +5,7 @@ var helpers = require('../../../lib/test_helpers.js');
 describe('lotto', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
-    this.timeout(4000);
+    this.timeout(6000);
 
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/lottery");
@@ -16,7 +16,7 @@ describe('lotto', function() {
 describe('lotto', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ["date", "lotto", "joker", "prize", "link"];
-    this.timeout(4000);
+    this.timeout(6000);
 
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/lottery/lotto");
