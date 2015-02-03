@@ -3,7 +3,6 @@ var helpers = require('../../../lib/test_helpers.js');
 var assert = require('assert');
 
 describe('weather', function(){
-    this.timeout(6000);
     it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/weather/");
@@ -49,7 +48,6 @@ describe('weather', function(){
             request.get(params, resultHandler);
         });
         it("should return an array with 1 result", function (done) {
-            this.timeout(4000);
             var params = helpers.testRequestParams("/weather/forecasts?stations=1");
             request.get(params, function(err, res, body) {
                 if (err) throw err;
@@ -170,7 +168,6 @@ describe('weather', function(){
             });
         });
         it("should return an array with 2 results", function (done) {
-            this.timeout(4000);
             var params = helpers.testRequestParams("/weather/texts?types=5,6");
             request.get(params, function(err, res, body) {
                 if (err) throw err;

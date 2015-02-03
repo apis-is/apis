@@ -7,7 +7,6 @@ describe('currency', function() {
     var fieldsToCheckFor = ["shortName", "longName", "value", "askValue", "bidValue", "changeCur", "changePer"];
 
     describe('searching using provider "m5"', function() {
-        this.timeout(6000); // This endpoint is SLOW, need more time
         it("should return an array of objects containing correct fields", function(done) {
             var params = helpers.testRequestParams("/currency/m5");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
@@ -22,7 +21,6 @@ describe('currency', function() {
         });
     });
     describe('searching using provider "lb"', function() {
-        this.timeout(4000);
         it("should return an array of objects containing correct fields", function(done) {
             var params = helpers.testRequestParams("/currency/lb");
             var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);

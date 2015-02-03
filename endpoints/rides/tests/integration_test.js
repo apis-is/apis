@@ -2,7 +2,6 @@ var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('rides root', function(){
-    this.timeout(4000);
     it('should return info and endpoints', function (done) {
         var fieldsToCheckFor = ['info', 'endpoints'];
         var params = helpers.testRequestParams('/rides/');
@@ -14,7 +13,6 @@ describe('rides root', function(){
 [ 'samferda-drivers', 'samferda-passengers' ].forEach(function (api) {
     var apiName = 'rides - ' + api;
     describe(apiName, function () {
-        this.timeout(4000);
         var fieldsToCheckFor = ['link', 'from', 'to', 'date', 'time'];
         it('should return an array of objects containing correct fields', function (done) {
             var params = helpers.testRequestParams('/rides/' + api);

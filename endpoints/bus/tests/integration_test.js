@@ -3,8 +3,6 @@ var request = require('request'),
     helpers = require('../../../lib/test_helpers.js');
 
 describe('bus', function() {
-    this.timeout(0); // this endpoint is slow
-
     var fieldsToCheckFor = ["busNr","busses"];
 
     var customCheck = function(json) {
