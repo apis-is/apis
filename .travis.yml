@@ -6,7 +6,7 @@ node_js:
 before_install:
 - npm install -g npm@latest
 - openssl aes-256-cbc -K $encrypted_893d0cdd819b_key -iv $encrypted_893d0cdd819b_iv -in travisapis.enc -out travisapis -d
-script: ./node_modules/mocha/bin/mocha test/integration
+script: ./node_modules/mocha/bin/mocha --invert --grep particulates test/integration
 branches:
   only:
     - master
