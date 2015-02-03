@@ -50,7 +50,6 @@
     "apis-helpers": "0.0.1"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test/integration",
-    "unit-test": "node_modules/mocha/bin/mocha test/unit"
+    "test": "node_modules/mocha/bin/mocha test/integration"
   }
 }
