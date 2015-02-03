@@ -5,7 +5,7 @@ node_js:
 - '0.8'
 before_install:
 - npm install -g npm@latest
-script: ./node_modules/mocha/bin/mocha test/integration
+script: ./node_modules/mocha/bin/mocha --invert --grep particulates test/integration
 branches:
   only:
     - master
