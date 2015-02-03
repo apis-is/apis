@@ -16,4 +16,4 @@ notifications:
 after_success:
  - chmod 600 .travis/deploy_key.pem
  - ssh-add .travis/deploy_key.pem
- - ssh ubuntu@46.149.30.103 'cd api && git pull origin master && npm install && npm test && pm2 restart api'
+ - ssh -o "StrictHostKeyChecking no" ubuntu@46.149.30.103 'cd api && git pull origin master && npm install && npm test && pm2 restart api'
