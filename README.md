@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/kristjanmik/apis.png?label=ready&title=Ready)](https://waffle.io/kristjanmik/apis)
+[![Build Status](https://travis-ci.org/kristjanmik/apis.png?branch=master)](https://travis-ci.org/kristjanmik/apis)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
 The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
@@ -11,13 +11,7 @@ The code that is running the service is open source under the [MIT licence](http
 
 [@kristjanmik](https://github.com/kristjanmik/)
 
-[@arnorhs](https://github.com/arnorhs/)
-
 [@benediktvaldez](https://github.com/benediktvaldez)
-
-
-[![Build Status](https://travis-ci.org/kristjanmik/apis.png?branch=master)](https://travis-ci.org/kristjanmik/apis)
-
 
 ## Tests
 
@@ -26,11 +20,6 @@ Currently there are two types of tests, integration and unit tests. All tests ar
 To run the integration tests:
 ```sh
 $ npm test
-```
-
-To run the unit tests:
-```sh
-$ npm run unit-test
 ```
 
 ## Adding a new Endpoint

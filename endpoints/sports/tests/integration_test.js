@@ -2,7 +2,7 @@ var request = require('request');
 var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
-describe('handball', function() {
+describe.skip('handball', function() {
     it("should return an array of objects containing correct fields", function(done) {
         var fieldsToCheckFor = ['Date', 'Time', 'Tournament', 'Venue', 'Teams'];
         var params = helpers.testRequestParams("/sports/handball", {
@@ -14,8 +14,7 @@ describe('handball', function() {
     });
 });
 
-describe('football', function() {
-    this.timeout(4000);
+describe.skip('football', function() {
 	it("should return an array of objects containing correct fields", function(done) {
 		var fieldsToCheckFor = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
 		var params = helpers.testRequestParams("/sports/football", {
