@@ -4,8 +4,8 @@ var request = require('request'),
 	app = require('../../server');
 
 
-app.get('/car/:number?', function(req, res){
-	var carPlate = req.query.number || req.query.carPlate || req.params.number || '';
+app.get('/car', function(req, res){
+	var carPlate = req.query.number || req.query.carPlate || '';
 	
 	if(!carPlate)
 		return res.json(431,{error:'Please provide a valid carPlate to lookup'});
@@ -20,12 +20,12 @@ app.get('/car/:number?', function(req, res){
 		url: url
 	}, function(error, response, body) {
 		if(error || response.statusCode !== 200) {
-			return res.json(500,{error:'www.us.is refuses to respond or give back data'});
+			return res.json(500,{error:'www.samgongustofa.is refuses to respond or give back data'});
 		}
 
 		var data = $(body);
 
-		var	obj = { 
+		var obj = {
 			results: []
 		};
 
@@ -40,6 +40,8 @@ app.get('/car/:number?', function(req, res){
 		if (fields.length > 0) {
 			obj.results.push({
 				type: fields[0],
+				subType: fields[0].substring(fields[0].indexOf('-')+2,fields[0].indexOf('(')-1),
+				color: fields[0].substring(fields[0].indexOf('(')+1,fields[0].indexOf(')')),
 				registryNumber: fields[1],
 				number: fields[2],
 				factoryNumber: fields[3],
