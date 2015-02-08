@@ -11,7 +11,11 @@ The code that is running the service is open source under the [MIT licence](http
 
 [@kristjanmik](https://github.com/kristjanmik/)
 
-[@benediktvaldez](https://github.com/benediktvaldez)
+[@benediktvaldez](https://github.com/benediktvaldez/)
+
+[@koddsson](https://github.com/koddsson/)
+
+[@MiniGod](https://github.com/minigod/)
 
 ## Tests
 
