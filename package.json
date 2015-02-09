@@ -4,12 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "koa": "~0.16.0",
-    "6to5": "~3.3.7"
+    "6to5": "~3.3.7",
+    "apis-endpoint": "git://github.com/MiniGod/apis-endpoint",
+    "async": "~0.9.0",
+    "config": "~1.10.0",
+    "cors": "~2.5.2",
+    "express": "~4.10.7",
+    "firm": "^0.1.3",
+    "statuses": "^1.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
   }
 }
