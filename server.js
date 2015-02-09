@@ -8,6 +8,13 @@ var cors = require('cors');
 
 app.set('port', config.get('port'));
 
+/**
+ * Redirect root to docs
+ */
+app.get('/', function(req, res) {
+  res.redirect('//docs.apis.is/');
+});
+
 // In production, someone else does this (nginx|varnish|haproxy)
 if (app.get('env') !== 'production') {
   /*
@@ -16,13 +23,6 @@ if (app.get('env') !== 'production') {
   app.use(function(req, res, next) {
     console.log('requested:', req.url);
     next();
-  });
-
-  /**
-   * Redirect root to docs
-   */
-  app.get('/', function(req, res) {
-    res.redirect('//docs.apis.is/');
   });
 
   /**
