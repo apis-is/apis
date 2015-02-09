@@ -1,11 +1,20 @@
+//process.env.NODE_ENV = 'testing';
+var app = require('./server.js');
+var supertest = require('supertest');
+
 // TODO: test core features 
 describe('Core APIs.is', function() {
   describe('GET /', function() {
-    it.skip('should redirect to docs.apis.is');
+    it('should redirect to docs.apis.is', function(done) {
+      supertest(app)
+        .get('/')
+        .expect(302)
+        .expect('location', /docs\.apis\.is/, done);
+    });
   });
 
   describe('GET /status', function() {
-    it.skip('should return status of each endpoint');
+    it.skip('should return status of each endpoint / or redirect to status.apis.is?');
   });
 });
 
