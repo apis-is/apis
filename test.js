@@ -1,5 +1,5 @@
 //process.env.NODE_ENV = 'testing';
-var app = require('./server.js');
+var app = require('./index.js');
 var supertest = require('supertest');
 
 // TODO: test core features 
