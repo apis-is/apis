@@ -6,6 +6,8 @@ var statuses = require('statuses');
 var config = require('config');
 var cors = require('cors');
 
+var endpoints = fs.readdirSync(__dirname + '/endpoints/');
+
 app.set('port', config.get('port'));
 
 /**
@@ -39,14 +41,11 @@ app.get('/status', function(req, res, next) {
 /**
  * Set up endpoints
  */
-var endpoints = fs.readdirSync('./endpoints/')
-  .map(function(path) {
-    console.log('Setting up: ' + path);
+endpoints.forEach(function(path) {
+    console.log('Setting up:', path);
 
     var endpoint = require('./endpoints/' + path);
     app.use('/' + path, endpoint);
-
-    return endpoint;
   });
 
 app.use(function(req, res, next) {
