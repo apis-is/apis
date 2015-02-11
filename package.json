@@ -1,7 +1,7 @@
 {
   "name": "v2apis",
-  "version": "0.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "The purpose of [APIs.is](http://apis.is) is to make data readily available masterrto anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.",
   "main": "index.js",
   "scripts": {
     "start": "gulp build && node dist/index.js",
