@@ -1,6 +1,32 @@
-The groundwork for v2 of the project
+[![Build Status](https://travis-ci.org/kristjanmik/apis.png?branch=v2)](https://travis-ci.org/kristjanmik/apis)
+# [APIs.is](http://apis.is) - Making data pretty since 2012!
 
-Previous discussions for improvements:
+The purpose of [APIs.is](http://apis.is) is to make data readily available masterrto anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
+
+The code that is running the service is open source under the [MIT licence](https://en.wikipedia.org/wiki/MIT_License). The platform itself is hosted on a load balanced setup by [GreenQloud](http://www.greenqloud.com) to be as antifragile as possible. The hosted service does not store any information, so all data is gathered on runtime and disregarded immediately afterwards.
+
+**Don't hesitate to lend a hand - All knowledge and help is much appreciated!**
+
+## Maintainers
+
+[@kristjanmik](https://github.com/kristjanmik/)
+
+[@benediktvaldez](https://github.com/benediktvaldez)
+
+## Local development
+
+The following commands should get you up and running.
+
+```
+git clone https://github.com/kristjanmik/apis/
+cd apis/
+npm install
+gulp watch
+```
+
+Now gulp will be running express in the background restarting it, rebuilding all code and running tests when any change is detected.
+
+## Roadmap to APIs 2.0
 
 - APIs 2.0 [#80](https://github.com/kristjanmik/apis/issues/80)
 - Caching headers mentioned in [#74](https://github.com/kristjanmik/apis/issues/74)
