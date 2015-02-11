@@ -5,6 +5,7 @@
     {
       "path": "/is",
       "method": "GET",
+      "description": "Search through the icelandic company registry",
       "source": {
         "title": "Directorate of Internal Revenue in Iceland",
         "path": "http://www.rsk.is/fyrirtaekjaskra/leit"
