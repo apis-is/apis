@@ -1,0 +1,37 @@
+{
+  "title": "Companies",
+  "description": "Search through company registries",
+  "endpoints": [
+    {
+      "path": "/is",
+      "method": "GET",
+      "source": {
+        "title": "Directorate of Internal Revenue in Iceland",
+        "path": "http://www.rsk.is/fyrirtaekjaskra/leit"
+      },
+      "variables": [
+        {
+          "type": "query",
+          "name": "name",
+          "description": "Company name",
+          "demoValue": "hagar"
+        },
+        {
+          "type": "query",
+          "name": "address",
+          "description": "Company's address",
+        },
+        {
+          "type": "query",
+          "name": "ssn",
+          "description": "Company's social security number / ID number",
+        },
+        {
+          "type": "query",
+          "name": "vsknr",
+          "description": "Company's VAT number (VSK in icelandic)",
+        }
+      ]
+    }
+  ]
+}
