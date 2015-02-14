@@ -4,3 +4,8 @@ config/*.config.json
 dist
 npm-debug.log
 *.swp
+
+.coverdata/
+.coverrun
+coverage/
+debug/
