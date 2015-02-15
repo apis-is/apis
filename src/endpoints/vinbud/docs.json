@@ -1,0 +1,23 @@
+{
+  "title": "Vínbúð",
+  "description": "Find the opening hours for Vínbúð stores",
+  "endpoints": [
+    {
+      "path": "/",
+      "method": "GET",
+      "description": "Search through the Vínbúð opening hours.",
+      "source": {
+        "title": "Vínbúð homepage",
+        "path": "https://www.vinbudin.is/desktopdefault.aspx/tabid-5/"
+      },
+      "variables": [
+        {
+          "type": "query",
+          "name": "name",
+          "description": "Store name",
+          "demoValue": "Búðardalur"
+        }
+      ]
+    }
+  ]
+}
