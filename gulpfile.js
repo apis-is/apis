@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var to5 = require('gulp-6to5');
+var to5 = require('gulp-babel');
 var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
 var del = require('del');
@@ -21,8 +21,8 @@ gulp.task('build', ['clean'], function() {
       .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['default'], function() {
-    gulp.watch('src/**/*.js', ['default']);  
+gulp.task('watch', ['default', 'test'], function() {
+    gulp.watch('src/**/*.js', ['default', 'test']);  
     nodemon({ script: 'dist/index.js' })
       .on('change', ['build'])
       .on('restart', function () {
