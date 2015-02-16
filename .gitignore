@@ -1,0 +1,16 @@
+# System, npm and bower
+*.swp
+.DS_Store
+node_modules
+npm-debug.log
+bower_components
+
+# Sublime
+*.sublime-workspace
+
+# Project
+dev/*
+dist/*
+
+# Keep .gitkeep
+!*/.gitkeep
