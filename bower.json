@@ -1,0 +1,50 @@
+{
+  "name": "docs-apis-is",
+  "description": "Documentation for apis.is",
+  "version": "2.0.0-alpha",
+  "homepage": "http://docs.apis.is",
+  "authors": [
+    "Benedikt D Valdez <hello@bdvs.info>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "jquery-easing": "*",
+    "normalize-scss": "~3.0.2",
+    "requirejs": "~2.1.16",
+    "requirejs-domready": "~2.0.1",
+    "requirejs-plugins": "~1.0.3",
+    "modernizr": "~2.8.3",
+    "html5-polyfills": "*",
+    "underscore": "~1.7.0"
+  },
+  "overrides": {
+    "jquery": {
+      "main": [
+        "./dist/jquery.min.js",
+        "./dist/jquery.min.map"
+      ]
+    },
+    "jquery-easing": {
+      "main": "jquery.easing.min.js"
+    },
+    "requirejs-domready": {
+      "main": "./domReady.js"
+    },
+    "modernizr": {
+      "main": "./modernizr.js"
+    },
+    "html5-polyfills": {
+      "main": [
+        "./classList.js"
+      ]
+    },
+    "underscore": {
+      "main": [
+        "./underscore-min.js",
+        "./underscore-min.map"
+      ]
+    }
+  }
+}

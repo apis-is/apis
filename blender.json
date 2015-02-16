@@ -1,0 +1,76 @@
+{
+  "version": "2.0.0-alpha",
+  "env": {
+    "development": {
+      "dir": "./dev/"
+    },
+    "production": {
+      "dir": "./dist/"
+    }
+  },
+  "cmd": {
+    "stage": "./bin/stage.sh",
+    "assets": "./bin/assets.sh",
+    "deploy": "./bin/deploy.sh",
+    "deployLive": "./bin/deploy-live.sh",
+    "require": "./bin/require.sh"
+  },
+  "connect": {
+    "port": "1337",
+    "livereload": true
+  },
+  "templates": {
+    "watchSrc": "./src/views/**/*.jade",
+    "src": [
+      "./src/views/**/*.jade",
+      "!./src/views/**/_*.jade"
+    ]
+  },
+  "scripts": {
+    "src": "./src/js/**/*.{js,map}",
+    "jsFilter": [
+      "**/*.js",
+      "**/*.map"
+    ],
+    "lint": {
+      "config": "./.jshintrc",
+      "exclude": [
+        "!**/vendor/**/*"
+      ]
+    },
+    "subDir": "js/"
+  },
+  "images": {
+    "src": "./src/img/**/*.{png,gif,jpg,jpeg}",
+    "imgFilter": "**/*.{png,gif,jpg,jpeg}",
+    "subDir": "img/"
+  },
+  "styles": {
+    "watchSrc": "./src/scss/**/*.scss",
+    "src": [
+      "./src/scss/**/*.scss",
+      "!./src/scss/**/_*.scss"
+    ],
+    "cssFilter": "**/*.css",
+    "scssFilter": "**/*.scss",
+    "srcDir": "./src/scss/",
+    "subDir": "css/"
+  },
+  "svg": {
+    "src": "./src/img/**/*.svg",
+    "subDir": "img/"
+  },
+  "ico": {
+    "src": "./src/img/**/*.ico",
+    "subDir": "img/"
+  },
+  "fonts": {
+    "src": "./src/fonts/**/*",
+    "subDir": "fonts/"
+  },
+  "bower": {
+    "jsDest": "./src/js/vendor/",
+    "imgDest": "./src/img/vendor/",
+    "scssDest": "./src/scss/vendor/"
+  }
+}
