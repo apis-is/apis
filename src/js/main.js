@@ -32,6 +32,6 @@
   });
 
   require([
-
+    'init/view'
   ]);
 }).call(this);
