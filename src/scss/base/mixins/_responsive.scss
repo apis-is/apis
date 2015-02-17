@@ -1,0 +1,54 @@
+
+// ==========================================================================
+// Media Queries
+// ==========================================================================
+
+@mixin respond-to($media) {
+
+  @if $media == xsmall-up or $media == xsmall {
+    @media #{$xsmall-up} { @content; }
+  }
+  @else if $media == small-up or $media == small {
+    @media #{$small-up} { @content; }
+  }
+  @else if $media == medium-up or $media == medium {
+    @media #{$medium-up} { @content; }
+  }
+  @else if $media == large-up or $media == large {
+    @media #{$large-up} { @content; }
+  }
+  @else if $media == xlarge-up or $media == xlarge {
+    @media #{$xlarge-up} { @content; }
+  }
+
+  @else if $media == xsmall-only {
+    @media #{$xsmall-only} { @content; }
+  }
+  @else if $media == small-only {
+    @media #{$small-only} { @content; }
+  }
+  @else if $media == medium-only {
+    @media #{$medium-only} { @content; }
+  }
+  @else if $media == large-only {
+    @media #{$large-only} { @content; }
+  }
+
+  @else if $media == landscape {
+    @media #{$landscape} { @content; }
+  }
+  @else if $media == portrait {
+    @media #{$portrait} { @content; }
+  }
+  @else if $media == retina {
+    @media #{$retina} { @content; }
+  }
+
+  @else if type-of($media) == number {
+    @media #{$screen} and (min-width: $media) { @content; }
+  }
+
+  @else {
+    @media #{$screen} { @content; }
+  }
+}

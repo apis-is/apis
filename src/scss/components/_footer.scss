@@ -1,0 +1,11 @@
+
+footer {
+  @include clearfix;
+
+  user-select: none;
+  cursor: default;
+
+  margin: auto;
+
+  text-align: center;
+}

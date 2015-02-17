@@ -1,0 +1,53 @@
+
+[data-tooltip] {
+  position: relative;
+
+  &:before,
+  &:after {
+    transition: opacity $transition-duration;
+    opacity: 0;
+    visibility: hidden;
+
+    position: absolute;
+    left: 0;
+  }
+
+  &:before {
+    content: attr(data-tooltip);
+
+    display: block;
+    white-space: nowrap;
+
+    padding: 0 $spacing/4;
+    height: 20px;
+    line-height: 22px;
+    top: -30px;
+
+    font-size: 10px;
+    color: white;
+
+    background: $color-red;
+    border-radius: $radius;
+  }
+
+  &:after {
+    content: '';
+
+    width: 0;
+    height: 0;
+
+    top: -10px;
+    left: 10px;
+
+    border: 5px solid transparent;
+    border-top-color: $color-red;
+  }
+
+  &:hover {
+    &:before,
+    &:after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

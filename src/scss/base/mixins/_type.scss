@@ -1,0 +1,33 @@
+
+// ==========================================================================
+// Text/content related
+// ==========================================================================
+
+@mixin font-face( $family-name, $font-path, $font-weight:normal, $font-style:normal) {
+  @font-face {
+      font-family: $family-name;
+      src: url('#{$font-path}.eot');
+      src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'),
+           url('#{$font-path}.woff') format('woff'),
+           url('#{$font-path}.ttf') format('truetype'),
+           url('#{$font-path}.svg##{$family-name}') format('svg');
+      font-weight: $font-weight;
+      font-style: $font-style;
+  }
+}
+
+@mixin text-overflow() {
+  // Requires inline-block or block for proper styling
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin columns($width: (20rem - ($spacing*2)), $count: 0, $gap: $spacing, $rule-color: $color-border, $rule-style: solid, $rule-width: 0px) {
+  column-width: $width;
+  column-count: $count;
+  column-gap: $gap;
+  column-rule-color: $rule-color;
+  column-rule-style: $rule-style;
+  column-rule-width: $rule-width;
+}

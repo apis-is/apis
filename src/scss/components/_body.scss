@@ -1,0 +1,156 @@
+
+body.mce-content-body,
+html {
+  overflow-x: hidden;
+  height: 100%;
+
+  line-height: $line-height;
+
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $font-color;
+
+  background-color: $body-background;
+
+  direction: $text-direction;
+}
+
+body {
+  margin: 0;
+  // height: 100%;
+
+  transition-property: background;
+  transition-duration: $transition-duration;
+  transition-delay: $transition-duration;
+
+  .loaded & {
+    background: $color-dark;
+  }
+}
+
+pagewrap {
+  position: relative;
+
+  display: block;
+  min-width: $page-min-width;
+
+  background-color: $body-background;
+
+  transition: opacity $transition-duration-fast, transform $transition-duration-slower;
+
+  // transition-property: opacity, transform;
+  // transition-duration: $transition-duration-fast;
+  transition-timing-function: cubic-bezier(0.750, 0.000, 0.500, 1.000);
+
+  opacity: 1;
+
+  html.loading &,
+  html.prep & {
+    opacity: 0;
+    transition-duration: 0;
+  }
+
+
+  body[data-viewmodel-state='sidebar-open'] & {
+    transform: translate3d($spacing*2,0,0);
+  }
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+
+  transition-property: opacity;
+  transition-duration: $transition-duration;
+
+  body[data-viewmodel-state='sidebar-open'] & {
+    opacity: 0.7;
+  }
+}
+
+// Default box-sizing to border-box, except for images and hr
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+hr,img {
+  box-sizing: content-box;
+}
+
+// General elements
+
+code {
+  font-size: 14px;
+}
+
+// Horizontal line
+
+hr {
+  @include clearfix;
+
+  background: 0;
+  border: 0;
+  outline: 0;
+
+  margin: $spacing 0;
+  height: 1px;
+  border-top: 1px solid $color-dark;
+
+  &.dotline {
+    border-top-style: dashed;
+  }
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      border-top-color: nth($i,2);
+    }
+  }
+}
+
+// Cheat classes
+
+.notransition {
+  transition: none !important;
+}
+
+.noscroll {
+  overflow: hidden !important;
+}
+
+.x-scroll {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.y-scroll {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.relative {
+  position: relative;
+}
+
+.clear { clear: both; }
+.clearfix { @include clearfix(); }
+.float-right { float: right; }
+.float-left { float: left; }
+
+@each $i in $colorArray {
+  &.#{nth($i,1)}-text {
+    color: nth($i,2);
+  }
+  &.#{nth($i,1)}-back {
+    color: nth($i,3);
+    background-color: nth($i,2);
+
+    &.light {
+      background-color: mix(white,nth($i,2),10%);
+    }
+    &.dark {
+      background-color: mix(black,nth($i,2),10%);
+    }
+  }
+}

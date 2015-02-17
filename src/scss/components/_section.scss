@@ -1,0 +1,20 @@
+
+section {
+  padding-top: $spacing;
+  padding-bottom: 0;
+
+  article {
+    padding: $spacing*2 0 $spacing*2;
+  }
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+
+      @if lightness(nth($i,3)) > lightness(nth($i,2)) {
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+  }
+}

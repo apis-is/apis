@@ -1,0 +1,17 @@
+
+[toggle-next] {
+  cursor: pointer;
+  user-select: none;
+
+  &[toggle-next='hidden'] {
+    &:after {
+      font-size: 10px;
+    }
+    &.demo:after {
+      content: ' (click for demo)';
+    }
+    &.response:after {
+      content: ' (click for preview)';
+    }
+  }
+}

@@ -1,0 +1,16 @@
+
+.svg-loader {
+  height: auto;
+  width: 105px;
+
+  g {
+
+    path {
+      fill: $color-red;
+    }
+  }
+
+  .logo.large & {
+    width: 210px;
+  }
+}

@@ -1,0 +1,62 @@
+
+.message, message {
+  cursor: default;
+  position: relative;
+
+  display: block;
+  margin: rem-calc(5) auto $spacing;
+  padding: 0 $spacing/2;
+
+  height: auto;
+  font-size: 0.8rem;
+
+  line-height: rem-calc(30);
+  color: white;
+
+  background: $color-red;
+  box-shadow: 0 2px 0 0 rgba(black,0.05);
+
+  border-radius: $form-radius;
+
+  .input-wrap & {
+    user-select: none;
+
+    transition: margin, height, line-height, font-size;
+    transition-duration: $transition-duration-fast;
+
+    &:before {
+      @include triangle('up',$color-red,13px);
+      content: '';
+
+      position: absolute;
+      top: -10px;
+      left: $spacing/2;
+
+      opacity: 1;
+
+      transition: opacity $transition-duration;
+    }
+
+
+    &.hidden {
+      margin-top: 0;
+      height: 0rem;
+      line-height: 0rem;
+      font-size: rem-calc(0);
+
+      &:before { opacity: 0; }
+    }
+  }
+
+  @each $i in $colorArray {
+    $selector: '.#{nth($i,1)}';
+    @if nth($i,1) == 'primary' {
+      $selector: '';
+    }
+    &#{$selector} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+      .input-wrap &:before { border-bottom-color: nth($i,2); }
+    }
+  }
+}

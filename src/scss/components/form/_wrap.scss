@@ -1,0 +1,51 @@
+
+.input-wrap {
+  margin-bottom: $spacing;
+  position: relative;
+
+  &.tight { margin-bottom: $spacing/2; }
+
+  label {
+    display: block;
+
+    margin: 0;
+
+    font-weight: $label-font-weight;
+    text-transform: $label-text-transform;
+    text-align: left;
+
+    @each $i in $elementArray {
+      @include respond-to('#{nth($i,1)}') {
+        line-height: nth($i,2);
+        font-size: nth($i,3);
+      }
+    }
+  }
+
+  &.side {
+    $form-side-padding: 150px;
+
+    padding-left: $form-side-padding;
+    position: relative;
+
+    >label:first-child {
+      max-width: $form-side-padding;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    @include respond-to($form-side-padding*3) {
+      padding-left: 0;
+
+      >label:first-child {
+        max-width: none;
+        position: static;
+      }
+    }
+  }
+
+  &.error {
+    label { color: red; }
+  }
+}

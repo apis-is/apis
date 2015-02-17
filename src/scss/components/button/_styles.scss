@@ -1,0 +1,28 @@
+
+.button, button {
+
+  @each $i in $colorArray {
+    $selector: '.#{nth($i,1)}';
+    @if nth($i,1) == 'primary' {
+      $selector: '';
+    }
+    &#{$selector} {
+      color: nth($i,3);
+      background: nth($i,2);
+
+      @if lightness(nth($i,3)) > lightness(nth($i,2)) {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      &:focus,
+      &:hover {
+        color: nth($i,3);
+        background: mix(black, nth($i,2), 10%);
+      }
+
+      &:active {
+        background: mix(white, nth($i,2) , 5%);
+      }
+    }
+  }
+}

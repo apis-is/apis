@@ -1,0 +1,65 @@
+
+article {
+  padding: $spacing 0;
+
+  @include respond-to(medium) {
+    padding: $spacing*3 0 $spacing*2;
+  }
+
+  + article {
+    border-top: 1px dashed rgba($color-dark,.5);
+  }
+
+  &.endpoint {
+    hgroup {
+      >h3 {
+        >a {
+          >icon {
+            display: inline-block;
+            margin-left: -40px;
+            width: 40px;
+            text-align: center;
+            opacity: 0.1;
+            transition: opacity;
+            transition-duration: $transition-duration;
+          }
+          &:hover >icon {
+            opacity: 1;
+          }
+        }
+      }
+      > icon {
+        float: right;
+        font-size: 40px;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+
+        border-radius: 100%;
+
+        &:before {
+          display: block;
+          text-align: center;
+        }
+
+        @each $i in $colorArray {
+          &.#{nth($i,1)} {
+            background-color: nth($i,2);
+            color: nth($i,3);
+          }
+        }
+      }
+    }
+  }
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+
+      @if lightness(nth($i,3)) > lightness(nth($i,2)) {
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+  }
+}

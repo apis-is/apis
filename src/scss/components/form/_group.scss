@@ -1,0 +1,87 @@
+
+.button-group,
+.form-group {
+  @include clearfix;
+
+  margin-bottom: 0;
+
+  font-size: 0;
+
+  vertical-align: top;
+
+  >button,
+  >.button,
+  >dropdown,
+  >select,
+  >textarea,
+  >input[type="text"],
+  >input[type="search"],
+  >input[type="url"],
+  >input[type="email"],
+  >input[type="password"],
+  >input[type="tel"],
+  >input[type="number"],
+  >input[type="date"],
+  >input[type="datetime-local"],
+  >input[type="month"],
+  >input[type="week"],
+  >input[type="time"],
+  >input[type="color"],
+  >.button-group,
+  >.form-group {
+    display: inline-block;
+    vertical-align: top;
+
+    margin-left: $spacing/2;
+    margin-right: $spacing/2;
+    margin-bottom: $spacing;
+
+    span { font-size: 14px; }
+
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+
+  &.combine {
+    >button,
+    >.button,
+    >dropdown,
+    >select,
+    >textarea,
+    >input[type="text"],
+    >input[type="search"],
+    >input[type="url"],
+    >input[type="email"],
+    >input[type="password"],
+    >input[type="tel"],
+    >input[type="number"],
+    >input[type="date"],
+    >input[type="datetime-local"],
+    >input[type="month"],
+    >input[type="week"],
+    >input[type="time"],
+    >input[type="color"],
+    >.button-group,
+    >.form-group {
+      margin-left: 0;
+      margin-right: 0;
+
+      border-radius: 0;
+
+      &:first-child {
+        border-left-width: 1px;
+        border-top-left-radius: $form-radius;
+        border-bottom-left-radius: $form-radius;
+      }
+
+      &:last-child {
+        border-right-width: 1px;
+        border-top-right-radius: $form-radius;
+        border-bottom-right-radius: $form-radius;
+      }
+    }
+  }
+
+  .button-group,
+  .form-group { margin-bottom: 0; }
+}

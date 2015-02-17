@@ -1,0 +1,19 @@
+
+.circled {
+  border-radius: 100%;
+  display: inline-block;
+  font-size: 0.5em;
+  font-weight: 500;
+  height: 1.5625em;
+  line-height: 1.7em;
+  text-align: center;
+  width: 1.5625em;
+  vertical-align: middle;
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+    }
+  }
+}

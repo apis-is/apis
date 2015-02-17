@@ -1,0 +1,53 @@
+
+sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  // bottom: 0;
+  z-index: 89;
+
+  display: block;
+  width: auto;
+  min-width: $sidebar-min-width;
+  max-width: $sidebar-max-width;
+  height: calc(100% - 20px);
+
+  background: $color-blue;
+  box-shadow: 0 0 4px rgba(black,.25);
+  box-shadow: 4px 0 4px -4px rgba($color-dark,.25);
+
+  transform: translate3d(-150%, 0, 0);
+  transition: transform $transition-duration-slow;
+  transition-timing-function: cubic-bezier(0.750, 0.000, 0.500, 1.000);
+
+  html.loading &,
+  html.prep & {
+    transition-duration: 0;
+  }
+
+  body[data-viewmodel-state='sidebar-open'] & {
+    transition-delay: $transition-duration-slower - $transition-duration-slow;
+    transform: translate3d($spacing/2,$spacing/2,0);
+  }
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      background-color: nth($i,2);
+      color: nth($i,3);
+
+      @if lightness(nth($i,3)) > lightness(nth($i,2)) {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: nth($i,3);
+        box-shadow: 0 2px 1px -2px rgba(nth($i,3),1);
+
+        &:hover {
+          color: mix(black,nth($i,3),10%);
+          box-shadow: 0 2px 1px -2px rgba(mix(black,nth($i,3),10%),1);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+
+sidebar > nav {
+  padding: $spacing*2.5 $spacing 0;
+
+  ul {
+    @include reset-list();
+    margin: 0;
+    padding: 0;
+
+    a, .no-link {
+      display: block;
+      margin-bottom: $spacing/2;
+
+      >icon {
+        display: inline-block;
+        width: 30px;
+        text-align: center;
+      }
+
+      &[shortname] {
+        &:after {
+          content: ' (/' attr(shortname) ')';
+          font-size: 14px;
+        }
+      }
+    }
+
+    .no-link {
+      cursor: default;
+    }
+  }
+
+  >ul {
+    >li {
+      @include clearfix;
+      margin-bottom: $spacing/2;
+
+      >a, >.no-link {
+        font-size: 1.25em;
+
+        &.no-link {
+        }
+      }
+
+      ul {
+        padding-left: $spacing/2;
+      }
+    }
+  }
+}

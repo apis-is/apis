@@ -1,0 +1,126 @@
+
+.box, box {
+  &.endpoints {
+    color: rgba($color-light,.75);
+    opacity: 1;
+    box-shadow: 0 3px 3px -3px $color-dark;
+
+    transition-property: transform, color, opacity;
+    transition-duration: $transition-duration;
+
+    &:before {
+      content: '';
+      padding-top: 80px;
+    }
+
+    inner {
+      display: block;
+      // position: absolute;
+      // margin: auto;
+      // top: 0; left: 0; right: 0; bottom: 0;
+      // top: 50%;
+      // transform: translateY(-50%);
+    }
+
+    icon {
+      position: absolute;
+      top: $spacing;
+      left: $spacing;
+      right: $spacing;
+
+      display: block;
+      margin: auto;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      font-size: 40px;
+      text-align: center;
+
+      transition-property: transform;
+      transition-duration: $transition-duration;
+    }
+
+    h3 {
+      // position: absolute;
+      // top: 50%; left: $spacing; right: $spacing;
+      text-align: center;
+    }
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.05);
+      color: $color-light;
+
+      icon {
+        transform: scale(1.25);
+        // transition-delay: $transition-duration;
+      }
+    }
+  }
+  &.endpoint {
+    padding: 0;
+
+    border-bottom: 5px solid $color-blue;
+    box-shadow: 0 3px 3px -3px $color-dark;
+
+    &.disabled {
+      // border-bottom-color: $color-dark;
+    }
+
+    .content {
+      padding: $spacing $spacing 0;
+    }
+
+    titlebar {
+      display: block;
+      font-size: 0;
+
+      border-radius: $box-radius $box-radius 0 0;
+
+      // box-shadow: 0 -3px 3px -3px $color-dark;
+
+      method, path {
+        display: inline-block;
+
+        font-size: $font-size;
+        font-family: $font-family-mono;
+        line-height: 40px;
+      }
+      method {
+        width: 80px;
+        text-transform: uppercase;
+        text-align: center;
+        border-right: 1px solid transparent;
+      }
+      path {
+        padding: 0 $spacing/2;
+        width: calc(100% - 82px);
+      }
+
+    }
+    @each $i in $colorArray {
+      &.#{nth($i,1)},
+      .content.#{nth($i,1)},
+      titlebar.#{nth($i,1)} {
+        background-color: nth($i,2);
+        color: nth($i,3);
+
+        method { border-right-color: nth($i,3); }
+
+        @if lightness(nth($i,3)) > lightness(nth($i,2)) {
+          -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+          color: nth($i,3);
+          box-shadow: 0 2px 1px -2px rgba(nth($i,3),1);
+
+          &:hover {
+            color: mix(black,nth($i,3),10%);
+            box-shadow: 0 2px 1px -2px rgba(mix(black,nth($i,3),10%),1);
+          }
+        }
+      }
+    }
+  }
+}

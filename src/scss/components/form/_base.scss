@@ -1,0 +1,83 @@
+
+dropdown,
+select,
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="color"] {
+  @include clearfix;
+  transition: margin $transition-duration-fast, border $transition-duration-fast;
+
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: bottom;
+
+  position: relative;
+  z-index: auto;
+
+  margin: 0;
+  padding: 0 $spacing;
+
+  width: auto;
+  max-width: 100%;
+  &.fill,
+  .input-wrap & { width: 100%; }
+
+  font-weight: $form-font-weight;
+  text-transform: $form-text-transform;
+  color: $font-color;
+
+  outline: none;
+
+  border: 1px solid $color-border;
+  border-radius: $form-radius;
+
+  background: white;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  @include placeholder(rgba($color-blue, 0.25));
+
+  &.disabled,
+  &[disabled] {
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    background: darken($color-red,10%);
+
+    @include placeholder(white);
+  }
+
+  &:hover { border-color: rgba($color-blue,0.5); }
+  &:focus { border-color: rgba($color-blue,0.75); }
+  .error &,
+  &.error { border-color: rgba(red,0.75); }
+
+  @each $i in $elementArray {
+    @include respond-to('#{nth($i,1)}') {
+      height: nth($i,2);
+      line-height: nth($i,2);
+      font-size: nth($i,3);
+    }
+  }
+
+  @each $i in $colorArray {
+    &.#{nth($i,1)} {
+      background-color: mix(nth($i,2),white,15%);
+      border-color: nth($i,2);
+
+      &:hover { border-color: rgba(nth($i,2),0.5); }
+      &:focus { border-color: rgba(nth($i,2),0.75); }
+    }
+  }
+}

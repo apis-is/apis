@@ -1,0 +1,67 @@
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 $spacing*2;
+  padding: 0;
+
+  line-height: 1.2;
+  font-family: $font-family-alt;
+  font-weight: 300;
+  text-transform: none;
+
+  &.caps {
+    text-transform: uppercase;
+  }
+
+  b, strong {
+    font-weight: 500;
+  }
+}
+
+h1 {
+  font-size: rem-calc(74);
+  @include respond-to(medium) {
+    font-size: rem-calc(84);
+  }
+}
+
+h2 {
+  font-size: rem-calc(38);
+}
+
+h3 {
+  font-size: rem-calc(28);
+}
+
+h4 {
+  font-size: rem-calc(16);
+  font-weight: 500;
+}
+
+h5 {
+  margin-bottom: $spacing;
+  font-family: $font-family;
+  font-size: rem-calc(14);
+  font-weight: 400;
+  opacity: 0.5;
+  text-transform: uppercase;
+
+  border-top: 1px dashed $color-dark;
+  padding-top: $spacing/2;
+}
+
+h6 {
+  font-size: rem-calc(16);
+}
+
+hgroup {
+  @include clearfix;
+  margin-bottom: $spacing;
+
+  h1, h2, h3, h4, h5, h6 {
+    + h1, + h2, + h3, + h4, + h5, + h6 {
+      margin-top: -$spacing / 2;
+    }
+  }
+
+  :last-child { margin-bottom: 0; }
+}

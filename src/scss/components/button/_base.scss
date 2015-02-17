@@ -1,0 +1,57 @@
+
+.button, button {
+  transition: color $transition-duration-fast, background $transition-duration-fast, border $transition-duration-fast;
+
+  cursor: pointer;
+  vertical-align: bottom;
+  white-space: nowrap;
+  display: inline-block;
+
+  margin: 0;
+  min-width: 200px;
+  position: relative;
+
+  font-family: $font-family-alt;
+  font-weight: 300;
+  text-align: center;
+  text-transform: none;
+  text-shadow: 0 1px 0 0 white;
+
+  border: none;
+  border-radius: $button-radius;
+
+  outline: none;
+
+  @each $i in $elementArray {
+    @include respond-to('#{nth($i,1)}') {
+      padding: 0 nth($i,4);
+      height: nth($i,2);
+      line-height: nth($i,2);
+      font-size: nth($i,3);
+
+      &.wide {
+        padding: 0 (nth($i,4) * 2);
+      }
+    }
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &.fill {
+    @include text-overflow();
+    display: block;
+    margin: 0 auto $spacing;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+  }
+}

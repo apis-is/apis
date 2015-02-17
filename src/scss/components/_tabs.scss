@@ -1,0 +1,47 @@
+
+tabs {
+  display: block;
+  margin: 0 auto $spacing;
+  position: relative;
+
+  >nav {
+    user-select: none;
+
+    font-size: 0;
+
+    border-bottom: 2px solid $color-red;
+
+    >tab {
+      cursor: pointer;
+      display: inline-block;
+      padding: 0 $spacing;
+
+      line-height: rem-calc($element-medium);
+      font-size: $font-size;
+      color: $color-light;
+
+      background: $color-blue;
+
+      &:hover { background-color: darken($color-blue,5%); }
+
+      &.active,
+      &[active='true'] { background: $color-red; }
+
+      >span { display: block; pointer-events: none; }
+    }
+  }
+
+  >tab {
+    @include clearfix();
+    display: block;
+    padding: $spacing $spacing 0;
+    background: white;
+  }
+
+  &[alive='true'] {
+    >tab {
+      display: none;
+      &.active, &[active='true'] { display: block;}
+    }
+  }
+}

@@ -1,0 +1,151 @@
+// Typography
+$font-family: 'Open Sans', Arial, tahoma, sans-serif;
+$font-family-alt: $font-family;
+$font-family-mono: 'Inconsolata', monospace;
+$font-size: 18px;
+$font-weight: 300;
+$line-height: 1.5;
+
+// Sizes
+$spacing: 20px;
+$page-max-width: 1400px;
+$page-min-width: 320px;
+
+// Grid
+$grid-columns: 12;
+$grid-gutter: $spacing;
+
+// Sidebar
+$sidebar-width: calc(100% - 20px);
+$sidebar-max-width: 500px;
+$sidebar-min-width: 300px;
+
+// Radius
+$radius: 2px;
+$box-radius: $radius;
+$form-radius: $radius;
+$button-radius: $form-radius;
+
+// Forms
+$form-font-weight: bold;
+$form-text-transform: none;
+$label-font-weight: bold;
+$label-text-transform: none;
+
+// Used for both forms and buttons
+$element-small: 50px;
+$element-medium: 50px;
+$element-large: 50px;
+
+$element-font-small: 28px;
+$element-font-medium: 28px;
+$element-font-large: 28px;
+
+// breakpoint   size             font-size             padding
+$elementArray:
+  "small"       $element-small   $element-font-small   $spacing/2,
+  "medium"      $element-medium  $element-font-medium  $spacing/2,
+  "large"       $element-large   $element-font-large   $spacing/2
+;
+
+// Colors
+$color-gray-dark: #555;
+$color-gray: #4D4D4D;
+$color-gray-light: #ccc;
+
+$color-blue: #268bd2;
+$color-blue-dark: #097ACA;
+$color-blue-darker: #06568F;
+
+$color-yellow: #FFC620;
+$color-red: #FF5D20;
+
+$color-light: #fdf6e3;
+$color-dark: $color-blue-darker;
+$color-background: $color-light;
+
+$color-border: #dddddd;
+$font-color: $color-gray;
+
+// Color array used for hr, links, boxes, buttons, forms, messages and sections
+// "primary" item is default style for buttons and messages
+// color-name   color-value         font-color
+$colorArray:
+  ("blue", $color-blue, $color-light)
+  ("blue-dark", $color-blue-dark, $color-light)
+  ("blue-darker", $color-blue-darker, $color-light)
+  ("yellow", $color-yellow, $color-dark)
+  ("red", $color-red, $color-dark)
+  ("light", $color-light, $color-dark)
+  ("dark", $color-dark, $color-light)
+  ("white", white, $font-color)
+  ("black", black, white)
+;
+$color-count: length($colorArray);
+
+// Applied to html and main
+$body-background: $color-light;
+
+// Text direction & floats
+$text-direction: ltr;
+$default-float: left;
+$opposite-float: right;
+@if $text-direction == ltr {
+  $default-float: left;
+  $opposite-float: right;
+} @else {
+  $default-float: right;
+  $opposite-float: left;
+}
+
+// Transitions duration
+$transition-duration-fast: 125ms;
+$transition-duration: 250ms;
+$transition-duration-slow: 350ms;
+$transition-duration-slower: 500ms;
+
+// Media Queries
+$screen: "only screen";
+$landscape: "#{$screen} and (orientation: landscape)";
+$portrait: "#{$screen} and (orientation: portrait)";
+
+$retina:
+  "(min--moz-device-pixel-ratio: 1.5),
+  (-o-min-device-pixel-ratio: 3/2),
+  (-webkit-min-device-pixel-ratio: 1.5),
+  (min-device-pixel-ratio: 1.5),
+  (min-resolution: 144dpi),
+  (min-resolution: 1.5dppx)";
+
+// To create new breakpoint:
+// Create range values, add to breakArray, add to respond-to mixin
+
+$xsmall-range: (0px, 480px);
+$small-range: (480px, 640px);
+$medium-range: (641px, 1024px);
+$large-range: (1025px, $page-max-width);
+$xlarge-range: ($page-max-width, 9999px);
+
+// name    lower-bound                upper-bound
+$breakArray:
+  ("xsmall", lower-bound($xsmall-range), upper-bound($xsmall-range))
+  ("small", lower-bound($small-range), upper-bound($small-range))
+  ("medium", lower-bound($medium-range), upper-bound($medium-range))
+  ("large", lower-bound($large-range), upper-bound($large-range))
+  ("xlarge", lower-bound($xlarge-range), upper-bound($xlarge-range))
+;
+
+$xsmall-up: "#{$screen} and (min-width:#{lower-bound($xsmall-range)})";
+$xsmall-only: "#{$screen} and (min-width:#{lower-bound($xsmall-range)}) and (max-width:#{upper-bound($small-range)})";
+
+$small-up: "#{$screen} and (min-width:#{lower-bound($small-range)})";
+$small-only: "#{$screen} and (min-width:#{lower-bound($small-range)}) and (max-width:#{upper-bound($small-range)})";
+
+$medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})";
+$medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})";
+
+$large-up: "#{$screen} and (min-width:#{lower-bound($large-range)})";
+$large-only: "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})";
+
+$xlarge-up: "#{$screen} and (min-width:#{lower-bound($xlarge-range)})";
+$xlarge-only: "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})";

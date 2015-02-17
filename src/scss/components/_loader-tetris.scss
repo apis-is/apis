@@ -1,0 +1,90 @@
+$w: 96px;
+$h: 112px;
+$xspace: $w/2;
+$yspace: $h/4 - 1;
+$speed: 1.5s;
+
+.loader {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-$h, -$w);
+}
+
+.layer {
+  width: $w;
+  height: $h;
+  position: absolute;
+  transition: all ease .3s;
+  background: url('data:image/svg+xml;utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 684"%3E%3Cpath fill="%23010101" d="M305.7 0L0 170.9v342.3L305.7 684 612 513.2V170.9L305.7 0z"/%3E%3Cpath fill="%23fff" d="M305.7 80.1l-233.6 131 233.6 131 234.2-131-234.2-131"/%3E%3C/svg%3E') no-repeat top center;
+
+  &:before {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    text-align: center;
+    line-height: $w/1.5;
+  }
+
+  &.nr1 {
+    animation: layer1 $speed*2 ease-out infinite;
+    &:before { content: 'nr1'; }
+  }
+  &.nr2 {
+    animation: layer2 $speed*2 ease-out infinite;
+    &:before { content: 'nr2'; }
+  }
+  &.nr3 {
+    animation: layer3 $speed*2 ease-out infinite;
+    &:before { content: 'nr3'; }
+    z-index: 2;
+  }
+  &.nr4 {
+    animation: layer4 $speed*2 ease-out infinite;
+    &:before { content: 'nr4'; }
+  }
+}
+
+@keyframes layer1 {
+  0%, 40% {
+    /* compose logo *//* 1 on 3 *//* L-shape */
+    transform: translate(0,0);
+  } 50% {
+    /* pre-box */
+    transform: translate($xspace,-$yspace);
+  } 60%, 100% {
+    /* box *//* compose logo */
+    transform: translate($xspace*2,0);
+  }
+}
+
+@keyframes layer2 {
+  0%, 20% {
+    /* compose logo *//* 1 on 3 */
+    transform: translate($xspace*2, 0px);
+  } 40%, 100% {
+    /* L-shape *//* box *//* compose logo */
+    transform: translate($xspace*3, $yspace);
+  }
+}
+
+@keyframes layer3 {
+  0% {
+    /* compose logo */
+    transform: translate($xspace*3, $yspace);
+  } 20%, 60% {
+    /* 1 on 3 *//* L-shape *//* box */
+    transform: translate($xspace*2, $yspace*2);
+  } 90%, 100% {
+    /* compose logo */
+    transform: translate($xspace, $yspace);
+  }
+}
+
+@keyframes layer4 {
+  0%, 60% {
+    /* compose logo *//* 1 on 3 *//* L-shape *//* box */
+    transform: translate($xspace, $yspace);
+  } 90%, 100% {
+    /* compose logo */
+    transform: translate(0, 0);
+  }
+}

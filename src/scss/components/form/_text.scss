@@ -1,0 +1,37 @@
+
+input[type="text"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"] {
+  // textish elements
+}
+
+.input-wrap textarea,
+textarea {
+  $textarea-line-height: rem-calc(20);
+  line-height: $textarea-line-height;
+
+  @include resizable(vertical);
+
+  @each $i in $elementArray {
+    @include respond-to('#{nth($i,1)}') {
+      $padding: nth($i,2) - $textarea-line-height;
+      min-height: ($textarea-line-height * 3) + $padding;
+      padding-top: $padding/2;
+      padding-bottom: $padding/2;
+    }
+  }
+
+  &.disabled,
+  &[disabled] {
+    @include resizable(none);
+  }
+}

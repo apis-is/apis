@@ -1,0 +1,41 @@
+
+icon {
+  display: inline-block;
+}
+
+icon {
+  &.circle {
+    display: inline-block;
+    width: $element-small;
+    height: $element-small;
+    position: relative;
+
+    font-size: rem-calc($font-size);
+    line-height: rem-calc(34);
+    text-align: center;
+
+    background: white;
+    border-radius: 100%;
+    color: $color-blue;
+
+    &.right:after,
+    &:before {
+      display: block;
+      margin: 0 auto;
+      width: $element-small;
+      height: $element-small;
+    }
+    &.primary {
+      background: $color-red;
+      color: white;
+    }
+    &.secondary {
+      background: $color-blue;
+      color: white;
+    }
+    &.light {
+      background: $color-light;
+      color: $color-red;
+    }
+  }
+}

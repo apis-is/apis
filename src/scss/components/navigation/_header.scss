@@ -1,0 +1,57 @@
+
+nav {
+  &.header {
+    white-space: nowrap;
+
+    a {
+      color: $color-gray;
+      display: inline-block;
+      font-family: $font-family-alt;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 70px;
+      margin: 0 $spacing;
+      text-transform: uppercase;
+
+      &:hover {
+        color: $color-blue;
+      }
+
+      &.current {
+        font-weight: 500;
+      }
+
+      &.subsite {
+        color: $color-blue;
+        font-size: 14px;
+
+        &:before {
+          @extend .ss-icon;
+          display: inline-block;
+          font-size: 18px;
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          color: lighten($color-blue,30%);
+        }
+      }
+
+      &.mittvis-link {
+        &:before {
+          content: '\1F512';
+        }
+        &.logged-in:before {
+          content: '\1F513';
+        }
+      }
+
+      &.tjonahjalp-link {
+        &:before {
+          content: '\26A0';
+        }
+      }
+    }
+  }
+}

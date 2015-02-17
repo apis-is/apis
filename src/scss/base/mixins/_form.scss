@@ -1,0 +1,33 @@
+
+// ==========================================================================
+// Form element related
+// ==========================================================================
+
+@mixin resizable($direction: both) {
+  // resize: horizontal | vertical | both
+  resize: $direction;
+  overflow: auto; // Safari fix
+}
+
+@mixin placeholder($color: $color-red,$font-style:normal) {
+  &:-ms-input-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  &::-moz-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+  &::input-placeholder {
+    color: $color;
+    font-style: $font-style;
+  }
+}
