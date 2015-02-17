@@ -4,11 +4,7 @@ node_js:
 before_install:
 - npm install -g npm@latest
 - npm install -g jshint
-- openssl aes-256-cbc -K $encrypted_893d0cdd819b_key -iv $encrypted_893d0cdd819b_iv -in travisapis.enc -out travisapis -d
 script: npm test
 notifications:
   slack:
     secure: BWKjmGdVcK55tR5wxLr1GFuWjyqlevL4dSzmHHE4/dyjN8Q6fKDDvdWHEvOAw7jphODVvSxHA3F4gYVM0LiS+CkYwucy9rrqYlTnW7t7L/smr9cpyt8IoOOE+hwvQ1JMAFUbsQOTSk1f8lNHRUUJYG/SKpiO4H4teDjRHsldFTI=
-after_success:
-- chmod 600 travisapis
-- ssh -o "StrictHostKeyChecking no" -i travisapis ubuntu@46.149.30.103 'cd beta && git checkout v2 && git pull origin v2 && npm install && npm test && pm2 restart beta'
