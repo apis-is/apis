@@ -11,7 +11,7 @@ app.set('port', config.get('port'));
 /**
  * Redirect root to docs
  */
-app.get('/', (req, res) => {
+app.get('/', function(req, res) {
   res.redirect('//docs.apis.is/');
 });
 
@@ -39,12 +39,12 @@ app.get('/status', function(req, res, next) {
 /**
  * Set up endpoints
  */
-var endpoints = fs.readdirSync('./dist/endpoints/')
-  .map(path => {
-    console.log(`Setting up: ${path}`);
+var endpoints = fs.readdirSync('./endpoints/')
+  .map(function(path) {
+    console.log('Setting up: ' + path);
 
-    let endpoint = require('./endpoints/' + path);
-    app.use(`/${path}`, endpoint);
+    var endpoint = require('./endpoints/' + path);
+    app.use('/' + path, endpoint);
 
     return endpoint;
   });

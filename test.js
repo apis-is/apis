@@ -19,7 +19,7 @@ describe('Core APIs.is', function() {
 });
 
 // Itterate and run endpoints integration tests
-require('fs').readdirSync('./dist/endpoints/').forEach(function(path) {
+require('fs').readdirSync('./endpoints/').forEach(function(path) {
   describe('/' + path, function() {
     require('./endpoints/' + path + '/test');
   });
