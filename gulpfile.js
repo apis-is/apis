@@ -1,6 +1,3 @@
-var del = require('del');
-var vinylPaths = require('vinyl-paths');
-
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var nodemon = require('gulp-nodemon');
