@@ -4,7 +4,7 @@
   "description": "The purpose of APIs.is is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.",
   "main": "index.js",
   "scripts": {
-    "start": "gulp build && node dist/index.js",
+    "start": "gulp build && node index.js",
     "test": "jshint . && gulp test",
     "coverage": "`npm bin`/istanbul cover test.js",
     "coveralls": "npm run-script coverage && node ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info"
