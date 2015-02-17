@@ -15,7 +15,12 @@ gulp.task('test', ['build'], function() {
       .pipe(mocha({reporter: 'spec', timeout: 10000}));
 });
 
-gulp.task('build', ['clean'], function() {
+gulp.task('docs', function() {
+  return gulp.src('src/**/*.json')
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['clean', 'docs'], function() {
     return gulp.src('src/**/*.js')
       .pipe(to5())
       .pipe(gulp.dest('dist'));
