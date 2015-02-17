@@ -6,6 +6,8 @@ var statuses = require('statuses');
 var config = require('config');
 var cors = require('cors');
 
+var endpoints = fs.readdirSync(__dirname + '/endpoints/');
+
 app.set('port', config.get('port'));
 
 /**
@@ -36,17 +38,35 @@ app.get('/status', function(req, res, next) {
   next(404);
 });
 
+app.get('/docs.json', function(req, res) {
+  var endpoint;
+  var docs = endpoints.map(function(name) {
+    try {
+      endpoint = require('./endpoints/' + name + '/docs');
+    } catch (e) {
+      endpoint = {nodocs: true, endpoints:[]};
+    }
+
+    endpoint.id = name;
+    endpoint.endpoints = endpoint.endpoints.map(function(subendpoint) {
+      subendpoint.path = '/' + name + subendpoint.path;
+      subendpoint.demoPath = '/' + name + subendpoint.demoPath;
+      return subendpoint;
+    });
+
+    return endpoint;
+  });
+  res.json(docs);
+});
+
 /**
  * Set up endpoints
  */
-var endpoints = fs.readdirSync('./endpoints/')
-  .map(function(path) {
-    console.log('Setting up: ' + path);
+endpoints.forEach(function(path) {
+    console.log('Setting up:', path);
 
     var endpoint = require('./endpoints/' + path);
     app.use('/' + path, endpoint);
-
-    return endpoint;
   });
 
 app.use(function(req, res, next) {

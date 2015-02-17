@@ -1,6 +1,7 @@
 //process.env.NODE_ENV = 'testing';
 var app = require('./index.js');
 var supertest = require('supertest');
+var assert = require('assert');
 
 // TODO: test core features 
 describe('Core APIs.is', function() {
@@ -15,6 +16,19 @@ describe('Core APIs.is', function() {
 
   describe('GET /status', function() {
     it.skip('should return status of each endpoint / or redirect to status.apis.is?');
+  });
+
+  describe('GET /docs.json', function() {
+    it('should return an array of docs for all endpoints', function(done) {
+      supertest(app)
+        .get('/docs.json')
+        .expect(200)
+        .expect('content-type', /^application\/json/)
+        .expect(function(res) {
+          assert(Array.isArray(res.body), 'res.body should be an object');
+        })
+        .end(done);
+    });
   });
 });
 
