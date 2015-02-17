@@ -1,38 +1,19 @@
-var gulp = require('gulp');
-var to5 = require('gulp-babel');
-var nodemon = require('gulp-nodemon');
-var mocha = require('gulp-mocha');
 var del = require('del');
 var vinylPaths = require('vinyl-paths');
 
-gulp.task('clean', function () {
-    return gulp.src('dist/*')
-      .pipe(vinylPaths(del));
-});
+var gulp = require('gulp');
+var mocha = require('gulp-mocha');
+var nodemon = require('gulp-nodemon');
 
-gulp.task('test', ['build'], function() {
-    return gulp.src('dist/test.js', {read: false})
+gulp.task('test', function() {
+    return gulp.src('test.js', {read: false})
       .pipe(mocha({reporter: 'spec', timeout: 10000}));
 });
 
-gulp.task('docs', function() {
-  return gulp.src('src/**/*.json')
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('build', ['clean', 'docs'], function() {
-    return gulp.src('src/**/*.js')
-      .pipe(to5())
-      .pipe(gulp.dest('dist'));
-});
-
-gulp.task('watch', ['default', 'test'], function() {
-    gulp.watch('src/**/*.js', ['default', 'test']);  
-    nodemon({ script: 'dist/index.js' })
-      .on('change', ['build'])
+gulp.task('watch', ['test'], function() {
+    nodemon({ script: 'index.js' })
+      .on('change', ['test'])
       .on('restart', function () {
           console.log('restarted!');
       });
 });
-
-gulp.task('default', ['build']);
