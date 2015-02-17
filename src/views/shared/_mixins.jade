@@ -1,0 +1,12 @@
+mixin titlebar(method, path)
+  titlebar.blue
+    method=method
+    path: a(href="http://apis.is"+path target="_blank")=path
+
+mixin disabledtitlebar(method, path)
+  titlebar.blue
+    method=method
+    path=path
+
+mixin demo(code)
+  pre.jquery-demo: code.javascript=code

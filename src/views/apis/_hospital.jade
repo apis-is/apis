@@ -1,0 +1,53 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'hospital'
+  - var title = 'Status of icelandic hospitals'
+  - var icon = 'stethoscope'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://landspitali.is' target="_blank") The National University Hospital of Iceland
+
+block endpoints
+  box.light.endpoint
+    +disabledtitlebar('get','/hospital')
+    .content
+      p Get the current status of the National University Hospital of Iceland.
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/hospital',
+          'type': 'GET',
+          'dataType': 'json',
+          'data': {},
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "birthNumbers": 2,
+              "surgeries": 3,
+              "dischargedNumbers": 2,
+              "hospitalizedNumbers": 15,
+              "atwork": 2193,
+              "patients-child": 13,
+              "patients-er": 25,
+              "patients-walk": 17,
+              "patients-icu": 15,
+              "patients-hotel": 33,
+              "donors": 3,
+              "patients-skilun": 7,
+              "patients-heart2": 3
+            }
+          ]
+        }

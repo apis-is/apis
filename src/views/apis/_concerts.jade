@@ -1,0 +1,53 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'concerts'
+  - var title = 'Concerts in Iceland'
+  - var icon = 'music'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://midi.is' target="_blank") midi.is
+
+block endpoints
+  box.light.endpoint
+    +titlebar('get','/concerts')
+    .content
+      p Get a list of all the concerts in Iceland sorted by date
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/concerts',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "eventDateName": "Vínartónleikar 2015",
+              "name": "Græn - tónleikaröð",
+              "dateOfShow": "2015-01-08T19:30:00",
+              "userGroupName": "Harpa",
+              "eventHallName": "Eldborg                                           ",
+              "imageSource": "http://midi.is/images/medium/15.759.jpg"
+            },
+            {
+              "eventDateName": "Föstudagsfreistingar 09.01",
+              "name": "",
+              "dateOfShow": "2015-01-09T12:00:00",
+              "userGroupName": "Miðasala MAk",
+              "eventHallName": "Hamrar                                            ",
+              "imageSource": "http://midi.is/images/medium/1.8394.jpg"
+            }
+          ]
+        }

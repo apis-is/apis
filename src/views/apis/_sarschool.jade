@@ -1,0 +1,61 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'sarschool'
+  - var title = 'Landsbjörg SAR School course schedule'
+  - var icon = 'cube'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://skoli.landsbjorg.is' target="_blank") SAR School
+
+block endpoints
+  box.light.endpoint
+    +titlebar('get','/sarschool')
+    .content
+      p Get a list of all courses scheduled by the Search and Rescue school for training of SAR Squad members.
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/sarschool',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "id": 2753,
+              "name": "Snjóflóð 2",
+              "time_start": "2015-01-08",
+              "time_end": "2015-01-11",
+              "sar_members_only": 0,
+              "host": "Squad",
+              "location": "Siglufjörður",
+              "price_regular": 54000,
+              "price_members": 21600,
+              "link": "http://skoli.landsbjorg.is/Open/Course.aspx?Id=2753"
+            },
+            {
+              "id": 3017,
+              "name": "Snjóflóð 1",
+              "time_start": "2015-01-08",
+              "time_end": "2015-01-11",
+              "sar_members_only": 0,
+              "host": "Squad",
+              "location": "Siglufjörður",
+              "price_regular": 42280,
+              "price_members": 15100,
+              "link": "http://skoli.landsbjorg.is/Open/Course.aspx?Id=3017"
+            }
+          ]
+        }

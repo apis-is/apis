@@ -1,0 +1,112 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'currency'
+  - var title = 'Currency in relation to ISK'
+  - var icon = 'dollar'
+
+block sources
+  h4
+    | Sources:&nbsp;
+    a(href='http://m5.is' target="_blank") m5.is
+    | ,&nbsp;
+    a(href='http://arionbanki.is' target="_blank") Arion banki
+    |  and&nbsp;
+    a(href='http://landsbankinn.is' target="_blank") Landsbankinn
+
+block endpoints
+  box.light.endpoint.disabled
+    +disabledtitlebar('get','/currency/:source')
+    .content
+      p Get currency data in relation to ISK
+
+      h5.params(toggle-next) Parameters
+      dl.params
+        dt.required /:source
+        dd Which source to use (m5|arion|lb)
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/currency/m5',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response (m5)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "shortName": "USD",
+              "longName": "Bandarískur dalur",
+              "value": 121.53,
+              "askValue": 0,
+              "bidValue": 0,
+              "changeCur": 0.055,
+              "changePer": 0.05
+            },
+            {
+              "shortName": "EUR",
+              "longName": "Evra",
+              "value": 162.2,
+              "askValue": 0,
+              "bidValue": 0,
+              "changeCur": 0.015,
+              "changePer": 0.01
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (arion)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "shortName": "USD",
+              "longName": "Bandarískur dalur",
+              "value": 121.515,
+              "askValue": 121.88,
+              "bidValue": 121.15,
+              "changeCur": -0.40857,
+              "changePer": 0
+            },
+            {
+              "shortName": "EUR",
+              "longName": "Evra",
+              "value": 162.185,
+              "askValue": 162.67,
+              "bidValue": 161.7,
+              "changeCur": 0.09845,
+              "changePer": "0.00"
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (lb)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "shortName": "USD",
+              "longName": "Bandaríkjadalur",
+              "value": 121.47,
+              "askValue": 121.83,
+              "bidValue": 121.11,
+              "changeCur": 0.01,
+              "changePer": 0
+            },
+            {
+              "shortName": "EUR",
+              "longName": "Evra",
+              "value": 162.3,
+              "askValue": 162.78,
+              "bidValue": 161.82,
+              "changeCur": 0.09,
+              "changePer": 0
+            }
+          ]
+        }

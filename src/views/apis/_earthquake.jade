@@ -1,0 +1,55 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'earthquake'
+  - var title = 'Earthquakes in Iceland'
+  - var icon = 'cube'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://vedur.is' target="_blank") Icelandic Meteorological Office
+
+block endpoints
+  box.light.endpoint
+    +titlebar('get','/earthquake/is')
+    .content
+      p Get earthquake monitoring data for the last 48 hours.
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/earthquake/is',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "timestamp": "2013-09-17T10:35:46.000Z",
+              "latitude": 66.181,
+              "longitude": -17.764,
+              "depth": 11.3,
+              "size": 0.9,
+              "quality": 54.02,
+              "humanReadableLocation": "3,8 km ANA af Flatey"
+            },
+            {
+              "timestamp": "2013-09-17T04:52:13.000Z",
+              "latitude": 63.684,
+              "longitude": -19.282,
+              "depth": 4.7,
+              "size": 1.7,
+              "quality": 35.9,
+              "humanReadableLocation": "5,1 km NNV af Goðabungu"
+            }
+          ]
+        }

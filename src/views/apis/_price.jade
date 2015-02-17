@@ -1,0 +1,22 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'price'
+  - var title = 'Prices by barcode'
+  - var icon = 'barcode'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://kronan.is' target="_blank") Krónan
+
+block endpoints
+  box.light.endpoint
+    +disabledtitlebar('get','/price/kronan')
+    .content
+      p Get prices from Krónan by barcode
+
+      h5.params(toggle-next) Parameters
+      dl.params
+        dt.required barcode
+        dd Valid barcode

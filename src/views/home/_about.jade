@@ -1,0 +1,54 @@
+
+section.section.dark(scrolltrigger)#about
+  article: row
+    column.large-6.medium-10.medium-centered: .text-center
+      h2 What the..?
+      p.
+        <strong>API</strong> stands for 'Application Programming Interface',
+        literally specifying how software components should interact with each other.
+        In our context, this means we have endpoints that return different kinds
+        of data to developers using
+        <a class="light" href="https://en.wikipedia.org/wiki/JSON" target="_blank" title="JavaScript Object Notation">JSON</a>
+        objects, allowing them to use and manipulate it for their own applications.
+      p.
+        Bottom line is; this service creates a lot of opportunities for developers
+        that don't necessarily have the know-how, time or resources to get the data
+        themselves, but are full of ideas for using it.
+        So if you have an idea that only needs a little more data to become a reality,
+        don't hesitate to <a class="light" href="mailto:apis@apis.is">contact us</a> or even
+        contribute yourself to our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repository</a>.
+
+    column.large-6.medium-10.medium-centered: .text-center
+      h3 How does it all work?
+      p.
+        Our servers <a class="light" href="https://en.wikipedia.org/wiki/Web_scraping" type="_blank">scrape</a>
+        various websites for the desired information. For more detailed information
+        on individual endpoints visit our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repository</a>
+        and look at the source code.
+
+    column.large-6.medium-10.medium-centered: .text-center
+      h3 How to get started?
+      p.
+        This documentation includes simple
+        <a class="light" href="http://api.jquery.com/jQuery.ajax/" target="_blank">jQuery.ajax</a>
+        demos. Feel free to copy these to your projects, but remember that they
+        are provided as is, and you will most certainly have to adjust
+        them to your own needs.
+  row
+    column.large-6.medium-10.medium-centered: .text-center
+      h3 What about version control?
+      p.
+        At the moment, including an <code>accept-version</code> header is not
+        necessary, since all endpoints are at version 1, <strong>but we strongly
+        recommend it</strong>, especially in production environments. Once an
+        endpoint has been updated, the default version to be returned is the most
+        recent, and this documentation will be updated accordingly. Changes in
+        functionality between versions will be outlisted.
+
+    column.large-6.medium-10.medium-centered: .text-center
+      h3 How is all this possible? And for free?
+      p.
+        <strong>APIs.is</strong> is completely open source and developed by several
+        <a class="light" href="https://github.com/kristjanmik/apis/graphs/contributors" target="_blank">contributors</a>
+        working on their own personal time. All this runs in the cloud, available
+        to you at all times.

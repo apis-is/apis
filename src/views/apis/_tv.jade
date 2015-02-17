@@ -1,0 +1,239 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'tv'
+  - var title = 'Icelandic television schedules'
+  - var icon = 'cube'
+
+block sources
+  h4
+    | Sources:&nbsp;
+    a(href='http://ruv.is' target="_blank") RÚV
+    | ,&nbsp;
+    a(href='http://stod2.is' target="_blank") Stöð 2
+    |  and&nbsp;
+    a(href='http://skjarinn.is/einn' target="_blank") SkjárEinn
+
+block endpoints
+  box.light.endpoint.disabled
+    +disabledtitlebar('get','/tv/:channel')
+    .content
+      p Get schedules for icelandic tv stations.
+
+      h5.params(toggle-next) Parameters
+      dl.params
+        dt.required /:channel
+        dd Which channel's schedule to get
+
+      h5.response(toggle-next) Response (no channel)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "info": "This is an api for Icelandic tv channel schedules",
+              "endpoints": {
+                "ruv": "/tv/ruv/",
+                "ruvithrottir": "/tv/ruvithrottir/",
+                "stod2": "/tv/stod2/",
+                "stod2sport": "/tv/stod2sport",
+                "stod2sport2": "/tv/stod2sport2",
+                "stod2gull": "/tv/stod2gull",
+                "stod2bio": "/tv/stod2bio",
+                "stod3": "/tv/stod3",
+                "skjar1": "/tv/skjar1"
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/ruv)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Sm\u00e6lki",
+              "originalTitle": "Small Potatoes",
+              "duration": "00:03:00",
+              "description": "",
+              "shortDescription": "",
+              "live": false,
+              "premier": true,
+              "startTime": "2014-07-05 07:01:00",
+              "aspectRatio": "16:9",
+              "series": {
+                "episode": "24",
+                "series": "26"
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/ruvithrottir)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "HM \u00ed f\u00f3tbolta",
+              "originalTitle": "Holland - Argent\u00edna",
+              "duration": "00:25:00",
+              "description": "Upptaka fr\u00e1 leik \u00ed undan\u00farslitum HM \u00ed f\u00f3tbolta sem fram fer \u00ed Brasil\u00edu.",
+              "shortDescription": "",
+              "live": false,
+              "premier": true,
+              "startTime": "2014-07-09 22:45:00",
+              "aspectRatio": "16:9",
+              "series": {
+                "episode": "1",
+                "series": "1"
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod2)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Fr\u00e9ttir",
+              "originalTitle": "",
+              "duration": "0:45",
+              "description": "Fr\u00e9ttir St\u00f6\u00f0var 2 endurs\u00fdndar fr\u00e1 \u00fev\u00ed fyrr \u00ed kv\u00f6ld.",
+              "live": "false",
+              "premier": "true",
+              "startTime": "2014-07-06 05:25:00",
+              "aspectRatio": "4\/3",
+              "series": {
+                "episode": "",
+                "series": ""
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod2sport)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Arsenal -  Liverpool",
+              "originalTitle": "FA bikarinn",
+              "duration": "1:55",
+              "description": "\u00datsending fr\u00e1 leik Arsenal og Liverpool \u00ed FA bikarnum.",
+              "live": false,
+              "premier": false,
+              "startTime": "2014-07-09 18:20:00",
+              "aspectRatio": "16\/9",
+              "series": {
+                "episode": "",
+                "series": ""
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod2sport2)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Brasil\u00eda - \u00de\u00fdskaland",
+              "originalTitle": "HM 2014",
+              "duration": "1:40",
+              "description": "\u00datsending fr\u00e1 leik Brasil\u00edu og \u00de\u00fdskalands \u00ed undan\u00farslitum \u00e1 HM 2014.",
+              "live": false,
+              "premier": false,
+              "startTime": "2014-07-09 07:00:00",
+              "aspectRatio": "16\/9",
+              "series": {
+                "episode": "",
+                "series": ""
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod2gull)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Str\u00e1karnir",
+              "originalTitle": "",
+              "duration": "0:25",
+              "description": "Sveppi, Auddi og P\u00e9tur halda uppteknum h\u00e6tti og sprella sem aldrei fyrr me\u00f0 \u00f3borganlegum upp\u00e1t\u00e6kjum.",
+              "live": false,
+              "premier": false,
+              "startTime": "2014-07-09 17:55:00",
+              "aspectRatio": "4\/3",
+              "series": {
+                "episode": "",
+                "series": ""
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod2bio)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Argo",
+              "originalTitle": "",
+              "duration": "2:00",
+              "description": "Fr\u00e1b\u00e6r mynd sem hlaut \u00d3skarsver\u00f0launin fyrr \u00e1 \u00feessu \u00e1ri sem besta myndin auk \u00feess sem h\u00fan hlaut ver\u00f0laun fyrir handriti\u00f0 og klippingu. Alls var myndin tilnefnd til sj\u00f6 \u00d3skarsver\u00f0launa. Myndin gerist \u00e1ri\u00f0 1980 \u00feegar bylting var ger\u00f0 \u00ed \u00cdran og starfsmenn bandar\u00edska sendir\u00e1\u00f0sins voru teknir \u00ed g\u00edslingu. L\u00edtill h\u00f3pur n\u00e1\u00f0i a\u00f0 l\u00e6\u00f0ast \u00fat og leita skj\u00f3ls \u00ed kanad\u00edska sendiherrab\u00fasta\u00f0num og bandar\u00edsk yfirv\u00f6ld \u00feurftu a\u00f0 beita frumlegum a\u00f0fer\u00f0um til a\u00f0 frelsa h\u00f3pinn. Leikstj\u00f3ri myndarinnar er Ben Affleck sem einnig leikur a\u00f0alhlutverki\u00f0.",
+              "live": false,
+              "premier": false,
+              "startTime": "2014-07-09 03:15:00",
+              "aspectRatio": "16\/9",
+              "series": {
+                "episode": "",
+                "series": ""
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/stod3)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Malibu Country",
+              "originalTitle": "",
+              "duration": "0:25",
+              "description": "Skemmtilegir gaman\u00fe\u00e6ttir um konu \u00e1 besta aldri \u00ed Nashville sem skilur vi\u00f0 eiginmann sinn og flyst me\u00f0 fj\u00f6lskyldu s\u00edna til Malibu. \u00dear reynir \u00e1 a\u00f0l\u00f6gunarh\u00e6fni \u00feeirra allra en h\u00fan reynir fyrir s\u00e9r sem s\u00f6ngkona og b\u00f6rnin reyna a\u00f0 tapa s\u00e9r ekki \u00ed efnishyggjunni sem vir\u00f0ist yfirr\u00e1\u00f0andi.",
+              "live": false,
+              "premier": false,
+              "startTime": "2014-07-09 18:10:00",
+              "aspectRatio": "16\/9",
+              "series": {
+                "episode": "14",
+                "series": "18"
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/skjar1)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "title": "Leverage",
+              "originalTitle": "Leverage 5",
+              "duration": "00:46:00",
+              "description": "\u00deetta er fimmta \u00fe\u00e1ttar\u00f6\u00f0in af Leverage, \u00e6sispennandi \u00fe\u00e1ttar\u00f6\u00f0 \u00ed anda Ocean\u2019s Eleven um \u00fej\u00f3fah\u00f3p sem r\u00e6nir \u00fe\u00e1 sem misnota vald sitt og r\u00edkid\u00e6mi og n\u00ed\u00f0ast \u00e1 minnim\u00e1ttar.",
+              "shortDescription": "Nate ver\u00f0ur a\u00f0 hreinsa mannor\u00f0 Sophie \u00feegar h\u00fan er grunu\u00f0 um \u00fej\u00f3fna\u00f0 \u00e1 \u00f3metanlegu m\u00e1lverki.",
+              "live": false,
+              "premier": true,
+              "startTime": "2014-07-09 23:54",
+              "aspectRatio": "",
+              "series": {
+                "episode": "10",
+                "series": "15"
+              }
+            }
+          ]
+        }

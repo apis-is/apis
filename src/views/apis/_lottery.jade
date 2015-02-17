@@ -1,0 +1,128 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'lottery'
+  - var title = 'Icelandic lottery'
+  - var icon = 'ticket'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://lotto.is' target="_blank") lotto.is
+
+block endpoints
+  box.light.endpoint
+    +titlebar('get','/lottery')
+    .content
+      p Get the most recent numbers for the icelandic lottery.
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/lottery',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "date": "14.09.2013",
+              "lotto": "13 14 28 37 39 (29)",
+              "joker": "0 7 6 6 9",
+              "prize": "6.091.360 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/lotto?_date=14.09.2013"
+            },
+            {
+              "date": "07.09.2013",
+              "lotto": "10 15 34 35 39 (27)",
+              "joker": "6 5 1 7 4",
+              "prize": "13.287.850 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/lotto?_date=07.09.2013"
+            }
+          ]
+        }
+
+  box.light.endpoint
+    +titlebar('get','/lottery/vikingalotto')
+    .content
+      p Get the most recent numbers for Vikingalotto.
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/lottery/vikingalotto',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "date": "11.09.2013",
+              "lotto": "3 8 25 32 34 45 20 22 (27)",
+              "joker": "2 2 0 4 0",
+              "prize": "316.866.390 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/vikingalotto?_date=11.09.2013"
+            },
+            {
+              "date": "04.09.2013",
+              "lotto": "8 12 13 14 33 47 27 48 (3)",
+              "joker": "9 5 8 0 1",
+              "prize": "206.822.330 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/vikingalotto?_date=04.09.2013"
+            }
+          ]
+        }
+  box.light.endpoint
+    +titlebar('get','/lottery/eurojackpot')
+    .content
+      p Get the most recent numbers for EuroJackpot
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/lottery/eurojackpot',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "date": "13.09.2013",
+              "lotto": "3 10 18 31 43 1 (7)",
+              "joker": "1 8 3 1 3",
+              "prize": "2.456.318.720 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/eurojackpot?_date=13.09.2013"
+            },
+            {
+              "date": "06.09.2013",
+              "lotto": "3 7 20 32 44 4 (5)",
+              "joker": "0 5 5 5 8",
+              "prize": "2.137.751.150 kr.",
+              "link": "http://lotto.is/lottoleikir/urslit/eurojackpot?_date=06.09.2013"
+            }
+          ]
+        }

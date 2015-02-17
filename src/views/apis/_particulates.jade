@@ -1,0 +1,44 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'particulates'
+  - var title = 'Particulates in Reykjavik'
+  - var icon = 'cube'
+
+block sources
+  h4
+    | Source:&nbsp;
+    a(href='http://reykjavik.is' target="_blank") Reykjavik City
+
+block endpoints
+  box.light.endpoint
+    +titlebar('get','/particulates')
+    .content
+      p Get current status of <a href="https://en.wikipedia.org/wiki/Particulates" target="_blank">particulates</a> in <a href="http://reykjavik.is" target="_blank">Reykjavik City</a>
+
+      h5.params No parameters available
+
+      h5.demo(toggle-next='closed') jQuery demo
+      pre.demo: code.javascript.
+        $.ajax({
+          'url': 'http://apis.is/particulates',
+          'type': 'GET',
+          'dataType': 'json',
+          'success': function(response) {
+            console.log(response);
+          }
+        });
+
+      h5.response(toggle-next='closed') Response
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "PM10nuna": "0",
+              "PM10medaltal": "9.1",
+              "Counter": "29",
+              "Dags": "2013-09-18",
+              "nanariuppl": "http://www.rvk.is/desktopdefault.aspx/tabid-1007"
+            }
+          ]
+        }

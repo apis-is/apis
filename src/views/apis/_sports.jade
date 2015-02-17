@@ -1,0 +1,100 @@
+extends ../shared/_endpoint
+
+block endpointvars
+  - var shortname = 'sports'
+  - var title = 'Sport events in Iceland'
+  - var icon = 'soccer-ball-o'
+
+block sources
+  h4
+    | Sources:&nbsp;
+    a(href='http://ksi.is' target="_blank") KSÍ
+    |  and&nbsp;
+    a(href='http://hsi.is' target="_blank") HSÍ
+
+block endpoints
+  box.light.endpoint.disabled
+    +disabledtitlebar('get','/sports/:sport')
+    .content
+      p Get events for icelandic football and/or handball
+
+      h5.params(toggle-next) Parameters
+      dl.params
+        dt.required /:sport
+        dd Which sport events to get (football|handball)
+
+      h5.response(toggle-next) Response (no sport)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "info": "This is an api for Ielandic sports events",
+              "endpoints": {
+                "football": "/sports/football/",
+                "handball": "/sports/handball/"
+              }
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/football)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "counter": "2",
+              "date": "fös. 09. jan",
+              "time": "19:15",
+              "tournament": "Innimót - Úrslitakeppni mfl. karla",
+              "location": "Fylkishöll",
+              "homeTeam": "Fylkir",
+              "awayTeam": "Stál-úlfur"
+            },
+            {
+              "counter": "3",
+              "date": "fös. 09. jan",
+              "time": "19:30",
+              "tournament": "Innimót - Úrslitakeppni mfl. karla",
+              "location": "Álftanes",
+              "homeTeam": "Víkingur Ó.",
+              "awayTeam": "KFG"
+            },
+            {
+              "counter": "4",
+              "date": "fös. 09. jan",
+              "time": "20:30",
+              "tournament": "Innimót - Úrslitakeppni mfl. karla",
+              "location": "Laugardalshöll",
+              "homeTeam": "Fjölnir",
+              "awayTeam": "Grundarfjörður"
+            }
+          ]
+        }
+
+      h5.response(toggle-next='closed') Response (/handball)
+      pre.response: code.json.
+        {
+          "results": [
+            {
+              "Date": "�ri.  9.sep.2014",
+              "Time": "18.00",
+              "Tournament": "RVK m�t karla",
+              "Venue": "�M Grafarvogi",
+              "Teams": "Fj�lnir - KR"
+            },
+            {
+              "Date": "�ri.  9.sep.2014",
+              "Time": "19.30",
+              "Tournament": "RVK m�t karla",
+              "Venue": "Framh�s",
+              "Teams": "Fram - V�kingur"
+            },
+            {
+              "Date": "Mi�. 10.sep.2014",
+              "Time": "19.30",
+              "Tournament": "RVK m�t kvenna",
+              "Venue": "Vodafone h�llin",
+              "Teams": "Valur - Fram"
+            }
+          ]
+        }
