@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kristjanmik/apis.png?branch=v2)](https://travis-ci.org/kristjanmik/apis)
+[![Build Status](https://codeship.com/projects/63542/status?branch=v2)](https://codeship.com/projects/63542/status?branch=v2)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
 The purpose of [APIs.is](http://apis.is) is to make data readily available masterrto anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
