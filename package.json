@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp build && node dist/index.js",
-    "test": "jshint . && gulp test"
+    "test": "jshint src/ && gulp test"
   },
   "author": "",
   "license": "BSD-2-Clause",
