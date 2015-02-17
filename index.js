@@ -38,26 +38,33 @@ app.get('/status', function(req, res, next) {
   next(404);
 });
 
-app.get('/docs.json', function(req, res) {
+app.get('/docs.json', (function() {
+  console.log('Building /docs.json');
   var endpoint;
   var docs = endpoints.map(function(name) {
     try {
       endpoint = require('./endpoints/' + name + '/docs');
     } catch (e) {
+      console.error(' - Error loading docs for /%s: %s', name, e);
       endpoint = {nodocs: true, endpoints:[]};
     }
 
     endpoint.id = name;
     endpoint.endpoints = endpoint.endpoints.map(function(subendpoint) {
       subendpoint.path = '/' + name + subendpoint.path;
-      subendpoint.demoPath = '/' + name + subendpoint.demoPath;
       return subendpoint;
     });
 
     return endpoint;
   });
-  res.json(docs);
-});
+
+  // clear memory
+  endpoint = undefined;
+
+  return function(req, res) {
+    res.json(docs);
+  };
+})());
 
 /**
  * Set up endpoints
