@@ -38,6 +38,27 @@ app.get('/status', function(req, res, next) {
   next(404);
 });
 
+app.get('/docs.json', function(req, res) {
+  var endpoint;
+  var docs = endpoints.map(function(name) {
+    try {
+      endpoint = require('./endpoints/' + name + '/docs');
+    } catch (e) {
+      endpoint = {nodocs: true, endpoints:[]};
+    }
+
+    endpoint.id = name;
+    endpoint.endpoints = endpoint.endpoints.map(function(subendpoint) {
+      subendpoint.path = '/' + name + subendpoint.path;
+      subendpoint.demoPath = '/' + name + subendpoint.demoPath;
+      return subendpoint;
+    });
+
+    return endpoint;
+  });
+  res.json(docs);
+});
+
 /**
  * Set up endpoints
  */
