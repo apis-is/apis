@@ -1,0 +1,16 @@
+{
+  "title": "tvinna.is",
+  "description": "Get job opportunities from tvinna.is",
+  "endpoints": [
+    {
+      "path": "/",
+      "method": "GET",
+      "description": "List all jobs",
+      "source": {
+        "title": "tvinna.is",
+        "path": "http://tvinna.is/"
+      },
+          "variables": []
+    }
+  ]
+}

@@ -20,6 +20,7 @@
     "firm": "^0.2.1",
     "gulp": "^3.8.11",
     "statuses": "^1.2.1",
+    "tvinna": "^1.0.1",
     "vinbud": "^1.0.1"
   },
   "devDependencies": {
