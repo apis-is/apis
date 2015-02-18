@@ -1,4 +1,4 @@
-[ ![Codeship Status for kristjanmik/apis](https://codeship.com/projects/7c0ce5a0-9901-0132-893b-365d53813970/status?branch=v2)](https://codeship.com/projects/63542)
+[ ![Codeship Status for kristjanmik/apis](https://img.shields.io/codeship/7c0ce5a0-9901-0132-893b-365d53813970/v2.svg)](https://codeship.com/projects/63542)
 [![Coverage Status](https://coveralls.io/repos/kristjanmik/apis/badge.svg?branch=v2)](https://coveralls.io/r/kristjanmik/apis?branch=v2)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
