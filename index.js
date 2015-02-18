@@ -10,6 +10,13 @@ var endpoints = fs.readdirSync(__dirname + '/endpoints/');
 
 app.set('port', config.get('port'));
 
+var uptime = new Date().getTime();
+app.get('/uptime', function(req, res) {
+  res.json({
+    uptime: (new Date().getTime() - uptime) / 1000
+  });
+});
+
 /**
  * Redirect root to docs
  */
@@ -96,8 +103,9 @@ app.use(function(err, req, res, next) {
  * Start the server
  */
 if (!module.parent) {
-  app.listen(process.env.PORT || config.get('port'), function () {
-    console.log('Listening');
+  var port = process.env.PORT || config.get('port');
+  app.listen(port, function () {
+    console.log('Listening on port',port);
   });
 }
 
