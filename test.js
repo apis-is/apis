@@ -14,10 +14,6 @@ describe('Core APIs.is', function() {
     });
   });
 
-  describe('GET /status', function() {
-    it.skip('should return status of each endpoint / or redirect to status.apis.is?');
-  });
-
   describe('GET /docs.json', function() {
     it('should return an array of docs for all endpoints', function(done) {
       supertest(app)
