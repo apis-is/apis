@@ -2,6 +2,7 @@
 var app = require('./index.js');
 var supertest = require('supertest');
 var assert = require('assert');
+var fs = require('fs');
 
 // TODO: test core features 
 describe('Core APIs.is', function() {
@@ -38,8 +39,33 @@ describe('Core APIs.is', function() {
 });
 
 // Itterate and run endpoints integration tests
-require('fs').readdirSync('./endpoints/').forEach(function(path) {
-  describe('/' + path, function() {
-    require('./endpoints/' + path + '/test');
+describe('Endpoints',function(){
+  require('fs').readdirSync('./endpoints/').forEach(function(path) {
+    describe('/' + path, function() {
+      describe('Requirements', function() {
+        it('should include test.js',function(done){
+          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
+            throw new Error("No test.js file");
+          }
+          done();
+        });
+
+        it('should include test.js',function(done){
+          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
+            throw new Error("No test.js file");
+          }
+          done();
+        });
+
+        it('should include test.js',function(done){
+          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
+            throw new Error("No test.js file");
+          }
+          done();
+        });
+      });
+      
+      require('./endpoints/' + path + '/test');
+    });
   });
 });
