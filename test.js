@@ -13,9 +13,14 @@ describe('Core APIs.is', function() {
         .expect('location', /docs\.apis\.is/, done);
     });
   });
-
-  describe('GET /status', function() {
-    it.skip('should return status of each endpoint / or redirect to status.apis.is?');
+  
+  describe('GET /thispathshouldntexist', function() {
+    it('should return a 404 in JSON', function(done) {
+      supertest(app)
+        .get('/thispathshouldntexist')
+        .expect(404)
+        .expect('content-type', /^application\/json/, done);
+    });
   });
 
   describe('GET /docs.json', function() {
