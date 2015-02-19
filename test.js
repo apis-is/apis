@@ -1,4 +1,5 @@
-//process.env.NODE_ENV = 'testing';
+process.env.NODE_ENV = 'testing';
+
 var app = require('./index.js');
 var supertest = require('supertest');
 var assert = require('assert');
@@ -64,8 +65,10 @@ describe('Endpoints',function(){
           done();
         });
       });
-      
-      require('./endpoints/' + path + '/test');
+
+      if(fs.existsSync('./endpoints/' + path + '/test.js')){
+        require('./endpoints/' + path + '/test');
+      }
     });
   });
 });
