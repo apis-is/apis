@@ -8,7 +8,7 @@ var cors = require('cors');
 
 var endpoints = fs.readdirSync(__dirname + '/endpoints/');
 
-app.set('port', config.get('port'));
+app.set('port', process.env.PORT || config.get('port'));
 
 var uptime = new Date().getTime();
 app.get('/uptime', function(req, res) {
@@ -103,9 +103,8 @@ app.use(function(err, req, res, next) {
  * Start the server
  */
 if (!module.parent) {
-  var port = process.env.PORT || config.get('port');
-  app.listen(port, function () {
-    console.log('Listening on port',port);
+  app.listen(app.get('port'), function () {
+    console.log('Listening on port', app.get('port'));
   });
 }
 
