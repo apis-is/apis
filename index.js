@@ -83,6 +83,10 @@ endpoints.forEach(function(path) {
     app.use('/' + path, endpoint);
   });
 
+app.use(function(req, res, next) {
+  next(404);
+});
+
 app.use(function(err, req, res, next) {
   var code;
   if (typeof err === 'number') {
