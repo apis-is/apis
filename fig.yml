@@ -1,0 +1,13 @@
+web:
+  build: .
+  command: npm start
+varnish:
+  image: jacksoncage/varnish
+  links:
+   - web
+  ports:
+   - "6000:80"
+  environment:
+    VARNISH_BACKEND_PORT: 3000
+    VARNISH_BACKEND_IP: web
+    VARNISH_PORT: 80
