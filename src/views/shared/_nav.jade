@@ -5,4 +5,7 @@ sidebar.blue
       li: a(href='#about') About APIs
       li
         a(href='#endpoints') Endpoints
-        ul.endpoints
+        ul.endpoints(v-repeat="endpoint:endpoints | orderBy title")
+          li: a(href="#endpoint-{{endpoint.id}}" v-on="click: closeSidebar" v-attr="id:endpoint.id")
+            icon.blue.fa(class="fa-{{endpoint.icon | defaultIcon}}")
+            | {{endpoint.title}}

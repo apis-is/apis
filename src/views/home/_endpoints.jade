@@ -1,2 +1,23 @@
-section.section.blue(scrolltrigger)#endpoints
-  row#endpoints-wrap(equalize-wrap='above:480')
+section.section.light#endpoints(scrolltrigger)
+  template(v-repeat="endpoint:endpoints | orderBy title")
+    article.endpoint(id="endpoint-{{endpoint.id}}" v-attr="endpoint:endpoint.id, title:endpoint.title, icon:endpoint.icon | defaultIcon")
+      row: column.medium-10.large-8.col-centered
+        hgroup
+          icon.blue.fa(class="fa-{{endpoint.icon | defaultIcon}}")
+          h3: a(href="#endpoint-{{endpoint.id}}")
+            icon.fa.fa-link
+            | {{endpoint.title}}
+          p {{endpoint.description}}
+
+        box.light.endpoint(v-repeat="endp:endpoint.endpoints")
+          +titlebar('{{endp.method}}','{{endp.path}}')
+          .content
+            p: b: small
+              | Source:&nbsp;
+              a(href='{{endp.source.path}}' target="_blank") {{endp.source.title}}
+            p {{endp.description}}
+
+            h5.params(toggle-next v-show="endp.variables.length > 0") Parameters
+            dl.params: template(v-repeat="vars:endp.variables")
+              dt {{vars.name}}
+              dd {{vars.description}}

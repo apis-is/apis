@@ -47,6 +47,7 @@
   require([
     'viewmodel',
     'init/view',
+    'init/vue',
     'init/align',
     'init/scrolltrigger',
     'init/smoothscroll',
