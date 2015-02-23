@@ -1,5 +1,6 @@
 {
   "title": "Companies",
+  "icon": "building",
   "description": "Search through company registries",
   "endpoints": [
     {
