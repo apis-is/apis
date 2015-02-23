@@ -1,0 +1,14 @@
+extends shared/_layout
+
+block hero
+  include home/_welcome
+
+block content
+
+  include home/_about
+  include home/_endpoints
+
+block footer
+  footer: section.dark
+    row: column.medium-10.large-8.col-centered
+      box: p.text-large Would you like to suggest a new endpoint to be implemented?<br/>Don't hesitate to <a class="light" href="mailto:apis@apis.is">contact us</a>, or contribute to our <a class="light" href="https://github.com/kristjanmik/apis" target="_blank">github repo</a>.
