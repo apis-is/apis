@@ -1,5 +1,6 @@
 {
   "title": "tvinna.is",
+  "icon": "suitcase",
   "description": "Get job opportunities from tvinna.is",
   "endpoints": [
     {
