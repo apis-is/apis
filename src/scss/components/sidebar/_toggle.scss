@@ -32,7 +32,7 @@ toggle {
     height: 5px;
   }
 
-  body[data-viewmodel-state='sidebar-open'] & {
+  body[data-sidebar-state='open'] & {
     transform: translate3d(5px,5px,0) rotate(0deg);
 
     bar {

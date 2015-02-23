@@ -25,7 +25,7 @@ sidebar {
     transition-duration: 0;
   }
 
-  body[data-viewmodel-state='sidebar-open'] & {
+  body[data-sidebar-state='open'] & {
     transition-delay: $transition-duration-slower - $transition-duration-slow;
     transform: translate3d($spacing/2,$spacing/2,0);
   }

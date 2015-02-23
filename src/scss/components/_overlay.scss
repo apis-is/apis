@@ -12,7 +12,7 @@ overlay {
   transition: opacity $transition-duration, transform $transition-duration ease $transition-duration;
   z-index: 80;
 
-  body[data-viewmodel-state='sidebar-open'] & {
+  body[data-sidebar-state='open'] & {
     cursor: pointer;
     opacity: 0;
     transform: translate3d(0, 0, 0);

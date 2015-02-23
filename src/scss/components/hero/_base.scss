@@ -16,7 +16,7 @@ hero {
   transition-property: opacity;
   transition-duration: $transition-duration;
 
-  body[data-viewmodel-state='sidebar-open'] & {
+  body[data-sidebar-state='open'] & {
     opacity: 0.7;
     transition-delay: $transition-duration;
   }

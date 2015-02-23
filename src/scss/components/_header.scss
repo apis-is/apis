@@ -22,15 +22,9 @@ header {
     transition-delay: 0;
   }
 
-  body[data-viewmodel-state='sidebar-open'] &,
-  body[data-viewmodel-position='hero'] & {
+  body[data-sidebar-state='open'] & {
     transition-delay: 0;
     background: rgba($color-blue,0);
     transform: translate3d(0,0,0);
-  }
-
-  body[data-viewmodel-state='sidebar-open'] & {
-    transition-delay: 0;
-    // transform: translate3d(10px,10px,0);
   }
 }
