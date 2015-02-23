@@ -17,7 +17,8 @@
     "requirejs-plugins": "~1.0.3",
     "modernizr": "~2.8.3",
     "html5-polyfills": "*",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "vue": "~0.11.5"
   },
   "overrides": {
     "jquery": {

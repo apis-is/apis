@@ -22,6 +22,7 @@
       underscore: 'vendor/underscore-min',
 
       modernizr: 'vendor/modernizr',
+      vue: 'vendor/vue',
 
       sidebar: 'kolibri/koli-sidebar',
       smoothscroll: 'kolibri/koli-smoothscroll',
