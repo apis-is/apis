@@ -1,0 +1,24 @@
+include _mixins
+block vars
+  - var title = 'apis.is'
+
+doctype html
+//[if lt IE 9]><html class="no-js lt-ie10 lt-ie9"><![endif]
+//[if IE 9]>   <html class="no-js lt-ie10 ie9"><![endif]
+//[if gt IE 9]><!
+html.loading.no-js
+  //<![endif]
+  include _head
+
+  body#apis
+    include _loader
+
+    pagewrap
+      block hero
+      main
+        block content
+
+      block footer
+        include _footer
+
+    include _javascript

@@ -1,19 +1,19 @@
-extends shared/_layout
+extends shared/_layout-errors
 
 block hero
-  section.section.full.dark
-    .inner
-      .limit.padding.tight.text-center
+  section.section.dark(window-height)
+    row(vertical-center): column.large-6.medium-8.col-centered
+      .text-center
         h1 Oops..!
         h3 This time it's our fault :(
-        p.large
-          a(href='javascript:window.location.reload()') Try again
-          | in a little while
+        p.text-large
+          a.light(href='javascript:window.location.reload()') Try again
+          |  in a little while
 
 block footer
-  .limit.padding
-    p.
+  footer: section.dark
+    row: column.medium-10.large-8.col-centered: box: p.text-large.
       If you're still here, we must be having some problems!<br/>
       Perhaps you should check out our
       <a href="https://github.com/kristjanmik/apis" target="_blank">github repo</a>
-      for now.
+      and do some contributing?
