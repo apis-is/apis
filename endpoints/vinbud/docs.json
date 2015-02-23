@@ -1,5 +1,6 @@
 {
   "title": "Vínbúð",
+  "icon": "glass",
   "description": "Find the opening hours for Vínbúð stores",
   "endpoints": [
     {
