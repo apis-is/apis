@@ -33,7 +33,7 @@ toggle {
   }
 
   body[data-sidebar-state='open'] & {
-    transform: translate3d(5px,5px,0) rotate(0deg);
+    transform: translate3d(5px,5px,0) rotate(360deg);
 
     bar {
       transition-delay: $transition-duration-slower - $transition-duration-slow;
@@ -42,12 +42,12 @@ toggle {
         transform: translate3d(0,10px,0) rotate(135deg);
       }
       &.bar2 {
-        transform: rotate(-135deg);
+        transform: rotate(90deg);
         // transition-duration: $transition-duration;
-        // opacity: 0;
+        opacity: 0;
       }
       &.bar3 {
-        transform: translate3d(0,-10px,0) rotate(-45deg);
+        transform: translate3d(0,-10px,0) rotate(45deg);
       }
     }
   }

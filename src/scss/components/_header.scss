@@ -23,7 +23,7 @@ header {
   }
 
   body[data-sidebar-state='open'] & {
-    transition-delay: 0;
+    transition-delay: 250ms;
     background: rgba($color-blue,0);
     transform: translate3d(0,0,0);
   }
