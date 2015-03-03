@@ -1,0 +1,25 @@
+{
+  "title": "Cars",
+  "icon": "car",
+  "description": "Search through car registries",
+  "endpoints": [
+    {
+      "path": "/is/:carPlate",
+      "method": "GET",
+      "description": "Search through the icelandic car registry",
+      "source": {
+        "title": "Icelandic Transport Authority",
+        "path": "http://www.samgongustofa.is/umferd/okutaeki/okutaekjaskra/uppfletting"
+      },
+      "variables": [
+        {
+          "type": "param",
+          "name": "carPlate",
+          "description": "Car plate",
+          "required": true,
+          "demoValue": "aa031"
+        }
+      ]
+    }
+  ]
+}
