@@ -1,0 +1,24 @@
+{
+  "title": "Flights",
+  "icon": "plane",
+  "description": "Get info on flights",
+  "endpoints": [
+    {
+      "path": "/kef",
+      "method": "GET",
+      "description": "Get a list of all flights departing and arriving at Keflavik Airport today. Default response in english, but icelandic optionally available; set 'accept-language' header to 'is' for icelandic response.",
+      "source": {
+        "title": "Keflavik Airport",
+        "path": "http://www.kefairport.is/"
+      },
+      "variables": [
+        {
+          "type": "query",
+          "name": "type",
+          "description": "Type of flights to get, arrivals or departures. Defaults to arrivals.",
+          "demoValue": "departures"
+        }
+      ]
+    }
+  ]
+}
