@@ -12,7 +12,9 @@ app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {
     headers: {'User-Agent': h.browser()},
     url: url
   }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
+    if(error || response.statusCode !== 200){
+      return res.json(504,{error:'skjarinn.is is not responding with the right data'});
+    }
 
     parseSkjar1(function (data) {
       res.cache(1800).json(200, {
