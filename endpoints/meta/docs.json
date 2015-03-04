@@ -29,6 +29,13 @@
       "description": "Get a list of official sponsors of the project.",
       "source": {},
       "variables": []
+    },
+    {
+      "path": "/about",
+      "method": "GET",
+      "description": "Content for docs about section.",
+      "source": {},
+      "variables": []
     }
   ]
 }
