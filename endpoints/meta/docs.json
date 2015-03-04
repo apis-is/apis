@@ -1,0 +1,17 @@
+{
+  "title": "Meta",
+  "icon": "",
+  "description": "Various meta info about the apis.is project.",
+  "endpoints": [
+    {
+      "path": "/maintainers",
+      "method": "GET",
+      "description": "List the maintainers of the project.",
+      "source": {
+        "title": "GitHub",
+        "path": "https://api.github.com/orgs/apis-is/public_members"
+      },
+      "variables": []
+    }
+  ]
+}
