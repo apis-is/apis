@@ -47,3 +47,12 @@ endpoint.get('/contributors/', function(req, res, fail) {
     return res.json(maintainers);
   });
 });
+
+/**
+ * Get a list of official sponsors of the project.
+ */
+endpoint.get('/sponsors/', function(req, res, fail) {
+  return res.json({
+      'nosponsors': 'No sponsors yet! Contact us at apis@apis.is if you\'re interested!'
+    });
+});

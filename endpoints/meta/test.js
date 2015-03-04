@@ -13,4 +13,10 @@ describe('Meta endpoints', function() {
         .expect(200, done);
     });
   });
+  describe('Listing the sponsors', function() {
+    it('should succeed', function(done) {
+      endpoint.tester('/contributors')
+        .expect(200, done);
+    });
+  });
 });
