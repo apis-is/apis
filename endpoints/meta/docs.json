@@ -12,6 +12,16 @@
         "path": "https://api.github.com/orgs/apis-is/public_members"
       },
       "variables": []
+    },
+    {
+      "path": "/contributors",
+      "method": "GET",
+      "description": "Get a list of all contributors of the project.",
+      "source": {
+        "title": "GitHub",
+        "path": "https://api.github.com/repos/apis-is/apis/contributors"
+      },
+      "variables": []
     }
   ]
 }
