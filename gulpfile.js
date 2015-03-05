@@ -7,9 +7,8 @@ gulp.task('test', function() {
       .pipe(mocha({reporter: 'spec', timeout: 10000}));
 });
 
-gulp.task('watch', ['test'], function() {
+gulp.task('watch', function() {
     nodemon({ script: 'index.js' })
-      .on('change', ['test'])
       .on('restart', function () {
           console.log('restarted!');
       });
