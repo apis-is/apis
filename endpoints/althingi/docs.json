@@ -1,0 +1,26 @@
+{
+  "title": "Parliament",
+  "icon": "suitcase",
+  "description": "Parse various info from parliament.",
+  "endpoints": [
+    {
+      "path": "/",
+      "method": "GET",
+      "description": "List all parliament members",
+      "source": {
+        "title": "althingi.is",
+        "path": "http://althingi.is/"
+      },
+      "variables": []
+    }, {
+      "path": "/:id/votes",
+      "method": "GET",
+      "description": "List the votes for a specific parliament members",
+      "source": {
+        "title": "althingi.is",
+        "path": "http://althingi.is/"
+      },
+      "variables": ["id"]
+    }
+  ]
+}
