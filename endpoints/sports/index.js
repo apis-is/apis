@@ -66,10 +66,10 @@ app.get('/sports/football', function (req, res) {
       var obj = { results: []};
       var fields = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
       try {
-        $('#leikir-tafla tr').not(':first').each(function(key) {
+        $('#leikir-tafla tr').each(function(key) {
           if (key !== 0) {
             var game = {};
-        	  $(this.cells).each(function(key2) {
+        	  $('td', this).each(function(key2) {
                 var val = $(this).text();
                 if (val && val.trim() && val !== '' && val !== 0 && val !== '\t' && val !== '\n') {
                   game[fields[key2]] = val;
@@ -77,8 +77,9 @@ app.get('/sports/football', function (req, res) {
             });
 
             // Checking whether it has the necessary fields
-            if (!$.isEmptyObject(game) && game.counter && game.date && game.time && game.tournament && game.location && game.homeTeam && game.awayTeam)
+            if (game.counter && game.date && game.time && game.tournament && game.location && game.homeTeam && game.awayTeam) {
               obj.results.push(game);
+            }
           }
         });
       } catch(error) {
@@ -107,18 +108,19 @@ app.get('/sports/handball', function (req, res) {
       var fields = ['Date', 'Time', 'Tournament', 'Venue', 'Teams'];
 
       try {
-        $('table').eq(1).find('tr').not(':first').each(function(key) {
+        $('table').eq(1).find('tr').each(function(key) {
           if (key !== 0) {
             var game = {};
-            $(this.cells).each(function(key2) {
+            $('td', this).each(function(key2) {
               var val = $(this).text().trim();
               if (val && val !== '' && val !== 0) {
                 game[fields[key2]] = val;
               }
             });
 
-            if (!$.isEmptyObject(game) && game.Date && game.Time && game.Tournament && game.Venue && game.Teams)
+            if (game.Date && game.Time && game.Tournament && game.Venue && game.Teams) {
               obj.results.push(game);
+            }
           }
         });
       } catch(error) {
