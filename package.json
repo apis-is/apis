@@ -50,6 +50,7 @@
     "apis-helpers": "0.0.1"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test/integration"
+    "test": "node_modules/mocha/bin/mocha test/integration",
+    "coveralls": "exit 0"
   }
 }
