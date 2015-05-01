@@ -1,0 +1,35 @@
+{
+  "title": "Lottery",
+  "icon": "ticket",
+  "description": "Display the latest lottery numbers",
+  "endpoints": [
+    {
+      "path": "/lottery/lotto",
+      "method": "GET",
+      "description": "Get the lotto numbers",
+      "source": {
+        "title": "Getspá - Getraunir",
+        "path": "https://igvefur.lotto.is/lottoleikir/urslit/lotto/"
+      },
+      "variables": []
+    }, {
+      "path": "/lottery/vikingalotto",
+      "method": "GET",
+      "description": "Get the vikingalotto numbers",
+      "source": {
+        "title": "Getspá - Getraunir",
+        "path": "https://igvefur.lotto.is/lottoleikir/urslit/vikingalotto/"
+      },
+      "variables": []
+    }, {
+      "path": "/lottery/eurojackpot",
+      "method": "GET",
+      "description": "Get the eurojackpot numbers",
+      "source": {
+        "title": "Getspá - Getraunir",
+        "path": "https://igvefur.lotto.is/lottoleikir/urslit/eurojackpot/"
+      },
+      "variables": []
+    },
+  ]
+}
