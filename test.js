@@ -37,6 +37,20 @@ describe('Core APIs.is', function() {
         .end(done);
     });
   });
+
+  describe('GET /status', function() {
+    it('should return the uptime of the server', function(done) {
+      supertest(app)
+        .get('/status')
+        .expect(200)
+        .expect('content-type', /^application\/json/)
+        .expect(function(res) {
+          assert.equal(typeof res.body.uptime, 'number', 'res.body.uptime should be numeric');
+          assert(!isNaN(res.body.uptime), 'res.body.uptime should not be NaN');
+        })
+        .end(done);
+    });
+  });
 });
 
 // Itterate and run endpoints integration tests

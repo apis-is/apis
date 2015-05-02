@@ -10,13 +10,6 @@ var endpoints = fs.readdirSync(__dirname + '/endpoints/');
 
 app.set('port', process.env.PORT || config.get('port'));
 
-var uptime = new Date().getTime();
-app.get('/uptime', function(req, res) {
-  res.json({
-    uptime: (new Date().getTime() - uptime) / 1000
-  });
-});
-
 /**
  * Redirect root to docs
  */
@@ -40,9 +33,12 @@ if (app.get('env') !== 'production') {
   app.use(cors());
 }
 
+var uptime = new Date().getTime();
 app.get('/status', function(req, res, next) {
-  // TODO: call status of each `endpoints`, or redirect to status.apis.is
-  next(404);
+  // @TODO: call status of each `endpoints`
+  res.json({
+    uptime: (new Date().getTime() - uptime) / 1000
+  });
 });
 
 app.get('/docs.json', (function() {
