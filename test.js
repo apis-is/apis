@@ -58,25 +58,12 @@ describe('Endpoints',function(){
   require('fs').readdirSync('./endpoints/').forEach(function(path) {
     describe('/' + path, function() {
       describe('Requirements', function() {
-        it('should include test.js',function(done){
-          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
-            throw new Error("No test.js file");
-          }
-          done();
-        });
+        var requiredFiles = ['/index.js', '/test.js', '/docs.json'];
 
-        it('should include test.js',function(done){
-          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
-            throw new Error("No test.js file");
-          }
-          done();
-        });
-
-        it('should include test.js',function(done){
-          if(!fs.existsSync('./endpoints/' + path + '/test.js')){
-            throw new Error("No test.js file");
-          }
-          done();
+        requiredFiles.forEach(function(name) {
+          it('should include ' + name,function(){
+            require.resolve('./endpoints/' + path + name);
+          });
         });
       });
 
