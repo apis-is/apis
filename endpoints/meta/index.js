@@ -6,6 +6,13 @@ var urlBuilder = require('url');
 
 module.exports = endpoint;
 
+/*
+ * Get the various applications that use apis.is
+ */
+endpoint.get('/users/', function(req, res, fail) {
+  return res.json(require('./json/users.json'));
+});
+
 /**
  * Get the maintainers of the project.
  */
