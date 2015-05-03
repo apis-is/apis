@@ -1,0 +1,25 @@
+{
+    "title": "Icelandic addresses",
+    "icon": "home",
+    "description": "Parse various info from parliament.",
+    "endpoints": [
+        {
+            "path": "/:address",
+            "method": "GET",
+            "description": "Look up a address by it's address",
+            "source": {
+                "title": "Icelandic Post",
+                "path": "http://postur.is/"
+            },
+            "variables": [
+            {
+                "type": "param",
+                "name": "address",
+                "description": "The address to look up",
+                "required": true,
+                "demoValue": "Laugarvegur 1"
+            }
+            ]
+        }
+    ]
+}
