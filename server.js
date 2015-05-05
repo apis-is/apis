@@ -31,7 +31,7 @@ app.use(cache());
  * Set up endpoints
  */
 fileModule.walkSync('./endpoints', function iterateEndpoints(dirPath, dirs, endpoints) {
-    if (endpoints && dirPath.indexOf('/test') < 0) endpoints.forEach(requireEndpoint);
+    if (endpoints && dirPath.indexOf('test') < 0) endpoints.forEach(requireEndpoint);
 
     function requireEndpoint(endpoint) {
         if (endpoint.indexOf('.DS_Store') === -1) require('./' + dirPath + '/' + endpoint);
