@@ -95,8 +95,8 @@ endpoint.get('/contributors/', function(req, res, fail) {
  */
 endpoint.get('/sponsors/', function(req, res, fail) {
   return res.json({
-      'nosponsors': 'No sponsors yet! Contact us at apis@apis.is if you\'re interested!'
-    });
+    'nosponsors': 'No sponsors yet! Contact us at apis@apis.is if you\'re interested!'
+  });
 });
 
 /**
