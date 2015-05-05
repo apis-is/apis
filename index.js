@@ -48,7 +48,9 @@ app.get('/docs.json', (function() {
     try {
       endpoint = require('./endpoints/' + name + '/docs');
     } catch (e) {
-      console.error(' - Error loading docs for /%s: %s', name, e);
+      if(process.env.NODE_ENV !== 'testing'){
+        console.error(' - Error loading docs for /%s: %s', name, e);
+      }
       endpoint = {nodocs: true, endpoints:[]};
     }
 
@@ -73,11 +75,14 @@ app.get('/docs.json', (function() {
  * Set up endpoints
  */
 endpoints.forEach(function(path) {
-    console.log('Setting up:', path);
+  if(!fs.existsSync('./endpoints/' + path + '/index.js')){
+    return console.error('Could not set up:',path);
+  }
+  console.log('Setting up:', path);
 
-    var endpoint = require('./endpoints/' + path);
-    app.use('/' + path, endpoint);
-  });
+  var endpoint = require('./endpoints/' + path);
+  app.use('/' + path, endpoint);
+});
 
 app.use(function(req, res, next) {
   next(404);

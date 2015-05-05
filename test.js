@@ -1,7 +1,9 @@
-//process.env.NODE_ENV = 'testing';
+process.env.NODE_ENV = 'testing';
+
 var app = require('./index.js');
 var supertest = require('supertest');
 var assert = require('assert');
+var fs = require('fs');
 
 // TODO: test core features 
 describe('Core APIs.is', function() {
@@ -52,8 +54,22 @@ describe('Core APIs.is', function() {
 });
 
 // Itterate and run endpoints integration tests
-require('fs').readdirSync('./endpoints/').forEach(function(path) {
-  describe('/' + path, function() {
-    require('./endpoints/' + path + '/test');
+describe('Endpoints',function(){
+  require('fs').readdirSync('./endpoints/').forEach(function(path) {
+    describe('/' + path, function() {
+      describe('Requirements', function() {
+        var requiredFiles = ['/index.js', '/test.js', '/docs.json'];
+
+        requiredFiles.forEach(function(name) {
+          it('should include ' + name,function(){
+            require.resolve('./endpoints/' + path + name);
+          });
+        });
+      });
+
+      if(fs.existsSync('./endpoints/' + path + '/test.js')){
+        require('./endpoints/' + path + '/test');
+      }
+    });
   });
 });
