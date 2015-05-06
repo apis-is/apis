@@ -42,7 +42,7 @@ app.get('/hljomaholl', function (req, res, next) {
                     event[fields[4]] = $('p',this).text().trim();
                     event[fields[5]] = $('.time h2',this).text().trim();
                     event[fields[6]] = $('.btn-wrapper',this).find('.btn-green').attr('href') || false;
-                    event[fields[7]] = "http://www.hljomaholl.is/" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
+                    event[fields[7]] = "http://www.hljomaholl.is" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
 
                     obj.results.push(event)
 
