@@ -20,7 +20,7 @@ app.get('/hljomaholl', function (req, res, next) {
         }
 
         var obj = { results: []};
-        var fields = ['date', 'time', 'image','title', 'description','location'];
+        var fields = ['date', 'time', 'image','title', 'description','location', 'buyTicketURL', 'moreInfoURL'];
         try {
             $('.main-content-body ul').find('li').each(function(key){
                 if(key !== 0)
@@ -41,6 +41,8 @@ app.get('/hljomaholl', function (req, res, next) {
                     event[fields[3]] = $('.time h1',this).text().trim();
                     event[fields[4]] = $('p',this).text().trim();
                     event[fields[5]] = $('.time h2',this).text().trim();
+                    event[fields[6]] = $('.btn-wrapper',this).find('.btn-green').attr('href');
+                    event[fields[7]] = "http://www.hljomaholl.is/" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
 
                     obj.results.push(event)
 
@@ -48,7 +50,7 @@ app.get('/hljomaholl', function (req, res, next) {
 
             });
         } catch(error) {
-            return res.json(500, {error: 'Could not parse the game data'});
+            return res.json(500, {error: 'Could not parse event data'});
         }
 
         return res.json(obj);

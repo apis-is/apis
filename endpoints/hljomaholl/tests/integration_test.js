@@ -4,7 +4,7 @@ var helpers = require('../../../lib/test_helpers.js');
 
 describe('hljomaholl', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ['date', 'time', 'image','title', 'description','location'];
+    var fieldsToCheckFor = ['date', 'time', 'image','title', 'description','location', 'buyTicketURL', 'moreInfoURL'];
 
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/hljomaholl");
