@@ -23,30 +23,28 @@ app.get('/hljomaholl', function (req, res, next) {
         var fields = ['date', 'time', 'image','title', 'description','location', 'buyTicketURL', 'moreInfoURL'];
         try {
             $('.main-content-body ul').find('li').each(function(key){
-                if(key !== 0)
-                {
-                    var event = {};
 
-                    var counter = 0;
-                    $('.time').find('time').each(function(key1){
+                var event = {};
 
-                        if(counter === 2)
-                            return false;
+                var counter = 0;
+                $('.time',this).find('time').each(function(key1){
 
-                        var val = $(this).text();
-                        event[fields[key1]] = val;
-                        counter++;
-                    });
-                    event[fields[2]] = $('img',this).attr('src');
-                    event[fields[3]] = $('.time h1',this).text().trim();
-                    event[fields[4]] = $('p',this).text().trim();
-                    event[fields[5]] = $('.time h2',this).text().trim();
-                    event[fields[6]] = $('.btn-wrapper',this).find('.btn-green').attr('href') || false;
-                    event[fields[7]] = "http://www.hljomaholl.is/" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
+                    if(counter === 2)
+                        return false;
 
-                    obj.results.push(event)
+                    var val = $(this).text();
+                    event[fields[key1]] = val;
+                    counter++;
+                });
+                event[fields[2]] = $('img',this).attr('src');
+                event[fields[3]] = $('.time h1',this).text().trim();
+                event[fields[4]] = $('p',this).text().trim();
+                event[fields[5]] = $('.time h2',this).text().trim();
+                event[fields[6]] = $('.btn-wrapper',this).find('.btn-green').attr('href') || false;
+                event[fields[7]] = "http://www.hljomaholl.is" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
 
-                }
+                obj.results.push(event)
+
 
             });
         } catch(error) {
