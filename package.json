@@ -22,6 +22,7 @@
     "firm": "^0.2.1",
     "flights": "^0.2.0",
     "gulp": "^3.8.11",
+    "icelandic-lottery": "^1.0.0",
     "statuses": "^1.2.1",
     "tvinna": "^1.0.1",
     "vinbud": "^1.0.1"
