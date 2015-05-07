@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var fileModule = require('file');
 
-var testDir = '/tests';
+var testDir = 'tests';
 var testFileName = 'integration_test.js';
 
 describe('endpoint', function() {
