@@ -23,12 +23,11 @@ app.get('/hljomaholl', function (req, res, next) {
         var fields = ['date', 'time', 'image','title', 'description','location', 'buyTicketURL', 'moreInfoURL'];
         try {
             $('.main-content-body ul').find('li').each(function(key){
-                if(key !== 0)
-                {
+
                     var event = {};
 
                     var counter = 0;
-                    $('.time').find('time').each(function(key1){
+                    $('.time',this).find('time').each(function(key1){
 
                         if(counter === 2)
                             return false;
@@ -45,8 +44,6 @@ app.get('/hljomaholl', function (req, res, next) {
                     event[fields[7]] = "http://www.hljomaholl.is" + $('.btn-wrapper',this).find('.btn-blue').attr('href');
 
                     obj.results.push(event)
-
-                }
 
             });
         } catch(error) {
