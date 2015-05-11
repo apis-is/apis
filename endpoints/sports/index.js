@@ -34,7 +34,7 @@ app.get('/sports', function (req, res, next) {
     {
       results: [
         {
-          info: 'This is an api for Ielandic sports events',
+          info: 'This is an api for Icelandic sports events',
           endpoints: {
             football: '/sports/football/',
             handball: '/sports/handball/',
@@ -55,7 +55,7 @@ app.get('/sports/football/male-leagues', function (req, res, next) {
     {
       results: [
         {
-          info: 'This is an api for Ielandic male football leagues',
+          info: 'This is an api for Icelandic male football leagues',
           endpoints: {
             "borgun-cup": '/sports/football/male-leagues/borgun/',
             pepsi: '/sports/football/male-leagues/pepsi/',
@@ -77,7 +77,7 @@ app.get('/sports/football/female-leagues', function (req, res, next) {
     {
       results: [
         {
-          info: 'This is an api for Ielandic female football leagues',
+          info: 'This is an api for Icelandic female football leagues',
           endpoints: {
             "borgun-cup": '/sports/football/female-leagues/borgun/',
             pepsi: '/sports/football/female-leagues/pepsi/'
