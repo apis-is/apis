@@ -15,13 +15,36 @@ describe.skip('handball', function() {
 });
 
 describe.skip('football', function() {
-	it("should return an array of objects containing correct fields", function(done) {
-		var fieldsToCheckFor = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
-		var params = helpers.testRequestParams("/sports/football", {
-			language: "en"
-		});
+    it("should return an array of objects containing correct fields", function(done) {
+        var fieldsToCheckFor = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
+        var params = helpers.testRequestParams("/sports/football", {
+            language: "en"
+        });
 
-		var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-		request.get(params, resultHandler);
-	});
+        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+        request.get(params, resultHandler);
+    });
 });
+
+testFootballLeague("male-leagues/borgun");
+testFootballLeague("male-leagues/pepsi");
+testFootballLeague("male-leagues/1st");
+testFootballLeague("male-leagues/2nd");
+testFootballLeague("male-leagues/3rd");
+
+testFootballLeague("female-leagues/borgun");
+testFootballLeague("female-leagues/pepsi");
+
+function testFootballLeague(leagueParams){
+    describe("football/"+leagueParams, function() {
+        it("should return an array of objects containing correct fields", function(done) {
+            var fieldsToCheckFor = ['counter','date','time','teams', 'location', 'scores'];
+            var params = helpers.testRequestParams("/sports/football/"+leagueParams, {
+                language: "en"
+            });
+
+            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+            request.get(params, resultHandler);
+        });
+    });
+};
