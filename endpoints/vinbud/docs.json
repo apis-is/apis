@@ -19,6 +19,15 @@
           "demoValue": "Búðardalur"
         }
       ]
+    }, {
+      "path": "/items",
+      "method": "GET",
+      "description": "Get all available items at vinbud",
+      "source": {
+        "title": "tldr.is",
+        "path": "http://tldr.is/vinbud.json"
+      },
+      "variables": []
     }
   ]
 }

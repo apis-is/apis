@@ -9,7 +9,19 @@ var vinbud = require('vinbud');
  */
 endpoint.get('/', function(req, res, fail) {
   vinbud.opening_times(req.query, function(err, data) {
-    if (err) return fail(err);
+    if (err) {
+      return fail(err);
+    }
+
+    return res.json(data);
+  });
+});
+
+endpoint.get('/items', function(req, res, fail) {
+  vinbud.items(function(err, data) {
+    if (err) {
+      return fail(err);
+    }
 
     return res.json(data);
   });
