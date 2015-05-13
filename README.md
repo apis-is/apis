@@ -23,8 +23,9 @@ The code that is running the service is open source under the [MIT licence](http
 The following commands should get you up and running.
 
 ```
-git clone https://github.com/kristjanmik/apis/
+git clone https://github.com/apis-is/apis
 cd apis/
+git checkout v2
 npm install
 gulp watch
 ```
