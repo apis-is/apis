@@ -23,6 +23,6 @@ endpoint.get('/items', function(req, res, fail) {
       return fail(err);
     }
 
-    return res.json(data);
+    return res.json(JSON.parse(data));
   });
 });
