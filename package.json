@@ -24,7 +24,7 @@
     "gulp": "^3.8.11",
     "statuses": "^1.2.1",
     "tvinna": "^1.0.1",
-    "vinbud": "^1.1.0"
+    "vinbud": "^1.1.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
