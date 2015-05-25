@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "name": "Demo lotto web component",
+            "description": "A simple tests of a Web Component using the lottery endpoint",
+            "url": "https://github.com/koddsson/lottery-component"
+        },
+        {
+            "name": "robo-parliament",
+            "description": "Display current members of the Icelandic parliament rendered as superior robots.",
+            "url": "https://github.com/koddsson/robo-parliament"
+        }
+    ]
+}

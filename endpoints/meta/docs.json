@@ -1,0 +1,41 @@
+{
+  "title": "Meta",
+  "icon": "",
+  "description": "Various meta info about the apis.is project.",
+  "endpoints": [
+    {
+      "path": "/maintainers",
+      "method": "GET",
+      "description": "List the maintainers of the project.",
+      "source": {
+        "title": "GitHub",
+        "path": "https://api.github.com/orgs/apis-is/public_members"
+      },
+      "variables": []
+    },
+    {
+      "path": "/contributors",
+      "method": "GET",
+      "description": "Get a list of all contributors of the project.",
+      "source": {
+        "title": "GitHub",
+        "path": "https://api.github.com/repos/apis-is/apis/contributors"
+      },
+      "variables": []
+    },
+    {
+      "path": "/sponsors",
+      "method": "GET",
+      "description": "Get a list of official sponsors of the project.",
+      "source": {},
+      "variables": []
+    },
+    {
+      "path": "/about",
+      "method": "GET",
+      "description": "Content for docs about section.",
+      "source": {},
+      "variables": []
+    }
+  ]
+}
