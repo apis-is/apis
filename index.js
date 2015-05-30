@@ -89,6 +89,8 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
+  console.error(err);
+
   var code;
   if (typeof err === 'number') {
     code = err;

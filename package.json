@@ -20,13 +20,14 @@
     "cors": "~2.5.2",
     "express": "^4.11.2",
     "firm": "^0.2.1",
-    "flights": "^0.2.0",
+    "flights": "^0.3.0",
     "gulp": "^3.8.11",
     "lodash": "^3.3.1",
     "request": "^2.53.0",
     "statuses": "^1.2.1",
     "tvinna": "^1.0.1",
-    "vinbud": "^1.1.0"
+    "vinbud": "^1.1.0",
+    "bluebird": "~2.9.27"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
