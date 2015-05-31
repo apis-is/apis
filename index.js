@@ -73,7 +73,7 @@ app.get('/docs.json', (function() {
 /**
  * Set up endpoints
  */
-console.log('Setting up endpoints:')
+console.log('Setting up endpoints:');
 
 endpoints.forEach(function(path) {
   if(!fs.existsSync('./endpoints/' + path + '/index.js')){
