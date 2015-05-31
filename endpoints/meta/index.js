@@ -66,7 +66,7 @@ endpoint.get('/maintainers', function() {
         // These are the attributes we'll pull from the github API user object. 
         resolve(_.pick(data, ['name', 'url', 'bio', 'email', 'avatar_url', 'login']));
       });
-    })
+    });
   });
 });
 
@@ -94,5 +94,5 @@ endpoint.get('/contributors', function() {
     });
   }).map(function(maintainer){
     return _.pick(maintainer, ['login', 'avatar_url', 'url', 'contributions']);
-  })
+  });
 });
