@@ -1,6 +1,5 @@
 var endpoint = module.exports = require('apis-endpoint')();
-var Promise = require('bluebird');
-var vinbud = Promise.promisifyAll(require('vinbud'));
+var vinbud = require('bluebird').promisifyAll(require('vinbud'));
 
 endpoint.get('/', function(data) {
   return vinbud.opening_timesAsync(data);

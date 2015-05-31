@@ -1,7 +1,6 @@
 var endpoint = module.exports = require('apis-endpoint')();
 
-var Promise = require('bluebird');
-var althingi = Promise.promisifyAll(require('althingi'));
+var althingi = require('bluebird').promisifyAll(require('althingi'));
 
 endpoint.get('/', althingi.listAsync);
 

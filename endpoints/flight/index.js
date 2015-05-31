@@ -1,5 +1,4 @@
 var endpoint = module.exports = require('apis-endpoint')();
-var Promise = require('bluebird');
 var flights = require('flights');
 
 endpoint.get('/kef', function(data) {

@@ -1,6 +1,6 @@
 var endpoint = module.exports = require('apis-endpoint')();
 
-var Promise = require('bluebird');
+var BPromise = require('bluebird');
 var _ = require('lodash');
 var request = require('request');
 var async = require('async');
@@ -9,19 +9,19 @@ var urlBuilder = require('url');
 /*
  * Get the various applications that use apis.is
  */
-var users = Promise.resolve(require('./json/users.json'));
+var users = BPromise.resolve(require('./json/users.json'));
 endpoint.get('/users', users);
 
 /**
  * Get a list of official sponsors of the project.
  */
-var sponsors = Promise.resolve(require('./json/sponsors.json'));
+var sponsors = BPromise.resolve(require('./json/sponsors.json'));
 endpoint.get('/sponsors', sponsors);
 
 /**
  * Content for docs about section
  */
-var about = Promise.resolve(require('./json/about.json'));
+var about = BPromise.resolve(require('./json/about.json'));
 endpoint.get('/about', about);
 
 /**
@@ -47,11 +47,11 @@ endpoint.get('/maintainers', function() {
   var headers = { 'User-Agent': 'apis-is' };
   var options = { url: githubUrl , headers: headers };
  
-  return new Promise(function(resolve){
+  return new BPromise(function(resolve){
     request.get(options, function(err, response, body) {
       if (err) throw err;
 
-      //Exceptions are catched in the promise
+      //Exceptions are catched in the Bpromise
       var data = JSON.parse(body);
 
       resolve(data.map(function(e) { 
@@ -59,7 +59,7 @@ endpoint.get('/maintainers', function() {
       }));
     });
   }).map(function(url){
-    return new Promise(function(resolve){
+    return new BPromise(function(resolve){
       request.get({url: url, headers: headers}, function(err, response, body) {
         var data = JSON.parse(body);
 
@@ -82,7 +82,7 @@ endpoint.get('/contributors', function() {
     }
   };
 
-  return new Promise(function(resolve,reject){
+  return new BPromise(function(resolve,reject){
     request.get(options, function(err, response, body) {
       if (err) throw err;
 

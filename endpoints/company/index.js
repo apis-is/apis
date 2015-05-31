@@ -1,7 +1,6 @@
 var endpoint = module.exports = require('apis-endpoint')();
 
-var Promise = require('bluebird');
-var firm = Promise.promisifyAll(require('firm'));
+var firm = require('bluebird').promisifyAll(require('firm'));
 
 endpoint.get('/is', function(data) {
   return firm.isAsync(data);
