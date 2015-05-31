@@ -1,22 +1,33 @@
+var endpoint = module.exports = require('apis-endpoint')();
+
+var Promise = require('bluebird');
 var _ = require('lodash');
-var endpoint = require('apis-endpoint')();
 var request = require('request');
 var async = require('async');
 var urlBuilder = require('url');
 
-module.exports = endpoint;
-
 /*
  * Get the various applications that use apis.is
  */
-endpoint.get('/users/', function(req, res, fail) {
-  return res.json(require('./json/users.json'));
-});
+var users = Promise.resolve(require('./json/users.json'));
+endpoint.get('/users', users);
+
+/**
+ * Get a list of official sponsors of the project.
+ */
+var sponsors = Promise.resolve(require('./json/sponsors.json'));
+endpoint.get('/sponsors', sponsors);
+
+/**
+ * Content for docs about section
+ */
+var about = Promise.resolve(require('./json/about.json'));
+endpoint.get('/about', about);
 
 /**
  * Get the maintainers of the project.
  */
-endpoint.get('/maintainers/', function(req, res, fail) {
+endpoint.get('/maintainers', function() {
   // Github will allow some low number of requests per IP per hour (50?)
   // without authentication so this will not be always needed but should be set
   // in production.
@@ -25,7 +36,7 @@ endpoint.get('/maintainers/', function(req, res, fail) {
     client_secret: process.env.GITHUB_CLIENT_SECRET
   };
   
-  var github_url = urlBuilder.format({
+  var githubUrl = urlBuilder.format({
     protocol: "https",
     host: "api.github.com",
     pathname: "/orgs/apis-is/public_members",
@@ -34,44 +45,36 @@ endpoint.get('/maintainers/', function(req, res, fail) {
 
   // Github want's user agents to be able to diffrienciate between apps.
   var headers = { 'User-Agent': 'apis-is' };
-  var options = { url: github_url , headers: headers };
+  var options = { url: githubUrl , headers: headers };
  
-  // These are the attributes we'll pull from the github API user object. 
-  var properties = ['name', 'url', 'bio', 'email', 'avatar_url', 'login'];
+  return new Promise(function(resolve){
+    request.get(options, function(err, response, body) {
+      if (err) throw err;
 
-  async.waterfall([
-    function(callback) {
-      // Fetch all the maintainer urls and pass it on.
-      request.get(options, function(err, response, body) {
-        if (err) return res.json({error: err});
-        var json = JSON.parse(body);
-        callback(null, json.map(function(e) { return e.url + urlBuilder.format({query: query}); }));
+      //Exceptions are catched in the promise
+      var data = JSON.parse(body);
+
+      resolve(data.map(function(e) { 
+        return e.url + urlBuilder.format({query: query}); 
+      }));
+    });
+  }).map(function(url){
+    return new Promise(function(resolve){
+      request.get({url: url, headers: headers}, function(err, response, body) {
+        var data = JSON.parse(body);
+
+        // These are the attributes we'll pull from the github API user object. 
+        resolve(_.pick(data, ['name', 'url', 'bio', 'email', 'avatar_url', 'login']));
       });
-    },
-    function(urls, callback) {
-      // Fetch each individual user and pass that data onwards.
-      async.map(urls, function(url, cb) {
-        request.get({url: url, headers: headers}, function(err, response, body) {
-          cb(null, _.pick(JSON.parse(body), properties));
-        });
-      }, function(err, result) { 
-        callback(null, result);
-      });
-    }
-  ],
-  function(err, results) {
-    if (err) {
-      res.json({error: err});
-    } else {
-      res.json(results);
-    }
+    })
   });
 });
 
 /**
  * Get a list of all contributors to the project.
  */
-endpoint.get('/contributors/', function(req, res, fail) {
+endpoint.get('/contributors', function() {
+
   var options = {
     url: 'https://api.github.com/repos/apis-is/apis/contributors',
     headers: {
@@ -79,29 +82,17 @@ endpoint.get('/contributors/', function(req, res, fail) {
     }
   };
 
-  request.get(options, function(err, response, body) {
-    if (err) return res.json({error: err});
+  return new Promise(function(resolve,reject){
+    request.get(options, function(err, response, body) {
+      if (err) throw err;
 
-    var maintainers = _.map(JSON.parse(body), function(n) {
-      return _.pick(n, ['login', 'avatar_url', 'url', 'contributions']);
+      var data = JSON.parse(body);
+
+      if (response.statusCode !== 200) throw new Error(data.message);
+
+      resolve(data);
     });
-
-    return res.json(maintainers);
-  });
-});
-
-/**
- * Get a list of official sponsors of the project.
- */
-endpoint.get('/sponsors/', function(req, res, fail) {
-  return res.json({
-    'nosponsors': 'No sponsors yet! Contact us at apis@apis.is if you\'re interested!'
-  });
-});
-
-/**
- * Content for docs about section
- */
-endpoint.get('/about/', function(req, res, fail) {
-  return res.json(require('./json/about.json'));
+  }).map(function(maintainer){
+    return _.pick(maintainer, ['login', 'avatar_url', 'url', 'contributions']);
+  })
 });
