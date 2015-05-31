@@ -73,11 +73,13 @@ app.get('/docs.json', (function() {
 /**
  * Set up endpoints
  */
+console.log('Setting up endpoints:')
+
 endpoints.forEach(function(path) {
   if(!fs.existsSync('./endpoints/' + path + '/index.js')){
     return console.error('Could not set up:',path);
   }
-  console.log('Setting up:', path);
+  console.log(' -', path);
 
   var endpoint = require('./endpoints/' + path);
   app.use('/' + path, endpoint);
