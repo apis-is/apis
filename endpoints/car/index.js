@@ -1,15 +1,7 @@
-var endpoint = require('apis-endpoint')();
-module.exports = endpoint;
+var endpoint = module.exports = require('apis-endpoint')();
 
-var car = require('car');
+var car = require('bluebird').promisifyAll(require('car'));
 
-/**
- * Search through the icelandic car registry
- */
-endpoint.get('/is/:carPlate', function(req, res, fail) {
-  car.is(req.params.carPlate, function(err, data) {
-    if (err) return fail(err);
-
-    return res.json(data);
-  });
+endpoint.get('/is/:carPlate', function(data) {
+  return car.isAsync(data.carPlate);
 });

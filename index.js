@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 });
 
 // In production, someone else does this (nginx|varnish|haproxy)
-if (app.get('env') !== 'production') {
+if (app.get('env') !== 'production' && app.get('env') !== 'testing') {
   /*
    * Super simple logging
    */
@@ -42,7 +42,6 @@ app.get('/status', function(req, res, next) {
 });
 
 app.get('/docs.json', (function() {
-  console.log('Building /docs.json');
   var endpoint;
   var docs = endpoints.map(function(name) {
     try {
@@ -89,6 +88,8 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
+  console.error(err);
+
   var code;
   if (typeof err === 'number') {
     code = err;

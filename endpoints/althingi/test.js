@@ -8,6 +8,6 @@ describe('Listing all parliament members', function() {
 
 describe('Fetching a single parliament member votes by id', function() {
   it('should succeed', function(done) {
-    endpoint.tester('/1166/votes').expect(200, done);
+    endpoint.tester('/1166/vote').expect(200, done);
   });
 });
