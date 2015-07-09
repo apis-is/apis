@@ -51,6 +51,6 @@ app.get('/carparks', function(req, res){
 			});
 		}
 		
-		return res.cache(3600).json(obj);
+		return res.cache(180).json(obj);
 	});
 });
