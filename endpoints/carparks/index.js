@@ -1,5 +1,5 @@
 var request = require('request'),
-	$ = require('jquery'),
+	$ = require('cheerio'),
 	h = require('apis-helpers'),
 	app = require('../../server');
 
