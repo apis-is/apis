@@ -12,7 +12,7 @@ describe('hljomaholl', function() {
   it ('should return an array of items with correct fields', function(done) {
     var params = helpers.testRequestParams('/hljomaholl');
     var resultHandler = helpers.testRequestHandlerForFields(
-      done, fieldsToCheckFor, null
+      done, fieldsToCheckFor, null, true
     );
     request(params, resultHandler);
   });
