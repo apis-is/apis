@@ -30,43 +30,43 @@ app.get('/names', function (req, res) {
 
 /* Get all legal names for males */
 app.get('/names/males/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=yes';
+	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Get all legal names for females */
 app.get('/names/females/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=yes';
+	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Get all legal middle names */
 app.get('/names/middlenames/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=yes';
+	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes';
 	return handleRequest(url, req, res);
 });
 
 /* Get all rejected names for males */
 app.get('/names/rejected/males/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Drengir=on&Samthykkt=no';
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no';
   return handleRequest(url, req, res);
 });
 
 /* Get all rejected names for females */
 app.get('/names/rejected/females/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Samthykkt=no';
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no';
   return handleRequest(url, req, res);
 });
 
 /* Get all rejected middle names */
 app.get('/names/rejected/middlenames/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Millinofn=on&Samthykkt=no';
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no';
   return handleRequest(url, req, res);
 });
 
 /* Get all rejected names */
 app.get('/names/rejected/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no';
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no';
   return handleRequest(url, req, res);
 });
 
