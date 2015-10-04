@@ -6,8 +6,7 @@ describe('hospital', function() {
     // The only thing that changes is the form attribute, so why not just re-use the object
     var fieldsToCheckFor = ['birthNumbers', 'surgeries', 'dischargedNumbers',
 			    'hospitalizedNumbers', 'atwork', 'patients-child',
-		            'patients-er', 'patients-walk', 'patients-icu',
-			    'patients-hotel', 'donors', 'patients-skilun',
+		            'patients-er', 'patients-walk', 'patients-icu', 'donors', 'patients-skilun',
  			    'patients-heart2'];
 
     it("should return an array of objects containing correct fields", function(done) {
