@@ -1,6 +1,6 @@
 var app = require('../../server');
 var request = require('request');
-cheerio = require('cheerio');
+var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
 //returns the stats table of Icelandic football teams.
