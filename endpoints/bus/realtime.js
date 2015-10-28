@@ -17,6 +17,13 @@ app.get('/bus/realtime', function(req, res){
 			return res.json(500,{error:'Something is wrong with the data provided from the data source'});
 		}
 
+    if(obj.error){
+      var hasDescription = obj.error && obj.error.desc;
+
+      return res.status(500).json({
+        error: hasDescription ? obj.error.desc : 'Something went wrong'
+      });
+    }
 		var activeBusses = [],
 			requestedBusses = [];
 
