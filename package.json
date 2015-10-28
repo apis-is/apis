@@ -1,6 +1,7 @@
 {
   "name": "apis.is",
   "version": "0.3.0",
+  "main": "index.js",
   "author": {
     "name": "Kristján Ingi Mikaelsson",
     "email": "kristjanmik@gmail.com"
@@ -58,6 +59,7 @@
     "xregexp": "~2.0.0"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "mocha test/integration",
     "coveralls": "exit 0"
   }
