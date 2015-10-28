@@ -41,6 +41,7 @@
   ],
   "dependencies": {
     "apis-helpers": "0.0.1",
+    "babel": "^5.8.29",
     "cheerio": "~0.12.4",
     "express": "~3.20.1",
     "file": "~0.2.1",
