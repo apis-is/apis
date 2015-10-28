@@ -8,7 +8,7 @@ var iconv = require('iconv-lite');
 app.get('/isbolti',function(req,res){
 
   var stats = { results: [] };
-
+  
   request({url:'http://fotbolti.net/isboltinn.php' ,encoding: null}, function(error, response, html){
     if(error || response.statusCode !== 200){
       return res.json(500,{error:'Could not retreive data from fotbolti.net'});
