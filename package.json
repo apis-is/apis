@@ -33,6 +33,10 @@
       "name": "Kristján Oddsson (koddsson)",
       "email": "koddsson@gmail.com",
       "url": "https://koddsson.com"
+    },
+    {
+      "name": "Alexander Baldvin",
+      "email": "alexanderbaldvin@gmail.com"
     }
   ],
   "dependencies": {
@@ -40,15 +44,14 @@
     "cheerio": "~0.12.4",
     "express": "~3.20.1",
     "file": "~0.2.1",
+    "iconv-lite": "^0.4.13",
     "isn2wgs": "0.0.2",
     "jquery": "^2.1.4",
     "mocha": "~1.15.1",
     "moment": "~2.1.0",
-    "xml2js": "~0.2.8",
-    "request": "~2.27.0",
-    "scraper": "0.0.9",
     "redis": "~0.8.4",
     "request": "~2.27.0",
+    "scraper": "0.0.9",
     "underscore": "~1.5.2",
     "xml2js": "~0.2.8",
     "xregexp": "~2.0.0"
