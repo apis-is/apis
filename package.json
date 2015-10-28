@@ -52,6 +52,7 @@
     "redis": "~0.8.4",
     "request": "~2.27.0",
     "scraper": "0.0.9",
+    "statuses": "^1.2.1",
     "underscore": "~1.5.2",
     "xml2js": "~0.2.8",
     "xregexp": "~2.0.0"
