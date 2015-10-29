@@ -11,7 +11,7 @@ describe('bus', function() {
         helpers.assertPresenceOfFields(["unixTime","x","y","from","to"], busses);
     };
 
-    describe('realtime', function() {
+    describe.skip('realtime', function() {
         describe('searching a single bus', function() {
             it("should return an array of objects containing correct fields", function(done) {
                 var params = helpers.testRequestParams("/bus/realtime?busses=1");
