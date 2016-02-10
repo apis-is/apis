@@ -27,4 +27,12 @@ describe('currency', function() {
             request(params, resultHandler);
         });
     });
+    describe('searching using provider "borgun"', function(){
+        it("should return an array of objects containing correct fields", function(done){
+            var params = helpers.testRequestParams("/currency/borgun");
+            var fields = ["currencyCode", "currencyDescription", "currencyRate", "country", "countryEnglish", "countryCode", "rateDate"];
+            var resultHandler = helpers.testRequestHandlerForFields(done, fields);
+            request(params, resultHandler);
+        });
+    });
 });
