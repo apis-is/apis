@@ -4,7 +4,7 @@ var request = require('request'),
 
 app.get('/currency', function(req, res){
     var provider = req.query.provider || 'arion';
-    var providers = ['m5', 'arion', 'lb'];
+    var providers = ['m5', 'arion', 'lb', 'borgun'];
     if (providers.indexOf(provider) >= 0) {
         return res.redirect(301,'/currency/'+ provider);
     } else {
