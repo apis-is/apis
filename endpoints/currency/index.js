@@ -1,6 +1,6 @@
-var request = require('request'),
-    moment = require('moment'),
-    app = require('../../server');
+var request = require('request');
+var moment = require('moment');
+var app = require('../../server');
 
 app.get('/currency', function(req, res){
     var provider = req.query.provider || 'arion';
@@ -8,6 +8,6 @@ app.get('/currency', function(req, res){
     if (providers.indexOf(provider) >= 0) {
         return res.redirect(301,'/currency/'+ provider);
     } else {
-        return res.json(404,{error:'This provider does not exist',code:2});
+        return res.status(404).json({error:'This provider does not exist',code:2});
     }
 });

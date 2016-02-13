@@ -1,6 +1,6 @@
-var request = require('request'),
-	parseString = require('xml2js').parseString,
-	app = require('../../server');
+var request = require('request');
+var parseString = require('xml2js').parseString;
+var app = require('../../server');
 
 app.get('/currency/lb', function(req, res){
 	// A = Almennt gengi, S = Seðlagengi
@@ -10,7 +10,7 @@ app.get('/currency/lb', function(req, res){
 		url: 'http://www.landsbankinn.is/modules/markets/services/XMLGengi.asmx/NyjastaGengiByType?strTegund=' + type
 		}, function(err, response, xml) {
 			if(err || response.statusCode !== 200)
-				return res.json(500,{error: 'www.landsbankinn.is refuses to respond or give back data'});
+				return res.status(500).json({error: 'www.landsbankinn.is refuses to respond or give back data'});
 
 			var currencies = [];
 			parseString(xml, { explicitRoot: false }, function(err, result) {

@@ -29,7 +29,7 @@ var scrapeSamferdaFor = function (requesting, res) {
 
 	request(url, function (error, response, body) {
 		if (error) {
-			return res.json(500,{error: url + ' not responding correctly...' });
+			return res.status(500).json({error: url + ' not responding correctly...' });
 		}
 
 		// Cheerio declared and then attemted to load.
@@ -37,7 +37,7 @@ var scrapeSamferdaFor = function (requesting, res) {
 		try {
 			$ = cheerio.load( body );
 		} catch (e) {
-			return res.json(500,{error:'Could not load the body with cherrio.'});
+			return res.status(500).json({error:'Could not load the body with cherrio.'});
 		}
 
 		// Base object to be added to
@@ -78,4 +78,3 @@ app.get('/rides/samferda-drivers', function (req, res, next) {
 app.get('/rides/samferda-passengers', function (req, res, next) {
 	scrapeSamferdaFor('Ride', res);
 });
-

@@ -1,6 +1,6 @@
-var request = require('request'),
-    app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 String.prototype.replaceArray = function(find, replace) {
   var replaceString = this;
@@ -50,13 +50,13 @@ var parseList = function ( body ) {
 	}
 
     var results = [];
-    
+
 
     var tr = $('.rgMasterTable').find('tbody').find('tr');
 
     tr.each(function (i) {
         var td = $(this).find('td');
-        
+
         // Change start time from d.m.YYYY to YYYY-mm-dd
         var start_date = td.eq(6).text().trim();
         if(start_date=="") {
@@ -66,7 +66,7 @@ var parseList = function ( body ) {
 	  		var sd = new Date(sd_split[2],sd_split[1],sd_split[0]);
 	  		var start_date_final = sd.getFullYear()+"-"+pad(sd.getMonth())+"-"+pad(sd.getDate());
 		}
-       
+
         // Change end time from d.m.YYYY to YYYY-mm-dd
         var end_date = td.eq(7).text().trim();
         if(end_date=="") {
@@ -76,10 +76,10 @@ var parseList = function ( body ) {
 	  		var ed = new Date(ed_split[2],ed_split[1],ed_split[0]);
 	  		var end_date_final = ed.getFullYear()+"-"+pad(ed.getMonth())+"-"+pad(ed.getDate());
 		}
-		
+
 		var find = [".", " kr."];
 		var replace = ["", ""];
-		
+
         results.push({
              id: (td.eq(3).text().trim()==""?"":parseFloat(td.eq(3).text().trim())),
              name: (td.eq(4).text().trim()==""?"":td.eq(4).text().trim()),

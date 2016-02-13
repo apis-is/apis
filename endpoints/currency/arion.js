@@ -1,7 +1,7 @@
-var request = require('request'),
-	moment = require('moment'),
-	h = require('apis-helpers'),
-	app = require('../../server');
+var request = require('request');
+var moment = require('moment');
+var h = require('apis-helpers');
+var app = require('../../server');
 
 app.get('/currency/arion', function(req, res){
 
@@ -13,7 +13,7 @@ app.get('/currency/arion', function(req, res){
 		body: toSend
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200) {
-			return res.json(500,{error:'www.arionbanki.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.arionbanki.is refuses to respond or give back data'});
 		}
 
 		var jsonObject = JSON.parse(body),

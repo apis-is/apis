@@ -8,7 +8,7 @@ app.get('/particulates', function(req, res) {
     url: 'http://www.loft.rvk.is/xml/Xsvifryk.xml'
   }, function(err, response, xml) {
     if (err || response.statusCode !== 200) {
-      return res.json(500, {
+      return res.status(500).json({
         error: 'www.loft.rvk.is refuses to respond or give back data'
       });
     }

@@ -8,10 +8,10 @@ var iconv = require('iconv-lite');
 app.get('/isbolti',function(req,res){
 
   var stats = { results: [] };
-  
+
   request({url:'http://fotbolti.net/isboltinn.php' ,encoding: null}, function(error, response, html){
     if(error || response.statusCode !== 200){
-      return res.json(500,{error:'Could not retreive data from fotbolti.net'});
+      return res.status(500).json({error:'Could not retreive data from fotbolti.net'});
     }else{
 
       var body = iconv.decode(html,'iso-8859-1');
@@ -19,7 +19,7 @@ app.get('/isbolti',function(req,res){
       try {
           var $ = cheerio.load(body);
       } catch(err) {
-          return res.json(500,{error:'Could not parse body'});
+          return res.status(500).json({error:'Could not parse body'});
       }
 
       $('table tr').each(function(key){

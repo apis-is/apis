@@ -1,7 +1,7 @@
-var request = require('request'),
-	cheerio = require('cheerio'),
-	_ = require('underscore'),
-	app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var _ = require('underscore');
+var app = require('../../server');
 
 app.get('/concerts', function (req, res, next) {
   var url = 'http://midi.is/Home/LoadMoreEventsByDate?eventType=Concerts&pageNumber='
@@ -9,8 +9,7 @@ app.get('/concerts', function (req, res, next) {
 
   request.get(url + page, function (error, response, body) {
   	if (error || response.statusCode !== 200) {
-		return res.json(500,
-			{ error: 'Something came up when contacting the midi.is server!'});
+		return res.status(500).json({ error: 'Something came up when contacting the midi.is server!'});
 	}
 	var events = JSON.parse(body);
 	var filtered = _.map(events, function(event) {

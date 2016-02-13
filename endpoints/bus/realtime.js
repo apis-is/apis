@@ -10,13 +10,13 @@ app.get('/bus/realtime', function(req, res){
 
   request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
     if(error || response.statusCode !== 200)
-      return res.json(500,{error:'The bus api is down or refuses to respond'});
+      return res.status(500).json({error:'The bus api is down or refuses to respond'});
 
     var obj;
     try{
       obj = JSON.parse(body);
     }catch(error){
-      return res.json(500,{error:'Something is wrong with the data provided from the data source'});
+      return res.status(500).json({error:'Something is wrong with the data provided from the data source'});
     }
 
     var activeBusses = [],
@@ -46,12 +46,12 @@ app.get('/bus/realtime', function(req, res){
     request('http://straeto.is/bitar/bus/livemap/json.jsp?routes='+objString, function (error, response, body) {
 
       if(error || response.statusCode !== 200)
-        return res.json(500,{error:'The bus api is down or refuses to respond'});
+        return res.status(500).json({error:'The bus api is down or refuses to respond'});
 
       try{
         var data = JSON.parse(body);
       }catch(e){
-        return res.json(500,{error:'Something is wrong with the data provided from the data source'});
+        return res.status(500).json({error:'Something is wrong with the data provided from the data source'});
       }
 
       var routes = data.routes;
@@ -64,7 +64,7 @@ app.get('/bus/realtime', function(req, res){
         var objRoute = {
           busNr: route.id || "", // will be undefined if none are active
           busses: []
-        }; 
+        };
         objRoutes.results.push(objRoute);
 
         if (!route.busses) return; // No busses active, eg. after schedule

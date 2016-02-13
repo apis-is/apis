@@ -18,7 +18,7 @@ function getJsonData(url, callback){
     }, function (error, response, body) {
 
       if (error) throw new Error(url + ' did not respond');
-      
+
       parseString(body, function (err, result, title) {
         callback(result);
     });
@@ -95,15 +95,15 @@ app.get('/sports/football', function (req, res) {
   request.get({ headers: {'User-Agent': h.browser()}, url: url },
     function(error, response, body) {
       if(error || response.statusCode !== 200) {
-        return res.json(500,{error:'www.ksi.is refuses to respond or give back data'});
+        return res.status(500).json({error:'www.ksi.is refuses to respond or give back data'});
       }
 
       var $;
 
       try {
-        $ = cheerio.load(body); 
+        $ = cheerio.load(body);
       } catch(error) {
-        return res.json(500,{error:'Could not parse body'});
+        return res.status(500).json({error:'Could not parse body'});
       }
 
       var obj = { results: []};
@@ -126,7 +126,7 @@ app.get('/sports/football', function (req, res) {
           }
         });
       } catch(error) {
-        return res.json(500, {error: 'Could not parse the game data'});
+        return res.status(500).json({error: 'Could not parse the game data'});
       }
 
       return res.json(obj);
@@ -179,15 +179,15 @@ function footballLeagues(url, req, res){
   request.get({ headers: {'User-Agent': h.browser()}, url: url },
     function(error, response, body) {
       if(error || response.statusCode !== 200) {
-        return res.json(500,{error:'www.ksi.is refuses to respond or give back data'});
+        return res.status(500).json({error:'www.ksi.is refuses to respond or give back data'});
       }
 
       var $;
 
       try {
-        $ = cheerio.load(body); 
+        $ = cheerio.load(body);
       } catch(error) {
-        return res.json(500,{error:'Could not parse body'});
+        return res.status(500).json({error:'Could not parse body'});
       }
 
       var obj = { results: []};
@@ -210,7 +210,7 @@ function footballLeagues(url, req, res){
           }
         });
       } catch(error) {
-        return res.json(500, {error: 'Could not parse the game data'});
+        return res.status(500).json({error: 'Could not parse the game data'});
       }
 
       return res.json(obj);
@@ -224,13 +224,13 @@ app.get('/sports/handball', function (req, res) {
   request.get({ headers: {'User-Agent': h.browser()}, url: url},
     function(error, response, body) {
       if(error || response.statusCode !== 200) {
-        return res.json(500, {error:'www.hsi.is refuses to respond or give back data'});
+        return res.status(500).json({error:'www.hsi.is refuses to respond or give back data'});
       }
 
       try {
         var $ = cheerio.load(body);
       } catch(error) {
-        return res.json(500, {error:'Could not parse body'});
+        return res.status(500).json({error:'Could not parse body'});
       }
 
       var obj = {results: []};
@@ -253,7 +253,7 @@ app.get('/sports/handball', function (req, res) {
           }
         });
       } catch(error) {
-        return res.json(500, {error: 'Could not parse the game data: ' + error});
+        return res.status(500).json({error: 'Could not parse the game data: ' + error});
       }
 
       return res.json(obj);
