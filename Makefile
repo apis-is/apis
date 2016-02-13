@@ -5,4 +5,4 @@ tests:
 	npm test
 
 run:
-	npm run
+	npm start
