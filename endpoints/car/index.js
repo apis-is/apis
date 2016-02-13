@@ -6,9 +6,9 @@ var request = require('request'),
 
 app.get('/car', function(req, res){
 	var carPlate = req.query.number || req.query.carPlate || '';
-	
+
 	if(!carPlate)
-		return res.json(431,{error:'Please provide a valid carPlate to lookup'});
+		return res.status(431).json({error:'Please provide a valid carPlate to lookup'});
 
 	// Encode carPlate so that Icelandic characters will work
 	carPlate = encodeURIComponent(carPlate);
@@ -20,7 +20,7 @@ app.get('/car', function(req, res){
 		url: url
 	}, function(error, response, body) {
 		if(error || response.statusCode !== 200) {
-			return res.json(500,{error:'www.samgongustofa.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.samgongustofa.is refuses to respond or give back data'});
 		}
 
 		var data = $(body);
@@ -51,8 +51,8 @@ app.get('/car', function(req, res){
 				status: fields[7],
 				nextCheck: fields[8]
 			});
-		} 
-		
+		}
+
 		return res.cache().json(obj);
 	});
 });

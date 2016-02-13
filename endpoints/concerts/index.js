@@ -9,8 +9,7 @@ app.get('/concerts', function (req, res, next) {
 
   request.get(url + page, function (error, response, body) {
   	if (error || response.statusCode !== 200) {
-		return res.json(500,
-			{ error: 'Something came up when contacting the midi.is server!'});
+		return res.status(500).json({ error: 'Something came up when contacting the midi.is server!'});
 	}
 	var events = JSON.parse(body);
 	var filtered = _.map(events, function(event) {
