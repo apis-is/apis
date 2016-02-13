@@ -2,14 +2,15 @@ var request = require('request');
 var helpers = require('../../../lib/test_helpers.js');
 
 describe('tv root', function() {
-    it("should return info", function (done) {
+  it("should return info", function (done) {
         var fieldsToCheckFor = ["info"];
         var params = helpers.testRequestParams("/tv/");
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
         request.get(params, resultHandler);
     });
 });
-describe('tv - skjar1', function () {
+
+describe.skip('tv - skjar1', function () {
     it("should return an array of objects containing correct fields", function (done) {
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/skjar1");
@@ -72,8 +73,9 @@ describe('tv - stod2', function () {
     });
 });
 
-describe('tv - ruv ithrottir', function () {
+describe.skip('tv - ruv ithrottir', function () {
     it("should return an array of objects containing correct fields", function (done) {
+        this.timeout(20000);
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruvithrottir");
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, undefined, true);
@@ -81,8 +83,9 @@ describe('tv - ruv ithrottir', function () {
     });
 });
 
-describe('tv - ruv', function () {
+describe.skip('tv - ruv', function () {
     it("should return an array of objects containing correct fields", function (done) {
+        this.timeout(20000);
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
         var params = helpers.testRequestParams("/tv/ruv");
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);

@@ -6,6 +6,8 @@ var request = require('request'),
 
 /* Skjar 1 */
 app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {
+  res.json(503, {error: 'Source page has changed. Scraping needs to be re-implemented'});
+
   var url = 'http://www.skjarinn.is/einn/dagskrarupplysingar/?channel_id=7&output_format=xml';
 
   request.get({
