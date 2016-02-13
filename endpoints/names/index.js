@@ -5,10 +5,10 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-var request = require('request'),
-	h = require('apis-helpers'),
-	app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var h = require('apis-helpers');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 /* Root names handler - only returns a list of resources */
 app.get('/names', function (req, res) {

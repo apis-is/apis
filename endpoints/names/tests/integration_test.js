@@ -2,7 +2,7 @@
 About:   Integration tests for the Names API
 Author:  Hjörtur Líndal Stefánsson
 Email:   hjorturls@gmail.com
-Created: August 2014 
+Created: August 2014
 */
 
 var request = require('request');
@@ -137,7 +137,7 @@ function testFiltered(url) {
 function assertResults(params, shouldBeEmpty) {
     shouldBeEmpty = shouldBeEmpty || false;
     request.get(params, function(err, res, body) {
-            json = JSON.parse(body);
+            var json = JSON.parse(body);
 
             assert(json.results && typeof json.results.length !== "undefined", "Does not contain a 'results' field");
             if (!shouldBeEmpty) {

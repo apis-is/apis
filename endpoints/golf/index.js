@@ -1,14 +1,14 @@
-var request = require('request'),
-app = require('../../server'),
-cheerio = require('cheerio'),
-_ = require('underscore'),
-h = require('apis-helpers');
+var request = require('request');
+var app = require('../../server');
+var cheerio = require('cheerio');
+var _ = require('underscore');
+var h = require('apis-helpers');
 
 var getParamFromURL = function(url, param) {
   // This feels wrong.
   var params = url.split('?')[1].split('&');
 
-  for (p in params) {
+  for (var p in params) {
     var pieces = params[p].split('=');
     if (pieces[0] === param) {
       return pieces[1];
@@ -31,7 +31,7 @@ app.get('/golf/teetimes', function(req, res) {
     if(err || response.statusCode !== 200) {
       return res.status(500).json({error: 'mitt.golf.is refuses to respond or give back data'});
     }
-    $ = cheerio.load(html);
+    var $ = cheerio.load(html);
     var rows = $('table.teeTimeTable tbody').children();
     var time = '';
     return res.cache().json({ results: _.map(rows, function(row) {
@@ -55,7 +55,8 @@ app.get('/golf/clubs', function(req, res) {
   }, function(err, response, html) {
     if(err || response.statusCode !== 200)
       return res.status(500).json({error: 'mitt.golf.is refuses to respond or give back data'});
-    $ = cheerio.load(html);
+
+    var $ = cheerio.load(html);
     var rows = $('table.golfTable tr').slice(2); // Skip the first element.
     return res.cache(3600).json({ results: _.map(rows, function(row) {
       var row = $(row);

@@ -67,7 +67,7 @@ app.get('/cinema', function(req, res, next) {
         .match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig);
 
       if (urls && urls.length > 0) {
-        imgUrl = urls[0];
+        imgURL = urls[0];
       }
 
       var realeasedYear = movie

@@ -1,7 +1,7 @@
-var request = require('request'),
-    cheerio = require('cheerio'),
-    browser = require('apis-helpers').browser,
-    app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var browser = require('apis-helpers').browser;
+var app = require('../../server');
 
 /*
  * Hraun table parse

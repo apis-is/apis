@@ -61,7 +61,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha test/integration",
+    "test": "mocha ./test",
     "coveralls": "exit 0"
   }
 }

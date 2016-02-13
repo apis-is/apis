@@ -1,6 +1,6 @@
-var request = require('request'),
-	parseString = require('xml2js').parseString,
-	app = require('../../server');
+var request = require('request');
+var parseString = require('xml2js').parseString;
+var app = require('../../server');
 
 app.get('/currency/borgun', function(req, res) {
 

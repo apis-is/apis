@@ -1,7 +1,7 @@
-var request = require('request'),
-    cheerio = require('cheerio'),
-    h = require('apis-helpers'),
-    app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var h = require('apis-helpers');
+var app = require('../../server');
 
 app.get('/company', function(req, res, next){
 

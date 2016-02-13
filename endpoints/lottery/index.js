@@ -1,6 +1,6 @@
-var request = require('request'),
-    app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 
 var getLotto = function (req, res) {

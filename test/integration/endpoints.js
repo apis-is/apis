@@ -25,7 +25,7 @@ describe('endpoint', function() {
 
           if (!fs.existsSync(fullPath)) return;
           if (path.extname(fullPath) !== '.js') return;
-          
+
           require('../../' + fullPath);
         });
 

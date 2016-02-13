@@ -1,10 +1,10 @@
 // dependencies
-var app = require('../../server'),
-	request = require('request'),
-	helper = require('apis-helpers'),
-	cheerio = require('cheerio'),
-	_ = require('underscore'),
-	url = require('url');
+var app = require('../../server');
+var request = require('request');
+var helper = require('apis-helpers');
+var cheerio = require('cheerio');
+var _ = require('underscore');
+var url = require('url');
 
 var baseUrl = url.parse('http://dev.phpbin.ja.is/ajax_leit.php');
 

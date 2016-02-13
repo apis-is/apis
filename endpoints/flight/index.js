@@ -1,7 +1,7 @@
-var request = require('request'),
-    h = require('apis-helpers'),
-    app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var h = require('apis-helpers');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 app.get('/flight', function(req, res){
     var data = req.query,
