@@ -28,7 +28,7 @@ app.get('/declension/:word', function(req, res) {
 function getDeclensions(callback, params) {
 	request.get(params, function(err, res, body) {
 		if (err || res.statusCode != 200) {
-			return res.json(500, {error:'A request to dev.phpbin.ja.is resulted in a error'});
+			return res.status(500).json({error:'A request to dev.phpbin.ja.is resulted in a error'});
 		}
 
 		body = body.replace(/<!--[\s\S]*?-->/g, '');
@@ -37,7 +37,7 @@ function getDeclensions(callback, params) {
 		try {
 			$ = cheerio.load(body);
 		} catch(error) {
-			return res.json(500, {
+			return res.status(500).json({
 				error: 'Parsing the data from dev.phpbin.ja.is resulted in a error',
 				moreinfo: error
 			});

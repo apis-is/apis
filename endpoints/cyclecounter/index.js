@@ -7,7 +7,7 @@ app.get('/cyclecounter', function(req, res){
     url: 'http://www.bicyclecounter.dk/BicycleCounter/GetCycleInfo?ran=1379500208853&StationId=235&LaneId=0'
     }, function(err, response, xml) {
       if(err || response.statusCode !== 200)
-        return res.json(500,{error: 'www.bicyclecounter.dk refuses to respond or give back data'});
+        return res.status(500).json({error: 'www.bicyclecounter.dk refuses to respond or give back data'});
 
       var cyclecounter = [];
       parseString(xml, { explicitRoot: false }, function(err, result) {

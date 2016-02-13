@@ -18,7 +18,7 @@ app.get('/company', function(req, res, next){
         qs: queryString
     }, function(error, response, body){
         if(error || response.statusCode !== 200) {
-            return res.json(500,{error:'www.rsk.is refuses to respond or give back data'});
+            return res.status(500).json({error:'www.rsk.is refuses to respond or give back data'});
         }
 
         var obj = { results: [] },

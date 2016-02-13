@@ -8,14 +8,14 @@ app.get('/currency/borgun', function(req, res) {
 		{url: 'https://www.borgun.is/currency/Default.aspx?function=all'},
 		function(err, response, xml){
 			if(err || response.statusCode !== 200) {
-				return res.json(500, { error: 'www.borgun.is refuses to respond or give back data' });
+				return res.status(500).json({ error: 'www.borgun.is refuses to respond or give back data' });
 			}
 
 			var currencies = [];
 			parseString(xml, {explicitRoot: false}, function(err, result){
 
 				if(err || result.Status[0].ResultCode[0] !== '0'){
-					return res.json(500, { error: 'Unable to parse Borgun data: ' + JSON.stringify(err) });
+					return res.status(500).json({ error: 'Unable to parse Borgun data: ' + JSON.stringify(err) });
 				}
 
 				for(var i=0; i<result.Rate.length; i++){

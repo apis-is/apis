@@ -14,7 +14,7 @@ app.get('/currency/m5', function (req, res) {
         url: 'http://www.m5.is/?gluggi=gjaldmidlar'
     }, function(err, response, body) {
         if(err || response.statusCode !== 200) {
-            return res.json(500,{error:'www.m5.is refuses to respond or give back data'});
+            return res.status(500).json({error:'www.m5.is refuses to respond or give back data'});
         }
 
         var $ = cheerio.load(body),

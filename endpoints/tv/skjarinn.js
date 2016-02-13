@@ -6,7 +6,7 @@ var app = require('../../server');
 
 /* Skjar 1 */
 app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {
-  res.json(503, {error: 'Source page has changed. Scraping needs to be re-implemented'});
+  res.status(503).json({error: 'Source page has changed. Scraping needs to be re-implemented'});
 
   var url = 'http://www.skjarinn.is/einn/dagskrarupplysingar/?channel_id=7&output_format=xml';
 
@@ -15,7 +15,7 @@ app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {
     url: url
   }, function (error, response, body) {
     if(error || response.statusCode !== 200){
-      return res.json(504,{error:'skjarinn.is is not responding with the right data'});
+      return res.status(504).json({error:'skjarinn.is is not responding with the right data'});
     }
 
     parseSkjar1(function (data) {

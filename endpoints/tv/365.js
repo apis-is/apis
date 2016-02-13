@@ -14,7 +14,7 @@ app.get('/tv/stod2', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -32,7 +32,7 @@ app.get('/tv/stod2sport', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -50,7 +50,7 @@ app.get('/tv/stod2sport2', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -68,7 +68,7 @@ app.get('/tv/stod3', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -86,7 +86,7 @@ app.get('/tv/stod2bio', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -104,7 +104,7 @@ app.get('/tv/stod2gull', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);

@@ -8,7 +8,7 @@ var app = require('../../server');
  */
 app.get('/earthquake/is', function (req, res, next) {
     getEarthquakes(function(error,body) {
-        if(error) return res.json(500,{error:error.toString()});
+        if(error) return res.status(500).json({error:error.toString()});
 
         return res.json({
             results: parseList(body)
@@ -21,7 +21,7 @@ app.get('/earthquake/is', function (req, res, next) {
  */
 app.get('/earthquake/is/sec', function (req, res, next) {
     getEarthquakes(function(error,body) {
-        if(error) return res.json(500,{error:error.toString()});
+        if(error) return res.json({error:error.toString()});
         return res.json({
             results: parseJavaScriptVariable(body)
         });

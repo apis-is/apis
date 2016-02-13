@@ -11,7 +11,7 @@ app.get('/cinema', function(req, res, next) {
 
   request(url, function(error, response, body) {
     if (error) {
-      return res.json(500, {error: url + ' not responding correctly...'});
+      return res.status(500).json({error: url + ' not responding correctly...'});
     }
 
     // Cheerio declared and then attemted to load.
@@ -19,7 +19,7 @@ app.get('/cinema', function(req, res, next) {
     try {
       $ = cheerio.load(body);
     } catch (e) {
-      return res.json(500, {error:'Could not load the body with cherrio.'});
+      return res.status(500).json({error:'Could not load the body with cherrio.'});
     }
 
     // Base object to be added to
@@ -100,7 +100,7 @@ app.get('/cinema/theaters', function (req, res, next) {
   var url = 'http://kvikmyndir.is/bio/syningatimar_bio/';
 
   request(url, function (error, response, body) {
-    if (error) return res.json(500,{error: url + ' not responding correctly...' });
+    if (error) return res.status(500).json({error: url + ' not responding correctly...' });
 
     // Cheerio declared and then attemted to load.
     var $;
@@ -108,7 +108,7 @@ app.get('/cinema/theaters', function (req, res, next) {
     try {
       $ = cheerio.load( body );
     } catch (e) {
-      return res.json(500,{error:'Could not load the body with cherrio.'});
+      return res.status(500).json({error:'Could not load the body with cherrio.'});
     }
 
     // Base object to be added to

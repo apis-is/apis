@@ -12,12 +12,12 @@ app.get('/carparks', function(req, res){
 		url: url
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200)
-			return res.json(500,{error:'www.bilastaedasjodur.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.bilastaedasjodur.is refuses to respond or give back data'});
 
 		try{
 			var data = $(body);
 		}catch(error){
-			return res.json(500,{error:'Could not parse body'});
+			return res.status(500).json({error:'Could not parse body'});
 		}
 
 		var	obj = { results: []};

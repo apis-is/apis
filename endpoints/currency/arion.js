@@ -13,7 +13,7 @@ app.get('/currency/arion', function(req, res){
 		body: toSend
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200) {
-			return res.json(500,{error:'www.arionbanki.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.arionbanki.is refuses to respond or give back data'});
 		}
 
 		var jsonObject = JSON.parse(body),
