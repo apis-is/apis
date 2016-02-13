@@ -73,7 +73,7 @@ describe('tv - stod2', function () {
     });
 });
 
-describe('tv - ruv ithrottir', function () {
+describe.skip('tv - ruv ithrottir', function () {
     it("should return an array of objects containing correct fields", function (done) {
         this.timeout(20000);
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
@@ -83,7 +83,7 @@ describe('tv - ruv ithrottir', function () {
     });
 });
 
-describe('tv - ruv', function () {
+describe.skip('tv - ruv', function () {
     it("should return an array of objects containing correct fields", function (done) {
         this.timeout(20000);
         var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
