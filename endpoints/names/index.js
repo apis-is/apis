@@ -2,7 +2,7 @@
 About:   An API for all names that are allowed in Iceland. Names are devided into male names, female names and middle names
 Author:  Hjörtur Líndal Stefánsson
 Email:   hjorturls@gmail.com
-Created: August 2014 
+Created: August 2014
 */
 
 var request = require('request'),
@@ -20,7 +20,7 @@ app.get('/names', function (req, res) {
           endpoints: {
             males: '/names/males/',
             females: '/names/females/',
-            middlenames: '/names/middlenames/' 
+            middlenames: '/names/middlenames/'
           }
         }
       ]
@@ -79,22 +79,22 @@ function handleRequest(url, req, res) {
 	if (filter !== ''){
 		url += '&Nafn=' + filter;
 	}
-	
+
 	request.get({
 		headers: {'User-Agent': h.browser()},
 		url: url
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200)
-			return res.json(500,{error:'www.island.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.island.is refuses to respond or give back data'});
 
 		try{
-			var $ = cheerio.load(body);	
+			var $ = cheerio.load(body);
 		}catch(error){
-			return res.json(500,{error:'Could not parse body'});
+			return res.status(500).json({error:'Could not parse body'});
 		}
 
 		var	obj = { results: []};
-		
+
 		// Clear data regarding the acceptance date of the name (not needed)
 		$('.dir li i').each(function(key) {
 			$(this).remove();
@@ -105,7 +105,7 @@ function handleRequest(url, req, res) {
 			var name = $(this).text();
 			obj.results.push(name.trim());
 		});
-		
+
 		// Return the results as JSON and cache for 24 hours
 		return res.cache(86400).json(obj);
 	});

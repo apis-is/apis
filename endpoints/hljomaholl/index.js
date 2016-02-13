@@ -9,7 +9,7 @@ app.get('/hljomaholl', function(req, res, next) {
   request.get(url, function(error, response, body) {
 
     if (error || response.statusCode !== 200) {
-      return res.json(500, {
+      return res.status(500).json({
         error:'www.hljomaholl.is refuses to respond or give back data'
       });
     }
@@ -17,7 +17,7 @@ app.get('/hljomaholl', function(req, res, next) {
     try {
       var $ = cheerio.load(body);
     } catch (error) {
-      return res.json(500, {error:'Could not parse body'});
+      return res.status(500).json({error:'Could not parse body'});
     }
 
     var obj = {results: []};
@@ -56,7 +56,7 @@ app.get('/hljomaholl', function(req, res, next) {
         obj.results.push(event);
       });
     } catch (error) {
-      return res.json(500, {error: 'Could not parse event data'});
+      return res.status(500).json({error: 'Could not parse event data'});
     }
 
     return res.json(obj);

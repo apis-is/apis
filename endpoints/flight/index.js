@@ -27,12 +27,12 @@ app.get('/flight', function(req, res){
         url: url
     }, function(error, response, body){
         if(error || response.statusCode !== 200)
-            return res.json(500,{error:'www.kefairport.is refuses to respond or give back data'});
+            return res.status(500).json({error:'www.kefairport.is refuses to respond or give back data'});
 
         try {
-          var $ = cheerio.load(body);   
+          var $ = cheerio.load(body);
         } catch(err) {
-            return res.json(500,{error:'Could not parse body'});
+            return res.status(500).json({error:'Could not parse body'});
         }
 
         var obj = { results: []};
@@ -62,11 +62,11 @@ app.get('/flight', function(req, res){
                         'status': $(this).children('td').slice(6).html()
                     };
                 }
-                
+
                 obj.results.push(flight);
             }
         });
-        
+
         return res.cache(3600).json(obj);
     });
 });

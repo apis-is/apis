@@ -8,7 +8,7 @@ var request = require('request'),
  */
 app.get('/earthquake/is', function (req, res, next) {
     getEarthquakes(function(error,body) {
-        if(error) return res.json(500,{error:error.toString()});
+        if(error) return res.status(500).json({error:error.toString()});
 
         return res.json({
             results: parseList(body)
@@ -21,7 +21,7 @@ app.get('/earthquake/is', function (req, res, next) {
  */
 app.get('/earthquake/is/sec', function (req, res, next) {
     getEarthquakes(function(error,body) {
-        if(error) return res.json(500,{error:error.toString()});
+        if(error) return res.json({error:error.toString()});
         return res.json({
             results: parseJavaScriptVariable(body)
         });
@@ -83,7 +83,7 @@ function parseJavaScriptVariable(body) {
     // Create semi-final JSON string.
     res = JSON.parse(res_string.replace(regex_date, dateReplace).replace(/\'/g, '"'));
     } catch(ex) {
-      return JSON.parse([{error:"Error parsing source."}]);  
+      return JSON.parse([{error:"Error parsing source."}]);
     }
     // rename fields to match current specs
     res_fields = [];

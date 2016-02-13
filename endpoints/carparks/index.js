@@ -4,7 +4,7 @@ var request = require('request'),
 	app = require('../../server');
 
 app.get('/carparks', function(req, res){
-	
+
 	var url = 'http://www.bilastaedasjodur.is/';
 
 	request.get({
@@ -12,19 +12,19 @@ app.get('/carparks', function(req, res){
 		url: url
 	}, function(error, response, body){
 		if(error || response.statusCode !== 200)
-			return res.json(500,{error:'www.bilastaedasjodur.is refuses to respond or give back data'});
+			return res.status(500).json({error:'www.bilastaedasjodur.is refuses to respond or give back data'});
 
 		try{
-			var data = $(body);	
+			var data = $(body);
 		}catch(error){
-			return res.json(500,{error:'Could not parse body'});
+			return res.status(500).json({error:'Could not parse body'});
 		}
 
 		var	obj = { results: []};
 		var hus = $('.hus', $(body));
 
 		var js = body.match(/LatLng\((.*?)\)/g);
-		
+
 		function parseCoordinates(str) {
 			try {
 				var Regexp = /(?:^|\s)LatLng.(.*?)\)(?:\s|$)/g;
@@ -44,13 +44,13 @@ app.get('/carparks', function(req, res){
 				name: $(that).find('aside h2').text(),
 				address: $(that).find('h5').text(),
 				parkingSpaces: {
-					free: !isNaN(freeSpaces) ? freeSpaces : null, 
+					free: !isNaN(freeSpaces) ? freeSpaces : null,
 					total: !isNaN(totalSpaces) ? totalSpaces : null
 				},
 				coordinates: parseCoordinates(js[i])
 			});
 		}
-		
+
 		return res.cache(180).json(obj);
 	});
 });
