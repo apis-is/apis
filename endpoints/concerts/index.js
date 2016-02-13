@@ -1,7 +1,7 @@
-var request = require('request'),
-	cheerio = require('cheerio'),
-	_ = require('underscore'),
-	app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var _ = require('underscore');
+var app = require('../../server');
 
 app.get('/concerts', function (req, res, next) {
   var url = 'http://midi.is/Home/LoadMoreEventsByDate?eventType=Concerts&pageNumber='

@@ -1,12 +1,12 @@
-var request = require('request'),
-	$ = require('cheerio'),
-	h = require('apis-helpers'),
-	app = require('../../server');
+var request = require('request');
+var $ = require('cheerio');
+var h = require('apis-helpers');
+var app = require('../../server');
 
 
 app.get('/car', function(req, res){
 	var carPlate = req.query.number || req.query.carPlate || '';
-	
+
 	if(!carPlate)
 		return res.json(431,{error:'Please provide a valid carPlate to lookup'});
 
@@ -51,8 +51,8 @@ app.get('/car', function(req, res){
 				status: fields[7],
 				nextCheck: fields[8]
 			});
-		} 
-		
+		}
+
 		return res.cache().json(obj);
 	});
 });

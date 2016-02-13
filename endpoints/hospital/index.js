@@ -1,7 +1,7 @@
-var request = require('request'),
-  app = require('../../server'),
-  cheerio = require('cheerio'),
-  _ = require('underscore');
+var request = require('request');
+var app = require('../../server');
+var cheerio = require('cheerio');
+var _ = require('underscore');
 
 app.get('/hospital', function(req, res){
   request.get({ url: 'http://www.landspitali.is/' }, function(err, response, body) {
@@ -14,7 +14,7 @@ app.get('/hospital', function(req, res){
     } catch (e) {
     	return res.json(500, { error: 'An error occured when parsing the data from landspitali.is' });
     }
-    
+
     var data = {};
     _.each($('.activityNumbers.activityNumbersNew').children('div'), function(elem) {
 	data[elem.attribs.class] = parseInt($(elem).children().eq(1).html());

@@ -1,7 +1,7 @@
-var request = require('request'),
-    h = require('apis-helpers'),
-    app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var h = require('apis-helpers');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 app.get('/currency/m5', function (req, res) {
     var currencyNames = {
@@ -23,7 +23,7 @@ app.get('/currency/m5', function (req, res) {
         $('.table-striped tr').each(function () {
             var tds = $(this).find('td'),
                 name = tds.eq(0).text();
-            
+
             name && currencies.push({
                 shortName: name,
                 longName: h.currency[name].long,

@@ -1,11 +1,11 @@
-var request = require('request'),
-	parseString = require('xml2js').parseString,
-	app = require('../../server');
+var request = require('request');
+var parseString = require('xml2js').parseString;
+var app = require('../../server');
 
 app.get('/currency/borgun', function(req, res) {
 
 	request.get(
-		{url: 'https://www.borgun.is/currency/Default.aspx?function=all'}, 
+		{url: 'https://www.borgun.is/currency/Default.aspx?function=all'},
 		function(err, response, xml){
 			if(err || response.statusCode !== 200) {
 				return res.json(500, { error: 'www.borgun.is refuses to respond or give back data' });
@@ -13,7 +13,7 @@ app.get('/currency/borgun', function(req, res) {
 
 			var currencies = [];
 			parseString(xml, {explicitRoot: false}, function(err, result){
-				
+
 				if(err || result.Status[0].ResultCode[0] !== '0'){
 					return res.json(500, { error: 'Unable to parse Borgun data: ' + JSON.stringify(err) });
 				}

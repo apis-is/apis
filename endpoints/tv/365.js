@@ -1,7 +1,7 @@
-var request = require('request'),
-    parseString = require('xml2js').parseString,
-    h = require('apis-helpers'),
-    app = require('../../server');
+var request = require('request');
+var parseString = require('xml2js').parseString;
+var h = require('apis-helpers');
+var app = require('../../server');
 
 /* Stod 2 */
 app.get('/tv/stod2', function (req, res) {

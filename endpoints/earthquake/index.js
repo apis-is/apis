@@ -1,7 +1,7 @@
-var request = require('request'),
-    cheerio = require('cheerio'),
-    browser = require('apis-helpers').browser,
-    app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var browser = require('apis-helpers').browser;
+var app = require('../../server');
 
 /*
  * Hraun table parse
@@ -83,7 +83,7 @@ function parseJavaScriptVariable(body) {
     // Create semi-final JSON string.
     res = JSON.parse(res_string.replace(regex_date, dateReplace).replace(/\'/g, '"'));
     } catch(ex) {
-      return JSON.parse([{error:"Error parsing source."}]);  
+      return JSON.parse([{error:"Error parsing source."}]);
     }
     // rename fields to match current specs
     res_fields = [];

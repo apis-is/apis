@@ -1,7 +1,7 @@
-var request = require('request'),
-    h = require('apis-helpers'),
-    app = require('../../server'),
-    cheerio = require('cheerio');
+var request = require('request');
+var h = require('apis-helpers');
+var app = require('../../server');
+var cheerio = require('cheerio');
 
 app.get('/flight', function(req, res){
     var data = req.query,
@@ -30,7 +30,7 @@ app.get('/flight', function(req, res){
             return res.json(500,{error:'www.kefairport.is refuses to respond or give back data'});
 
         try {
-          var $ = cheerio.load(body);   
+          var $ = cheerio.load(body);
         } catch(err) {
             return res.json(500,{error:'Could not parse body'});
         }
@@ -62,11 +62,11 @@ app.get('/flight', function(req, res){
                         'status': $(this).children('td').slice(6).html()
                     };
                 }
-                
+
                 obj.results.push(flight);
             }
         });
-        
+
         return res.cache(3600).json(obj);
     });
 });

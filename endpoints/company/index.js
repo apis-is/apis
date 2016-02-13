@@ -1,10 +1,10 @@
-var request = require('request'),
-    cheerio = require('cheerio'),
-    h = require('apis-helpers'),
-    app = require('../../server');
+var request = require('request');
+var cheerio = require('cheerio');
+var h = require('apis-helpers');
+var app = require('../../server');
 
 app.get('/company', function(req, res, next){
-    
+
     var queryString = {
         nafn: req.query.name || '',
         heimili: req.query.address || '',
@@ -51,9 +51,9 @@ app.get('/company', function(req, res, next){
                     address: td.eq(2).text()
                 });
 
-            }); 
+            });
         }
-        
+
         return res.cache(86400).json(obj);
     });
 });

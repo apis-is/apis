@@ -1,6 +1,6 @@
-var request = require('request'),
-    moment = require('moment'),
-    app = require('../../server');
+var request = require('request');
+var moment = require('moment');
+var app = require('../../server');
 
 app.get('/currency', function(req, res){
     var provider = req.query.provider || 'arion';

@@ -1,8 +1,8 @@
-var request = require('request'),
-    moment = require('moment'),
-    parseString = require('xml2js').parseString,
-    h = require('apis-helpers'),
-    app = require('../../server');
+var request = require('request');
+var moment = require('moment');
+var parseString = require('xml2js').parseString;
+var h = require('apis-helpers');
+var app = require('../../server');
 
 /* Skjar 1 */
 app.get('/tv/:var(skjar1|skjareinn)', function (req, res) {

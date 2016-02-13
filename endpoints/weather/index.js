@@ -24,20 +24,20 @@ validTypes = ['2','3','5','6','7','9','10','11','12','14','27','30','31','32','3
 measurements = {
   is: {
     'F'   : 'Vindhraði (m/s)',
-    'FX'  : 'Mesti vindhraði (m/s)', 
-    'FG'  : 'Mesta vindhviða (m/s)', 
-    'D'   : 'Vindstefna', 
-    'T'   : 'Hiti (°C)', 
-    'W'   : 'Veðurlýsing', 
-    'V'   : 'Skyggni (km)', 
-    'N'   : 'Skýjahula (%)', 
-    'P'   : 'Loftþrýstingur (hPa)', 
-    'RH'  : 'Rakastig (%)', 
-    'SNC' : 'Lýsing á snjó', 
-    'SND' : 'Snjódýpt', 
-    'SED' : 'Snjólag', 
-    'RTE' : 'Vegahiti (°C)', 
-    'TD'  : 'Daggarmark (°C)', 
+    'FX'  : 'Mesti vindhraði (m/s)',
+    'FG'  : 'Mesta vindhviða (m/s)',
+    'D'   : 'Vindstefna',
+    'T'   : 'Hiti (°C)',
+    'W'   : 'Veðurlýsing',
+    'V'   : 'Skyggni (km)',
+    'N'   : 'Skýjahula (%)',
+    'P'   : 'Loftþrýstingur (hPa)',
+    'RH'  : 'Rakastig (%)',
+    'SNC' : 'Lýsing á snjó',
+    'SND' : 'Snjódýpt',
+    'SED' : 'Snjólag',
+    'RTE' : 'Vegahiti (°C)',
+    'TD'  : 'Daggarmark (°C)',
     'R'   : 'Uppsöfnuð úrkoma (mm/klst) úr sjálfvirkum mælum'
   },
   en: {
@@ -72,7 +72,7 @@ function getJsonData(url, callback){
     }, function (error, response, body) {
 
       if (error) throw new Error(url + ' did not respond');
-      
+
       parseString(body, function (err, result, title) {
         callback(result);
     });
@@ -130,7 +130,7 @@ app.get('/weather/getAvailableStations', function (req, res, next) {
       // get the station title and id
       titleMatch = xregexp.cache(titleRegex).exec(elem.attr('title'));
       idMatch = xregexp.cache(idRegex).exec(elem.attr('href'));
-      
+
       if (!idMatch || !titleMatch) {
         throw new Error( 'Parsing error -- Source is changed' );
       }
@@ -188,7 +188,7 @@ app.get('/weather/forecasts/:lang?', function (req, res) {
         ]
       }
     );
-  }; 
+  };
 
   getJsonData(url, function(forecasts){
     // make some nice changes to the object for cleaner JSON
