@@ -1,7 +1,9 @@
-var h = require('apis-helpers'),
-request = require('request'),
-app = require('../../server'),
-isn2wgs = require('isn2wgs');
+const h = require('apis-helpers');
+const request = require('request');
+const app = require('../../server');
+const isn2wgs = require('isn2wgs');
+
+const debug = require('debug')('bus/realtime');
 
 app.get('/bus/realtime', function(req, res){
   var data = req.query;
@@ -20,7 +22,9 @@ app.get('/bus/realtime', function(req, res){
     var activeBusses = [],
     requestedBusses = [];
 
-    obj.routes.forEach(function(object, key){
+    const routes = obj.routes || [];
+
+    routes.forEach(function(object, key){
       activeBusses.push(object.id);
     });
 
