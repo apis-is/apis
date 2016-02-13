@@ -1,11 +1,14 @@
-var express = require('express');
-var app = module.exports = express();
+import express from 'express';
+import fileModule from 'file';
+import { EventEmitter as EE } from 'events';
 
-var config = require('./config');
-var fileModule = require('file');
-var cache = require('./lib/cache');
-var cors = require('./lib/cors');
-var EE = require('events').EventEmitter;
+import config from './config';
+import cache from './lib/cache';
+import cors from './lib/cors';
+
+var app = express();
+
+module.exports = app;
 
 /**
  * Set the spacing to 0 for shorter output
