@@ -4,7 +4,7 @@ var request = require('request'),
 	app = require('../../server');
 
 
-app.get('/car', function(req, res){
+app.get('/car', function(req, res,next){
 	var carPlate = req.query.number || req.query.carPlate || '';
 
 	if(!carPlate)
