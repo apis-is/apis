@@ -61,7 +61,7 @@ app.use(function(error, req, res, next){
     message = statuses[code] || message;
   }else if (typeof error === 'object' && error.message && error.message.length === 3 && !isNaN(error.message)) {
     //throw Error(404)
-    code = parseInt(error.message,10);
+    code = error.message
     message = statuses[code] || message;
 
   }else {
@@ -70,7 +70,7 @@ app.use(function(error, req, res, next){
     message = error.message;
   }
 
-  code = parseInt(code);
+  code = parseInt(code,10);
 
   res.status(code).json({error: message});
 });
