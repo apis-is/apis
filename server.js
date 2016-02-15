@@ -1,4 +1,6 @@
 import express from 'express';
+import expressMetrics from 'express-metrics';
+
 import fileModule from 'file';
 import { EventEmitter as EE } from 'events';
 
@@ -7,6 +9,10 @@ import cache from './lib/cache';
 import cors from './lib/cors';
 
 var app = express();
+
+app.use(expressMetrics({
+  port: 8091
+}));
 
 module.exports = app;
 
