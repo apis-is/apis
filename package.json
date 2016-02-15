@@ -42,6 +42,7 @@
   ],
   "dependencies": {
     "apis-helpers": "0.0.1",
+    "axios": "^0.9.1",
     "babel": "^5.8.29",
     "cheerio": "~0.12.4",
     "debug": "^2.2.0",
