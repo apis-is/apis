@@ -4,8 +4,8 @@ var app = require('../../server');
 var cheerio = require('cheerio');
 
 app.get('/flight', function(req, res){
-    var data = req.query,
-        url = '';
+    var data = req.query;
+    var url = '';
 
     if(!data.type) data.type = '';
     if(!data.language) data.language = '';
