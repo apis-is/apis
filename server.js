@@ -1,3 +1,8 @@
+/**
+ * Only for apis.is production environment
+ */
+if(process.env.NODE_ENV === 'production') process.chdir('/apis/current');
+
 import express from 'express';
 import expressMetrics from 'express-metrics';
 
