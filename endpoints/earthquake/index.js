@@ -143,12 +143,16 @@ function parseList(body) {
 
   // This finds all the table rows in the list, except the first row, which
   // is a header row.
-  return $('table').eq(2).find('tr').slice(1).map(function() {
+  const data = [];
+
+  $('table').eq(2).find('tr').slice(1).map(function() {
     var $children = $(this).children(),
     obj = {};
     for (var key in fieldsParser) {
       obj[key] = fieldsParser[key]($children);
     }
-    return obj;
+    data.push(obj);
   });
+
+  return data;
 };
