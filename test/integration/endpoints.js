@@ -10,7 +10,7 @@ var testFileName = 'integration_test.js';
 
 describe('endpoint', function() {
   it('should load the server and set everything up properly',function(done){
-    this.timeout(2000); //Server should not take more than 1 sek to boot
+    this.timeout(10000); //Server should not take more than 1 sek to boot
 
     var app = require(process.cwd() + '/server');
 
