@@ -10,9 +10,7 @@ app.get('/earthquake/is', function (req, res, next) {
     getEarthquakes(function(error,body) {
         if(error) return res.status(500).json({error:error.toString()});
 
-        return res.json({
-            results: parseList(body)
-        });
+        return res.json({ results: parseList(body) });
     });
 });
 
@@ -153,5 +151,5 @@ function parseList(body) {
             obj[key] = fieldsParser[key]($children);
         }
         return obj;
-    });
+    })[0];
 };
