@@ -12,7 +12,7 @@ parseString = require('xml2js').parseString,
 h = require('apis-helpers'),
 app = require('../../server'),
 cheerio = require('cheerio'),
-xregexp = require('xregexp').XRegExp;
+xregexp = require('xregexp');
 
 /** Variable initialization **/
 
