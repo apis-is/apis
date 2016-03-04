@@ -71,7 +71,7 @@ app.use(function(error, req, res, next){
 
   }else {
     //Other errors that might have been swallowed
-    console.error(error);
+    console.error(error.stack);
     message = error.message;
   }
 
