@@ -22,7 +22,7 @@ app.get('/company', function(req, res, next){
         }
 
         var obj = { results: [] },
-              $ = cheerio.load(body);
+              $ = cheerio.load(body, {decodeEntities: false});
 
         if($('.resultnote').length === 0){
             var tr = $('.boxbody > .nozebra tbody tr').first();
