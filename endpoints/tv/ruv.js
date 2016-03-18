@@ -23,7 +23,7 @@ app.get('/tv/ruv', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
@@ -41,7 +41,7 @@ app.get('/tv/ruvithrottir', function (req, res) {
     if (error) throw new Error(url + ' did not respond');
 
     parseFeed(function (data) {
-      res.cache(1800).json(200, {
+      res.cache(1800).json({
         results: data
       });
     }, body);
