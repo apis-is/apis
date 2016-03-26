@@ -3,8 +3,11 @@ var app = require('../../server');
 var cheerio = require('cheerio');
 
 
-var getLotto = function (req, res) {
-    getLottery(function(body) {
+var getLotto = function (req, res, next) {
+    getLottery(function(err, body) {
+        if (err) {
+            return next(502)
+        }
         return res.cache(3600).json({
             results: parseList(body)
         });
@@ -14,15 +17,21 @@ var getLotto = function (req, res) {
 app.get('/lottery', getLotto);
 app.get('/lottery/lotto', getLotto);
 
-app.get('/lottery/vikingalotto', function(req, res) {
-    getLottery(function(body) {
+app.get('/lottery/vikingalotto', function(req, res, next) {
+    getLottery(function(err, body) {
+        if (err) {
+            return next(502)
+        }
         return res.cache(3600).json({
             results: parseList(body)
         });
     }, 'https://games.lotto.is/lottoleikir/urslit/vikingalotto/');
 });
-app.get('/lottery/eurojackpot', function(req, res) {
-    getLottery(function(body) {
+app.get('/lottery/eurojackpot', function(req, res, next) {
+    getLottery(function(err, body) {
+        if (err) {
+            return next(502)
+        }
         return res.cache(3600).json({
             results: parseList(body)
         });
@@ -37,13 +46,13 @@ var getLottery = function(callback, url) {
     };
 
     request(params, function (error, res, body) {
-        if (error) throw new Error(error);
+        if (error) return callback(error);
 
         if (res.statusCode != 200) {
-            throw new Error("HTTP error from endpoint, status code " + res.statusCode);
+            return callback(new Error("HTTP error from endpoint, status code " + res.statusCode));
         }
 
-        return callback(body);
+        return callback(null, body);
     });
 };
 
