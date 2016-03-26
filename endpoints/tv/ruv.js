@@ -5,7 +5,7 @@ var h = require('apis-helpers');
 var app = require('../../server');
 
 /* RUV */
-app.get('/tv/ruv', function (req, res) {
+app.get('/tv/ruv', function (req, res, next) {
   var url = 'http://muninn.ruv.is/files/xml/ruv/';
 
   if (req.params.date) {
@@ -16,43 +16,43 @@ app.get('/tv/ruv', function (req, res) {
     }
   }
 
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* RUV Ithrottir*/
-app.get('/tv/ruvithrottir', function (req, res) {
+app.get('/tv/ruvithrottir', function (req, res, next) {
   var url = 'http://muninn.ruv.is/files/xml/ruvithrottir/';
+  serve(url, res, next);
+});
 
+var serve = function(url, res, next) {
+  getFeed(url, function (err, data) {
+    if (err) {
+      console.error(err);
+      return next(502);
+    }
+
+    res.cache(1800).json({
+      results: data
+    });
+  });
+};
+
+var getFeed = function(url, callback) {
   request.get({
     headers: {'User-Agent': h.browser()},
     url: url
   }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
+    if (error) return callback(new Error(url + ' did not respond'));
 
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
+    parseFeed(callback, body);
   });
-});
-
+};
 
 /* Parse feeds from RUV */
 var parseFeed = function (callback, data) {
   parseString(data, function (err, result, title) {
-    if (err) throw new Error('Parsing of XML failed. Title '+title);
+    if (err) return callback(new Error('Parsing of XML failed. Title '+title));
 
     var schedule = [];
 
@@ -78,6 +78,6 @@ var parseFeed = function (callback, data) {
         }
       });
     }
-    return callback(schedule);
+    return callback(null, schedule);
   });
 };
