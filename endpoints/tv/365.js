@@ -4,117 +4,69 @@ var h = require('apis-helpers');
 var app = require('../../server');
 
 /* Stod 2 */
-app.get('/tv/stod2', function (req, res) {
+app.get('/tv/stod2', function (req, res, next) {
   var url = 'http://stod2.is/XML--dagskrar-feed/XML-Stod-2-dagurinn';
-
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* Stod 2 Sport*/
-app.get('/tv/stod2sport', function (req, res) {
+app.get('/tv/stod2sport', function (req, res, next) {
   var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-dagurinn';
-
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* Stod 2 Sport 2*/
-app.get('/tv/stod2sport2', function (req, res) {
+app.get('/tv/stod2sport2', function (req, res, next) {
   var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-2-dagurinn';
-
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* Stod 3*/
-app.get('/tv/stod3', function (req, res) {
+app.get('/tv/stod3', function (req, res, next) {
   var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-3-dagurinn';
-
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* Stod 2 Bio */
-app.get('/tv/stod2bio', function (req, res) {
+app.get('/tv/stod2bio', function (req, res, next) {
   var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Bio-dagurinn';
-
-  request.get({
-    headers: {'User-Agent': h.browser()},
-    url: url
-  }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
-
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
-  });
+  serve(url, res, next);
 });
 
 /* Stod 2 Gull */
-app.get('/tv/stod2gull', function (req, res) {
+app.get('/tv/stod2gull', function (req, res, next) {
   var url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Extra-dagurinn';
+  serve(url, res, next);
+});
 
+var serve = function(url, res, next) {
+  getFeed(url, function (err, data) {
+    if (err) {
+      console.error(err);
+      return next(502);
+    }
+
+    res.cache(1800).json({
+      results: data
+    });
+  });
+};
+
+var getFeed = function(url, callback) {
   request.get({
     headers: {'User-Agent': h.browser()},
     url: url
   }, function (error, response, body) {
-    if (error) throw new Error(url + ' did not respond');
+    if (error) return callback(new Error(url + ' did not respond'));
 
-    parseFeed(function (data) {
-      res.cache(1800).json({
-        results: data
-      });
-    }, body);
+    parseFeed(callback, body);
   });
-});
+};
 
 /* Parse feeds from 365 midlar */
 var parseFeed = function (callback, data) {
   parseString(data, function (err, result, title) {
-    if (err) throw new Error('Parsing of XML failed. Title '+title);
+    if (err) return callback(new Error('Parsing of XML failed. Title '+title));
 
     var schedule = [];
 
@@ -136,6 +88,6 @@ var parseFeed = function (callback, data) {
         }
       });
     }
-    return callback(schedule);
+    return callback(null, schedule);
   });
 };
