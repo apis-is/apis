@@ -5,6 +5,7 @@ var helpers = require('../../../lib/test_helpers.js');
 var fieldsToCheckFor = ["id","name_and_origin","ueln","date_of_birth","color_code","color","country_located","fate","microchip","father","mother"];
 
 describe('multi-results', function() {
+    this.timeout(20000);
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/horses", { name: "Oddur", origin: "Selfossi" });
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
@@ -21,6 +22,7 @@ describe('single-result-by-name', function() {
 });
 
 describe('single-result-partial-info', function() {
+    this.timeout(20000);
     it("should return an array of objects containing correct fields", function(done) {
         var params = helpers.testRequestParams("/horses", { name: "Lotta", origin: "Ármóti" });
         var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
