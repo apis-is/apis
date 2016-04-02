@@ -179,7 +179,7 @@ app.get('/horses', function(req, res){
 							complete_multi_results.push(single_result[0]);
 							loop();
 						});
-					},1000);
+					},2000);
 				},
 				callback: function() {
 					var obj = {results: complete_multi_results};
