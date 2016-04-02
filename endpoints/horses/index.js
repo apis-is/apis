@@ -45,17 +45,17 @@ function query_data(id, name, origin, microchip, callback) {
 
 function parse_data(fields) {
 	var params = [
-		null,   //  0 id
-		null,   //  1 name_and_origin
-		null,   //  2 ueln
-		null,   //  3 date_of_birth
-		null,   //  4 color_code
-		null,   //  5 color
-		null,   //  6 country_located
-		null,   //  7 fate
-		null,   //  8 microchip
-		null,   //  9 father
-		null,   // 10 mother
+		null, //  0 id
+		null, //  1 name_and_origin
+		null, //  2 ueln
+		null, //  3 date_of_birth
+		null, //  4 color_code
+		null, //  5 color
+		null, //  6 country_located
+		null, //  7 fate
+		null, //  8 microchip
+		null, //  9 father
+		null  // 10 mother
 	];
 	var labels = [
 		'FEIF ID',                     //  0 id
@@ -68,7 +68,7 @@ function parse_data(fields) {
 		'Fate ',                       //  7 fate
 		'Microchip',                   //  8 microchip
 		'Sire',                        //  9 father
-		'Dam',                         // 10 mother
+		'Dam'                          // 10 mother
 	];
 	var temp = null; // oh the things I'm gonna do to you!
 	// health checks along the way
@@ -77,14 +77,16 @@ function parse_data(fields) {
 	for (var i = 0; i < labels.length; i++) { 
 		temp = fields.lastIndexOf(labels[i]);
 		if (temp !== -1 && labels.lastIndexOf(fields[temp+1]) == -1) {
-			if (i < 9) {
-				params[i] = fields[temp+1];
-			} else {
-				temp = fields[temp+1].split(' - ');
-				params[i] = {
-					id: temp[0],
-					name_and_origin: temp[1]
-				};
+			if (fields[temp+1] !== '') {
+				if (i < 9) {
+					params[i] = fields[temp+1];
+				} else {
+					temp = fields[temp+1].split(' - ');
+					params[i] = {
+						id: temp[0],
+						name_and_origin: temp[1]
+					};
+				}
 			}
 		}
 	}
@@ -113,7 +115,7 @@ function parse_data(fields) {
 				break;
 			}
 		}
-		if (multi_records) {
+		if (multi_records) { // collect partial data
 			var count = Number(fields[count_index].replace('Number: ',''));
 			for (var i = 0; i < count; i++) {
 				temp = fields[count_index + 1 + i*5].split(' - ');
