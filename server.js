@@ -1,7 +1,9 @@
 /**
  * Only for apis.is production environment
  */
-if(process.env.NODE_ENV === 'production') process.chdir('/apis/current');
+if (process.env.NODE_ENV === 'production') {
+  process.chdir('/apis/current');
+}
 
 import express from 'express';
 import expressMetrics from 'express-metrics';
@@ -15,10 +17,13 @@ import config from './config';
 import cache from './lib/cache';
 import cors from './lib/cors';
 
-var app = express();
+import makeDebug from 'debug';
+
+const debug = makeDebug('server');
+const app = express();
 
 app.use(expressMetrics({
-  port: 8091
+  port: 8091,
 }));
 
 module.exports = app;
@@ -46,47 +51,56 @@ app.use(cache());
 /**
  * Set up endpoints
  */
-fileModule.walkSync('./endpoints', function iterateEndpoints(dirPath, dirs, endpoints) {
-    if (endpoints && dirPath.indexOf('test') < 0) endpoints.forEach(requireEndpoint);
-
-    function requireEndpoint(endpoint) {
-        if (endpoint.indexOf('.DS_Store') === -1) require('./' + dirPath + '/' + endpoint);
+fileModule.walkSync('./endpoints', (dirPath, dirs, endpoints) => {
+  function requireEndpoint(endpoint) {
+    if (endpoint.indexOf('.DS_Store') === -1) {
+      require(`./${dirPath}/${endpoint}`);
     }
+  }
+
+  if (endpoints && dirPath.indexOf('test') < 0) {
+    endpoints.forEach(requireEndpoint);
+  }
 });
 
-app.use(function(error, req, res, next){
-  if(res.headersSent) return console.error('Headers already sent');
+app.use((error, req, res) => {
+  let code = 500;
+  let message = 'Unknown error';
 
-  var code = 500;
-  var message = 'Unknown error';
+  if (res.headersSent) {
+    message = 'Headers already sent';
+  }
 
   if (typeof error === 'number') {
-    //next(404)
-    code = error
+    code = error;
     message = statuses[code] || message;
-  }else if (typeof error === 'object' && error.message && error.message.length === 3 && !isNaN(error.message)) {
-    //throw Error(404)
-    code = error.message
+  } else if (
+    typeof error === 'object' &&
+    error.message &&
+    error.message.length === 3 &&
+    !isNaN(error.message)) {
+    code = error.message;
     message = statuses[code] || message;
-
-  }else {
-    //Other errors that might have been swallowed
-    console.error(error.stack);
+  } else {
+    // Other errors that might have been swallowed
+    debug(error.stack);
     message = error.message;
   }
 
-  code = parseInt(code,10);
+  code = parseInt(code, 10);
 
-  res.status(code).json({error: message});
+  res.status(code).json({ error: message });
 });
 
 /**
  * Start the server
  */
-app.listen(config.port, function () {
-    app.emit('ready');
+app.listen(config.port, () => {
+  app.emit('ready');
 });
 
-app.on('ready', function () {
-    if (!config.testing) console.log('Server running at port:', config.port);
+app.on('ready', () => {
+  if (!config.testing) {
+    debug('Server running at port:', config.port);
+  }
 });
