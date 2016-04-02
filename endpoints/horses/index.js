@@ -47,7 +47,6 @@ function query_data(id, name, origin, microchip, callback) {
 }
 
 function parse_data(fields) {
-  console.log(fields);
   var params = [
     null, //  0 id
     null, //  1 name_and_origin
