@@ -4,25 +4,26 @@ var $ = require('cheerio');
 var h = require('apis-helpers');
 var app = require('../../server');
 
-var encoding = 'iso-8859-1';
-
 function query_data(id, name, origin, microchip, callback) {
-  // Encoding parameters so Icelandic characters will work
-  // Hacking around to get ISO 8859-1 encoded string, pls unhack if you know better way.
-  var encoded_name = encodeURIComponent(escape(name)).replace(/%25/g,"%");
-  var encoded_origin = encodeURIComponent(escape(origin)).replace(/%25/g,"%");
-
+  var url = 'http://www.worldfengur.com/freezone_horse.jsp?c=EN';
   var headers = {
     'User-Agent': h.browser(),
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
     'Content-Type': 'application/x-www-form-urlencoded'
   };
-  var url = 'http://www.worldfengur.com/freezone_horse.jsp?c=EN';
-  var form_data = 'fnr=' + id +
+
+  // Encoding parameters so Icelandic characters will work
+  // Hacking around to get ISO 8859-1 encoded string,
+  // pls unhack if you know better way.
+  var encoded_name = encodeURIComponent(escape(name)).replace(/%25/g,"%");
+  var encoded_origin = encodeURIComponent(escape(origin)).replace(/%25/g,"%");
+  var form_data = (
+    'fnr=' + id +
     '&nafn=' + encoded_name +
     '&uppruni=' + encoded_origin +
     '&ormerki=' + microchip +
-    '&leitahnappur=Search+&leita=1';
+    '&leitahnappur=Search+&leita=1'
+  );
 
   request.post({
     headers: headers,
@@ -33,8 +34,8 @@ function query_data(id, name, origin, microchip, callback) {
     if(error || response.statusCode !== 200) {
       callback(error, response, []);
     }
-    var body1 = iconv.decode(body,encoding);
-    var data = $(body1);
+    var body = iconv.decode(body, 'iso-8859-1');
+    var data = $(body);
     var fields = [];
     data.find('div.complete div table').each(function() {
       $(this).find('td').each(function() {
@@ -46,6 +47,7 @@ function query_data(id, name, origin, microchip, callback) {
 }
 
 function parse_data(fields) {
+  console.log(fields);
   var params = [
     null, //  0 id
     null, //  1 name_and_origin
@@ -59,6 +61,7 @@ function parse_data(fields) {
     null, //  9 father
     null  // 10 mother
   ];
+
   var labels = [
     'FEIF ID',                     //  0 id
     'Name and origin',             //  1 name_and_origin
@@ -140,19 +143,6 @@ function parse_data(fields) {
   return results;
 }
 
-function asyncLoop(obj) { // http://stackoverflow.com/a/7654602/2401628
-  var i = -1;
-  var loop = function() {
-    i++;
-    if (i==obj.length) {
-      obj.callback();
-      return;
-    }
-    obj.functionToLoop(loop, i);
-  }
-  loop(); // init
-}
-
 app.get('/horses', function(req, res){
   var id = req.query.id || '';
   var name = req.query.name || '';
@@ -160,8 +150,8 @@ app.get('/horses', function(req, res){
   var microchip = req.query.microchip || '';
 
   if (!id && !(name && origin) && !microchip) {
-    return res.status(431).json({
-      error:'Please provide at least one of the following: id, name and origin, microchip'
+    return res.status(400).json({
+      error:'Please provide at least one of the following: id, name and origin or microchip'
     });
   }
 
@@ -172,27 +162,16 @@ app.get('/horses', function(req, res){
       });
     }
     var results = parse_data(fields);
-    if (1 < results.length) {
-      var complete_multi_results = [];
-      asyncLoop({
-        length: results.length,
-        functionToLoop: function(loop, i) {
-          setTimeout(function() {
-            query_data(results[i]['id'], '', '', '', function(err, res, fields) {
-              var single_result = parse_data(fields);
-              complete_multi_results.push(single_result[0]);
-              loop();
-            });
-          },2000);
-        },
-        callback: function() {
-          var obj = {results: complete_multi_results};
-          return res.cache().json(obj);
-        }
+    if (results.length > 1) {
+      var completeResults = results.map(result => {
+        query_data(result.id, '', '', '', function(err, res, fields) {
+          return parse_data(fields)[0];
+        });
       });
+
+      return res.cache().json({results: completeResults});
     } else {
-      var obj = {results: results};
-      return res.cache().json(obj);
+      return res.cache().json({results: results});
     }
   });
 });

@@ -2,7 +2,18 @@ var request = require('request');
 var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 
-var fieldsToCheckFor = ["id","name_and_origin","ueln","date_of_birth","color_code","color","country_located","fate","microchip","father","mother"];
+var fieldsToCheckFor = [
+  "id",
+  "name_and_origin",
+  "ueln","date_of_birth",
+  "color_code",
+  "color",
+  "country_located",
+  "fate",
+  "microchip",
+  "father",
+  "mother"
+];
 
 describe('multi-results', function() {
   this.timeout(20000);
