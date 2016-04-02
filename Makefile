@@ -5,4 +5,4 @@ tests:
 	npm test
 
 run:
-	DEBUG=server npm start
+	DEBUG=server,config npm start
