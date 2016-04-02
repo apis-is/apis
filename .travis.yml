@@ -1,5 +1,7 @@
 language: node_js
 sudo: false
+before_script:
+  npm run lint
 node_js:
   - "5"
   - "0.12"
