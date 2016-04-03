@@ -13,8 +13,7 @@ function query_data(id, name, origin, microchip, callback) {
   };
 
   // Encoding parameters so Icelandic characters will work
-  // Hacking around to get ISO 8859-1 encoded string,
-  // pls unhack if you know better way.
+  // Hacking around to get ISO 8859-1 encoded string, pls unhack if you know better way
   var encoded_name = encodeURIComponent(escape(name)).replace(/%25/g,"%");
   var encoded_origin = encodeURIComponent(escape(origin)).replace(/%25/g,"%");
   var form_data = (
@@ -32,114 +31,120 @@ function query_data(id, name, origin, microchip, callback) {
     encoding: null
   }, function(error, response, body) {
     if(error || response.statusCode !== 200) {
-      callback(error, response, []);
+      callback(error, response, '');
     }
-    var body = iconv.decode(body, 'iso-8859-1');
-    var data = $(body);
-    var fields = [];
-    data.find('div.complete div table').each(function() {
-      $(this).find('td').each(function() {
-        fields.push($(this).text());
-      });
-    });
-    callback(error, response, fields);
+    var html_page = iconv.decode(body, 'iso-8859-1');
+    callback(error, response, html_page);
   });
 }
 
-function parse_data(fields) {
+function parse_data(html_page) {
+  var data = $(html_page);
+  // td_elements:
+  // is a list of text strings from all td elements in the returned html_page
+  // we find data from the list by searching for key labels
+  // we assume the next value in the list after a key label is a corresponding value
+  var td_elements = [];
+  data.find('div.complete div table').each(function() {
+    $(this).find('td').each(function() {
+      td_elements.push($(this).text());
+    });
+  });
+  // params:
+  // name is the name of a single param
+  // label is the label used on the webpage for a given param
+  // value is the value of a given param, and null if it wasn't found in td_elements
   var params = [
-    null, //  0 id
-    null, //  1 name_and_origin
-    null, //  2 ueln
-    null, //  3 date_of_birth
-    null, //  4 color_code
-    null, //  5 color
-    null, //  6 country_located
-    null, //  7 fate
-    null, //  8 microchip
-    null, //  9 father
-    null  // 10 mother
+    {name: 'id',              label: 'FEIF ID',                     value: null},
+    {name: 'name_and_origin', label: 'Name and origin',             value: null},
+    {name: 'ueln',            label: 'UELN',                        value: null},
+    {name: 'date_of_birth',   label: 'Date of birth',               value: null},
+    {name: 'color_code',      label: 'Colour code',                 value: null},
+    {name: 'color',           label: 'Colour ',                     value: null},
+    {name: 'country_located', label: 'Country of current location', value: null},
+    {name: 'fate',            label: 'Fate ',                       value: null},
+    {name: 'microchip',       label: 'Microchip',                   value: null},
+    {name: 'father',          label: 'Sire',                        value: null},
+    {name: 'mother',          label: 'Dam',                         value: null},
   ];
+  var labels = params.map(function(x){return x['label'];});
 
-  var labels = [
-    'FEIF ID',                     //  0 id
-    'Name and origin',             //  1 name_and_origin
-    'UELN',                        //  2 ueln
-    'Date of birth',               //  3 date_of_birth
-    'Colour code',                 //  4 color_code
-    'Colour ',                     //  5 color
-    'Country of current location', //  6 country_located
-    'Fate ',                       //  7 fate
-    'Microchip',                   //  8 microchip
-    'Sire',                        //  9 father
-    'Dam'                          // 10 mother
-  ];
-  var temp = null; // oh the things I'm gonna do to you!
-  // health checks along the way
-  // - check if label is in fields
+  // we do the following health checks
+  // - check if label is in td_elements
   // - make sure the next field doesn't hold one of the labels
+  // - also make sure it isn't ''
+  // Note: we use 'lastIndexOf' because td_elements from the post form are included in td_elements
+  //       which are identical to some of our labels, this isn't an issue though because the next
+  //       value in td_elements for those elements is always ''
   for (var i = 0; i < labels.length; i++) { 
-    temp = fields.lastIndexOf(labels[i]);
-    if (temp !== -1 && labels.lastIndexOf(fields[temp+1]) == -1) {
-      if (fields[temp+1] !== '') {
-        if (i < 9) {
-          params[i] = fields[temp+1];
-        } else {
-          temp = fields[temp+1].split(' - ');
-          params[i] = {
-            id: temp[0],
-            name_and_origin: temp[1]
+    var label_location = td_elements.lastIndexOf(labels[i]);
+    if (label_location !== -1 && labels.lastIndexOf(td_elements[label_location+1]) == -1) {
+      if (td_elements[label_location+1] !== '') {
+        if (i < 9) { // first nine params values are strings
+          params[i]['value'] = td_elements[label_location+1];
+        } else { // father and mother params are objects
+          // parent strings look like this: '{id} - {name_and_origin}'
+          var parent_info = td_elements[label_location+1].split(' - ');
+          params[i]['value'] = {
+            id: parent_info[0],
+            name_and_origin: parent_info[1]
           };
         }
       }
     }
   }
+
   var results = [];
-  if (params[0] && params[1]) { // always single-record
-    results.push({
-      id: params[0],
-      name_and_origin: params[1],
-      ueln: params[2],
-      date_of_birth: params[3],
-      color_code: params[4],
-      color: params[5],
-      country_located: params[6],
-      fate: params[7],
-      microchip: params[8],
-      father: params[9],
-      mother: params[10]
-    });
-  } else { // check for multi-record
+  if (params[0]['value'] && params[1]['value']) {
+    // here we successfully found id and name of horse
+    // we 'correctly' assume we received a single-record result
+    var result = {};
+    for (var i = 0; i < params.length; i++) {
+      result[params[i]['name']] = params[i]['value'];
+    }
+    results.push(result);
+  } else {
+    // there is a chance we received a multi-records result
+    // then we have string like 'Number: 2' in td_elements if number of records were 2
+    // we check if multi-records are in result
     var multi_records = false;
     var count_index = -1;
-    for (var i = 0; i < fields.length; i++) {
-      if (fields[i].indexOf('Number: ') !== -1) {
+    for (var i = 0; i < td_elements.length; i++) {
+      if (td_elements[i].indexOf('Number: ') === 0) {
         multi_records = true;
         count_index = i;
         break;
       }
     }
-    if (multi_records) { // collect partial data
-      var count = Number(fields[count_index].replace('Number: ',''));
-      for (var i = 0; i < count; i++) {
-        temp = fields[count_index + 1 + i*5].split(' - ');
+    if (multi_records) {
+      // for multi-records we receive less data for each horse than in single-record result
+      // we get 5 td elements for each horse, explaining the i*5 below
+      // we fish out only id and name for each horse and return list of those
+      var num_records = Number(td_elements[count_index].replace('Number: ',''));
+      for (var i = 0; i < num_records; i++) {
+        var horse_info = td_elements[count_index + 1 + i*5].split(' - ');
         results.push({
-          id: temp[0],
-          name_and_origin: temp[1],
-          ueln: null,
-          date_of_birth: null,
-          color_code: null,
-          color: null,
-          country_located: null,
-          fate: null,
-          microchip: null,
-          father: null,
-          mother: null
+          id: horse_info[0],
+          name_and_origin: horse_info[1],
         });
       }
     }
   }
   return results;
+}
+
+function asyncLoop(obj) {
+  // http://stackoverflow.com/a/7654602/2401628
+  var i = -1;
+  var loop = function() {
+    i++;
+    if (i==obj.length) {
+      obj.callback();
+      return;
+    }
+    obj.functionToLoop(loop, i);
+  }
+  loop(); // init
 }
 
 app.get('/horses', function(req, res){
@@ -154,21 +159,30 @@ app.get('/horses', function(req, res){
     });
   }
 
-  query_data(id, name, origin, microchip, function(error, response, fields) {
+  query_data(id, name, origin, microchip, function(error, response, html_page) {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({
         error:'www.worldfengur.com refuses to respond or give back data'
       });
     }
-    var results = parse_data(fields);
+    var results = parse_data(html_page);
     if (results.length > 1) {
-      var completeResults = results.map(result => {
-        query_data(result.id, '', '', '', function(err, res, fields) {
-          return parse_data(fields)[0];
-        });
+      // we receive less data for multi-records, so we do additional query for each result
+      // which we 'correctly' assume returns a single-record result
+      var complete_multi_results = [];
+      asyncLoop({
+        length: results.length,
+        functionToLoop: function(loop, i) {
+          query_data(results[i]['id'], '', '', '', function(err, res, fields) {
+            var single_result = parse_data(fields)[0];
+            complete_multi_results.push(single_result);
+            loop();
+          });
+        },
+        callback: function() {
+          return res.cache().json({results: complete_multi_results});
+        }
       });
-
-      return res.cache().json({results: completeResults});
     } else {
       return res.cache().json({results: results});
     }
