@@ -17,7 +17,11 @@ function queryData(id, name, origin, microchip, callback) {
   const encodedName = encodeURIComponent(escape(name)).replace(/%25/g, '%')
   const encodedOrigin = encodeURIComponent(escape(origin)).replace(/%25/g, '%')
   const formData = (
-    `fnr=${id}&nafn=${encodedName}&uppruni=${encodedOrigin}&ormerki=${microchip}&leitahnappur=Search+&leita=1'`
+    'fnr=' + id +
+    '&nafn=' + encodedName +
+    '&uppruni=' + encodedOrigin +
+    '&ormerki=' + microchip +
+    '&leitahnappur=Search+&leita=1'
   )
 
   request.post({

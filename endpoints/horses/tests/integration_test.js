@@ -14,7 +14,7 @@ const fieldsToCheckFor = [
   'mother',
 ]
 
-describe('multi-results', () => {
+describe('multi-results', function () {
   this.timeout(20000)
   it('should return an array of objects containing correct fields', (done) => {
     const params = helpers.testRequestParams('/horses', { name: 'Oddur', origin: 'Selfossi' })
@@ -31,7 +31,7 @@ describe('single-result-by-name', () => {
   })
 })
 
-describe('single-result-partial-info', () => {
+describe('single-result-partial-info', function () {
   this.timeout(20000)
   it('should return an array of objects containing correct fields', (done) => {
     const params = helpers.testRequestParams('/horses', { name: 'Lotta', origin: 'Ármóti' })
@@ -40,7 +40,7 @@ describe('single-result-partial-info', () => {
   })
 })
 
-describe('single-result-by-id', () => {
+describe('single-result-by-id', function () {
   this.timeout(20000)
   it('should return an array of objects containing correct fields', (done) => {
     const params = helpers.testRequestParams('/horses', { id: 'IS1987187700' })
