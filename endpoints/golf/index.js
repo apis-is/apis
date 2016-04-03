@@ -4,21 +4,8 @@ import request from 'request';
 import cheerio from 'cheerio';
 import h from 'apis-helpers';
 import _ from 'lodash';
+import { parse as parseUrl } from 'url';
 import app from '../../server';
-
-const getParamFromURL = (url, param) => {
-  // This feels wrong.
-  const params = url.split('?')[1].split('&');
-  const found = params.find(p => {
-    const pieces = p.split('=');
-    return pieces[0] === param;
-  });
-
-  if (found) {
-    return found;
-  }
-  throw new Error('Key not found in query parameters');
-};
 
 app.get('/golf/teetimes', (req, res) => {
   const clubId = req.query.club;
@@ -73,10 +60,16 @@ app.get('/golf/clubs', (req, res) => {
     return res.cache(3600).json({
       results: _.map(rows, (row) => {
         const $row = $(row);
+        const url = (
+          $row.children('td.club').children('a').attr('href')
+        );
+
+        const query = parseUrl(url, true).query;
+
         return {
           abbreviation: $row.children('td.abbreviation').html(),
           club: {
-            id: getParamFromURL($row.children('td.club').children('a').attr('href'), 'club'),
+            id: query.club,
             name: $row.children('td.club').children('a').html(),
           },
           location: $row.children('td.location').html(),

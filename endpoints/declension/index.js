@@ -73,20 +73,20 @@ function parseTable($) {
   const singular = generateSequence(0, 4, 3);
   const results = [];
 
-  $('table tr td span').each((i) => {
+  $('table tr td span').each((i, element) => {
     const predicate = (
-      this
-      .parent
-      .parent
-      .children
-      .filter(node => node.name === 'td')[0]
-      .children[0]
-      .data
+      element
+        .parent
+        .parent
+        .children
+        .filter(node => node.name === 'td')[0]
+        .children[0]
+        .data
     );
 
     results.push({
       predicate,
-      value: this.children[0].data,
+      value: element.children[0].data,
       category: i in singular ? 'Eintala' : 'Fleirtala',
     });
   });
