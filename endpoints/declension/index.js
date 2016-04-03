@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import app from '../../server'
 import request from 'request'
 import helper from 'apis-helpers'
@@ -109,4 +107,3 @@ app.get('/declension/:word', (req, res) => {
     return res.json(parseTable(body))
   }, params)
 })
-

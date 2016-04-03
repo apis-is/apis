@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign, consistent-return */
-
 import request from 'request'
 import { parseString } from 'xml2js'
 import h from 'apis-helpers'

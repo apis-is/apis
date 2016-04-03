@@ -4,6 +4,8 @@
   "rules": {
     "arrow-body-style": ["off"],
     "func-names": ["off"],
+    "consistent-return": ["warn"],
+    "no-param-reassign": ["warn"],
     "no-inline-comments": ["error"],
     "semi": ["error", "never"]
   },

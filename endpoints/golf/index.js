@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-
 import request from 'request'
 import cheerio from 'cheerio'
 import h from 'apis-helpers'
