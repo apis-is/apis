@@ -14,7 +14,8 @@ app.get('/golf/teetimes', (req, res) => {
   }
 
   request.get({
-    rejectUnauthorized: false, // http://stackoverflow.com/a/20091919
+    // http://stackoverflow.com/a/20091919
+    rejectUnauthorized: false,
     headers: { 'User-Agent': h.browser() },
     url: `http://mitt.golf.is/pages/rastimar/rastimayfirlit/?club=${clubId}`,
   }, (err, response, html) => {
@@ -43,7 +44,8 @@ app.get('/golf/teetimes', (req, res) => {
 
 app.get('/golf/clubs', (req, res) => {
   request.get({
-    rejectUnauthorized: false, // http://stackoverflow.com/a/20091919
+    // http://stackoverflow.com/a/20091919
+    rejectUnauthorized: false,
     headers: { 'User-Agent': h.browser() },
     url: 'http://mitt.golf.is/pages/rastimar/',
   }, (err, response, html) => {
@@ -54,7 +56,8 @@ app.get('/golf/clubs', (req, res) => {
     }
 
     const $ = cheerio.load(html)
-    const rows = $('table.golfTable tr').slice(2) // Skip the first element.
+    // Skip the first element.
+    const rows = $('table.golfTable tr').slice(2)
     return res.cache(3600).json({
       results: _.map(rows, (row) => {
         const $row = $(row)
