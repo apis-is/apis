@@ -41,7 +41,7 @@ const scrapeSamferdaFor = (requesting, res) => {
     // and eventually sent as a JSON response.
     const results = []
 
-    $('table:has(thead) > tbody > tr[bgcolor]').each(() => {
+    $('table:has(thead) > tbody > tr[bgcolor]').each(function () {
       const cols = $(this).children()
       const rowType = cols.eq(1).text().trim()
 
