@@ -1,36 +1,36 @@
-//Turn test mode on
+/* global describe, it */
+
+// Turn test mode on
 process.env.INTEGRATION = true;
 
-var fs = require('fs');
-var path = require('path');
-var fileModule = require('file');
+import fs from 'fs';
+import path from 'path';
+import fileModule from 'file';
 
-var testDir = 'tests';
-var testFileName = 'integration_test.js';
+const testDir = 'tests';
+const testFileName = 'integration_test.js';
 
-describe('endpoint', function() {
-  it('should load the server and set everything up properly',function(done){
-    this.timeout(10000); //Server should not take more than 1 sek to boot
+describe('endpoint', () => {
+  it('should load the server and set everything up properly', (done) => {
+    const app = require(`${process.cwd()}/server`);
 
-    var app = require(process.cwd() + '/server');
-
-    app.on('ready',function(){
-      fileModule.walkSync('./endpoints', function(dirPath, dirs, files){
+    app.on('ready', () => {
+      fileModule.walkSync('./endpoints', (dirPath, dirs, files) => {
         if (dirPath.indexOf(testDir) < 0) return;
 
-        files.forEach(function(file){
-          if (file != testFileName) return;
+        files.forEach((file) => {
+          if (file !== testFileName) return;
 
-          var fullPath = dirPath + '/' + file;
+          const fullPath = `${dirPath}/${file}`;
 
           if (!fs.existsSync(fullPath)) return;
           if (path.extname(fullPath) !== '.js') return;
 
-          require('../../' + fullPath);
+          require(`../../${fullPath}`);
         });
       });
 
       done();
     });
-  });
+  }).timeout(10000);
 });
