@@ -11,6 +11,7 @@
     <link href="img/favicon.png" rel="shortcut icon" type="image/png">
     <script type="text/javascript" src="js/vendor/modernizr.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/icelandic-horse.css">
   </head>
   <body>
     <loader>
@@ -2277,6 +2278,73 @@
       "id": "6"
     }
   ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-horses" shortname="horses" title="Icelandic horses" icon="icelandic-horse" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-icelandic-horse"></icon>
+                <h3><a href="#endpoint-horses">
+                    <icon class="fa fa-link"></icon>Icelandic horses</a></h3>
+                <h4>Source:&nbsp;<a href="http://www.worldfengur.com/freezone_horse.jsp?c=EN" target="_blank">Worldfengur.com</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/horses?id=IS1987187700" target="_blank">?id=IS1987187700</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Search the icelandic horse database Worldfengur.<br><b>NB: At least one of the following is required, id, name and origin or microchip.</b></p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt>id</dt>
+                    <dd>Public ID</dd>
+                    <dt>name</dt>
+                    <dd>Name</dd>
+                    <dt>origin</dt>
+                    <dd>Place of origin</dd>
+                    <dt>microchip</dt>
+                    <dd>Microchip number</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/horses',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'id': 'IS1987187700'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+        {
+            "id": "IS1987187700",
+            "name_and_origin": "Oddur frá Selfossi",
+            "ueln": "352002987187700",
+            "date_of_birth": "15.06.1987",
+            "color_code": "4521",
+            "color": "Palomino with a star flaxen mane and tail",
+            "country_located": "IS",
+            "fate": "Put down",
+            "microchip": null,
+            "father": {
+                "id": "IS1981157025",
+                "name_and_origin": "Kjarval frá Sauðárkróki"
+            },
+            "mother": {
+                "id": "IS1972287521",
+                "name_and_origin": "Leira frá Þingdal"
+            }
+        }
+    ]
 }</code></pre>
                 </div>
               </box>

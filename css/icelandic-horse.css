@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'icelandic-horse';
+    src: url('/fonts/custom/icelandic-horse.eot?vz6df3');
+    src: url('/fonts/custom/icelandic-horse.eot?vz6df3#iefix') format('embedded-opentype'),
+         url('/fonts/custom/icelandic-horse.ttf?vz6df3') format('truetype'),
+         url('/fonts/custom/icelandic-horse.woff?vz6df3') format('woff'),
+         url('/fonts/custom/icelandic-horse.svg?vz6df3') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa-icelandic-horse {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icelandic-horse' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-icelandic-horse:before {
+    content: "\e900";
+}
