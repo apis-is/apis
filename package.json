@@ -68,7 +68,7 @@
     "start": "node index.js",
     "test": "mocha --reporter=dot ./test",
     "coveralls": "exit 0",
-    "lint": "./node_modules/eslint/bin/eslint.js ."
+    "lint": "eslint ."
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
