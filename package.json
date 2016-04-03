@@ -71,6 +71,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js ."
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.2",
     "eslint": "^2.6.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-import": "^1.4.0"
