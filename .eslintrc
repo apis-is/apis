@@ -7,6 +7,7 @@
     "consistent-return": ["warn"],
     "no-param-reassign": ["warn"],
     "no-inline-comments": ["error"],
+    "max-len": ["warn", 120],
     "semi": ["error", "never"]
   },
   "env": {
