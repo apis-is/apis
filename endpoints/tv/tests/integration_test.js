@@ -1,94 +1,98 @@
-var request = require('request');
-var helpers = require('../../../lib/test_helpers.js');
+/* global describe it */
 
-describe('tv root', function() {
-  it("should return info", function (done) {
-        var fieldsToCheckFor = ["info"];
-        var params = helpers.testRequestParams("/tv/");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+import request from 'request';
+import helpers from '../../../lib/test_helpers';
+
+describe('tv root', () => {
+  it('should return info', (done) => {
+    const fieldsToCheckFor = ['info'];
+    const params = helpers.testRequestParams('/tv/');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe.skip('tv - skjar1', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/skjar1");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe.skip('tv - skjar1', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/skjar1');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod2 gull', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod2gull");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod2 gull', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod2gull');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod2 bio', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod2bio");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod2 bio', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod2bio');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod3', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod3");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod3', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod3');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod2 sport2', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod2sport2");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod2 sport2', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod2sport2');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod2 sport', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod2sport");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod2 sport', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod2sport');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe('tv - stod2', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/stod2");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe('tv - stod2', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/stod2');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
 
-describe.skip('tv - ruv ithrottir', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        this.timeout(20000);
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/ruvithrottir");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, undefined, true);
-        request.get(params, resultHandler);
-    });
+describe.skip('tv - ruv ithrottir', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    this.timeout(20000);
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/ruvithrottir');
+    const resultHandler = helpers.testRequestHandlerForFields(
+      done, fieldsToCheckFor, undefined, true
+    );
+    request.get(params, resultHandler);
+  });
 });
 
-describe.skip('tv - ruv', function () {
-    it("should return an array of objects containing correct fields", function (done) {
-        this.timeout(20000);
-        var fieldsToCheckFor = ["series", "title", "originalTitle", "description", "live", "premier"];
-        var params = helpers.testRequestParams("/tv/ruv");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
+describe.skip('tv - ruv', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    this.timeout(20000);
+    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier'];
+    const params = helpers.testRequestParams('/tv/ruv');
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
+    request.get(params, resultHandler);
+  });
 });
