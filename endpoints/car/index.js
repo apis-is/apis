@@ -1,7 +1,7 @@
-const request = require('request')
-const $ = require('cheerio')
-const h = require('apis-helpers')
-const app = require('../../server')
+import request from 'request'
+import $ from 'cheerio'
+import h from 'apis-helpers'
+import app from '../../server'
 
 
 app.get('/car', (req, res) => {
