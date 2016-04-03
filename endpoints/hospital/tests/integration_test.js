@@ -1,17 +1,17 @@
-var request = require('request');
-var assert = require('assert');
-var helpers = require('../../../lib/test_helpers.js');
+var request = require('request')
+var assert = require('assert')
+var helpers = require('../../../lib/test_helpers.js')
 
-describe('hospital', function() {
+describe('hospital', function () {
     // The only thing that changes is the form attribute, so why not just re-use the object
-    var fieldsToCheckFor = ['birthNumbers', 'surgeries', 'dischargedNumbers',
+  var fieldsToCheckFor = ['birthNumbers', 'surgeries', 'dischargedNumbers',
 			    'hospitalizedNumbers', 'atwork', 'patients-child',
 		            'patients-er', 'patients-walk', 'patients-icu', 'donors', 'patients-skilun',
- 			    'patients-heart2'];
+ 			    'patients-heart2']
 
-    it("should return an array of objects containing correct fields", function(done) {
-        var params = helpers.testRequestParams("/hospital");
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request(params, resultHandler);
-    });
-});
+  it('should return an array of objects containing correct fields', function (done) {
+    var params = helpers.testRequestParams('/hospital')
+    var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+    request(params, resultHandler)
+  })
+})

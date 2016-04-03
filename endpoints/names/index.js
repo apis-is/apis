@@ -5,10 +5,10 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-var request = require('request');
-var h = require('apis-helpers');
-var app = require('../../server');
-var cheerio = require('cheerio');
+var request = require('request')
+var h = require('apis-helpers')
+var app = require('../../server')
+var cheerio = require('cheerio')
 
 /* Root names handler - only returns a list of resources */
 app.get('/names', function (req, res) {
@@ -25,88 +25,88 @@ app.get('/names', function (req, res) {
         }
       ]
     }
-  );
-});
+  )
+})
 
 /* Get all legal names for males */
-app.get('/names/males/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes';
-	return handleRequest(url, req, res);
-});
+app.get('/names/males/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
+  return handleRequest(url, req, res)
+})
 
 /* Get all legal names for females */
-app.get('/names/females/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes';
-	return handleRequest(url, req, res);
-});
+app.get('/names/females/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
+  return handleRequest(url, req, res)
+})
 
 /* Get all legal middle names */
-app.get('/names/middlenames/:filter?', function(req, res){
-	var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes';
-	return handleRequest(url, req, res);
-});
+app.get('/names/middlenames/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
+  return handleRequest(url, req, res)
+})
 
 /* Get all rejected names for males */
-app.get('/names/rejected/males/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no';
-  return handleRequest(url, req, res);
-});
+app.get('/names/rejected/males/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
+  return handleRequest(url, req, res)
+})
 
 /* Get all rejected names for females */
-app.get('/names/rejected/females/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no';
-  return handleRequest(url, req, res);
-});
+app.get('/names/rejected/females/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
+  return handleRequest(url, req, res)
+})
 
 /* Get all rejected middle names */
-app.get('/names/rejected/middlenames/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no';
-  return handleRequest(url, req, res);
-});
+app.get('/names/rejected/middlenames/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
+  return handleRequest(url, req, res)
+})
 
 /* Get all rejected names */
-app.get('/names/rejected/:filter?', function(req, res){
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no';
-  return handleRequest(url, req, res);
-});
+app.get('/names/rejected/:filter?', function (req, res) {
+  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
+  return handleRequest(url, req, res)
+})
 
 /* Handles the request for a specific request URL */
 function handleRequest(url, req, res) {
-	// Check for the filter parameter
-	var filter = req.params.filter || req.query.filter || req.query.search || '';
+  // Check for the filter parameter
+  var filter = req.params.filter || req.query.filter || req.query.search || ''
 
-	// Add name filtering if it is requested
-	if (filter !== ''){
-		url += '&Nafn=' + filter;
-	}
+  // Add name filtering if it is requested
+  if (filter !== '') {
+    url += '&Nafn=' + filter
+  }
 
-	request.get({
-		headers: {'User-Agent': h.browser()},
-		url: url
-	}, function(error, response, body){
-		if(error || response.statusCode !== 200)
-			return res.status(500).json({error:'www.island.is refuses to respond or give back data'});
+  request.get({
+    headers: { 'User-Agent': h.browser() },
+    url: url
+  }, function (error, response, body) {
+    if (error || response.statusCode !== 200)
+      return res.status(500).json({ error:'www.island.is refuses to respond or give back data' })
 
-		try{
-			var $ = cheerio.load(body);
-		}catch(error){
-			return res.status(500).json({error:'Could not parse body'});
-		}
+    try {
+      var $ = cheerio.load(body)
+    } catch (error) {
+      return res.status(500).json({ error:'Could not parse body' })
+    }
 
-		var	obj = { results: []};
+    var obj = { results: [] }
 
-		// Clear data regarding the acceptance date of the name (not needed)
-		$('.dir li i').each(function(key) {
-			$(this).remove();
-		});
+    // Clear data regarding the acceptance date of the name (not needed)
+    $('.dir li i').each(function (key) {
+      $(this).remove()
+    })
 
-		// Loop through all the names in the list and add them to our array
-		$('.dir li').each(function(key){
-			var name = $(this).text();
-			obj.results.push(name.trim());
-		});
+    // Loop through all the names in the list and add them to our array
+    $('.dir li').each(function (key) {
+      var name = $(this).text()
+      obj.results.push(name.trim())
+    })
 
-		// Return the results as JSON and cache for 24 hours
-		return res.cache(86400).json(obj);
-	});
+    // Return the results as JSON and cache for 24 hours
+    return res.cache(86400).json(obj)
+  })
 }

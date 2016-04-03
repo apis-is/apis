@@ -1,4 +1,4 @@
-var app = require('../../server');
+var app = require('../../server')
 
 /* Root TV  */
 app.get('/tv', function (req, res) {
@@ -20,18 +20,18 @@ app.get('/tv', function (req, res) {
             skjar1: '/tv/skjar1'
           },
           channels: [
-            {name: 'Rúv', endpoint: '/tv/ruv/'},
-            {name: 'Rúv íþróttir', endpoint: '/tv/ruvithrottir/'},
-            {name: 'Stöð 2', endpoint: '/tv/stod2/'},
-            {name: 'Stöð 2 Sport', endpoint: '/tv/stod2sport'},
-            {name: 'Stöð 2 Sport 2', endpoint: '/tv/stod2sport2'},
-            {name: 'Stöð 2 Gull', endpoint: '/tv/stod2gull'},
-            {name: 'Stöð 2 Bíó', endpoint: '/tv/stod2bio'},
-            {name: 'Stöð 2', endpoint: '/tv/stod3'},
-            {name: 'Skjár 1', endpoint: '/tv/skjar1'}
+            { name: 'Rúv', endpoint: '/tv/ruv/' },
+            { name: 'Rúv íþróttir', endpoint: '/tv/ruvithrottir/' },
+            { name: 'Stöð 2', endpoint: '/tv/stod2/' },
+            { name: 'Stöð 2 Sport', endpoint: '/tv/stod2sport' },
+            { name: 'Stöð 2 Sport 2', endpoint: '/tv/stod2sport2' },
+            { name: 'Stöð 2 Gull', endpoint: '/tv/stod2gull' },
+            { name: 'Stöð 2 Bíó', endpoint: '/tv/stod2bio' },
+            { name: 'Stöð 2', endpoint: '/tv/stod3' },
+            { name: 'Skjár 1', endpoint: '/tv/skjar1' }
           ]
         }
       ]
     }
-  );
-});
+  )
+})
