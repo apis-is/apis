@@ -5,16 +5,6 @@ import cheerio from 'cheerio'
 
 function pad(n) {return n < 10 ? `0${n}` : n}
 
-
-app.get('/sarschool', (req, res) => {
-  getRequest((body) => {
-    return res.cache().json({
-      results: parseList(body),
-    })
-  })
-})
-
-
 const getRequest = (callback, providedUrl) => {
   const url = providedUrl || 'http://skoli.landsbjorg.is/Open/Seminars.aspx?'
 
@@ -88,3 +78,11 @@ const parseList = (body) => {
 
   return results
 }
+
+app.get('/sarschool', (req, res) => {
+  getRequest((body) => {
+    return res.cache().json({
+      results: parseList(body),
+    })
+  })
+})

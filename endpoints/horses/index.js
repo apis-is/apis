@@ -16,6 +16,8 @@ function queryData(id, name, origin, microchip, callback) {
   // Hacking around to get ISO 8859-1 encoded string, pls unhack if you know better way
   const encodedName = encodeURIComponent(escape(name)).replace(/%25/g, '%')
   const encodedOrigin = encodeURIComponent(escape(origin)).replace(/%25/g, '%')
+
+  /* eslint-disable prefer-template */
   const formData = (
     'fnr=' + id +
     '&nafn=' + encodedName +
@@ -23,6 +25,7 @@ function queryData(id, name, origin, microchip, callback) {
     '&ormerki=' + microchip +
     '&leitahnappur=Search+&leita=1'
   )
+  /* eslint-enable */
 
   request.post({
     headers,
