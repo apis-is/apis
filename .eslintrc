@@ -6,5 +6,10 @@
     "func-names": ["off"],
     "no-inline-comments": ["error"],
     "semi": ["error", "never"]
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true
   }
 }
