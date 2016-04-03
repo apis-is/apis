@@ -1,17 +1,62 @@
 /*
-About:   An API for all names that are allowed in Iceland. Names are devided into male names, female names and middle names
+About:   An API for all names that are allowed in Iceland. Names are devided into
+          male names, female names and middle names
 Author:  Hjörtur Líndal Stefánsson
 Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-var request = require('request')
-var h = require('apis-helpers')
-var app = require('../../server')
-var cheerio = require('cheerio')
+import request from 'request'
+import h from 'apis-helpers'
+import app from '../../server'
+import cheerio from 'cheerio'
+
+/* Handles the request for a specific request URL */
+function handleRequest(providedUrl, req, res) {
+  let $
+  // Check for the filter parameter
+  const filter = req.params.filter || req.query.filter || req.query.search || ''
+
+  // Add name filtering if it is requested
+  let url = providedUrl || ''
+  if (filter !== '') {
+    url += `&Nafn=${filter}`
+  }
+
+  request.get({
+    headers: { 'User-Agent': h.browser() },
+    url,
+  }, (error, response, body) => {
+    if (error || response.statusCode !== 200) {
+      return res.status(500).json({ error: 'www.island.is refuses to respond or give back data' })
+    }
+
+    try {
+      $ = cheerio.load(body)
+    } catch (exc) {
+      return res.status(500).json({ error: 'Could not parse body' })
+    }
+
+    const obj = { results: [] }
+
+    // Clear data regarding the acceptance date of the name (not needed)
+    $('.dir li i').each(() => {
+      $(this).remove()
+    })
+
+    // Loop through all the names in the list and add them to our array
+    $('.dir li').each(() => {
+      const name = $(this).text()
+      obj.results.push(name.trim())
+    })
+
+    // Return the results as JSON and cache for 24 hours
+    return res.cache(86400).json(obj)
+  })
+}
 
 /* Root names handler - only returns a list of resources */
-app.get('/names', function (req, res) {
+app.get('/names', (req, res) => {
   return res.json(
     {
       results: [
@@ -20,93 +65,52 @@ app.get('/names', function (req, res) {
           endpoints: {
             males: '/names/males/',
             females: '/names/females/',
-            middlenames: '/names/middlenames/'
-          }
-        }
-      ]
+            middlenames: '/names/middlenames/',
+          },
+        },
+      ],
     }
   )
 })
 
 /* Get all legal names for males */
-app.get('/names/males/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
+app.get('/names/males/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
 /* Get all legal names for females */
-app.get('/names/females/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
+app.get('/names/females/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
 /* Get all legal middle names */
-app.get('/names/middlenames/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
+app.get('/names/middlenames/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
 /* Get all rejected names for males */
-app.get('/names/rejected/males/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
+app.get('/names/rejected/males/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
 /* Get all rejected names for females */
-app.get('/names/rejected/females/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
+app.get('/names/rejected/females/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
 /* Get all rejected middle names */
-app.get('/names/rejected/middlenames/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
+app.get('/names/rejected/middlenames/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
 /* Get all rejected names */
-app.get('/names/rejected/:filter?', function (req, res) {
-  var url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
+app.get('/names/rejected/:filter?', (req, res) => {
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
-
-/* Handles the request for a specific request URL */
-function handleRequest(url, req, res) {
-  // Check for the filter parameter
-  var filter = req.params.filter || req.query.filter || req.query.search || ''
-
-  // Add name filtering if it is requested
-  if (filter !== '') {
-    url += '&Nafn=' + filter
-  }
-
-  request.get({
-    headers: { 'User-Agent': h.browser() },
-    url: url
-  }, function (error, response, body) {
-    if (error || response.statusCode !== 200)
-      return res.status(500).json({ error:'www.island.is refuses to respond or give back data' })
-
-    try {
-      var $ = cheerio.load(body)
-    } catch (error) {
-      return res.status(500).json({ error:'Could not parse body' })
-    }
-
-    var obj = { results: [] }
-
-    // Clear data regarding the acceptance date of the name (not needed)
-    $('.dir li i').each(function (key) {
-      $(this).remove()
-    })
-
-    // Loop through all the names in the list and add them to our array
-    $('.dir li').each(function (key) {
-      var name = $(this).text()
-      obj.results.push(name.trim())
-    })
-
-    // Return the results as JSON and cache for 24 hours
-    return res.cache(86400).json(obj)
-  })
-}
