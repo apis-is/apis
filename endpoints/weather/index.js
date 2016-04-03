@@ -2,7 +2,7 @@
 
 import request from 'request';
 import { parseString } from 'xml2js';
-import h from 'apis-helpsers';
+import h from 'apis-helpers';
 import cheerio from 'cheerio';
 import xregexp from 'xregexp';
 import app from '../../server';
