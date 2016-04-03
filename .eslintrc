@@ -2,6 +2,9 @@
   "parser": "babel-eslint",
   "extends": "airbnb/base",
   "rules": {
-    "arrow-body-style": 0
+    "arrow-body-style": ["off"],
+    "func-names": ["off"],
+    "no-inline-comments": ["error"],
+    "semi": ["error", "never"]
   }
 }
