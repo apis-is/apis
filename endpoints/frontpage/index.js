@@ -1,11 +1,11 @@
-var app = require('../../server')
+import app from '../../server'
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.redirect(301, 'http://docs.apis.is')
 })
 
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.json({
-    'info':'Velkominn á apis.is! Kíktu á docs.apis.is í vafranum þínum fyrir frekari upplýsingar!'
+    info: 'Velkominn á apis.is! Kíktu á docs.apis.is í vafranum þínum fyrir frekari upplýsingar!',
   })
 })
