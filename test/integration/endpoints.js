@@ -1,5 +1,3 @@
-/* global describe, it */
-
 // Turn test mode on
 process.env.INTEGRATION = true;
 
