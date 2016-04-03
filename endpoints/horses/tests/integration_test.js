@@ -42,6 +42,7 @@ describe('single-result-partial-info', function() {
 });
 
 describe('single-result-by-id', function() {
+  this.timeout(20000);
   it("should return an array of objects containing correct fields", function(done) {
     var params = helpers.testRequestParams("/horses", { id: "IS1987187700" });
     var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
