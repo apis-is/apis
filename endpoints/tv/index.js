@@ -1,8 +1,7 @@
-var app = require('../../server')
+import app from '../../server'
 
 /* Root TV  */
-app.get('/tv', function (req, res) {
-
+app.get('/tv', (req, res) => {
   return res.json(
     {
       results: [
@@ -17,7 +16,7 @@ app.get('/tv', function (req, res) {
             stod2gull: '/tv/stod2gull',
             stod2bio: '/tv/stod2bio',
             stod3: '/tv/stod3',
-            skjar1: '/tv/skjar1'
+            skjar1: '/tv/skjar1',
           },
           channels: [
             { name: 'Rúv', endpoint: '/tv/ruv/' },
@@ -28,10 +27,10 @@ app.get('/tv', function (req, res) {
             { name: 'Stöð 2 Gull', endpoint: '/tv/stod2gull' },
             { name: 'Stöð 2 Bíó', endpoint: '/tv/stod2bio' },
             { name: 'Stöð 2', endpoint: '/tv/stod3' },
-            { name: 'Skjár 1', endpoint: '/tv/skjar1' }
-          ]
-        }
-      ]
+            { name: 'Skjár 1', endpoint: '/tv/skjar1' },
+          ],
+        },
+      ],
     }
   )
 })

@@ -73,7 +73,7 @@ describe('tv - stod2', () => {
   })
 })
 
-describe.skip('tv - ruv ithrottir', () => {
+describe.skip('tv - ruv ithrottir', function () {
   it('should return an array of objects containing correct fields', (done) => {
     this.timeout(20000)
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
@@ -85,7 +85,7 @@ describe.skip('tv - ruv ithrottir', () => {
   })
 })
 
-describe.skip('tv - ruv', () => {
+describe.skip('tv - ruv', function () {
   it('should return an array of objects containing correct fields', (done) => {
     this.timeout(20000)
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
