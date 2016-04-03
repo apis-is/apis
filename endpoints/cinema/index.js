@@ -6,12 +6,12 @@ import app from '../../server'
  * Fetches movies for show today in Icelandic cinemas.
  * response - JSON: Movie data within an 'results' array.
  */
-app.get('/cinema', function (req, res, next) {
+app.get('/cinema', (req, res) => {
   const url = 'http://kvikmyndir.is/bio/syningatimar/'
 
-  request(url, function (error, response, body) {
+  request(url, (error, response, body) => {
     if (error) {
-      return res.status(500).json({ error: url + ' not responding correctly...' })
+      return res.status(500).json({ error: `${url} not responding correctly...` })
     }
 
     let $
@@ -19,34 +19,34 @@ app.get('/cinema', function (req, res, next) {
     try {
       $ = cheerio.load(body)
     } catch (e) {
-      return res.status(500).json({ error:'Could not load the body with cherrio.' })
+      return res.status(500).json({ error: 'Could not load the body with cherrio.' })
     }
 
     // Base object to be added to
     // and eventually sent as a JSON response.
-    let obj = {
-      results: []
+    const obj = {
+      results: [],
     }
 
     // DOM elements array containing all movies.
-    let movies = $('.Kvikmyndir_TimeTable #divbox').find('.utanumMynd_new')
+    const movies = $('.Kvikmyndir_TimeTable #divbox').find('.utanumMynd_new')
 
     // Loop through movies
     movies.each(function () {
       // This movie.
-      let movie = $(this)
+      const movie = $(this)
 
       // Showtimes for JSON
-      let showtimes = []
+      const showtimes = []
 
       // Find all theaters and loop through them.
-      let theaters = movie.find('[id^="myndbio"]')
+      const theaters = movie.find('[id^="myndbio"]')
 
       theaters.each(function () {
         // Single theater
-        let theater = {
+        const theater = {
           theater: $(this).find('#bio a').text().trim(),
-          schedule: []
+          schedule: [],
         }
 
         // Loop through each showtime and
@@ -59,14 +59,14 @@ app.get('/cinema', function (req, res, next) {
         showtimes.push(theater)
       })
 
-      let urls = movie
+      const urls = movie
         .find('img.poster')
         .attr('src')
         .match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
 
-      let imgUrl = `http://kvikmyndir.is${urls[0]}`
+      const imgUrl = `http://kvikmyndir.is${urls[0]}`
 
-      let realeasedYear = movie
+      const realeasedYear = movie
         .find('.mynd_titill_artal')
         .text()
         .replace('/[()]/g', '')
@@ -80,7 +80,7 @@ app.get('/cinema', function (req, res, next) {
         imdb: movie.find('.imdbEinkunn').text().trim(),
         imdbLink: movie.find('.imdbEinkunn a').attr('href') ? movie.find('.imdbEinkunn a').attr('href').trim() : '',
         image: imgUrl,
-        showtimes: showtimes
+        showtimes,
       })
     })
 
@@ -92,11 +92,11 @@ app.get('/cinema', function (req, res, next) {
  * Fetches theaters that are showing movies today.
  * response - JSON: Theater data within an 'results' array.
  */
-app.get('/cinema/theaters', function (req, res, next) {
-  let url = 'http://kvikmyndir.is/bio/syningatimar_bio/'
+app.get('/cinema/theaters', (req, res) => {
+  const url = 'http://kvikmyndir.is/bio/syningatimar_bio/'
 
-  request(url, function (error, response, body) {
-    if (error) return res.status(500).json({ error: url + ' not responding correctly...' })
+  request(url, (error, response, body) => {
+    if (error) return res.status(500).json({ error: `${url} not responding correctly...` })
 
     // Cheerio declared and then attemted to load.
     let $
@@ -104,33 +104,33 @@ app.get('/cinema/theaters', function (req, res, next) {
     try {
       $ = cheerio.load(body)
     } catch (e) {
-      return res.status(500).json({ error:'Could not load the body with cherrio.' })
+      return res.status(500).json({ error: 'Could not load the body with cherrio.' })
     }
 
     // Base object to be added to
     // and eventually sent as a JSON response.
-    let obj = {
-      results: []
+    const obj = {
+      results: [],
     }
 
     // DOM elements array containing all theaters.
-    let theaters = $('.Kvikmyndir_TimeTable').find('#utanumMynd_new')
+    const theaters = $('.Kvikmyndir_TimeTable').find('#utanumMynd_new')
 
     // Loop through theaters
     theaters.each(function () {
       // This theater.
-      let theater = $(this)
+      const theater = $(this)
 
       // List of movies.
-      let movies = []
+      const movies = []
 
       // Loop through movies.
       theater.find('#myndbio_new').each(function () {
         // This movie.
-        let movie = $(this)
+        const movie = $(this)
 
         // Time schedule.
-        let schedule = []
+        const schedule = []
 
         // Loop through each showtime on schedule today.
         movie.find('#timi_new div').each(function () {
@@ -141,7 +141,7 @@ app.get('/cinema/theaters', function (req, res, next) {
         // Append new movie to the list of movies.
         movies.push({
           title: movie.find('#bio a').text().trim(),
-          schedule: schedule
+          schedule,
         })
       })
 
@@ -150,8 +150,8 @@ app.get('/cinema/theaters', function (req, res, next) {
       obj.results.push({
         name: theater.find('#mynd_titill a').text().trim(),
         location: theater.find('.mynd_titill_artal').text().trim().replace(/(^\()|(\)$)/g, ''),
-        image: 'http://kvikmyndir.is' + theater.find('.mynd_plakat img').attr('src'),
-        movies: movies
+        image: `http://kvikmyndir.is${theater.find('.mynd_plakat img').attr('src')}`,
+        movies,
       })
     })
 
