@@ -9,7 +9,8 @@ const browser = helpers.browser
    the body
    */
 function getEarthquakes(callback, params) {
-  const reqParams = (params === null) ? {
+  // eslint-disable-next-line eqeqeq
+  const reqParams = !params ? {
     url: 'http://hraun.vedur.is/ja/skjalftar/skjlisti.html',
     headers: { 'User-Agent': browser() },
     // needed for some reason.. defaulting to ISO-8859-1
@@ -128,7 +129,7 @@ function parseList(body) {
   // is a header row.
   const data = []
 
-  $('table').eq(2).find('tr').slice(1).map(() => {
+  $('table').eq(2).find('tr').slice(1).map(function () {
     const $children = $(this).children()
     const obj = {}
     for (const key in fieldsParser) {
