@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var app = require('../../server')
 
 app.post('/bus/search', function (req, res) {

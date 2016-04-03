@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const h = require('apis-helpers')
 const request = require('request')
 const app = require('../../server')
