@@ -8,7 +8,8 @@ import _ from 'lodash'
 const baseUrl = url.parse('http://dev.phpbin.ja.is/ajax_leit.php')
 
 // return permutation of a given word
-function getDeclensions(callback, params) {
+function getDeclensions(callback, providedParams) {
+  const params = Object.assign({}, providedParams)
   request.get(params, (err, res, body) => {
     if (err || res.statusCode !== 200) {
       return res.status(500).json({

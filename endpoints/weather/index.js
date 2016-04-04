@@ -1,3 +1,5 @@
+// TODO: Find away to enable no-param-reassign
+/* eslint-disable no-param-reassign */
 import request from 'request'
 import { parseString } from 'xml2js'
 import h from 'apis-helpers'
@@ -172,8 +174,9 @@ app.get('/weather/forecasts/:lang?', (req, res) => {
     })
   }
 
-  getJsonData(url, (forecasts) => {
+  getJsonData(url, (providedForecasts) => {
     // make some nice changes to the object for cleaner JSON
+    const forecasts = Object.assign({}, providedForecasts)
     forecasts.results = forecasts.forecasts.station
     delete forecasts.forecasts.station
     delete forecasts.forecasts

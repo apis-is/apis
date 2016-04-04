@@ -5,7 +5,6 @@
     "arrow-body-style": ["off"],
     "func-names": ["off"],
     "consistent-return": ["off"],
-    "no-param-reassign": ["warn"],
     "no-inline-comments": ["error"],
     "no-console": ["off"],
     "max-len": ["error", 120],
