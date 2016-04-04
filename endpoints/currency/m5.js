@@ -7,7 +7,20 @@ app.get('/currency/m5', (req, res) => {
   // FIXME: Not being used, comment out for now
   // const currencyNames = {
   //   s: ['USD', 'DKK', 'EUR', 'JPY', 'CAD', 'NOK', 'GBP', 'CHF', 'SEK', 'TWI', 'XDR', 'ISK'],
-  //   l: ['Bandarískur dalur', 'Dönsk króna', 'Evra', 'Japanskt jen', 'Kanadískur dalur', 'Norsk króna', 'Sterlingspund', 'Svissneskur franki', 'Sænsk króna', 'Gengisvísitala', 'SDR', 'Íslensk króna'],
+  //   l: [
+  //     'Bandarískur dalur',
+  //     'Dönsk króna',
+  //     'Evra',
+  //     'Japanskt jen',
+  //     'Kanadískur dalur',
+  //     'Norsk króna',
+  //     'Sterlingspund',
+  //     'Svissneskur franki',
+  //     'Sænsk króna',
+  //     'Gengisvísitala',
+  //     'SDR',
+  //     'Íslensk króna',
+  //   ],
   // }
 
   request.get({

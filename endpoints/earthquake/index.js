@@ -49,6 +49,7 @@ function parseJavaScriptVariable(body) {
   const resString = jsonString.replace(/(:\'[-0-9][0-9]*)(,)([0-9]*)/g, '$1.$3')
 
   // Create a Regular expression and change date representation.
+  // eslint-disable-next-line max-len
   const regexDate = /(\'t\':)new Date\((([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+))\)(,\'a\')/g
   const dateReplace = (match, p1, p2, p3, p4, p5, p6, p7, p8, p9) => {
     const parsedDate = new Date(

@@ -61,6 +61,7 @@ app.get('/names', (req, res) => {
     {
       results: [
         {
+          // eslint-disable-next-line max-len
           info: 'This is an api that lists all allowed Icelandic names. A search parameter can be used with each endpoint',
           endpoints: {
             males: '/names/males/',
