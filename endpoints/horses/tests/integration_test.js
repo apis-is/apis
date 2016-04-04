@@ -23,7 +23,8 @@ describe('multi-results', function () {
   })
 })
 
-describe('single-result-by-name', () => {
+describe('single-result-by-name', function () {
+  this.timeout(20000)
   it('should return an array of objects containing correct fields', (done) => {
     const params = helpers.testRequestParams('/horses', { name: 'Fálki', origin: 'Geirshlíð' })
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
