@@ -1,9 +1,10 @@
 language: node_js
 sudo: false
+before_script:
+  - npm run lint
 node_js:
   - "5"
-  - "0.12"
-  - "0.10"
+  - "4"
 notifications:
   slack:
     secure: BWKjmGdVcK55tR5wxLr1GFuWjyqlevL4dSzmHHE4/dyjN8Q6fKDDvdWHEvOAw7jphODVvSxHA3F4gYVM0LiS+CkYwucy9rrqYlTnW7t7L/smr9cpyt8IoOOE+hwvQ1JMAFUbsQOTSk1f8lNHRUUJYG/SKpiO4H4teDjRHsldFTI=

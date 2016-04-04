@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb/base",
+  "rules": {
+    "arrow-body-style": ["off"],
+    "func-names": ["off"],
+    "consistent-return": ["off"],
+    "no-inline-comments": ["error"],
+    "no-console": ["off"],
+    "max-len": ["error", 120],
+    "semi": ["error", "never"]
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true
+  }
+}

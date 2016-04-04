@@ -1,50 +1,43 @@
-var request = require('request');
-var assert = require('assert');
-var helpers = require('../../../lib/test_helpers.js');
+import request from 'request'
+import helpers from '../../../lib/test_helpers.js'
 
-describe.skip('handball', function() {
-    it("should return an array of objects containing correct fields", function(done) {
-        var fieldsToCheckFor = ['Date', 'Time', 'Tournament', 'Venue', 'Teams'];
-        var params = helpers.testRequestParams("/sports/handball", {
-            language: "en"
-        });
+describe.skip('handball', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['Date', 'Time', 'Tournament', 'Venue', 'Teams']
+    const params = helpers.testRequestParams('/sports/handball', { language: 'en' })
 
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
-});
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+    request.get(params, resultHandler)
+  })
+})
 
-describe.skip('football', function() {
-    it("should return an array of objects containing correct fields", function(done) {
-        var fieldsToCheckFor = ['counter','date','time','tournament', 'location', 'homeTeam', 'awayTeam'];
-        var params = helpers.testRequestParams("/sports/football", {
-            language: "en"
-        });
+describe.skip('football', () => {
+  it('should return an array of objects containing correct fields', (done) => {
+    const fieldsToCheckFor = ['counter', 'date', 'time', 'tournament', 'location', 'homeTeam', 'awayTeam']
+    const params = helpers.testRequestParams('/sports/football', { language: 'en' })
 
-        var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-        request.get(params, resultHandler);
-    });
-});
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+    request.get(params, resultHandler)
+  })
+})
 
-testFootballLeague("male-leagues/borgun");
-testFootballLeague("male-leagues/pepsi");
-testFootballLeague("male-leagues/1st");
-testFootballLeague("male-leagues/2nd");
-testFootballLeague("male-leagues/3rd");
+function testFootballLeague(leagueParams) {
+  describe(`football/${leagueParams}`, () => {
+    it('should return an array of objects containing correct fields', (done) => {
+      const fieldsToCheckFor = ['counter', 'date', 'time', 'teams', 'location', 'scores']
+      const params = helpers.testRequestParams(`/sports/football/${leagueParams}`, { language: 'en' })
 
-testFootballLeague("female-leagues/borgun");
-testFootballLeague("female-leagues/pepsi");
+      const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+      request.get(params, resultHandler)
+    })
+  })
+}
 
-function testFootballLeague(leagueParams){
-    describe("football/"+leagueParams, function() {
-        it("should return an array of objects containing correct fields", function(done) {
-            var fieldsToCheckFor = ['counter','date','time','teams', 'location', 'scores'];
-            var params = helpers.testRequestParams("/sports/football/"+leagueParams, {
-                language: "en"
-            });
+testFootballLeague('male-leagues/borgun')
+testFootballLeague('male-leagues/pepsi')
+testFootballLeague('male-leagues/1st')
+testFootballLeague('male-leagues/2nd')
+testFootballLeague('male-leagues/3rd')
 
-            var resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-            request.get(params, resultHandler);
-        });
-    });
-};
+testFootballLeague('female-leagues/borgun')
+testFootballLeague('female-leagues/pepsi')
