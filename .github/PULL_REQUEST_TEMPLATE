@@ -1,9 +1,7 @@
-# Description
-
 Describe this code change as best you can here. Is it a new endpoint, bugfix or
 changes to the documentation?
 
-# Checklist
+### Checklist
 
 - [ ] Write tests
 - [ ] Write documentation
