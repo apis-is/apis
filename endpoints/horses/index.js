@@ -127,10 +127,40 @@ function parseData(htmlPage) {
       // we fish out only id and name for each horse and return list of those
       const numRecords = Number(tdElements[countIndex].replace('Number: ', ''))
       for (let i = 0; i < numRecords; i++) {
-        const horseInfo = tdElements[countIndex + 1 + i * 5].split(' - ')
+        if (!tdElements[countIndex + 1 + i * 5]) {
+          // when numRecords becomes very high it becomes at maximum 5000 but we don't always
+          // get exactly 5000 results in the html it seems
+          continue;
+        }
+        let horseInfo = tdElements[countIndex + 1 + i * 5].split(' - ')
+        let colorCode = null
+        let color = null
+        let fate = null
+        let countryLocated = null
+        if (tdElements[countIndex + 2 + i * 5] !== '') {
+          colorCode = tdElements[countIndex + 2 + i * 5]
+        }
+        if (tdElements[countIndex + 3 + i * 5] !== '') {
+          color = tdElements[countIndex + 3 + i * 5]
+        }
+        if (tdElements[countIndex + 4 + i * 5] !== '') {
+          fate = tdElements[countIndex + 4 + i * 5]
+        }
+        if (tdElements[countIndex + 5 + i * 5] !== '') {
+          countryLocated = tdElements[countIndex + 5 + i * 5]
+        }
         results.push({
           id: horseInfo[0],
           name_and_origin: horseInfo[1],
+          ueln: null,
+          date_of_birth: null,
+          color_code: colorCode,
+          color: color,
+          country_located: countryLocated,
+          fate: fate,
+          microchip: null,
+          father: null,
+          mother: null,
         })
       }
     }
@@ -172,9 +202,10 @@ app.get('/horses', (req, res) => {
       })
     }
     const results = parseData(htmlPage)
-    if (results.length > 1) {
-      // we receive less data for multi-records, so we do additional query for each result
-      // which we 'correctly' assume returns a single-record result
+    if (results.length > 1 && results.length < 8) {
+      // we receive less data for multi-records, so we do additional query for each result if
+      // we didn't get more than 8 results, else we just return the incomplete data we received
+      // we 'correctly' assume that id lookups only return single-record result or empty
       const completeMultiResults = []
       asyncLoop({
         length: results.length,
