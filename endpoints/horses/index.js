@@ -130,9 +130,9 @@ function parseData(htmlPage) {
         if (!tdElements[countIndex + 1 + i * 5]) {
           // when numRecords becomes very high it becomes at maximum 5000 but we don't always
           // get exactly 5000 results in the html it seems
-          continue;
+          continue
         }
-        let horseInfo = tdElements[countIndex + 1 + i * 5].split(' - ')
+        const horseInfo = tdElements[countIndex + 1 + i * 5].split(' - ')
         let colorCode = null
         let color = null
         let fate = null
@@ -155,9 +155,9 @@ function parseData(htmlPage) {
           ueln: null,
           date_of_birth: null,
           color_code: colorCode,
-          color: color,
+          color,
           country_located: countryLocated,
-          fate: fate,
+          fate,
           microchip: null,
           father: null,
           mother: null,
