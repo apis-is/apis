@@ -1,7 +1,7 @@
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import cheerio from 'cheerio'
+import request from 'request';
+import h from 'apis-helpers';
+import app from '../../server';
+import cheerio from 'cheerio';
 
 app.get('/currency/m5', (req, res) => {
   // FIXME: Not being used, comment out for now
@@ -28,15 +28,15 @@ app.get('/currency/m5', (req, res) => {
     url: 'http://www.m5.is/?gluggi=gjaldmidlar',
   }, (err, response, body) => {
     if (err || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.m5.is refuses to respond or give back data' })
+      return res.status(500).json({ error: 'www.m5.is refuses to respond or give back data' });
     }
 
-    const $ = cheerio.load(body)
-    const currencies = []
+    const $ = cheerio.load(body);
+    const currencies = [];
 
     $('.table-striped tr').each(function () {
-      const tds = $(this).find('td')
-      const name = tds.eq(0).text()
+      const tds = $(this).find('td');
+      const name = tds.eq(0).text();
 
       if (name) {
         currencies.push({
@@ -47,10 +47,10 @@ app.get('/currency/m5', (req, res) => {
           bidValue: 0,
           changeCur: parseFloat(tds.eq(4).text().replace(',', '.')),
           changePer: parseFloat(tds.eq(5).text().replace(/\((.*)%\)/, '$1').replace(',', '.')),
-        })
+        });
       }
-    })
+    });
 
-    return res.json({ results: currencies })
-  })
-})
+    return res.json({ results: currencies });
+  });
+});

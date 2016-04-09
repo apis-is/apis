@@ -8,7 +8,7 @@
     "no-inline-comments": ["error"],
     "no-console": ["off"],
     "max-len": ["error", 120],
-    "semi": ["error", "never"]
+    "semi": ["error", "always"]
   },
   "env": {
     "node": true,

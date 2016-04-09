@@ -1,4 +1,4 @@
-import app from '../../server'
+import app from '../../server';
 
 /* Root TV  */
 app.get('/tv', (req, res) => {
@@ -32,5 +32,5 @@ app.get('/tv', (req, res) => {
         },
       ],
     }
-  )
-})
+  );
+});
