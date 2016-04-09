@@ -1,7 +1,7 @@
-import request from 'request'
-import app from '../../server'
-import cheerio from 'cheerio'
-import _ from 'lodash'
+import request from 'request';
+import app from '../../server';
+import cheerio from 'cheerio';
+import _ from 'lodash';
 
 app.get('/hospital', (req, res) => {
   request.get(
@@ -10,28 +10,28 @@ app.get('/hospital', (req, res) => {
       if (err || response.statusCode !== 200) {
         return res.status(500).json({
           error: 'www.landspitali.is refuses to respond or give back data',
-        })
+        });
       }
 
-      let $
+      let $;
       try {
-        $ = cheerio.load(body)
+        $ = cheerio.load(body);
       } catch (e) {
         return res.status(500).json({
           error: 'An error occured when parsing the data from landspitali.is',
-        })
+        });
       }
 
-      const data = {}
+      const data = {};
       _.each(
         $('.activityNumbers.activityNumbersNew').children('div'),
         (elem) => {
           data[elem.attribs.class] = parseInt(
             $(elem).children().eq(1).html(), 10
-          )
+          );
         }
-      )
+      );
       // Cache for a hour.
-      return res.cache(3600).json({ results: [data] })
-    })
-})
+      return res.cache(3600).json({ results: [data] });
+    });
+});

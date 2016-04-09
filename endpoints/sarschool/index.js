@@ -1,65 +1,65 @@
-import request from 'request'
-import app from '../../server'
-import cheerio from 'cheerio'
+import request from 'request';
+import app from '../../server';
+import cheerio from 'cheerio';
 
 
-function pad(n) {return n < 10 ? `0${n}` : n}
+function pad(n) {return n < 10 ? `0${n}` : n;}
 
 const getRequest = (callback, providedUrl) => {
-  const url = providedUrl || 'http://skoli.landsbjorg.is/Open/Seminars.aspx?'
+  const url = providedUrl || 'http://skoli.landsbjorg.is/Open/Seminars.aspx?';
 
-  const params = { url }
+  const params = { url };
 
   request(params, (error, res, body) => {
-    if (error) throw new Error(error)
+    if (error) throw new Error(error);
 
     if (res.statusCode !== 200) {
-      throw new Error(`HTTP error from endpoint, status code ${res.statusCode}`)
+      throw new Error(`HTTP error from endpoint, status code ${res.statusCode}`);
     }
 
-    return callback(body)
-  })
-}
+    return callback(body);
+  });
+};
 
 const parseList = (body) => {
-  let $
+  let $;
   try {
-    $ = cheerio.load(body)
+    $ = cheerio.load(body);
   } catch (error) {
-    throw new Error('Could not parse body')
+    throw new Error('Could not parse body');
   }
 
-  const results = []
+  const results = [];
 
-  const tr = $('.rgMasterTable').find('tbody').find('tr')
+  const tr = $('.rgMasterTable').find('tbody').find('tr');
 
   tr.each(() => {
-    const td = $(this).find('td')
+    const td = $(this).find('td');
 
     // Change start time from d.m.YYYY to YYYY-mm-dd
-    const startDate = td.eq(6).text().trim()
-    let startDateFinal
-    let sdSplit
-    let sd
+    const startDate = td.eq(6).text().trim();
+    let startDateFinal;
+    let sdSplit;
+    let sd;
     if (startDate === '') {
-      startDateFinal = 'n/a'
+      startDateFinal = 'n/a';
     } else {
-      sdSplit = startDate.split('.')
-      sd = new Date(sdSplit[2], sdSplit[1], sdSplit[0])
-      startDateFinal = `${sd.getFullYear()}-${pad(sd.getMonth())}-${pad(sd.getDate())}`
+      sdSplit = startDate.split('.');
+      sd = new Date(sdSplit[2], sdSplit[1], sdSplit[0]);
+      startDateFinal = `${sd.getFullYear()}-${pad(sd.getMonth())}-${pad(sd.getDate())}`;
     }
 
     // Change end time from d.m.YYYY to YYYY-mm-dd
-    const endDate = td.eq(7).text().trim()
-    let endDateFinal
-    let edSplit
-    let ed
+    const endDate = td.eq(7).text().trim();
+    let endDateFinal;
+    let edSplit;
+    let ed;
     if (endDate === '') {
-      endDateFinal = 'n/a'
+      endDateFinal = 'n/a';
     } else {
-      edSplit = endDate.split('.')
-      ed = new Date(edSplit[2], edSplit[1], edSplit[0])
-      endDateFinal = `${ed.getFullYear()}-${pad(ed.getMonth())}-${pad(ed.getDate())}`
+      edSplit = endDate.split('.');
+      ed = new Date(edSplit[2], edSplit[1], edSplit[0]);
+      endDateFinal = `${ed.getFullYear()}-${pad(ed.getMonth())}-${pad(ed.getDate())}`;
     }
 
     results.push({
@@ -73,16 +73,16 @@ const parseList = (body) => {
       price_regular: (td.eq(9).text().trim() === '' ? '' : parseFloat(td.eq(9).text().trim().replace('.', ''))),
       price_members: (td.eq(10).text().trim() === '' ? '' : parseFloat(td.eq(10).text().trim().replace('.', ''))),
       link: `http://skoli.landsbjorg.is/Open/Course.aspx?Id=${td.eq(3).text().trim()}`,
-    })
-  })
+    });
+  });
 
-  return results
-}
+  return results;
+};
 
 app.get('/sarschool', (req, res) => {
   getRequest((body) => {
     return res.cache().json({
       results: parseList(body),
-    })
-  })
-})
+    });
+  });
+});

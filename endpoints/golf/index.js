@@ -1,16 +1,16 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import h from 'apis-helpers'
-import _ from 'lodash'
-import { parse as parseUrl } from 'url'
-import app from '../../server'
+import request from 'request';
+import cheerio from 'cheerio';
+import h from 'apis-helpers';
+import _ from 'lodash';
+import { parse as parseUrl } from 'url';
+import app from '../../server';
 
 app.get('/golf/teetimes', (req, res) => {
-  const clubId = req.query.club
+  const clubId = req.query.club;
   if (!clubId) {
     return res.status(500).json({
       error: 'Please provide a valid club id to lookup',
-    })
+    });
   }
 
   request.get({
@@ -22,25 +22,25 @@ app.get('/golf/teetimes', (req, res) => {
     if (err || response.statusCode !== 200) {
       return res.status(500).json({
         error: 'mitt.golf.is refuses to respond or give back data',
-      })
+      });
     }
-    const $ = cheerio.load(html)
-    const rows = $('table.teeTimeTable tbody').children()
-    let time = ''
+    const $ = cheerio.load(html);
+    const rows = $('table.teeTimeTable tbody').children();
+    let time = '';
     return res.cache().json({
       results: _.map(rows, (row) => {
-        const $row = $(row)
-        time = $row.children('td.time').html() === null ? time : $row.children('td.time').html()
+        const $row = $(row);
+        time = $row.children('td.time').html() === null ? time : $row.children('td.time').html();
         return {
           time,
           name: $($row.children('td.name')).html(),
           club: $($row.children('td.club')).html(),
           handicap: $($row.children('td.handicap')).html(),
-        }
+        };
       }),
-    })
-  })
-})
+    });
+  });
+});
 
 app.get('/golf/clubs', (req, res) => {
   request.get({
@@ -52,20 +52,20 @@ app.get('/golf/clubs', (req, res) => {
     if (err || response.statusCode !== 200) {
       return res.status(500).json({
         error: 'mitt.golf.is refuses to respond or give back data',
-      })
+      });
     }
 
-    const $ = cheerio.load(html)
+    const $ = cheerio.load(html);
     // Skip the first element.
-    const rows = $('table.golfTable tr').slice(2)
+    const rows = $('table.golfTable tr').slice(2);
     return res.cache(3600).json({
       results: _.map(rows, (row) => {
-        const $row = $(row)
+        const $row = $(row);
         const url = (
           $row.children('td.club').children('a').attr('href')
-        )
+        );
 
-        const query = parseUrl(url, true).query
+        const query = parseUrl(url, true).query;
 
         return {
           abbreviation: $row.children('td.abbreviation').html(),
@@ -74,8 +74,8 @@ app.get('/golf/clubs', (req, res) => {
             name: $row.children('td.club').children('a').html(),
           },
           location: $row.children('td.location').html(),
-        }
+        };
       }),
-    })
-  })
-})
+    });
+  });
+});

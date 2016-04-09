@@ -1,26 +1,26 @@
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import cheerio from 'cheerio'
+import request from 'request';
+import h from 'apis-helpers';
+import app from '../../server';
+import cheerio from 'cheerio';
 
 app.get('/flight', (req, res) => {
-  const data = req.query
-  let url = ''
-  let $
+  const data = req.query;
+  let url = '';
+  let $;
 
-  if (!data.type) data.type = ''
-  if (!data.language) data.language = ''
+  if (!data.type) data.type = '';
+  if (!data.language) data.language = '';
 
   if (data.type === 'departures' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/'
+    url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/';
   } else if (data.type === 'departures' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Departures/'
+    url = 'http://www.kefairport.is/English/Timetables/Departures/';
   } else if (data.type === 'arrivals' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Komur/'
+    url = 'http://www.kefairport.is/Flugaaetlun/Komur/';
   } else if (data.type === 'arrivals' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
   } else {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'http://www.kefairport.is/English/Timetables/Arrivals/';
   }
 
   request.get({
@@ -28,20 +28,20 @@ app.get('/flight', (req, res) => {
     url,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.kefairport.is refuses to respond or give back data' })
+      return res.status(500).json({ error: 'www.kefairport.is refuses to respond or give back data' });
     }
 
     try {
-      $ = cheerio.load(body)
+      $ = cheerio.load(body);
     } catch (err) {
-      return res.status(500).json({ error: 'Could not parse body' })
+      return res.status(500).json({ error: 'Could not parse body' });
     }
 
-    const obj = { results: [] }
+    const obj = { results: [] };
 
     $('table tr').each(function (key) {
       if (key !== 0) {
-        let flight = {}
+        let flight = {};
         if (data.type === 'departures') {
           flight = {
             date: $(this).children('td').slice(0).html(),
@@ -51,7 +51,7 @@ app.get('/flight', (req, res) => {
             plannedArrival: $(this).children('td').slice(4).html(),
             realArrival: $(this).children('td').slice(5).html(),
             status: $(this).children('td').slice(6).html(),
-          }
+          };
         } else {
           flight = {
             date: $(this).children('td').slice(0).html(),
@@ -61,13 +61,13 @@ app.get('/flight', (req, res) => {
             plannedArrival: $(this).children('td').slice(4).html(),
             realArrival: $(this).children('td').slice(5).html(),
             status: $(this).children('td').slice(6).html(),
-          }
+          };
         }
 
-        obj.results.push(flight)
+        obj.results.push(flight);
       }
-    })
+    });
 
-    return res.cache(3600).json(obj)
-  })
-})
+    return res.cache(3600).json(obj);
+  });
+});
