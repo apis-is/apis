@@ -4,10 +4,10 @@
  * Created:  March 2014
  */
 
-import request from 'request';
-import h from 'apis-helpers';
-import app from '../../server';
-import cheerio from 'cheerio';
+import request from 'request'
+import h from 'apis-helpers'
+import app from '../../server'
+import cheerio from 'cheerio'
 
 /** Routes **/
 
@@ -27,9 +27,9 @@ app.get('/sports', (req, res, next) => {
         },
       ],
     }
-  );
-  next();
-});
+  )
+  next()
+})
 
 /* Root footbal male leagues handler */
 app.get('/sports/football/male-leagues', (req, res, next) => {
@@ -48,9 +48,9 @@ app.get('/sports/football/male-leagues', (req, res, next) => {
         },
       ],
     }
-  );
-  next();
-});
+  )
+  next()
+})
 
 /* Root footbal female leagues handler */
 app.get('/sports/football/female-leagues', (req, res, next) => {
@@ -66,57 +66,57 @@ app.get('/sports/football/female-leagues', (req, res, next) => {
         },
       ],
     }
-  );
-  next();
-});
+  )
+  next()
+})
 
 /* Football */
 app.get('/sports/football', (req, res) => {
-  const url = 'http://www.ksi.is/mot/naestu-leikir/';
+  const url = 'http://www.ksi.is/mot/naestu-leikir/'
   request.get({
     headers: { 'User-Agent': h.browser() },
     url,
   },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' });
+        return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' })
       }
 
-      let $;
+      let $
 
       try {
-        $ = cheerio.load(body);
+        $ = cheerio.load(body)
       } catch (exc) {
-        return res.status(500).json({ error: 'Could not parse body' });
+        return res.status(500).json({ error: 'Could not parse body' })
       }
 
-      const obj = { results: [] };
-      const fields = ['counter', 'date', 'time', 'tournament', 'location', 'homeTeam', 'awayTeam'];
+      const obj = { results: [] }
+      const fields = ['counter', 'date', 'time', 'tournament', 'location', 'homeTeam', 'awayTeam']
       try {
         $('#leikir-tafla tr').each((key) => {
           if (key !== 0) {
-            const game = {};
+            const game = {}
             $('td', this).each(function (key2) {
-              const val = $(this).text();
+              const val = $(this).text()
               if (val && val.trim() && val !== '' && val !== 0 && val !== '\t' && val !== '\n') {
-                game[fields[key2]] = val;
+                game[fields[key2]] = val
               }
-            });
+            })
 
             // Checking whether it has the necessary fields
             if (game.counter && game.date && game.time && game.tournament && game.location
               && game.homeTeam && game.awayTeam) {
-              obj.results.push(game);
+              obj.results.push(game)
             }
           }
-        });
+        })
       } catch (exc) {
-        return res.status(500).json({ error: 'Could not parse the game data' });
+        return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj);
-    });
-});
+      return res.json(obj)
+    })
+})
 
 function footballLeagues(url, req, res) {
   request.get({
@@ -125,129 +125,129 @@ function footballLeagues(url, req, res) {
   },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' });
+        return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' })
       }
 
-      let $;
+      let $
 
       try {
-        $ = cheerio.load(body);
+        $ = cheerio.load(body)
       } catch (exc) {
-        return res.status(500).json({ error: 'Could not parse body' });
+        return res.status(500).json({ error: 'Could not parse body' })
       }
 
-      const obj = { results: [] };
-      const fields = ['counter', 'date', 'time', 'teams', 'location', 'scores'];
+      const obj = { results: [] }
+      const fields = ['counter', 'date', 'time', 'teams', 'location', 'scores']
       try {
         $('#leikir-tafla tr').each(function (key) {
           if (key !== 0) {
-            const game = {};
+            const game = {}
             $('td', this).each(function (key2) {
-              const val = $(this).text();
+              const val = $(this).text()
               if (val !== 0 && val !== '\t' && val !== '\n' && fields[key2]) {
-                game[fields[key2]] = val;
+                game[fields[key2]] = val
               }
-            });
+            })
 
             // Checking whether it has the necessary fields
             if (game.counter && game.date && game.time && game.teams && game.location) {
-              obj.results.push(game);
+              obj.results.push(game)
             }
           }
-        });
+        })
       } catch (exc) {
-        return res.status(500).json({ error: 'Could not parse the game data' });
+        return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj);
-    });
+      return res.json(obj)
+    })
 }
 
 /* Football male borgun cup */
 app.get('/sports/football/male-leagues/borgun', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33629';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33629'
+  return footballLeagues(url, req, res)
+})
 
 /* Football male Pepsi league */
 app.get('/sports/football/male-leagues/pepsi', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33503';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33503'
+  return footballLeagues(url, req, res)
+})
 
 /* Football male 1st league */
 app.get('/sports/football/male-leagues/1st', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33506';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33506'
+  return footballLeagues(url, req, res)
+})
 
 /* Football male 2nd league */
 app.get('/sports/football/male-leagues/2nd', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=32503';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=32503'
+  return footballLeagues(url, req, res)
+})
 
 /* Football male 3rd league */
 app.get('/sports/football/male-leagues/3rd', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33588';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33588'
+  return footballLeagues(url, req, res)
+})
 
 /* Football female borgun cup */
 app.get('/sports/football/female-leagues/borgun', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33628';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33628'
+  return footballLeagues(url, req, res)
+})
 
 /* Football female Pepsi league */
 app.get('/sports/football/female-leagues/pepsi', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33505';
-  return footballLeagues(url, req, res);
-});
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33505'
+  return footballLeagues(url, req, res)
+})
 
 
 /* Handball */
 app.get('/sports/handball', (req, res) => {
-  const url = 'http://hsi.is/library/motamal/naestu.htm';
+  const url = 'http://hsi.is/library/motamal/naestu.htm'
   request.get({
     headers: { 'User-Agent': h.browser() },
     url,
   },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ error: 'www.hsi.is refuses to respond or give back data' });
+        return res.status(500).json({ error: 'www.hsi.is refuses to respond or give back data' })
       }
 
-      let $;
+      let $
       try {
-        $ = cheerio.load(body);
+        $ = cheerio.load(body)
       } catch (exc) {
-        return res.status(500).json({ error: 'Could not parse body' });
+        return res.status(500).json({ error: 'Could not parse body' })
       }
 
-      const obj = { results: [] };
-      const fields = ['Date', 'Time', 'Tournament', 'Venue', 'Teams'];
+      const obj = { results: [] }
+      const fields = ['Date', 'Time', 'Tournament', 'Venue', 'Teams']
 
       try {
         $('table').eq(1).find('tr').each(function (key) {
           if (key !== 0) {
-            const game = {};
+            const game = {}
             $('td', this).each(function (key2) {
-              const val = $(this).text().trim();
+              const val = $(this).text().trim()
               if (val && val !== '' && val !== 0) {
-                game[fields[key2]] = val;
+                game[fields[key2]] = val
               }
-            });
+            })
 
             if (game.Date && game.Time && game.Tournament && game.Venue && game.Teams) {
-              obj.results.push(game);
+              obj.results.push(game)
             }
           }
-        });
+        })
       } catch (exc) {
-        return res.status(500).json({ error: `Could not parse the game data: ${error}` });
+        return res.status(500).json({ error: `Could not parse the game data: ${error}` })
       }
 
-      return res.json(obj);
-    });
-});
+      return res.json(obj)
+    })
+})

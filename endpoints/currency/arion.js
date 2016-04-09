@@ -1,14 +1,14 @@
-import request from 'request';
-import moment from 'moment';
-import h from 'apis-helpers';
-import app from '../../server';
+import request from 'request'
+import moment from 'moment'
+import h from 'apis-helpers'
+import app from '../../server'
 
 app.get('/currency/arion', (req, res) => {
-  let toSend = 'm=GetCurrencies';
-  toSend += `&beginDate=${moment().subtract(1, 'days').format('YYYY-MM-DD')}`;
-  toSend += `&finalDate=${moment().format('YYYY-MM-DD')}`;
-  toSend += '&currencyType=AlmenntGengi';
-  toSend += '&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR';
+  let toSend = 'm=GetCurrencies'
+  toSend += `&beginDate=${moment().subtract(1, 'days').format('YYYY-MM-DD')}`
+  toSend += `&finalDate=${moment().format('YYYY-MM-DD')}`
+  toSend += '&currencyType=AlmenntGengi'
+  toSend += '&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR'
 
   request.get({
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -16,14 +16,14 @@ app.get('/currency/arion', (req, res) => {
     body: toSend,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.arionbanki.is refuses to respond or give back data' });
+      return res.status(500).json({ error: 'www.arionbanki.is refuses to respond or give back data' })
     }
 
-    const jsonObject = JSON.parse(body);
-    const currencies = [];
+    const jsonObject = JSON.parse(body)
+    const currencies = []
 
     jsonObject.forEach((object) => {
-      const changePer = parseFloat(object.LastValueChange) / parseFloat(object.MidValue);
+      const changePer = parseFloat(object.LastValueChange) / parseFloat(object.MidValue)
       const currency = {
         shortName: object.Ticker,
         longName: h.currency[object.Ticker].long,
@@ -32,15 +32,15 @@ app.get('/currency/arion', (req, res) => {
         bidValue: object.BidValue,
         changeCur: object.LastValueChange,
         changePer: changePer.toFixed(2),
-      };
-
-      if (currency.changePer === '-0.00') {
-        currency.changePer = 0;
       }
 
-      currencies.push(currency);
-    });
+      if (currency.changePer === '-0.00') {
+        currency.changePer = 0
+      }
 
-    return res.json({ results: currencies });
-  });
-});
+      currencies.push(currency)
+    })
+
+    return res.json({ results: currencies })
+  })
+})

@@ -1,5 +1,5 @@
-import request from 'request';
-import helpers from '../../../lib/test_helpers.js';
+import request from 'request'
+import helpers from '../../../lib/test_helpers.js'
 
 describe('flight', () => {
   it('should return an array of objects containing correct fields', (done) => {
@@ -15,9 +15,9 @@ describe('flight', () => {
       'nextCheck',
       'pollution',
       'weight',
-    ];
-    const params = helpers.testRequestParams('/car', { carPlate: 'AA031' });
-    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor);
-    request.get(params, resultHandler);
-  });
-});
+    ]
+    const params = helpers.testRequestParams('/car', { carPlate: 'AA031' })
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+    request.get(params, resultHandler)
+  })
+})
