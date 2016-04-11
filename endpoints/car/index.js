@@ -1,20 +1,20 @@
-import request from 'request';
-import $ from 'cheerio';
-import h from 'apis-helpers';
-import app from '../../server';
+import request from 'request'
+import $ from 'cheerio'
+import h from 'apis-helpers'
+import app from '../../server'
 
 
 app.get('/car', (req, res) => {
-  let carPlate = req.query.number || req.query.carPlate || '';
+  let carPlate = req.query.number || req.query.carPlate || ''
 
   if (!carPlate) {
-    return res.status(431).json({ error: 'Please provide a valid carPlate to lookup' });
+    return res.status(431).json({ error: 'Please provide a valid carPlate to lookup' })
   }
 
   // Encode carPlate so that Icelandic characters will work
-  carPlate = encodeURIComponent(carPlate);
+  carPlate = encodeURIComponent(carPlate)
 
-  const url = `http://www.samgongustofa.is/umferd/okutaeki/okutaekjaskra/uppfletting?vq=${carPlate}`;
+  const url = `http://www.samgongustofa.is/umferd/okutaeki/okutaekjaskra/uppfletting?vq=${carPlate}`
 
   request.get({
     headers: { 'User-Agent': h.browser() },
@@ -23,22 +23,22 @@ app.get('/car', (req, res) => {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({
         error: 'www.samgongustofa.is refuses to respond or give back data',
-      });
+      })
     }
 
-    const data = $(body);
+    const data = $(body)
 
     const obj = {
       results: [],
-    };
+    }
 
-    const fields = [];
+    const fields = []
 
     data.find('.vehicleinfo ul li').each(function () {
-      const val = $(this).find('span').text();
+      const val = $(this).find('span').text()
 
-      fields.push(val);
-    });
+      fields.push(val)
+    })
 
     if (fields.length > 0) {
       obj.results.push({
@@ -53,9 +53,9 @@ app.get('/car', (req, res) => {
         weight: fields[6],
         status: fields[7],
         nextCheck: fields[8],
-      });
+      })
     }
 
-    return res.cache().json(obj);
-  });
-});
+    return res.cache().json(obj)
+  })
+})
