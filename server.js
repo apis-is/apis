@@ -63,12 +63,13 @@ fileModule.walkSync('./endpoints', (dirPath, dirs, endpoints) => {
   }
 })
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
   let code = 500
   let message = 'Unknown error'
 
   if (res.headersSent) {
-    message = 'Headers already sent'
+    console.error('Headers already sent')
+    return next()
   }
 
   if (typeof error === 'number') {
