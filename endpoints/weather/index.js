@@ -7,6 +7,11 @@ import cheerio from 'cheerio'
 import xregexp from 'xregexp'
 import app from '../../server'
 
+import v2 from './v2'
+
+app.use('/weather/v2', v2)
+app.use('/weather/latest', v2)
+
 /*
  * ids (tegundir textaspáa)
  * can later be used to include a readable version of the measurement names
