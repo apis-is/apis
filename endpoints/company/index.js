@@ -37,13 +37,17 @@ app.get('/company', (req, res) => {
         })
       }
     } else {
-      $('table tr').slice(1).each(() => {
-        const td = $(this).find('td')
+      $('table tr').slice(1).each((i, element) => {
+        const td = $(element).find('td')
         const nameRoot = td.eq(1).text()
         const felagAfskrad = '(Félag afskráð)'
 
         obj.results.push({
-          name: nameRoot.replace('\n', '').replace(felagAfskrad, '').replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
+          name: nameRoot
+            .replace('\n', '')
+            .replace(felagAfskrad, '')
+            .replace(/^\s\s*/, '')
+            .replace(/\s\s*$/, ''),
           sn: td.eq(0).text(),
           active: nameRoot.indexOf(felagAfskrad) > -1 ? 0 : 1,
           address: td.eq(2).text(),
