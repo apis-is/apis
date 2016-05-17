@@ -10,7 +10,6 @@ The code that is running the service is open source under the [MIT licence](http
 ## Maintainers
 
 
-
 [@kristjanmik](https://github.com/kristjanmik/)
 
 [@benediktvaldez](https://github.com/benediktvaldez/)
