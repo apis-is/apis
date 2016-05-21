@@ -23,23 +23,16 @@ function queryData(callback) {
 }
 
 app.get('/petrol', (req, res) => {
-  const timestamp = (new Date().toISOString().slice(0, 19)).replace('T',' ')
+  const timestamp = (new Date().toISOString().slice(0, 19)).replace('T', ' ')
   queryData((error, response, body) => {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({
         error: 'github.com refuses to respond or give back data',
       })
     }
-    let data = {}
-    try {
-      data.results = JSON.parse(body).stations
-    }
-    catch(err) {
-      return res.status(500).json({
-        error: 'didn\'t get valid json from gasvaktin github repo',
-      })
-    }
-    data.timestamp = timestamp
-    return res.cache().json(data)
+		return res.cache().json({
+			results: JSON.parse(body).stations,
+			timestamp
+		})
   })
 })
