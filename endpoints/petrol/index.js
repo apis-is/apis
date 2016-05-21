@@ -32,7 +32,7 @@ app.get('/petrol', (req, res) => {
     }
     return res.cache().json({
       results: JSON.parse(body).stations,
-      timestamp
+      timestamp,
     })
   })
 })
