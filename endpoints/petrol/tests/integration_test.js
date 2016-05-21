@@ -9,7 +9,7 @@ const fieldsToCheckFor = [
   'diesel_discount',
   'geo',
   'key',
-	'name',
+  'name',
 ]
 
 describe('get-petrol-stations', function () {
