@@ -30,9 +30,9 @@ app.get('/petrol', (req, res) => {
         error: 'github.com refuses to respond or give back data',
       })
     }
-		return res.cache().json({
-			results: JSON.parse(body).stations,
-			timestamp
-		})
+    return res.cache().json({
+      results: JSON.parse(body).stations,
+      timestamp
+    })
   })
 })
