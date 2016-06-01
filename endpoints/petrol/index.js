@@ -46,8 +46,8 @@ function queryTimestamps(callback) {
   })
 }
 
-function parseTimestamps(htmlPage) {
-  const data = $(htmlPage)
+function parseTimestamps(htmlText) {
+  const data = $(htmlText)
   return {
     'last_pricechanges': data.find('#file-prices_changed_timestamp-LC1').text().slice(0, 23),
     'last_pricecheck': data.find('#file-prices_lookup_timestamp-LC1').text().slice(0, 23)
@@ -57,14 +57,14 @@ function parseTimestamps(htmlPage) {
 app.get('/petrol', (req, res) => {
   const timestamp_apis = (new Date().toISOString().slice(0, 23))
   const nine_minutes = 900
-  queryData((error, response, body) => {
+  queryData((error, response, jsonText) => {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({
         error: 'raw.githubusercontent.com refuses to respond or give back data',
       })
     }
-    const results = JSON.parse(body).stations
-    queryTimestamps((error, response, body) => {
+    const results = JSON.parse(jsonText).stations
+    queryTimestamps((error, response, htmlText) => {
       if (error || response.statusCode !== 200) {
         return res.cache(nine_minutes).json({
           results,
@@ -73,7 +73,7 @@ app.get('/petrol', (req, res) => {
           timestamp_pricecheck: null,
         })
       }
-      const timestamps = parseTimestamps(body)
+      const timestamps = parseTimestamps(htmlText)
       return res.cache(nine_minutes).json({
         results,
         timestamp_apis,
