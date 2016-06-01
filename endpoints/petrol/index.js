@@ -66,7 +66,7 @@ app.get('/petrol', (req, res) => {
     const results = JSON.parse(jsonText).stations
     queryTimestamps((error2, response2, htmlText) => {
       if (error2 || response2.statusCode !== 200) {
-        return res.cache(nine_minutes).json({
+        return res.cache(nineMinutes).json({
           results,
           timestampApis,
           timestampPriceChanges: null,
@@ -74,7 +74,7 @@ app.get('/petrol', (req, res) => {
         })
       }
       const timestamps = parseTimestamps(htmlText)
-      return res.cache(nine_minutes).json({
+      return res.cache(nineMinutes).json({
         results,
         timestampApis,
         timestampPriceChanges: timestamps.lastPriceChanges,
