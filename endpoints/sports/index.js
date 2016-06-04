@@ -93,10 +93,10 @@ app.get('/sports/football', (req, res) => {
       const obj = { results: [] }
       const fields = ['counter', 'date', 'time', 'tournament', 'location', 'homeTeam', 'awayTeam']
       try {
-        $('#leikir-tafla tr').each((key) => {
+        $('#leikir-tafla tr').each((key, element) => {
           if (key !== 0) {
             const game = {}
-            $('td', this).each(function (key2) {
+            $('td', element).each(function (key2) {
               const val = $(this).text()
               if (val && val.trim() && val !== '' && val !== 0 && val !== '\t' && val !== '\n') {
                 game[fields[key2]] = val
