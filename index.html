@@ -2296,7 +2296,7 @@
               <box class="light endpoint">
                 <titlebar class="blue">
                   <method>get</method>
-                  <path><a href="http://apis.is/horses?id=IS1987187700" target="_blank">?id=IS1987187700</a></path>
+                  <path><a href="http://apis.is/horses?id=IS1987187700" target="_blank">/horses?id=IS1987187700</a></path>
                 </titlebar>
                 <div class="content">
                   <p>Search the icelandic horse database Worldfengur.<br><b>NB: At least one of the following is required, id, name and origin or microchip.</b></p>
@@ -2345,6 +2345,72 @@
             }
         }
     ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+        <article id="endpoint-petrol" shortname="petrol" title="Petrol stations in Iceland" icon="tint" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-tint"></icon>
+                <h3><a href="#endpoint-petrol">
+                    <icon class="fa fa-link"></icon>Petrol stations in Iceland</a></h3>
+                <h4>Source:&nbsp;<a href="https://github.com/gasvaktin/gasvaktin" target="_blank">github.com/gasvaktin</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/petrol" target="_blank">/petrol</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Lookup locations and gas prices for petrol stations in Iceland.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/petrol',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+      {
+        "bensin95": 201.4,
+        "bensin95_discount": 198.4,
+        "company": "Atlantsolía",
+        "diesel": 183.9,
+        "diesel_discount": 180.9,
+        "geo": {
+          "lat": 65.69913,
+          "lon": -18.135231
+        },
+        "key": "ao_000",
+        "name": "Baldursnes Akureyri"
+      },
+      ...
+      {
+        "bensin95": 202.7,
+        "bensin95_discount": null,
+        "company": "Skeljungur",
+        "diesel": 186.3,
+        "diesel_discount": null,
+        "geo": {
+          "lat": 63.995624,
+          "lon": -21.185094
+        },
+        "key": "sk_008",
+        "name": "Hveragerði"
+      }
+    ],
+    "timestampApis": "2016-06-01T22:47:39.419",
+    "timestampPriceChanges": "2016-05-31T11:15:15.964",
+    "timestampPriceCheck": "2016-06-01T22:45:07.809"
 }</code></pre>
                 </div>
               </box>
