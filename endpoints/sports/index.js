@@ -93,10 +93,10 @@ app.get('/sports/football', (req, res) => {
       const obj = { results: [] }
       const fields = ['counter', 'date', 'time', 'tournament', 'location', 'homeTeam', 'awayTeam']
       try {
-        $('#leikir-tafla tr').each((key) => {
+        $('#leikir-tafla tr').each((key, element) => {
           if (key !== 0) {
             const game = {}
-            $('td', this).each(function (key2) {
+            $('td', element).each(function (key2) {
               const val = $(this).text()
               if (val && val.trim() && val !== '' && val !== 0 && val !== '\t' && val !== '\n') {
                 game[fields[key2]] = val
@@ -165,43 +165,43 @@ function footballLeagues(url, req, res) {
 
 /* Football male borgun cup */
 app.get('/sports/football/male-leagues/borgun', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33629'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35590'
   return footballLeagues(url, req, res)
 })
 
 /* Football male Pepsi league */
 app.get('/sports/football/male-leagues/pepsi', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33503'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35586'
   return footballLeagues(url, req, res)
 })
 
 /* Football male 1st league */
 app.get('/sports/football/male-leagues/1st', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33506'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35585'
   return footballLeagues(url, req, res)
 })
 
 /* Football male 2nd league */
 app.get('/sports/football/male-leagues/2nd', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=32503'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35584'
   return footballLeagues(url, req, res)
 })
 
 /* Football male 3rd league */
 app.get('/sports/football/male-leagues/3rd', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33588'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35307'
   return footballLeagues(url, req, res)
 })
 
 /* Football female borgun cup */
 app.get('/sports/football/female-leagues/borgun', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33628'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35587'
   return footballLeagues(url, req, res)
 })
 
 /* Football female Pepsi league */
 app.get('/sports/football/female-leagues/pepsi', (req, res) => {
-  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=33505'
+  const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35583'
   return footballLeagues(url, req, res)
 })
 
