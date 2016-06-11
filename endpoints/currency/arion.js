@@ -3,16 +3,18 @@ import moment from 'moment'
 import h from 'apis-helpers'
 import app from '../../server'
 
-app.get('/currency/arion', (req, res) => {
+app.get('/currency/arion/:type?', (req, res) => {
+  // types: AlmenntGengi,KortaGengi(valitor),SedlaGengi,AirportGengi
+  const type = req.params.type || 'AlmenntGengi'
   let toSend = 'm=GetCurrencies'
+
   toSend += `&beginDate=${moment().subtract(1, 'days').format('YYYY-MM-DD')}`
   toSend += `&finalDate=${moment().format('YYYY-MM-DD')}`
-  toSend += '&currencyType=AlmenntGengi'
+  toSend += `&currencyType=${type}`
   toSend += '&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR'
-
   request.get({
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    url: 'http://www.arionbanki.is/Webservice/PortalCurrency.ashx',
+    url: 'https://www.arionbanki.is/Webservice/PortalCurrency.ashx',
     body: toSend,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
