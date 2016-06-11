@@ -3,12 +3,12 @@ import xml2js from 'xml2js'
 import app from '../../server'
 const parseString = xml2js.parseString
 
-app.get('/currency/lb', (req, res) => {
+app.get('/currency/lb/:type?', (req, res) => {
   // A = Almennt gengi, S = Seðlagengi
   const type = req.params.type || 'A'
 
   request.get({
-    url: `http://www.landsbankinn.is/modules/markets/services/XMLGengi.asmx/NyjastaGengiByType?strTegund=${type}`,
+    url: `https://www.landsbankinn.is/modules/markets/services/XMLGengi.asmx/NyjastaGengiByType?strTegund=${type}`,
   }, (err, response, xml) => {
     if (err || response.statusCode !== 200) {
       return res.status(500).json({ error: 'www.landsbankinn.is refuses to respond or give back data' })
