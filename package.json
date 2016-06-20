@@ -51,6 +51,7 @@
     "express": "^4.13.4",
     "express-metrics": "^1.1.0",
     "file": "~0.2.2",
+    "fridagar": "3.0.0",
     "iconv-lite": "^0.4.13",
     "isn2wgs": "0.0.2",
     "jquery": "^2.1.4",
