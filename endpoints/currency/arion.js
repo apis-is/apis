@@ -8,7 +8,7 @@ app.get('/currency/arion/:type?', (req, res) => {
   const type = req.params.type || 'AlmenntGengi'
   let toSend = 'm=GetCurrencies'
 
-  toSend += `&beginDate=${moment().subtract(1, 'days').format('YYYY-MM-DD')}`
+  toSend += `&beginDate=${moment().format('YYYY-MM-DD')}`
   toSend += `&finalDate=${moment().format('YYYY-MM-DD')}`
   toSend += `&currencyType=${type}`
   toSend += '&currenciesAvailable=ISK%2CUSD%2CGBP%2CEUR%2CCAD%2CDKK%2CNOK%2CSEK%2CCHF%2CJPY%2CXDR'
