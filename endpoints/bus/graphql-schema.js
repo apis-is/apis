@@ -33,6 +33,6 @@ export default {
     busses: { type: GraphQLString },
   },
   resolve: (_, args) => {
-    return getBusRoutes(args.busses).then((data) => data.results, (error) => error)
+    return getBusRoutes(args).then((data) => data.results, (error) => error)
   },
 }
