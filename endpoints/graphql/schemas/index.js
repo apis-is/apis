@@ -1,8 +1,6 @@
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLList,
-  GraphQLString,
 } from 'graphql'
 
 import address from './addressSchema'

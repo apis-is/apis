@@ -3,33 +3,31 @@ import h from 'apis-helpers'
 import app from '../../server'
 import _ from 'lodash'
 
-const lookupAddresses = (address) => {
-  return new Promise((resolve, reject) => {
-    request.get({
-      headers: { 'User-Agent': h.browser() },
-      url: `https://api.postur.is/PosturIs/ws.asmx/GetPostals?address=${address}`,
-    }, (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        reject(error)
-      }
+const lookupAddresses = (address) => new Promise((resolve, reject) => {
+  request.get({
+    headers: { 'User-Agent': h.browser() },
+    url: `https://api.postur.is/PosturIs/ws.asmx/GetPostals?address=${address}`,
+  }, (error, response, body) => {
+    if (error || response.statusCode !== 200) {
+      reject(error)
+    }
 
-      // There is a enclosing () in the response
-      const data = _.flatten(
-        JSON.parse(body.replace(/[()]/g, ''))
-      )
+    // There is a enclosing () in the response
+    const data = _.flatten(
+      JSON.parse(body.replace(/[()]/g, ''))
+    )
 
-      const results = _.map(data, (elem) => ({
-        street: elem.Gata,
-        house: elem.Husnumer,
-        zip: elem.Postnumer,
-        city: elem.Sveitafelag,
-        apartment: elem.Ibud,
-        letter: elem.Stafur,
-      }))
-      resolve(results)
-    })
+    const results = _.map(data, (elem) => ({
+      street: elem.Gata,
+      house: elem.Husnumer,
+      zip: elem.Postnumer,
+      city: elem.Sveitafelag,
+      apartment: elem.Ibud,
+      letter: elem.Stafur,
+    }))
+    resolve(results)
   })
-}
+})
 
 app.get('/address/:address?', (req, res) => {
   const address = (
@@ -47,6 +45,5 @@ app.get('/address/:address?', (req, res) => {
     () => res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' })
   )
 })
-
 
 export default lookupAddresses
