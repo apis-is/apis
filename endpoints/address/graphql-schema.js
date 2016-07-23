@@ -4,7 +4,7 @@ import {
   GraphQLString,
 } from 'graphql'
 
-import lookupAddresses from '../../address'
+import lookupAddresses from './index'
 
 const addressType = new GraphQLObjectType({
   name: 'address',

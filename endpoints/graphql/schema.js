@@ -3,7 +3,7 @@ import {
   GraphQLObjectType,
 } from 'graphql'
 
-import address from './addressSchema'
+import address from '../address/graphql-schema'
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
