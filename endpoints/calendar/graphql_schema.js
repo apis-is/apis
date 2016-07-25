@@ -39,6 +39,6 @@ export default {
     const { year, month, day } = args
     return lookupHolidays(year, month, day)
       .then(data => data)
-      .catch(error => error)
+      .catch(({ error }) => { throw new Error(error) })
   },
 }
