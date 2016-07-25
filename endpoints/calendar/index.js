@@ -1,10 +1,56 @@
 import app from '../../server'
 import fridagar from 'fridagar'
 import makeDebug from 'debug'
-import moment from 'moment'
-import { range } from 'lodash'
+import { range, isString } from 'lodash'
 
 const debug = makeDebug('endpoint:calendar')
+
+const canBeInt = intLike => {
+  const num = Number.parseInt(intLike, 10)
+  return !Number.isNaN(num)
+}
+
+export const normalizeParams = (year, month, day) => {
+  // If string parsing failed, reject the promise
+  if (isString(year) && !canBeInt(year)) return { error: 'Year must be a number' }
+  if (isString(month) && !canBeInt(month)) return { error: 'Month must be a number' }
+  if (isString(day) && !canBeInt(day)) return { error: 'Day must be a number' }
+
+  return { year, month, day }
+}
+
+const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reject) => {
+  const { year, month, day, error } = normalizeParams(yearStr, monthStr, dayStr)
+
+  // Reject promise with relevant error when in error states
+  if (!year) reject({ error: 'No year was provided' })
+  if (!year && !month && !day) reject({ error: 'No parameters were provided' })
+  if (error) reject(error)
+
+  if (year && !month && !day) {
+    // Year
+    const holidays = range(1, 13).reduce((sum, current) => {
+      debug(`Getting year: ${year}, month: ${current}`)
+      return sum.concat(fridagar.getHolidays(year, current))
+    }, [])
+    resolve(holidays)
+  } else if (year && month && !day) {
+    // Year, Month
+    resolve(fridagar.getHolidays(year, month))
+  } else if (year && month && day) {
+    // Year, Month, Day
+    const holidays = fridagar.getHolidays(year, month)
+    const holiday = holidays.find((current) => {
+      return current.date.toISOString().startsWith(`${year}-${month}-${day}`)
+    })
+    const results = holiday || {
+      date: `${year}-${month}-${day}T00:00:00.000Z`,
+      description: null,
+      holiday: false,
+    }
+    resolve([results])
+  }
+})
 
 app.get('/calendar/', (req, res) => {
   return res.json({
@@ -19,62 +65,27 @@ app.get('/calendar/', (req, res) => {
 })
 
 app.get('/calendar/:year', (req, res) => {
-  const year = Number.parseInt(req.params.year, 10)
-  if (Number.isNaN(year)) {
-    return res.status(400).json({ error: 'Year must be a number' })
-  }
+  const { year } = req.params
 
-  const holidays = range(1, 13).reduce((sum, current) => {
-    debug(`Getting year: ${year}, month: ${current}`)
-    return sum.concat(fridagar.getHolidays(year, current))
-  }, [])
-
-  return res.json({
-    results: holidays,
-  })
+  lookupHolidays(year)
+    .then((holidays) => res.json({ results: holidays }))
+    .catch((error) => res.status(400).json(error))
 })
 
 app.get('/calendar/:year/:month', (req, res) => {
-  const year = Number.parseInt(req.params.year, 10)
-  const month = Number.parseInt(req.params.month, 10)
+  const { year, month } = req.params
 
-  if (Number.isNaN(year)) {
-    return res.status(400).json({ error: 'Year must be a number' })
-  }
-
-  if (Number.isNaN(month)) {
-    return res.status(400).json({ error: 'Month must be a number' })
-  }
-
-  const holidays = fridagar.getHolidays(year, month)
-
-  return res.json({
-    results: holidays,
-  })
+  lookupHolidays(year, month)
+    .then((holidays) => res.json({ results: holidays }))
+    .catch((error) => res.status(400).json(error))
 })
 
 app.get('/calendar/:year/:month/:day', (req, res) => {
-  const year = req.params.year
-  const month = req.params.month
-  const day = req.params.day
+  const { year, month, day } = req.params
 
-  if (!moment([year, month, day]).isValid()) {
-    return res.status(400).json({ error: 'Not a valid date' })
-  }
-
-  const holidays = fridagar.getHolidays(year, month)
-
-  const holiday = holidays.find((current) => {
-    return current.date.toISOString().startsWith(`${year}-${month}-${day}`)
-  })
-
-  const results = holiday || {
-    date: `${year}-${month}-${day}T00:00:00.000Z`,
-    description: null,
-    holiday: false,
-  }
-
-  return res.json({
-    results: [results],
-  })
+  lookupHolidays(year, month, day)
+    .then((holiday) => res.json({ results: holiday }))
+    .catch((error) => res.status(400).json(error))
 })
+
+export default lookupHolidays
