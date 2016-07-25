@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/apis-is/apis.svg?branch=master)](https://travis-ci.org/apis-is/apis)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
 The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
