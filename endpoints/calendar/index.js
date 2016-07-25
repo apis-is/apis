@@ -23,9 +23,9 @@ const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reje
   const { year, month, day, error } = normalizeParams(yearStr, monthStr, dayStr)
 
   // Reject promise with relevant error when in error states
+  if (error) reject({ error })
   if (!year) reject({ error: 'No year was provided' })
   if (!year && !month && !day) reject({ error: 'No parameters were provided' })
-  if (error) reject(error)
 
   if (year && !month && !day) {
     // Year
