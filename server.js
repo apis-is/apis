@@ -22,6 +22,12 @@ import makeDebug from 'debug'
 const debug = makeDebug('server')
 const app = express()
 
+// Set up error tracking with Sentry
+const SENTRY_URL = process.env.SENTRY_URL
+const raven = require('raven')
+const client = new raven.Client(SENTRY_URL)
+client.patchGlobal()
+
 app.use(expressMetrics({
   port: 8091,
 }))
