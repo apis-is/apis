@@ -39,8 +39,7 @@ const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reje
     resolve(fridagar.getHolidays(year, month))
   } else if (year && month && day) {
     // Year, Month, Day
-    const holidays = fridagar.getHolidays(year, month)
-    const holiday = holidays.find((current) => {
+    const holiday = fridagar.getHolidays(year, month).find((current) => {
       return current.date.toISOString().startsWith(`${year}-${month}-${day}`)
     })
     const results = holiday || {
@@ -48,6 +47,7 @@ const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reje
       description: null,
       holiday: false,
     }
+    // Wrap the single holiday in an array to keep responses consistent
     resolve([results])
   }
 })
