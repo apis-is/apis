@@ -8,6 +8,7 @@ import lookupAddresses from './index'
 
 const addressType = new GraphQLObjectType({
   name: 'address',
+  description: 'Lookup addresses in Iceland through the Icelandic Post API',
   fields: {
     street: { type: GraphQLString },
     house: { type: GraphQLString },
