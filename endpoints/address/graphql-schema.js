@@ -7,7 +7,7 @@ import {
 import lookupAddresses from './index'
 
 const addressType = new GraphQLObjectType({
-  name: 'address',
+  name: 'Address',
   fields: {
     street: { type: GraphQLString },
     house: { type: GraphQLString },
