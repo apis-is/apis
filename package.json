@@ -71,7 +71,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "mocha --reporter=dot ./test",
+    "test": "mocha --reporter=dot ./test/index.js",
     "test-single": "node ./test/run_integration_test_single.js",
     "coveralls": "exit 0",
     "lint": "eslint ."
