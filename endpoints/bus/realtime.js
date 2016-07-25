@@ -7,9 +7,7 @@ const isn2wgs = require('isn2wgs')
 
 const debug = require('debug')('bus/realtime')
 
-app.get('/bus/realtime', function (req, res) {
-  var data = req.query
-
+const getBusRoutes = (data) => new Promise((resolve, reject) => {
   request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
     if (error || response.statusCode !== 200)
       return res.status(500).json({ error:'The bus api is down or refuses to respond' })
@@ -18,7 +16,7 @@ app.get('/bus/realtime', function (req, res) {
     try {
       obj = JSON.parse(body)
     } catch (error) {
-      return res.status(500).json({ error:'Something is wrong with the data provided from the data source' })
+      return reject(error)
     }
 
     var activeBusses = [],
@@ -47,13 +45,14 @@ app.get('/bus/realtime', function (req, res) {
 
     request('http://straeto.is/bitar/bus/livemap/json.jsp?routes=' + objString, function (error, response, body) {
 
-      if (error || response.statusCode !== 200)
-        return res.status(500).json({ error:'The bus api is down or refuses to respond' })
+      if (error || response.statusCode !== 200) {
+        return reject(error)
+      }
 
       try {
         var data = JSON.parse(body)
       } catch (e) {
-        return res.status(500).json({ error:'Something is wrong with the data provided from the data source' })
+        return reject(e)
       }
 
       var routes = data.routes
@@ -86,7 +85,18 @@ app.get('/bus/realtime', function (req, res) {
         })
 
       })
-      return res.json(objRoutes)
+      return resolve(objRoutes)
     })
   })
 })
+
+app.get('/bus/realtime', function (req, res) {
+  var data = req.query
+
+  getBusRoutes(data).then(
+    (routes) => res.json(routes),
+    () => res.status(500).json({ error:'Something is wrong with the data provided from the data source' })
+  )
+})
+
+export default getBusRoutes
