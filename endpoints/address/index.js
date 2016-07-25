@@ -40,10 +40,9 @@ app.get('/address/:address?', (req, res) => {
     })
   }
 
-  lookupAddresses(address).then(
-    (results) => res.cache().json({ results }),
-    () => res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' })
-  )
+  lookupAddresses(address)
+    .then(results => res.cache().json({ results }))
+    .catch(() => res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' }))
 })
 
 export default lookupAddresses

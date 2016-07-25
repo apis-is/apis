@@ -93,9 +93,11 @@ const getBusRoutes = (data) => new Promise((resolve, reject) => {
 app.get('/bus/realtime', function (req, res) {
   var data = req.query
 
-  getBusRoutes(data).then(
-    (routes) => res.json(routes),
-    () => res.status(500).json({ error:'Something is wrong with the data provided from the data source' })
+  getBusRoutes(data)
+    .then(routes => res.json(routes)
+    .catch(() => res.status(500).json({
+      error: 'Something is wrong with the data provided from the data source'
+    }))
   )
 })
 
