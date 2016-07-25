@@ -8,6 +8,7 @@ import getBusRoutes from './realtime'
 
 const busInfoType = new GraphQLObjectType({
   name: 'busInfo',
+  description: 'Real-time location of busses. Results are only shown for active busses.',
   fields: {
     unixTime: { type: GraphQLString },
     x: { type: GraphQLString },
