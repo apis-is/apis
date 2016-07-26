@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLBoolean,
 } from 'graphql'
+import { GraphQLDate } from '../../graphql/types/GraphQLDate'
 
 import lookupHolidays from './index'
 
@@ -12,7 +13,7 @@ const holiday = new GraphQLObjectType({
   description: 'An Icelandic holiday',
   fields: {
     date: {
-      type: GraphQLString,
+      type: GraphQLDate,
       description: 'The datetime in ISO 8601 date format',
     },
     description: {
