@@ -43,7 +43,7 @@ const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reje
       return current.date.toISOString().startsWith(`${year}-${month}-${day}`)
     })
     const results = holiday || {
-      date: `${year}-${month}-${day}T00:00:00.000Z`,
+      date: new Date(`${year}-${month}-${day}T00:00:00.000Z`),
       description: null,
       holiday: false,
     }
