@@ -35,8 +35,7 @@ export default {
     month: { type: GraphQLString },
     day: { type: GraphQLString },
   },
-  resolve: (_, args) => {
-    const { year, month, day } = args
+  resolve: (_, { year, month, day }) => {
     return lookupHolidays(year, month, day)
       .then(data => data)
       .catch(({ error }) => { throw new Error(error) })

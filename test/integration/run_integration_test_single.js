@@ -5,7 +5,9 @@ import Mocha from 'mocha'
 import path from 'path'
 import fs from 'fs'
 
-const mocha = new Mocha()
+const mocha = new Mocha({
+  timeout: 5000,
+})
 // process.args[2] is the first argument passed to the script
 const testFile = process.argv[2]
 const testFileAbs = path.join(process.cwd(), testFile)
