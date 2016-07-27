@@ -22,9 +22,11 @@ import makeDebug from 'debug'
 const debug = makeDebug('server')
 const app = express()
 
-app.use(expressMetrics({
-  port: 8091,
-}))
+if (!process.env.NODE_ENV === 'test') {
+  app.use(expressMetrics({
+    port: 8091,
+  }))
+}
 
 module.exports = app
 

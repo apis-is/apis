@@ -5,6 +5,7 @@ import {
 
 import address from '../address/graphql-schema'
 import bus from '../bus/graphql-schema'
+import car from '../car/graphql_schema'
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -12,6 +13,7 @@ const schema = new GraphQLSchema({
     fields: {
       address,
       busses: bus,
+      car,
     },
   }),
 })
