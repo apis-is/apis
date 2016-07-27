@@ -1,3 +1,5 @@
+// @flow
+
 import request from 'request'
 import $ from 'cheerio'
 import h from 'apis-helpers'
