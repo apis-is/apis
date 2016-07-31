@@ -3,15 +3,17 @@ import {
   GraphQLObjectType,
 } from 'graphql'
 
-import address from '../address/graphql-schema'
-import bus from '../bus/graphql-schema'
+import address from '../address/graphql_schema'
+import bus from '../bus/graphql_schema'
+import holidays from '../calendar/graphql_schema'
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: 'query',
+    name: 'Root',
     fields: {
       address,
       busses: bus,
+      holidays,
     },
   }),
 })
