@@ -7,7 +7,7 @@ import {
 import getBusRoutes from './realtime'
 
 const busInfoType = new GraphQLObjectType({
-  name: 'busInfo',
+  name: 'BusInfo',
   fields: {
     unixTime: { type: GraphQLString },
     x: { type: GraphQLString },
@@ -18,7 +18,7 @@ const busInfoType = new GraphQLObjectType({
 })
 
 const busRouteType = new GraphQLObjectType({
-  name: 'busRoutes',
+  name: 'BusRoutes',
   fields: {
     busNr: { type: GraphQLString },
     busses: { type: new GraphQLList(busInfoType) },
