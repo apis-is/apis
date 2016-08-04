@@ -28,9 +28,11 @@ const raven = require('raven')
 const client = new raven.Client(SENTRY_URL)
 client.patchGlobal()
 
-app.use(expressMetrics({
-  port: 8091,
-}))
+if (!process.env.NODE_ENV === 'test') {
+  app.use(expressMetrics({
+    port: 8091,
+  }))
+}
 
 module.exports = app
 
