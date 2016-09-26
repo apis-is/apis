@@ -55,7 +55,7 @@ const getBusRoutes = (data) => new Promise((resolve, reject) => {
         return reject(e)
       }
 
-      var routes = data.routes
+      var routes = data.routes || []
 
       var objRoutes = {
         results: []
