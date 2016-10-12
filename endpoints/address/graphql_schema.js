@@ -30,7 +30,7 @@ const addressType = new GraphQLObjectType({
       description: 'A name for an apartment belonging to this address',
     },
     letter: {
-      type: GraphQLString
+      type: GraphQLString,
     },
   },
 })

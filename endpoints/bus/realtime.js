@@ -8,9 +8,10 @@ const isn2wgs = require('isn2wgs')
 const debug = require('debug')('bus/realtime')
 
 const getBusRoutes = (data) => new Promise((resolve, reject) => {
-  request('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
-    if (error || response.statusCode !== 200)
-      return res.status(500).json({ error:'The bus api is down or refuses to respond' })
+  request.get('http://straeto.is/bitar/bus/livemap/json.jsp', function (error, response, body) {
+    if (error || response.statusCode !== 200) {
+      return reject('The bus api is down or refuses to respond')
+    }
 
     var obj
     try {
