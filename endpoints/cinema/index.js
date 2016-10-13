@@ -29,7 +29,7 @@ app.get('/cinema', (req, res) => {
     }
 
     // DOM elements array containing all movies.
-    const movies = $('.Kvikmyndir_TimeTable #divbox').find('.utanumMynd_new')
+    const movies = $('.stimar')
 
     // Loop through movies
     movies.each(function () {
@@ -60,7 +60,7 @@ app.get('/cinema', (req, res) => {
       })
 
       const urls = movie
-        .find('img.poster')
+        .find('img')
         .attr('src')
         .match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
 
@@ -74,9 +74,9 @@ app.get('/cinema', (req, res) => {
       // Create an object of info
       // and add it to the 'results' array.
       obj.results.push({
-        title: movie.find('#mynd_titill a').html().trim(),
+        title: movie.find('.title').remove('.year').html().trim(),
         released: realeasedYear,
-        restricted: movie.find('.mynd_aldurstakmark img').attr('alt').trim(),
+        restricted: null,
         imdb: movie.find('.imdbEinkunn').text().trim(),
         imdbLink: movie.find('.imdbEinkunn a').attr('href') ? movie.find('.imdbEinkunn a').attr('href').trim() : '',
         image: imgUrl,
@@ -114,7 +114,7 @@ app.get('/cinema/theaters', (req, res) => {
     }
 
     // DOM elements array containing all theaters.
-    const theaters = $('.Kvikmyndir_TimeTable').find('#utanumMynd_new')
+    const theaters = $('.stimar')
 
     // Loop through theaters
     theaters.each(function () {
