@@ -1,0 +1,35 @@
+import request from 'request'
+import cheerio from 'cheerio'
+import h from 'apis-helpers'
+import app from '../../server'
+
+app.get('/tracking/:trackingNumber', (req, res) => {
+  const url = `http://www.postur.is/` +
+    `einstaklingar/senda-pakka-innanlands/finna-sendingu/` +
+    `?TrackingNumber=${req.params.trackingNumber}&Language=IS`
+
+  request.get(url, (err, response, body) => {
+    const $ = cheerio.load(body)
+
+    const history = $('table').eq(1).find('tr').map((index, row) => {
+      return {
+        date: $(row).children().eq(0).text().replace(/\s/g, ''),
+        action: $(row).children().eq(1).text().replace(/\s/g, ''),
+      }
+    }).get().slice(1).reduce((sum, curr) => {
+      sum[curr.date] = curr.action
+      return sum
+    }, {})
+
+    const dates = $('[data-th="Dagsetning"]').map((index, date) => {
+      return date.text()
+    }).get()
+    const actions = $('[data-th="Aðgerð"]').map((index, action) => {
+      return date.text()
+    }).get()
+
+    return res.json({
+      history
+    })
+  })
+})
