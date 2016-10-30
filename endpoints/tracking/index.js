@@ -1,11 +1,12 @@
+/* eslint-disable no-param-reassign */
+
 import request from 'request'
 import cheerio from 'cheerio'
-import h from 'apis-helpers'
 import app from '../../server'
 
 app.get('/tracking/:trackingNumber', (req, res) => {
-  const url = `http://www.postur.is/` +
-    `einstaklingar/senda-pakka-innanlands/finna-sendingu/` +
+  const url = 'http://www.postur.is/' +
+    'einstaklingar/senda-pakka-innanlands/finna-sendingu/' +
     `?TrackingNumber=${req.params.trackingNumber}&Language=IS`
 
   request.get(url, (err, response, body) => {
@@ -21,15 +22,8 @@ app.get('/tracking/:trackingNumber', (req, res) => {
       return sum
     }, {})
 
-    const dates = $('[data-th="Dagsetning"]').map((index, date) => {
-      return date.text()
-    }).get()
-    const actions = $('[data-th="Aðgerð"]').map((index, action) => {
-      return date.text()
-    }).get()
-
     return res.json({
-      history
+      history,
     })
   })
 })
