@@ -22,6 +22,10 @@ app.get('/tracking/:trackingNumber', (req, res) => {
       return sum
     }, {})
 
+    if (Object.keys(history).length === 0) {
+      return res.status(404).json({})
+    }
+
     return res.json({
       history,
     })
