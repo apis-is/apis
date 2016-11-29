@@ -1,9 +1,10 @@
+// @flow
 import request from 'request'
 import h from 'apis-helpers'
 import app from '../../server'
 import _ from 'lodash'
 
-const lookupAddresses = (address) => new Promise((resolve, reject) => {
+const lookupAddresses = (address: string) => new Promise((resolve, reject) => {
   request.get({
     headers: { 'User-Agent': h.browser() },
     url: `https://api.postur.is/PosturIs/ws.asmx/GetPostals?address=${address}`,
