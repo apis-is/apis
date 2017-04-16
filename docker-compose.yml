@@ -1,0 +1,13 @@
+web:
+  build: .
+  command: npm start
+varnish:
+  image: jacksoncage/varnish
+  volumes:
+    - ./varnish/:/etc/varnish/
+  links:
+   - web
+  ports:
+   - "9000:80"
+  environment:
+    VARNISH_PORT: 80
