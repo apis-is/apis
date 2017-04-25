@@ -3,8 +3,16 @@
 const h = require('apis-helpers')
 const request = require('request')
 const app = require('../../server')
+const busStopNames = require('./stops_names').default
 
 const debug = require('debug')('bus/realtime')
+
+function parseTimeStamp(timeStamp) {
+  var parts = timeStamp.match(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/)
+  parts.splice(0, 1)
+  parts[0] = '20' + parts[0]
+  return Math.floor(Date.UTC(...parts.map(Number)) / 1000)
+}
 
 const getBusRoutes = (data) => new Promise((resolve, reject) => {
   const reykjavikBusRoutes = [1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 26, 27, 28, 29, 31, 33, 34, 35, 43, 44],
@@ -34,77 +42,49 @@ const getBusRoutes = (data) => new Promise((resolve, reject) => {
       return reject(error)
     }
 
-    var activeBusses = [],
-      requestedRoutes = []
-
-    const busses = obj.positions || []
-
-    busses.forEach(function (object, key) {
-      activeBusses.push(object.routeNumber)
-    })
-    var activeRoutes = activeBusses.filter((v, i, a) => a.indexOf(v) === i)
-
-    var requestedRoutes
-    if (data.busses) { // Post busses = 1,2,3,4,5,...
-      // Prevent requested to busses that are not available
-      requestedRoutes = data.busses.split(',').filter((v, i, a) => activeRoutes.indexOf(v) !== -1)
-    } else {
-      // No bus was posted, use all active busses
-      requestedRoutes = activeRoutes
-    }
-
-    var objString = requestedRoutes.join('%2C')
+    var requestedRoutes = data.busses.split(',').filter(Boolean)
 
     var objRoutes = {
       results: []
     }
 
-    // If no valid bus route was requested then return an empty bus route
+    // If no bus routes was requested then return all bus routes
     if (requestedRoutes.length == 0) {
-      objRoutes.results.push({ 
-        busNr : '',
-        busses: []
-      })
-      return resolve(objRoutes)
+      requestedRoutes = allBusRoutes
     }
 
-    request.get('https://app.straeto.is/pele/api/v1/positions/filter/' + objString, function (error, response, body) {
+    var busses = obj.positions || []
 
-      if (error || response.statusCode !== 200) {
-        return reject(error)
+    requestedRoutes.forEach(function (route) {
+      var objRoute = {
+        busNr: route,
+        busses: []
       }
-
-      try {
-        var data = JSON.parse(body)
-      } catch (e) {
-        return reject(e)
-      }
-
-      var busses = data.positions || []
-
-      requestedRoutes.forEach(function (route) {
-        var objRoute = {
-          busNr: route,
-          busses: []
-        }
-        busses.forEach(function (bus) {
-          if (bus.routeNumber === route) {
-            objRoute.busses.push({
-              'unixTime': Math.floor(bus.gpsTime / 1000),
-              'x': bus.lat,
-              'y': bus.lon,
-              'from': bus.lastStop,
-              'to': bus.nextStop
-            })
-          }
-        })
-        if(objRoute.busses.length > 0){
-          objRoutes.results.push(objRoute)
+      busses.forEach(function (bus) {
+        if (bus.routeNumber == route) {
+          objRoute.busses.push({
+            //'unixTime': Math.floor(bus.gpsTime / 1000),
+            'unixTime': parseTimeStamp(bus.gpsTime),
+            'x': bus.lat,
+            'y': bus.lon,
+            'from': busStopNames[bus.lastStop].name,
+            'to': busStopNames[bus.nextStop].name
+          })
         }
       })
-
-      return resolve(objRoutes)
+      if(objRoute.busses.length > 0){
+        objRoutes.results.push(objRoute)
+      }
     })
+    // Ensure that the response is of proper form
+    if(objRoutes.results.length == 0){
+      objRoutes.results.push({
+        busNr: '',
+        busses: []
+      })
+    }
+
+    return resolve(objRoutes)
   })
 })
 
