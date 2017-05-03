@@ -2417,6 +2417,234 @@
             </column>
           </row>
         </article>
+
+        <article id="endpoint-auroracoin" shortname="auroracoin" title="Auroracoin to ISK exchange" icon="btc" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-btc"></icon>
+                <h3><a href="#endpoint-auroracoin">
+                    <icon class="fa fa-link"></icon>Auroracoin to ISK exchange</a></h3>
+                <h4>Source:&nbsp;<a href="https://isx.is/" target="_blank" title="ISX, íslenskur skiptimarkaður fyrir rafmyntir">ISX.is</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/aur" target="_blank">/aur</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Current Auroracoin exchange rate and various statistics for the past day.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/aur',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "ask": 26,
+    "bid": 25.05,
+    "daily_change": 2.5,
+    "daily_change_percent": 9.62,
+    "global_units": 8658139,
+    "global_volume": 481328,
+    "last_price": 26,
+    "last_transaction_type": "buy",
+    "market_cap": 218573801,
+    "max": 26,
+    "min": 23.5,
+    "open": 23.5,
+    "volume_1h": 0,
+    "volume_1h_buy": 0,
+    "volume_1h_sell": 0,
+    "volume_24h": 464440.935,
+    "volume_24h_buy": 464440.935,
+    "volume_24h_sell": 0,
+    "timestampApis": "2017-05-03T20:12:28"
+}</code></pre>
+                </div>
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/aur/history" target="_blank">/aur/history</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Daily exchange rate history for the past year.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/aur/history',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "currency": "ISK",
+    "market": "AUR",
+    "results": [
+        {
+            "date": "2016-05-03",
+            "rate": 31.91
+        },
+        {
+            "date": "2016-05-04",
+            "rate": 32.98
+        },
+        ...
+        {
+            "date": "2017-05-01",
+            "rate": 23.4
+        },
+        {
+            "date": "2017-05-02",
+            "rate": 23.4
+        }
+    ],
+    "timestampApis": "2017-05-03T20:27:28"
+}</code></pre>
+                </div>
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/aur/transactions" target="_blank">/aur/transactions</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>History of Auroracoin transactions on ISX.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/aur/transactions',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "results": [
+        {
+            "amount_aur": 124.94752262,
+            "amount_isk": 3248.63558812,
+            "id": 2461,
+            "rate": 26,
+            "timestamp": "2017-05-03T20:08:14",
+            "type": "sell"
+        },
+        {
+            "amount_aur": 1000,
+            "amount_isk": 26000,
+            "id": 2460,
+            "rate": 26,
+            "timestamp": "2017-05-03T20:08:14",
+            "type": "sell"
+        },
+        ...
+        {
+            "amount_aur": 98,
+            "amount_isk": 690.9,
+            "id": 56,
+            "rate": 7.05,
+            "timestamp": "2015-12-14T13:29:32",
+            "type": "sell"
+        },
+        {
+            "amount_aur": 2,
+            "amount_isk": 14.1,
+            "id": 55,
+            "rate": 7.05,
+            "timestamp": "2015-12-14T12:01:06",
+            "type": "sell"
+        }
+    ],
+    "timestampApis": "2017-05-03T20:52:33"
+}</code></pre>
+                </div>
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/aur/order-book" target="_blank">/aur/order-book</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>List of current sales and purchases offers on ISX.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/aur/order-book',
+  'type': 'GET',
+  'dataType': 'json',
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+    "ask": [
+        {
+            "order_amount_aur": 2023.05247738,
+            "order_value_isk": 52599.36,
+            "rate": 26,
+            "timestamp": "2017-04-29T14:59"
+        },
+        {
+            "order_amount_aur": 3540,
+            "order_value_isk": 93810,
+            "rate": 26.5,
+            "timestamp": "2017-05-02T19:22"
+        },
+        ...
+        {
+            "order_amount_aur": 540,
+            "order_value_isk": 54000,
+            "rate": 100,
+            "timestamp": "2016-04-05T08:18"
+        },
+        {
+            "order_amount_aur": 285.79,
+            "order_value_isk": 29259.18,
+            "rate": 102.38,
+            "timestamp": "2016-05-05T16:50"
+        }
+    ],
+    "bid": [
+        {
+            "order_amount_aur": 3952.10924551,
+            "order_value_isk": 99000.34,
+            "rate": 25.05,
+            "timestamp": "2017-05-03T20:07"
+        },
+        {
+            "order_amount_aur": 1770,
+            "order_value_isk": 42480,
+            "rate": 24,
+            "timestamp": "2017-05-03T20:19"
+        },
+        ...
+        {
+            "order_amount_aur": 3289.677475,
+            "order_value_isk": 52108.49,
+            "rate": 15.84,
+            "timestamp": "2017-03-31T17:21"
+        },
+        {
+            "order_amount_aur": 3540,
+            "order_value_isk": 55365.6,
+            "rate": 15.64,
+            "timestamp": "2017-03-30T19:34"
+        }
+    ],
+    "timestampApis": "2017-05-03T20:59:33"
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+
       </main>
       <footer>
         <section class="dark">
