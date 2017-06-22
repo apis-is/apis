@@ -8,12 +8,6 @@ const cacheTime = 120
 
 function queryGzipJson(url, callback) {
   const headers = {
-    accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'accept-encoding': 'gzip, deflate, sdch, br',
-    'accept-language': 'en-US,en;q=0.8,is;q=0.6,da;q=0.4',
-    'cache-control': 'no-cache',
-    pragma: 'no-cache',
-    'upgrade-insecure-requests': '1',
     'user-agent': h.browser(),
   }
   request.get({
