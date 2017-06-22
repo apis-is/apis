@@ -1,6 +1,5 @@
 import request from 'request'
 import moment from 'moment'
-import h from 'apis-helpers'
 import app from '../../server'
 
 // set cache time to 2 minutes
@@ -8,7 +7,7 @@ const cacheTime = 120
 
 function queryGzipJson(url, callback) {
   const headers = {
-    'user-agent': h.browser(),
+    'user-agent': 'apis.is',
   }
   request.get({
     headers,
