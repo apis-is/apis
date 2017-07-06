@@ -43,7 +43,7 @@ describe('stats', function () {
       helpers.assertPresenceOfFields(statsFields, [json])
       helpers.assertTypesOfFields(statsFieldsType, [json])
       assert(
-        transactionTypes.includes(json.last_transaction_type),
+        ~transactionTypes.indexOf(json.last_transaction_type),
         `Unexpected transaction type '${json.last_transaction_type}'`
       )
       assert(
@@ -130,7 +130,7 @@ describe('transactions', function () {
       helpers.assertTypesOfFields(transactionsFieldsType, json.results)
       json.results.forEach((result, i) => {
         assert(
-          transactionTypes.includes(result.type),
+          ~transactionTypes.indexOf(result.type),
           `Unexpected transaction type '${result.type}' in result #${i}`
         )
         assert(
