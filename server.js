@@ -62,10 +62,10 @@ app.use(cache())
 fileModule.walkSync('./endpoints', (dirPath, dirs, endpoints) => {
   function requireEndpoint(endpoint) {
     if (!(endpoint.includes('.DS_Store') && !dirPath.includes('graphql') && !endpoint.includes('graphql'))) {
-      try{
+      try {
         require(`./${dirPath}/${endpoint}`)
-      }catch(e){
-        console.error('Error loading file',error)
+      } catch (e) {
+        console.error('Error loading file', e)
       }
     }
   }
