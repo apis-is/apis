@@ -18,7 +18,7 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
       reject('www.samgongustofa.is refuses to respond or give back data')
     }
 
-    const data = $(body)
+    // Translations from: https:// www.samgongustofa.is/media/siglingar/skip/Vefskipaskra-2012.pdf
     const typeDict = {
       BJÖRGUNARSKIP: 'LIFEBOAT',
       DRÁTTARSKIP: 'TUGBOAT',
@@ -51,17 +51,18 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
       VÖRUFLUTNINGASKIP: 'DRY CARGO SHIP',
       ÞANGSKURÐARPRAMMI: 'BARGE',
     }
-    // Translations from: https:// www.samgongustofa.is/media/siglingar/skip/Vefskipaskra-2012.pdf
 
+    const data = $(body)
     const fieldList = []
     data.find('.vehicleinfo ul').each((index, element) => {
       const fields = []
       $(element).find('li').each((i, el) => {
+        // i === 10 is info about ship owners
         if (i !== 10) {
           const val = $(el).find('span').text()
           fields.push(val)
         } else {
-          // We'll treat the owners' field specifically
+          // We'll parse the owners' field separately
           const owners = []
           $(el).children('span').each(function () {
             const info = $(this).text().split(/\s{2,}/g)
