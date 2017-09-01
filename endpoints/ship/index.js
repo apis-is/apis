@@ -5,10 +5,10 @@ import app from '../../server'
 
 const parseIsFloat = (str) => parseFloat(str.replace('.', '').replace(',', '.'))
 
-const lookupShip = name => new Promise((resolve, reject) => {
-  // Encode shipName so that Icelandic characters will work
-  const shipName = encodeURIComponent(name)
-  const url = `http://www.samgongustofa.is/siglingar/skrar-og-utgafa/skipaskra/uppfletting?sq=${shipName}`
+const lookupShip = searchStr => new Promise((resolve, reject) => {
+  // Encode searchString so that Icelandic characters will work
+  const searchString = encodeURIComponent(searchStr)
+  const url = `http://www.samgongustofa.is/siglingar/skrar-og-utgafa/skipaskra/uppfletting?sq=${searchString}`
 
   request.get({
     headers: { 'User-Agent': h.browser() },
@@ -52,7 +52,6 @@ const lookupShip = name => new Promise((resolve, reject) => {
       ÞANGSKURÐARPRAMMI: 'BARGE',
     }
     // Translations from: https:// www.samgongustofa.is/media/siglingar/skip/Vefskipaskra-2012.pdf
-    // https://www.iho.int/mtg_docs/com_wg/CSBWG/CSBWG2/CSBWG2-5.2.2-Ship_Type_Identification_Recommendations.pdf
 
     const fieldList = []
     data.find('.vehicleinfo ul').each((index, element) => {
