@@ -1,22 +1,23 @@
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 
-describe('car', () => {
+describe('ship', () => {
   it('should return an array of objects containing correct fields', (done) => {
     const fieldsToCheckFor = [
-      'registryNumber',
-      'number',
-      'factoryNumber',
+      'name',
       'type',
-      'subType',
-      'color',
-      'registeredAt',
-      'status',
-      'nextCheck',
-      'pollution',
-      'weight',
+      'registrationNumber',
+      'regionalCode',
+      'homePort',
+      'registrationStatus',
+      'grossRegisterTonnage',
+      'grossTonnage',
+      'length',
+      'buildYear',
+      'buildYard',
+      'owners',
     ]
-    const params = helpers.testRequestParams('/car', { carPlate: 'AA031' })
+    const params = helpers.testRequestParams('/ship', { search: 'helga maría' })
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })
