@@ -2645,6 +2645,69 @@
           </row>
         </article>
 
+        <article id="endpoint-ship" shortname="ship" title="Icelandic Ship Registry" icon="compass" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-compass"></icon>
+                <h3><a href="#endpoint-ship">
+                    <icon class="fa fa-link"></icon>Icelandic Ship Registry</a></h3>
+                <h4>Source:&nbsp;<a href="https://www.samgongustofa.is/siglingar/skrar-og-utgafa/skipaskra/uppfletting/" target="_blank">The Icelandic Transport Authority</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/ship?search=engey" target="_blank">/ship?search=engey</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Search the Icelandic ship registry</p>
+                  <h5 toggle-next class="params">Parameters</h5>
+                  <dl class="params">
+                    <dt class="required">search</dt>
+                    <dd>Ship name, regional code (eg. RE-100) or the registy's registration number</dd>
+                  </dl>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+  'url': 'http://apis.is/ship',
+  'type': 'GET',
+  'dataType': 'json',
+  'data': {'search': 'helga maría'},
+  'success': function(response) {
+    console.log(response);
+  }
+});
+</code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">{
+  "results": [
+      {
+          "name": "HELGA MARÍA",
+          "type": "FISH.V.STERN TRAWLER",
+          "registrationNumber": "1868",
+          "regionalCode": "AK-016",
+          "homePort": "AKRANES",
+          "registrationStatus": "Listed",
+          "grossRegisterTonnage": 882.81,
+          "grossTonnage": 1469.7,
+          "length": 54.4,
+          "buildYear": 1988,
+          "buildYard": "FLEKKEFJ.SLIPP & MASK",
+          "owners": [
+              {
+                  "name": "HB Grandi hf.",
+                  "socialnumber": "5411850389",
+                  "share": 1
+              }
+          ]
+      }
+  ]
+}</code></pre>
+                </div>
+              </box>
+            </column>
+          </row>
+        </article>
+
       </main>
       <footer>
         <section class="dark">
