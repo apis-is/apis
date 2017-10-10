@@ -66,5 +66,5 @@ export default {
   },
   resolve: (_, { carPlate }) => lookupCar(carPlate)
     .then(data => data)
-    .catch(error => { throw new Error(error) }),
+    .catch((error) => { throw new Error(error) }),
 }

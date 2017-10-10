@@ -2,7 +2,7 @@ import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 
 describe.skip('lotto', () => {
-    // The only thing that changes is the form attribute, so why not just re-use the object
+  // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link']
 
   it('should return an array of objects containing correct fields', (done) => {
@@ -12,7 +12,7 @@ describe.skip('lotto', () => {
   })
 })
 describe.skip('lotto', () => {
-    // The only thing that changes is the form attribute, so why not just re-use the object
+  // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link']
 
   it('should return an array of objects containing correct fields', (done) => {
@@ -22,7 +22,7 @@ describe.skip('lotto', () => {
   })
 })
 describe.skip('vikingalotto', () => {
-    // The only thing that changes is the form attribute, so why not just re-use the object
+  // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link']
 
   it('should return an array of objects containing correct fields', (done) => {
@@ -32,7 +32,7 @@ describe.skip('vikingalotto', () => {
   })
 })
 describe.skip('eurojackpot', () => {
-    // The only thing that changes is the form attribute, so why not just re-use the object
+  // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['date', 'lotto', 'joker', 'prize', 'link']
 
   it('should return an array of objects containing correct fields', (done) => {

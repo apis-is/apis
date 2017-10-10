@@ -1,6 +1,7 @@
 import request from 'request'
 import xml2js from 'xml2js'
 import app from '../../server'
+
 const parseString = xml2js.parseString
 
 app.get('/currency/borgun', (req, res) => {
@@ -31,6 +32,6 @@ app.get('/currency/borgun', (req, res) => {
         }
         return res.json({ results: currencies })
       })
-    }
+    },
   )
 })

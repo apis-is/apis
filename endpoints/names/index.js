@@ -57,21 +57,19 @@ function handleRequest(providedUrl, req, res) {
 
 /* Root names handler - only returns a list of resources */
 app.get('/names', (req, res) => {
-  return res.json(
-    {
-      results: [
-        {
-          // eslint-disable-next-line max-len
-          info: 'This is an api that lists all allowed Icelandic names. A search parameter can be used with each endpoint',
-          endpoints: {
-            males: '/names/males/',
-            females: '/names/females/',
-            middlenames: '/names/middlenames/',
-          },
+  return res.json({
+    results: [
+      {
+        // eslint-disable-next-line max-len
+        info: 'This is an api that lists all allowed Icelandic names. A search parameter can be used with each endpoint',
+        endpoints: {
+          males: '/names/males/',
+          females: '/names/females/',
+          middlenames: '/names/middlenames/',
         },
-      ],
-    }
-  )
+      },
+    ],
+  })
 })
 
 /* Get all legal names for males */

@@ -76,7 +76,7 @@ app.get('/tv/ruv', (req, res, next) => {
   serve(url, res, next)
 })
 
-/* RUV Ithrottir*/
+/* RUV Ithrottir */
 app.get('/tv/ruvithrottir', (req, res, next) => {
   const url = 'http://muninn.ruv.is/files/xml/ruvithrottir/'
   serve(url, res, next)

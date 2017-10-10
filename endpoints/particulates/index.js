@@ -1,6 +1,7 @@
 import request from 'request'
 import xml2js from 'xml2js'
 import app from '../../server'
+
 const parseString = xml2js.parseString
 
 app.get('/particulates', (req, res) => {

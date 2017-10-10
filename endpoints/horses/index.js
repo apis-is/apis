@@ -70,7 +70,7 @@ function parseData(htmlPage) {
     { name: 'father', label: 'Sire', value: null },
     { name: 'mother', label: 'Dam', value: null },
   ]
-  const labels = params.map((x) => x.label)
+  const labels = params.map(x => x.label)
 
   // we do the following health checks
   // - check if label is in tdElements
