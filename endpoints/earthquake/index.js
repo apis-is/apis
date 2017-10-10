@@ -1,3 +1,7 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-useless-escape */
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import cheerio from 'cheerio'
 import helpers from 'apis-helpers'

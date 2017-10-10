@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
 // TODO: Find a way to enable no-param-reassign
 /* eslint-disable no-param-reassign */
 import request from 'request'

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import cheerio from 'cheerio'
 import h from 'apis-helpers'

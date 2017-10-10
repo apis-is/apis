@@ -1,3 +1,6 @@
+/* eslint-disable no-bitwise */
+/* eslint-disable import/first */
+/* eslint-disable import/extensions */
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 import assert from 'assert'

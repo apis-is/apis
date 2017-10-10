@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import xml2js from 'xml2js'
 import app from '../../server'

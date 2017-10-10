@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 /*
 About:   An API for all names that are allowed in Iceland. Names are devided into
           male names, female names and middle names

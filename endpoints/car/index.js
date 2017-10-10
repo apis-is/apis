@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import request from 'request'
 import $ from 'cheerio'
 import h from 'apis-helpers'

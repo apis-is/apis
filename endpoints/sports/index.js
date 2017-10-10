@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 /** ***************************
  * Name:     Sports API
  * Author:   Jón Orri Kristjánsson

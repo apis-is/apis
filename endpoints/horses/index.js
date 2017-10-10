@@ -1,3 +1,6 @@
+/* eslint-disable no-continue */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable no-plusplus */
 import request from 'request'
 import iconv from 'iconv-lite'
 import $ from 'cheerio'

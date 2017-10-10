@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable prefer-promise-reject-errors */
 import request from 'request'
 import $ from 'cheerio'
 import h from 'apis-helpers'

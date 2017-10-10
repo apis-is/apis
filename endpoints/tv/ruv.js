@@ -1,3 +1,6 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import moment from 'moment'
 import xml2js from 'xml2js'

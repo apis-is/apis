@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import app from '../../server'
 import request from 'request'
 import cheerio from 'cheerio'

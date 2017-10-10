@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable import/first */
 import app from '../../server'
 import fridagar from 'fridagar'
 import makeDebug from 'debug'

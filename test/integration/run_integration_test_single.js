@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/first */
 // Turn test mode on
 process.env.INTEGRATION = true
 

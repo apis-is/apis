@@ -1,3 +1,8 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/first */
 /**
  * Only for apis.is production environment
  */
