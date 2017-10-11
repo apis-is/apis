@@ -24,7 +24,7 @@ To run the project locally, first clone this repository...
 $ git clone https://github.com/apis-is/apis.git
 ```
 
-... install the dependencies and run the project.
+.... install the dependencies and run the project.
 
 ```sh
 $ npm install
