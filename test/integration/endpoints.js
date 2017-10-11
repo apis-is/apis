@@ -4,9 +4,14 @@ process.env.INTEGRATION = true
 import fs from 'fs'
 import path from 'path'
 import fileModule from 'file'
+import nock from 'nock'
 
 const testDir = 'tests'
 const testFileName = 'integration_test.js'
+
+before(() => {
+  nock.load('./mock-data.json')
+})
 
 describe('endpoint', () => {
   it('should load the server and set everything up properly', (done) => {
