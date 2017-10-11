@@ -8,9 +8,24 @@ import nock from 'nock'
 
 const testDir = 'tests'
 const testFileName = 'integration_test.js'
+const mockDataFilename = './mock-data.json'
 
 before(() => {
-  nock.load('./mock-data.json')
+  if (process.env.RECORD_MOCK_DATA) {
+    nock.recorder.rec({
+      output_objects: true,
+      dont_print: true,
+    })
+  } else {
+    nock.load(mockDataFilename)
+  }
+})
+
+after(() => {
+  if (process.env.RECORD_MOCK_DATA) {
+    const nockCallObjects = nock.recorder.play()
+    fs.writeFileSync(mockDataFilename, JSON.stringify(nockCallObjects, null, 2))
+  }
 })
 
 describe('endpoint', () => {
