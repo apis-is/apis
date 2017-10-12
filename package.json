@@ -79,10 +79,10 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
-    "eslint": "^2.6.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-plugin-import": "^1.4.0",
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-plugin-import": "^2.7.0",
     "nodemon": "1.9.2",
     "sinon": "1.17.5"
   }

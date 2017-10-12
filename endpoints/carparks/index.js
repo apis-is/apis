@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-plusplus */
 import request from 'request'
 import $ from 'cheerio'
 import h from 'apis-helpers'

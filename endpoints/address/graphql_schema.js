@@ -44,6 +44,6 @@ export default {
   },
   resolve: (_, args) => {
     const address = args.address.replace(' ', '+')
-    return lookupAddresses(address).then((data) => data, (error) => error)
+    return lookupAddresses(address).then(data => data, error => error)
   },
 }

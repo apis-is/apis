@@ -1,3 +1,6 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable import/first */
 import app from '../../server'
 import request from 'request'
 import helper from 'apis-helpers'

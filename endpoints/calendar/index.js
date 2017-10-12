@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable import/first */
 import app from '../../server'
 import fridagar from 'fridagar'
 import makeDebug from 'debug'
@@ -5,7 +7,7 @@ import { range, isString } from 'lodash'
 
 const debug = makeDebug('endpoint:calendar')
 
-const canBeInt = intLike => {
+const canBeInt = (intLike) => {
   const num = Number.parseInt(intLike, 10)
   return !Number.isNaN(num)
 }
@@ -20,7 +22,9 @@ export const normalizeParams = (year, month, day) => {
 }
 
 const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reject) => {
-  const { year, month, day, error } = normalizeParams(yearStr, monthStr, dayStr)
+  const {
+    year, month, day, error,
+  } = normalizeParams(yearStr, monthStr, dayStr)
 
   // Reject promise with relevant error when in error states
   if (error) reject({ error })
@@ -68,24 +72,24 @@ app.get('/calendar/:year', (req, res) => {
   const { year } = req.params
 
   lookupHolidays(year)
-    .then((holidays) => res.json({ results: holidays }))
-    .catch((error) => res.status(400).json(error))
+    .then(holidays => res.json({ results: holidays }))
+    .catch(error => res.status(400).json(error))
 })
 
 app.get('/calendar/:year/:month', (req, res) => {
   const { year, month } = req.params
 
   lookupHolidays(year, month)
-    .then((holidays) => res.json({ results: holidays }))
-    .catch((error) => res.status(400).json(error))
+    .then(holidays => res.json({ results: holidays }))
+    .catch(error => res.status(400).json(error))
 })
 
 app.get('/calendar/:year/:month/:day', (req, res) => {
   const { year, month, day } = req.params
 
   lookupHolidays(year, month, day)
-    .then((holiday) => res.json({ results: holiday }))
-    .catch((error) => res.status(400).json(error))
+    .then(holiday => res.json({ results: holiday }))
+    .catch(error => res.status(400).json(error))
 })
 
 export default lookupHolidays

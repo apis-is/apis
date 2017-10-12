@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 
@@ -21,7 +22,7 @@ describe('earthquake/is', () => {
 })
 
 describe('earthquake/is/sec', () => {
-    // Which fields we expect and of which type they should be
+  // Which fields we expect and of which type they should be
   const fieldsToCheckFor = {
     timestamp: Date,
     latitude: Number,

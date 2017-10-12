@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import request from 'request'
 import h from 'apis-helpers'
 import app from '../../server'

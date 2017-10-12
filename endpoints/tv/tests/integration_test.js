@@ -78,9 +78,7 @@ describe.skip('tv - ruv ithrottir', function () {
     this.timeout(20000)
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
     const params = helpers.testRequestParams('/tv/ruvithrottir')
-    const resultHandler = helpers.testRequestHandlerForFields(
-      done, fieldsToCheckFor, undefined, true
-    )
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, undefined, true)
     request.get(params, resultHandler)
   })
 })

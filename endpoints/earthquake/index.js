@@ -1,7 +1,12 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-useless-escape */
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import cheerio from 'cheerio'
 import helpers from 'apis-helpers'
 import app from '../../server'
+
 const browser = helpers.browser
 
 /*
@@ -57,7 +62,7 @@ function parseJavaScriptVariable(body) {
       parseInt(p4.split('-')[0], 10) - 1, parseInt(p5, 10),
       parseInt(p6, 10),
       parseInt(p7, 10),
-      parseInt(p8, 10)
+      parseInt(p8, 10),
     )
     return `${p1}\\${parsedDate.toISOString()}\\${p9}`
   }
@@ -100,7 +105,7 @@ function parseList(body) {
   // used for the fieldsParser below
   const numberField = function (i) {
     return function ($children) {
-      return + $children.eq(i).text().replace(',', '.')
+      return +$children.eq(i).text().replace(',', '.')
     }
   }
 
@@ -130,17 +135,18 @@ function parseList(body) {
   // is a header row.
   const data = []
 
-  $('table').eq(2).find('tr').slice(1).map(function () {
-    const $children = $(this).children()
-    const obj = {}
-    for (const key in fieldsParser) {
-      if (fieldsParser.hasOwnProperty(key)) {
-        obj[key] = fieldsParser[key]($children)
+  $('table').eq(2).find('tr').slice(1)
+    .map(function () {
+      const $children = $(this).children()
+      const obj = {}
+      for (const key in fieldsParser) {
+        if (fieldsParser.hasOwnProperty(key)) {
+          obj[key] = fieldsParser[key]($children)
+        }
       }
-    }
-    data.push(obj)
-    return obj
-  })
+      data.push(obj)
+      return obj
+    })
 
   return data
 }

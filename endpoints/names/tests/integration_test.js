@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /*
 About:   Integration tests for the Names API
 Author:  Hjörtur Líndal Stefánsson

@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import request from 'request'
 import app from '../../server'
 import cheerio from 'cheerio'
@@ -21,7 +22,8 @@ const parseList = function (body) {
 
     results.push({
       date: td.eq(0).text().trim(),
-      lotto: td.eq(1).html().match(/\d{1,2}/g).join(' ').replace(/(\d{1,2})$/, '($1)'),
+      lotto: td.eq(1).html().match(/\d{1,2}/g).join(' ')
+        .replace(/(\d{1,2})$/, '($1)'),
       joker: td.eq(2).text().trim(),
       prize: td.eq(3).text().trim(),
       link: `http://lotto.is${td.eq(4).find('a').attr('href').trim()}`,

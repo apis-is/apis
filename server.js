@@ -1,3 +1,8 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/first */
 /**
  * Only for apis.is production environment
  */
@@ -25,6 +30,7 @@ const app = express()
 // Set up error tracking with Sentry
 const SENTRY_URL = process.env.SENTRY_URL
 const raven = require('raven')
+
 const client = new raven.Client(SENTRY_URL)
 client.patchGlobal()
 

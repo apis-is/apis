@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import request from 'request'
 import cheerio from 'cheerio'
 import app from '../../server'

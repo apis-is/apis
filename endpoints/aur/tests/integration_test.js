@@ -1,3 +1,6 @@
+/* eslint-disable no-bitwise */
+/* eslint-disable import/first */
+/* eslint-disable import/extensions */
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 import assert from 'assert'
@@ -44,11 +47,11 @@ describe('stats', function () {
       helpers.assertTypesOfFields(statsFieldsType, [json])
       assert(
         ~transactionTypes.indexOf(json.last_transaction_type),
-        `Unexpected transaction type '${json.last_transaction_type}'`
+        `Unexpected transaction type '${json.last_transaction_type}'`,
       )
       assert(
         moment(json.timestampApis, timestampFormat, true).isValid(),
-        `Unexpected timestamp format, ${json.timestampApis}' does not match ${timestampFormat}`
+        `Unexpected timestamp format, ${json.timestampApis}' does not match ${timestampFormat}`,
       )
       done()
     })
@@ -81,21 +84,21 @@ describe('history', function () {
       helpers.assertTypesOfFields(historyFieldsType, json.results)
       assert(
         json.currency.constructor === String,
-        'Unexpected currency type, should be String'
+        'Unexpected currency type, should be String',
       )
       assert(
         json.market.constructor === String,
-        'Unexpected market type, should be String'
+        'Unexpected market type, should be String',
       )
       assert(
         moment(json.timestampApis, timestampFormat, true).isValid(),
-        `Unexpected timestamp format, '${json.timestampApis}' does not match ${timestampFormat}`
+        `Unexpected timestamp format, '${json.timestampApis}' does not match ${timestampFormat}`,
       )
       json.results.forEach((result, i) => {
         assert(
           moment(result.date, dateFormat, true).isValid(),
           (`Unexpected date format in result #${i};` +
-          ` '${result.date}' does not match ${dateFormat}`)
+          ` '${result.date}' does not match ${dateFormat}`),
         )
       })
       done()
@@ -131,12 +134,12 @@ describe('transactions', function () {
       json.results.forEach((result, i) => {
         assert(
           ~transactionTypes.indexOf(result.type),
-          `Unexpected transaction type '${result.type}' in result #${i}`
+          `Unexpected transaction type '${result.type}' in result #${i}`,
         )
         assert(
           moment(result.timestamp, timestampFormat, true).isValid(),
           (`Unexpected timestamp format in result #${i};` +
-          ` '${result.timestamp}' does not match ${timestampFormat}`)
+          ` '${result.timestamp}' does not match ${timestampFormat}`),
         )
       })
       done()
@@ -171,7 +174,7 @@ describe('order-book', function () {
         assert(
           moment(result.timestamp, timestampFormat, true).isValid(),
           (`Unexpected timestamp format in ask result #${i};` +
-          ` '${result.timestamp}' does not match ${timestampFormat}`)
+          ` '${result.timestamp}' does not match ${timestampFormat}`),
         )
       })
       assert(json.bid, 'Does not contain a \'bid\' field')
@@ -181,7 +184,7 @@ describe('order-book', function () {
         assert(
           moment(result.timestamp, timestampFormat, true).isValid(),
           (`Unexpected timestamp format in bid result #${i};` +
-          ` "${result.timestamp}" does not match ${timestampFormat}`)
+          ` "${result.timestamp}" does not match ${timestampFormat}`),
         )
       })
       done()

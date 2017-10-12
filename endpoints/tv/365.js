@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import xml2js from 'xml2js'
 import h from 'apis-helpers'
@@ -64,19 +66,19 @@ app.get('/tv/stod2', (req, res, next) => {
   serve(url, res, next)
 })
 
-/* Stod 2 Sport*/
+/* Stod 2 Sport */
 app.get('/tv/stod2sport', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-dagurinn'
   serve(url, res, next)
 })
 
-/* Stod 2 Sport 2*/
+/* Stod 2 Sport 2 */
 app.get('/tv/stod2sport2', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-2-dagurinn'
   serve(url, res, next)
 })
 
-/* Stod 3*/
+/* Stod 3 */
 app.get('/tv/stod3', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-3-dagurinn'
   serve(url, res, next)

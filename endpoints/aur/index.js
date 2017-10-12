@@ -31,7 +31,7 @@ function queryHistory(callback) {
   // default is "1mon", "ytd" is from last new years eve to present
   queryGzipJson(
     'https://isx.is/api/historical-prices?currency=isk&market=aur&timeframe=1year',
-    callback
+    callback,
   )
 }
 
@@ -39,7 +39,7 @@ function queryTransactions(callback) {
   // set limit to OVER 9000
   queryGzipJson(
     'https://isx.is/api/transactions?currency=isk&market=aur&limit=9001',
-    callback
+    callback,
   )
 }
 

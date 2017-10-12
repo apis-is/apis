@@ -1,3 +1,6 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable prefer-destructuring */
 import request from 'request'
 import moment from 'moment'
 import xml2js from 'xml2js'
@@ -76,7 +79,7 @@ app.get('/tv/ruv', (req, res, next) => {
   serve(url, res, next)
 })
 
-/* RUV Ithrottir*/
+/* RUV Ithrottir */
 app.get('/tv/ruvithrottir', (req, res, next) => {
   const url = 'http://muninn.ruv.is/files/xml/ruvithrottir/'
   serve(url, res, next)

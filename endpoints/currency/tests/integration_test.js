@@ -1,8 +1,9 @@
+/* eslint-disable import/extensions */
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 
 describe('currency', () => {
-    // The only thing that changes is the form attribute, so why not just re-use the object
+  // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['shortName', 'longName', 'value', 'askValue', 'bidValue', 'changeCur', 'changePer']
 
   describe('searching using provider "m5"', () => {

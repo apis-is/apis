@@ -13,7 +13,7 @@ app.get('/concerts', (req, res) => {
       })
     }
     const events = JSON.parse(body)
-    const filtered = _.map(events, (event) => (
+    const filtered = _.map(events, event => (
       _.pick(
         event,
         'eventDateName',
@@ -21,7 +21,7 @@ app.get('/concerts', (req, res) => {
         'dateOfShow',
         'userGroupName',
         'eventHallName',
-        'imageSource'
+        'imageSource',
       )
     ))
     return res.json({ results: filtered })

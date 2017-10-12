@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import request from 'request'
 import iconv from 'iconv-lite'
 import $ from 'cheerio'
@@ -17,7 +18,6 @@ function queryData(id, name, origin, microchip, callback) {
   const encodedName = encodeURIComponent(escape(name)).replace(/%25/g, '%')
   const encodedOrigin = encodeURIComponent(escape(origin)).replace(/%25/g, '%')
 
-  /* eslint-disable prefer-template */
   const formData = (
     'fnr=' + id +
     '&nafn=' + encodedName +
@@ -42,6 +42,9 @@ function queryData(id, name, origin, microchip, callback) {
 }
 
 function parseData(htmlPage) {
+  /* eslint-disable no-plusplus */
+  /* eslint-disable no-mixed-operators */
+  /* eslint-disable no-continue */
   const data = $(htmlPage)
   // tdElements:
   // is a list of text strings from all td elements in the returned htmlPage
@@ -70,7 +73,7 @@ function parseData(htmlPage) {
     { name: 'father', label: 'Sire', value: null },
     { name: 'mother', label: 'Dam', value: null },
   ]
-  const labels = params.map((x) => x.label)
+  const labels = params.map(x => x.label)
 
   // we do the following health checks
   // - check if label is in tdElements

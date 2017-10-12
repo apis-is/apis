@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/first */
 // Turn test mode on
 process.env.INTEGRATION = true
 
@@ -23,7 +25,7 @@ const app = require(`${process.cwd()}/server`)
 
 app.on('ready', () => {
   mocha.addFile(testFileAbs)
-  mocha.run(failures => {
+  mocha.run((failures) => {
     // exit with non-zero status if there were failures
     process.on('exit', () => process.exit(failures))
     process.exit()

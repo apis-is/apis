@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import request from 'request'
 import helpers from '../../../lib/test_helpers.js'
 
@@ -9,9 +10,7 @@ describe('hljomaholl', () => {
 
   it('should return an array of items with correct fields', (done) => {
     const params = helpers.testRequestParams('/hljomaholl')
-    const resultHandler = helpers.testRequestHandlerForFields(
-      done, fieldsToCheckFor, null, true
-    )
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, null, true)
     request(params, resultHandler)
   })
 })
