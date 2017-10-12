@@ -10,7 +10,7 @@ describe('weather', () => {
     request.get(params, resultHandler)
   })
 
-  describe('getAvailableStations', () => {
+  describe.skip('getAvailableStations', () => {
     it('should return an array of objects containing correct fields', (done) => {
       const fieldsToCheckFor = ['name', 'id']
       const params = helpers.testRequestParams('/weather/getAvailableStations')
