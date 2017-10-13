@@ -62,7 +62,7 @@ function parseJavaScriptVariable(body) {
       parseInt(p4.split('-')[0], 10) - 1, parseInt(p5, 10),
       parseInt(p6, 10),
       parseInt(p7, 10),
-      parseInt(p8, 10),
+      parseInt(p8, 10)
     )
     return `${p1}\\${parsedDate.toISOString()}\\${p9}`
   }

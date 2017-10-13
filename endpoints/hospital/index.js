@@ -28,10 +28,10 @@ app.get('/hospital', (req, res) => {
         $('.activityNumbers.activityNumbersNew').children('div'),
         (elem) => {
           data[elem.attribs.class] = parseInt($(elem).children().eq(1).html(), 10)
-        },
+        }
       )
       // Cache for a hour.
       return res.cache(3600).json({ results: [data] })
-    },
+    }
   )
 })

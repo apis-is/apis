@@ -111,7 +111,7 @@ app.get('/sports/football', (req, res) => {
       }
 
       return res.json(obj)
-    },
+    }
   )
 })
 
@@ -158,7 +158,7 @@ function footballLeagues(url, req, res) {
       }
 
       return res.json(obj)
-    },
+    }
   )
 }
 
@@ -249,6 +249,6 @@ app.get('/sports/handball', (req, res) => {
       }
 
       return res.json(obj)
-    },
+    }
   )
 })

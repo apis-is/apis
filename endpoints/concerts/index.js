@@ -21,7 +21,7 @@ app.get('/concerts', (req, res) => {
         'dateOfShow',
         'userGroupName',
         'eventHallName',
-        'imageSource',
+        'imageSource'
       )
     ))
     return res.json({ results: filtered })

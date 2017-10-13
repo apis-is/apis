@@ -34,6 +34,6 @@ app.get('/currency/borgun', (req, res) => {
         }
         return res.json({ results: currencies })
       })
-    },
+    }
   )
 })
