@@ -14,13 +14,18 @@ app.get('/tracking/:trackingNumber', (req, res) => {
 
     const history = $('table').eq(1).find('tr').map((index, row) => {
       return {
-        date: $(row).children().eq(0).text().replace(/\s/g, ''),
-        action: $(row).children().eq(1).text().replace(/\s/g, ''),
+        date: $(row).children().eq(0).text()
+          .replace(/\s/g, ''),
+        action: $(row).children().eq(1).text()
+          .replace(/\s/g, ''),
       }
-    }).get().slice(1).reduce((sum, curr) => {
-      sum[curr.date] = curr.action
-      return sum
-    }, {})
+    })
+      .get()
+      .slice(1)
+      .reduce((sum, curr) => {
+        sum[curr.date] = curr.action
+        return sum
+      }, {})
 
     if (Object.keys(history).length === 0) {
       return res.status(404).json({})
