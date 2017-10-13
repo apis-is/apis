@@ -6,6 +6,9 @@
     "name": "Kristján Ingi Mikaelsson",
     "email": "kristjanmik@gmail.com"
   },
+  "engines": {
+    "node" : "8.6.0"
+  },
   "description": "A json wrapper around publicly open data in Iceland",
   "repository": {
     "type": "git",
