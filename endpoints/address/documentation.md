@@ -8,6 +8,6 @@ Lookup addresses in Iceland through the Icelandic Post API
 
 | Parameters         | Description   | Example       |
 |--------------------|---------------|---------------|
-| Address (requires) | Valid address | Laugarvegur 1 |
+| Address (required) | Valid address | Laugarvegur 1 |
 
 ---
