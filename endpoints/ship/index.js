@@ -105,7 +105,7 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
         }
       }))
     } else {
-      reject(`No ship found with the name ${name}`)
+      reject(`No ship found with the query ${searchStr}`)
     }
   })
 })

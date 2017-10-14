@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 import request from 'request'
+import assert from 'assert'
 import helpers from '../../../lib/test_helpers.js'
 
 describe('ship', () => {
@@ -21,5 +22,16 @@ describe('ship', () => {
     const params = helpers.testRequestParams('/ship', { search: 'helga maría' })
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
+  })
+  it('should return a 404 when a ship is not found', (done) => {
+    const params = helpers.testRequestParams('/ship', { search: 'koddsson' })
+    request.get(params, (error, response, body) => {
+      if (error) {
+        return done(error)
+      }
+      const json = JSON.parse(body)
+      assert.equal(json.error, 'No ship found with the query koddsson')
+      done()
+    })
   })
 })
