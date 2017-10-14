@@ -7,6 +7,8 @@
     line-height: 1.5;
     font-size: 18px;
     font-weight: 300;
+    max-width: 860px;
+    margin: auto;
   }
   a {
     color: #268bd2;
@@ -28,8 +30,15 @@
     font-weight: 300;
     margin: 0;
   }
+  table {
+    width: 100%;
+  }
   th {
     text-align: left;
+  }
+  td:last-child,
+  th:last-child {
+    text-align: right;
   }
   hr {
     border-top-style: dashed;
