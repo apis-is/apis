@@ -22,9 +22,8 @@ const config = require('./config')
 const cache = require('./lib/cache')
 const cors = require('./lib/cors')
 
-const makeDebug = require('debug')
+const debug = require('debug')('server')
 
-const debug = makeDebug('server')
 const app = express()
 
 // Set up error tracking with Sentry

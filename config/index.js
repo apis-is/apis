@@ -1,10 +1,8 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 const _ = require('lodash')
-const makeDebug = require('debug')
+const debug = require('debug')('config')
 const defaultConfig = require('./default.json')
-
-const debug = makeDebug('config')
 
 let env = process.env.NODE_ENV
 let envConfig = {}
