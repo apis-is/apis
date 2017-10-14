@@ -29,7 +29,8 @@ const app = express()
 
 // Set up error tracking with Sentry
 const SENTRY_URL = process.env.SENTRY_URL
-const Raven = require('raven');
+const Raven = require('raven')
+
 Raven.config(SENTRY_URL).install()
 
 if (!process.env.NODE_ENV === 'test') {
