@@ -60,7 +60,6 @@
     "fridagar": "3.0.0",
     "graphql": "0.6.2",
     "iconv-lite": "^0.4.13",
-    "isn2wgs": "0.0.2",
     "jquery": "^2.1.4",
     "lodash": "^4.7.0",
     "mocha": "~2.4.5",
