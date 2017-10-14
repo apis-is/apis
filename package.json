@@ -7,7 +7,7 @@
     "email": "kristjanmik@gmail.com"
   },
   "engines": {
-    "node" : "8.6.0"
+    "node": "8.6.0"
   },
   "description": "A json wrapper around publicly open data in Iceland",
   "repository": {
@@ -77,8 +77,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "test": "mocha --reporter=dot ./test/index.js",
-    "test-single": "NODE_ENV=test node ./test/run_integration_test_single.js",
+    "test": "NODE_ENV=integration mocha --timeout 10000 --compilers js:babel-core/register --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
     "coveralls": "exit 0",
     "lint": "eslint ."
   },

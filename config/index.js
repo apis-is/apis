@@ -6,7 +6,7 @@ import defaultConfig from './default.json'
 
 const debug = makeDebug('config')
 
-let env = process.env.NODE_ENV ? `${process.env.NODE_ENV}.config` : 'dev.config'
+let env = process.env.NODE_ENV
 let envConfig = {}
 
 if (process.env.INTEGRATION) {
