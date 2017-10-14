@@ -30,8 +30,8 @@ Under 'Descriptions' you will find a list that will help you understand the outp
 
 - GET [/weather/texts](https://apis.is/weather/texts)
 
-| Parameters       | Description                          | Example                                        |
-|------------------|--------------------------------------|------------------------------------------------|
-| types (required) | List of types seperated by commas(,) or semicolons(;). See 'Valid types' below for full list of valid type numbers and what they stand for. | |
+| Parameters       | Description                          |
+|------------------|--------------------------------------|
+| types (required) | List of types seperated by commas(,) or semicolons(;). See 'Valid types' below for full list of valid type numbers and what they stand for. |
 
 ---

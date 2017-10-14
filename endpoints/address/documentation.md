@@ -6,8 +6,8 @@ Source [Iceland Post](https://postur.is)
 
 Lookup addresses in Iceland through the Icelandic Post API
 
-| Parameters         | Description   | Example       |
-|--------------------|---------------|---------------|
-| Address (required) | Valid address | Laugarvegur 1 |
+| Parameters         | Description   | Example                                                |
+|--------------------|---------------|--------------------------------------------------------|
+| Address (required) | Valid address | [Laugarvegur 1](https://apis.is/address/Laugarvegur 1) |
 
 ---

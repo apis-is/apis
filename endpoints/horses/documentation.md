@@ -12,6 +12,6 @@ Search the Icelandic horse database Worldfengur.
 | ID         | Public ID        | [IS1987187700](http://apis.is/horses?id=IS1987187700) |
 | Name       | Name of horse    |                                                       |
 | Origin     | Place of origin  |                                                       |
-| Microchip  | Microchip number |                                                       |
+| Microchip  | Microchip number | |                                                     |
 
 ---
