@@ -1,6 +1,6 @@
-import request from 'request'
-import _ from 'lodash'
-import app from '../../server'
+const request = require('request')
+const _ = require('lodash')
+const app = require('../../server')
 
 app.get('/concerts', (req, res) => {
   const url = 'http://midi.is/Home/LoadMoreEventsByDate?eventType=Concerts&pageNumber='

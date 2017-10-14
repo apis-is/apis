@@ -1,8 +1,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
-import request from 'request'
-import xml2js from 'xml2js'
-import app from '../../server'
+const request = require('request')
+const xml2js = require('xml2js')
+const app = require('../../server')
 
 const parseString = xml2js.parseString
 

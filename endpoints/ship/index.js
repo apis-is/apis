@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-promise-reject-errors */
-import request from 'request'
-import $ from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const $ = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 const parseIsFloat = str => parseFloat(str.replace('.', '').replace(',', '.'))
 
@@ -122,4 +122,4 @@ app.get('/ship', (req, res) => {
     .catch(error => res.status(500).json({ error }))
 })
 
-export default lookupShip
+module.exports = lookupShip

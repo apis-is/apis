@@ -1,12 +1,12 @@
-import {
+const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
   GraphQLBoolean,
-} from 'graphql'
-import { GraphQLDate } from '../../graphql/types/GraphQLDate'
+} = require('graphql')
+const { GraphQLDate } = require('../../graphql/types/GraphQLDate')
 
-import lookupHolidays from './index'
+const lookupHolidays = require('./index')
 
 const holiday = new GraphQLObjectType({
   name: 'Holiday',
@@ -29,7 +29,7 @@ const holiday = new GraphQLObjectType({
 
 const holidays = new GraphQLList(holiday)
 
-export default {
+module.exports = {
   type: holidays,
   args: {
     year: { type: GraphQLString },

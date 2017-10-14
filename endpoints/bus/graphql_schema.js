@@ -1,10 +1,10 @@
-import {
+const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-} from 'graphql'
+} = require('graphql')
 
-import getBusRoutes from './realtime'
+const getBusRoutes = require('./realtime')
 
 const busInfoType = new GraphQLObjectType({
   name: 'BusInfo',
@@ -27,7 +27,7 @@ const busRouteType = new GraphQLObjectType({
 
 const busRoutesType = new GraphQLList(busRouteType)
 
-export default {
+module.exports = {
   type: busRoutesType,
   args: {
     busses: { type: GraphQLString },

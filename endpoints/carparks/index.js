@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-plusplus */
-import request from 'request'
-import $ from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const $ = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 app.get('/carparks', (req, res) => {
   const url = 'http://www.bilastaedasjodur.is/'

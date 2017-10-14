@@ -1,6 +1,6 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import app from '../../server'
+const request = require('request')
+const cheerio = require('cheerio')
+const app = require('../../server')
 
 /**
  * Fetches movies for show today in Icelandic cinemas.

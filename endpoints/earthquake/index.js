@@ -2,10 +2,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-useless-escape */
 /* eslint-disable prefer-destructuring */
-import request from 'request'
-import cheerio from 'cheerio'
-import helpers from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const cheerio = require('cheerio')
+const helpers = require('apis-helpers')
+const app = require('../../server')
 
 const browser = helpers.browser
 

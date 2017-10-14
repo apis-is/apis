@@ -64,7 +64,7 @@ for more info.
 3. The file will be loaded automatically. Remember to require the server. Bare minimum example endpoint:
 
 ```javascript
-import app from '../../server';
+const app = require('../../server');
 
 app.get('/path', (req,res) => {
   //Sends out empty json object

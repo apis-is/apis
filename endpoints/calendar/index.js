@@ -1,9 +1,9 @@
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable import/first */
-import app from '../../server'
-import fridagar from 'fridagar'
-import makeDebug from 'debug'
-import { range, isString } from 'lodash'
+const app = require('../../server')
+const fridagar = require('fridagar')
+const makeDebug = require('debug')
+const { range, isString } = require('lodash')
 
 const debug = makeDebug('endpoint:calendar')
 
@@ -12,7 +12,7 @@ const canBeInt = (intLike) => {
   return !Number.isNaN(num)
 }
 
-export const normalizeParams = (year, month, day) => {
+const normalizeParams = (year, month, day) => {
   // If string parsing failed, reject the promise
   if (isString(year) && !canBeInt(year)) return { error: 'Year must be a number' }
   if (isString(month) && !canBeInt(month)) return { error: 'Month must be a number' }
@@ -92,4 +92,5 @@ app.get('/calendar/:year/:month/:day', (req, res) => {
     .catch(error => res.status(400).json(error))
 })
 
-export default lookupHolidays
+module.exports = lookupHolidays
+module.exports.normalizeParams = normalizeParams

@@ -1,7 +1,7 @@
 /* eslint-disable import/first */
-import request from 'request'
-import app from '../../server'
-import cheerio from 'cheerio'
+const request = require('request')
+const app = require('../../server')
+const cheerio = require('cheerio')
 
 
 const parseList = function (body) {

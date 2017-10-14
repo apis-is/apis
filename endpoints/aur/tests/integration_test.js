@@ -1,10 +1,10 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable import/first */
 /* eslint-disable import/extensions */
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
-import assert from 'assert'
-import moment from 'moment'
+const request = require('request')
+const helpers = require('../../../lib/test_helpers.js')
+const assert = require('assert')
+const moment = require('moment')
 
 const transactionTypes = ['buy', 'sell']
 

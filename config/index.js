@@ -1,8 +1,8 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
-import _ from 'lodash'
-import makeDebug from 'debug'
-import defaultConfig from './default.json'
+const _ = require('lodash')
+const makeDebug = require('debug')
+const defaultConfig = require('./default.json')
 
 const debug = makeDebug('config')
 

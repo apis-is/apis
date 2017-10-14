@@ -7,10 +7,10 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import cheerio from 'cheerio'
+const request = require('request')
+const h = require('apis-helpers')
+const app = require('../../server')
+const cheerio = require('cheerio')
 
 /* Handles the request for a specific request URL */
 function handleRequest(providedUrl, req, res) {

@@ -10,19 +10,19 @@ if (process.env.NODE_ENV === 'production') {
   process.chdir('/apis/current')
 }
 
-import express from 'express'
-import expressMetrics from 'express-metrics'
+const express = require('express')
+const expressMetrics = require('express-metrics')
 
-import fileModule from 'file'
-import { EventEmitter as EE } from 'events'
+const fileModule = require('file')
+const { EventEmitter: EE } = require('events')
 
-import statuses from 'statuses'
+const statuses = require('statuses')
 
-import config from './config'
-import cache from './lib/cache'
-import cors from './lib/cors'
+const config = require('./config')
+const cache = require('./lib/cache')
+const cors = require('./lib/cors')
 
-import makeDebug from 'debug'
+const makeDebug = require('debug')
 
 const debug = makeDebug('server')
 const app = express()

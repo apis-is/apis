@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-restricted-globals */
-import { GraphQLScalarType } from 'graphql'
-import { GraphQLError } from 'graphql/error'
-import { Kind } from 'graphql/language'
+const { GraphQLScalarType } = require('graphql')
+const { GraphQLError } = require('graphql/error')
+const { Kind } = require('graphql/language')
 
 const coerceDate = (value) => {
   if (!(value instanceof Date)) {
@@ -14,7 +14,7 @@ const coerceDate = (value) => {
   return value.toJSON()
 }
 
-export const GraphQLDate = new GraphQLScalarType({
+exports.GraphQLDate = new GraphQLScalarType({
   name: 'DateTime',
   serialize: coerceDate,
   parseValue: coerceDate,

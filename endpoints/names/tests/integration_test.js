@@ -6,9 +6,9 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-import request from 'request'
-import assert from 'assert'
-import helpers from '../../../lib/test_helpers.js'
+const request = require('request')
+const assert = require('assert')
+const helpers = require('../../../lib/test_helpers.js')
 
 /* Asserts the results */
 function assertResults(params, beEmpty) {

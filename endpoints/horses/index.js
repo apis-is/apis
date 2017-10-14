@@ -1,9 +1,9 @@
 /* eslint-disable prefer-template */
-import request from 'request'
-import iconv from 'iconv-lite'
-import $ from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const iconv = require('iconv-lite')
+const $ = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 function queryData(id, name, origin, microchip, callback) {
   const url = 'http://www.worldfengur.com/freezone_horse.jsp?c=EN'
