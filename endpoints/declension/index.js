@@ -108,6 +108,6 @@ app.get('/declension/:word', (req, res) => {
   }
 
   getDeclensions((body) => {
-    return res.json(parseTable(body))
+    return res.cache(86400).json(parseTable(body))
   }, params)
 })

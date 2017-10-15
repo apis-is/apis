@@ -52,6 +52,6 @@ app.get('/currency/m5', (req, res) => {
       }
     })
 
-    return res.json({ results: currencies })
+    return res.cache(60).json({ results: currencies })
   })
 })

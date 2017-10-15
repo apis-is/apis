@@ -24,6 +24,6 @@ app.get('/concerts', (req, res) => {
         'imageSource'
       )
     ))
-    return res.json({ results: filtered })
+    return res.cache(60).json({ results: filtered })
   })
 })

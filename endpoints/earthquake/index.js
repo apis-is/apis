@@ -160,7 +160,7 @@ app.get('/earthquake/is', (req, res) => {
       return res.status(500).json({ error: error.toString() })
     }
 
-    return res.json({ results: parseList(body) })
+    return res.cache(60).json({ results: parseList(body) })
   })
 })
 
@@ -172,7 +172,7 @@ app.get('/earthquake/is/sec', (req, res) => {
     if (error) {
       return res.json({ error: error.toString() })
     }
-    return res.json({
+    return res.cache(60).json({
       results: parseJavaScriptVariable(body),
     })
   }, {
