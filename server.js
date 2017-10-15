@@ -31,7 +31,7 @@ const Raven = require('raven')
 
 Raven.config(SENTRY_URL).install()
 
-if (!process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV !== 'test') {
   app.use(expressMetrics({
     port: 8091,
   }))
