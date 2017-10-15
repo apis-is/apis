@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import _ from 'lodash'
+const request = require('request')
+const h = require('apis-helpers')
+const app = require('../../server')
+const _ = require('lodash')
 
 const lookupAddresses = address => new Promise((resolve, reject) => {
   request.get({
@@ -45,4 +45,4 @@ app.get('/address/:address?', (req, res) => {
   )
 })
 
-export default lookupAddresses
+module.exports = lookupAddresses

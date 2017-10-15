@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
-import request from 'request'
-import app from '../../server'
-import cheerio from 'cheerio'
-import _ from 'lodash'
+const request = require('request')
+const app = require('../../server')
+const cheerio = require('cheerio')
+const _ = require('lodash')
 
 app.get('/hospital', (req, res) => {
   request.get(

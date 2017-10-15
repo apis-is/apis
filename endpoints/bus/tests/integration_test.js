@@ -4,7 +4,7 @@ var request = require('request');
 var assert = require('assert');
 var helpers = require('../../../lib/test_helpers.js');
 var sinon = require('sinon');
-var getBusRoutes = require('../realtime.js').default;
+var getBusRoutes = require('../realtime.js');
 
 describe('bus', function() {
   var fieldsToCheckFor = ['busNr', 'busses'];

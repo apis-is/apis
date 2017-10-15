@@ -1,4 +1,4 @@
-import app from '../../server'
+const app = require('../../server')
 
 app.get('/currency', (req, res) => {
   const provider = req.query.provider || 'arion'

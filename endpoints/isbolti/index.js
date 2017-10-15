@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
-import app from '../../server'
-import request from 'request'
-import cheerio from 'cheerio'
-import iconv from 'iconv-lite'
+const app = require('../../server')
+const request = require('request')
+const cheerio = require('cheerio')
+const iconv = require('iconv-lite')
 
 // returns the stats table of Icelandic football teams.
 // data retrieved from fotbolti.net.

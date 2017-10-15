@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
+const request = require('request')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe('isboltinn', () => {
   it('Should return an array of objects with fixed amount of fields.', (done) => {

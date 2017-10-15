@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
-import request from 'request'
-import assert from 'assert'
-import helpers from '../../../lib/test_helpers.js'
+const request = require('request')
+const assert = require('assert')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe('ship', () => {
   it('should return an array of objects containing correct fields', (done) => {

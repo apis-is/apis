@@ -1,5 +1,5 @@
-import fs from 'fs'
-import nock from 'nock'
+const fs = require('fs')
+const nock = require('nock')
 
 const mockDataFilename = './mock-data.json'
 

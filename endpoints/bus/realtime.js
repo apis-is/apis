@@ -100,4 +100,4 @@ app.get('/bus/realtime', function (req, res) {
   )
 })
 
-export default getBusRoutes
+module.exports = getBusRoutes

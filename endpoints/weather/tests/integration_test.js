@@ -1,6 +1,6 @@
-import request from 'request'
-import assert from 'assert'
-import helpers from '../../../lib/test_helpers'
+const request = require('request')
+const assert = require('assert')
+const helpers = require('../../../lib/test_helpers')
 
 describe('weather', () => {
   it('should return info', (done) => {

@@ -1,4 +1,4 @@
-import app from '../../server'
+const app = require('../../server')
 
 /* Root TV  */
 app.get('/tv', (req, res) => {
