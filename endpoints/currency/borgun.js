@@ -32,7 +32,7 @@ app.get('/currency/borgun', (req, res) => {
             rateDate: rate.RateDate[0],
           })
         }
-        return res.json({ results: currencies })
+        return res.cache(60).json({ results: currencies })
       })
     }
   )

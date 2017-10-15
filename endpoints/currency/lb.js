@@ -31,7 +31,7 @@ app.get('/currency/lb/:type?', (req, res) => {
           changePer: parseFloat((parseFloat(arr[i].Breyting) / parseFloat(arr[i].Midgengi)).toFixed(2)),
         })
       }
-      return res.json({ results: currencies })
+      return res.cache(60).json({ results: currencies })
     })
   })
 })

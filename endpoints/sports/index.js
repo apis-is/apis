@@ -110,7 +110,7 @@ app.get('/sports/football', (req, res) => {
         return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj)
+      return res.cache(60).json(obj)
     }
   )
 })
@@ -157,7 +157,7 @@ function footballLeagues(url, req, res) {
         return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj)
+      return res.cache(60).json(obj)
     }
   )
 }
@@ -248,7 +248,7 @@ app.get('/sports/handball', (req, res) => {
         return res.status(500).json({ error: `Could not parse the game data: ${error}` })
       }
 
-      return res.json(obj)
+      return res.cache(60).json(obj)
     }
   )
 })

@@ -22,7 +22,7 @@ app.get('/cyclecounter', (req, res) => {
         Date: result.Date[0],
       })
 
-      return res.json({ results: cyclecounter })
+      return res.cache(5).json({ results: cyclecounter })
     })
   })
 })

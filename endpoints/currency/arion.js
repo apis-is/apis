@@ -43,6 +43,6 @@ app.get('/currency/arion/:type?', (req, res) => {
       currencies.push(currency)
     })
 
-    return res.json({ results: currencies })
+    return res.cache(60).json({ results: currencies })
   })
 })
