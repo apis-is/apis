@@ -1,7 +1,5 @@
 const request = require('request')
-const expect = require('expect')
 const helpers = require('../../../lib/test_helpers')
-const { normalizeParams } = require('../')
 
 describe('/cinema', () => {
   it('should return an array of objects containing correct fields', (done) => {

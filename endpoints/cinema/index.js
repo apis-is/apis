@@ -60,7 +60,7 @@ app.get('/cinema', (req, res) => {
       })
 
       const src = movie.find('img').attr('src')
-      if(src) {
+      if (src) {
         const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
         const imgUrl = `http://kvikmyndir.is${urls[0]}`
         const realeasedYear = movie
