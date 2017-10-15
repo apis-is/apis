@@ -59,29 +59,27 @@ app.get('/cinema', (req, res) => {
         showtimes.push(theater)
       })
 
-      const urls = movie
-        .find('img')
-        .attr('src')
-        .match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
+      const src = movie.find('img').attr('src')
+      if(src) {
+        const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
+        const imgUrl = `http://kvikmyndir.is${urls[0]}`
+        const realeasedYear = movie
+          .find('.mynd_titill_artal')
+          .text()
+          .replace('/[()]/g', '')
 
-      const imgUrl = `http://kvikmyndir.is${urls[0]}`
-
-      const realeasedYear = movie
-        .find('.mynd_titill_artal')
-        .text()
-        .replace('/[()]/g', '')
-
-      // Create an object of info
-      // and add it to the 'results' array.
-      obj.results.push({
-        title: movie.find('.title').remove('.year').html().trim(),
-        released: realeasedYear,
-        restricted: null,
-        imdb: movie.find('.imdbEinkunn').text().trim(),
-        imdbLink: movie.find('.imdbEinkunn a').attr('href') ? movie.find('.imdbEinkunn a').attr('href').trim() : '',
-        image: imgUrl,
-        showtimes,
-      })
+        // Create an object of info
+        // and add it to the 'results' array.
+        obj.results.push({
+          title: movie.find('.title').remove('.year').html().trim(),
+          released: realeasedYear,
+          restricted: null,
+          imdb: movie.find('.imdbEinkunn').text().trim(),
+          imdbLink: movie.find('.imdbEinkunn a').attr('href') ? movie.find('.imdbEinkunn a').attr('href').trim() : '',
+          image: imgUrl,
+          showtimes,
+        })
+      }
     })
 
     return res.cache().json(obj)
