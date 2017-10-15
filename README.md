@@ -1,6 +1,8 @@
 [ ![Codeship Status for apis-is/apis](https://codeship.com/projects/7c0ce5a0-9901-0132-893b-365d53813970/status?branch=master)](https://codeship.com/projects/63542)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/apis-is/apis.svg)](https://greenkeeper.io/)
+
 The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
 
 The code that is running the service is open source under the [MIT licence](https://en.wikipedia.org/wiki/MIT_License). The platform itself is hosted on a load balanced setup by [Advania](https://www.advania.com/).

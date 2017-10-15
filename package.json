@@ -51,30 +51,30 @@
     "debug": "^2.2.0",
     "expect": "1.20.2",
     "express": "^4.13.4",
-    "express-graphql": "0.5.3",
+    "express-graphql": "0.6.11",
     "express-metrics": "^1.1.0",
     "file": "~0.2.2",
     "fridagar": "3.0.0",
-    "graphql": "0.6.2",
+    "graphql": "0.11.7",
     "iconv-lite": "^0.4.13",
     "isn2wgs": "0.0.2",
-    "jquery": "^2.1.4",
+    "jquery": "^3.2.1",
     "lodash": "^4.7.0",
-    "mocha": "~2.4.5",
-    "moment": "~2.12.0",
+    "mocha": "~4.0.1",
+    "moment": "~2.19.1",
     "nock": "^9.0.22",
-    "raven": "0.11.0",
-    "redis": "2.5.3",
-    "request": "~2.69.0",
+    "raven": "2.2.1",
+    "redis": "2.8.0",
+    "request": "~2.83.0",
     "scraper": "0.0.9",
     "statuses": "^1.2.1",
     "xml2js": "~0.4.16",
-    "xregexp": "~3.1.0"
+    "xregexp": "~3.2.0"
   },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "NODE_ENV=integration mocha --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
+    "test": "NODE_ENV=integration mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
     "coveralls": "exit 0",
     "lint": "eslint ."
   },
@@ -82,7 +82,7 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-import": "^2.7.0",
-    "nodemon": "1.9.2",
-    "sinon": "1.17.5"
+    "nodemon": "1.12.1",
+    "sinon": "4.0.1"
   }
 }
