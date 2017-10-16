@@ -10,6 +10,7 @@
     "node": ">=8.6.0"
   },
   "description": "A json wrapper around publicly open data in Iceland",
+  "licence": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/kristjanmik/apis.git"
