@@ -71,7 +71,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "DEBUG=server node server.js",
-    "test": "NODE_ENV=integration mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
+    "test": "NODE_ENV=testing mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
     "coveralls": "exit 0",
     "lint": "eslint ."
   },
