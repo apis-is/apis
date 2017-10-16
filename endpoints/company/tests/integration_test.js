@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe.skip('company', () => {
+describe('company', () => {
   const fieldsToCheckFor = ['name', 'sn', 'active', 'address']
 
   describe('searching by name', () => {

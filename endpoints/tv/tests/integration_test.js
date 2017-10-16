@@ -19,15 +19,6 @@ describe.skip('tv - skjar1', () => {
   })
 })
 
-describe.skip('tv - stod2 gull', () => {
-  it('should return an array of objects containing correct fields', (done) => {
-    const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
-    const params = helpers.testRequestParams('/tv/stod2gull')
-    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
-    request.get(params, resultHandler)
-  })
-})
-
 describe('tv - stod2 bio', () => {
   it('should return an array of objects containing correct fields', (done) => {
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']

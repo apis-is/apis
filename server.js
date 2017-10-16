@@ -18,7 +18,6 @@ const { EventEmitter: EE } = require('events')
 
 const statuses = require('statuses')
 
-const config = require('./config')
 const cache = require('./lib/cache')
 const cors = require('./lib/cors')
 
@@ -32,7 +31,7 @@ const Raven = require('raven')
 
 Raven.config(SENTRY_URL).install()
 
-if (!process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV !== 'test') {
   app.use(expressMetrics({
     port: 8091,
   }))
@@ -112,12 +111,11 @@ app.use((error, req, res, next) => {
 /**
  * Start the server
  */
-app.listen(config.port, () => {
+const port = process.env.NODE_ENV === 'testing' ? 3101 : 3100
+app.listen(port, () => {
   app.emit('ready')
 })
 
 app.on('ready', () => {
-  if (!config.testing) {
-    debug('Server running at port:', config.port)
-  }
+  debug('Server running at port:', port)
 })

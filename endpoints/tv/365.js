@@ -89,9 +89,3 @@ app.get('/tv/stod2bio', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Bio-dagurinn'
   serve(url, res, next)
 })
-
-/* Stod 2 Gull */
-app.get('/tv/stod2gull', (req, res, next) => {
-  const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Extra-dagurinn'
-  serve(url, res, next)
-})
