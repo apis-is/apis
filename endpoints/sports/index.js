@@ -100,8 +100,8 @@ app.get('/sports/football', (req, res) => {
             })
 
             // Checking whether it has the necessary fields
-            if (game.counter && game.date && game.time && game.tournament && game.location
-              && game.homeTeam && game.awayTeam) {
+            if (game.counter && game.date && game.time && game.tournament && game.location &&
+              game.homeTeam && game.awayTeam) {
               obj.results.push(game)
             }
           }
