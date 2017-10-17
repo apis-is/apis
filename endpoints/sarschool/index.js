@@ -3,7 +3,6 @@ const request = require('request')
 const app = require('../../server')
 const cheerio = require('cheerio')
 
-
 function pad(n) { return n < 10 ? `0${n}` : n }
 
 const getRequest = (callback, providedUrl) => {

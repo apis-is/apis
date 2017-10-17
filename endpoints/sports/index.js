@@ -204,7 +204,6 @@ app.get('/sports/football/female-leagues/pepsi', (req, res) => {
   return footballLeagues(url, req, res)
 })
 
-
 /* Handball */
 app.get('/sports/handball', (req, res) => {
   const url = 'http://hsi.is/library/motamal/naestu.htm'

@@ -84,7 +84,6 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
       }
     })
 
-
     if (fieldList.length > 0 && fieldList[0].length > 0) {
       resolve(fieldList.map((fields) => {
         const type = typeDict[fields[1]] ? typeDict[fields[1]] : fields[1]

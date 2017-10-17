@@ -3,7 +3,6 @@ const request = require('request')
 const app = require('../../server')
 const cheerio = require('cheerio')
 
-
 const parseList = function (body) {
   let $
   try {

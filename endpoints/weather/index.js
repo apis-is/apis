@@ -302,7 +302,6 @@ app.get('/weather/texts/:lang?', (req, res) => {
   })
 })
 
-
 /*
  * observation *
  ids
@@ -317,14 +316,12 @@ time
 anytime
 0 | 1
 
-
  * forecast *
  ids
 http://www.vedur.is/vedur/stodvar
 
 params (mælistærðir)
 'F','FX','FG','D','T','W','V','N','P','RH','SNC','SND','SED','RTE','TD','R'
-
 
  * text *
  ids (svæði)

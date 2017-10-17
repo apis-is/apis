@@ -2,7 +2,6 @@ const request = require('request')
 const cheerio = require('cheerio')
 const app = require('../../server')
 
-
 /* Root Rides */
 app.get('/rides', (req, res) => {
   return res.json({
@@ -17,7 +16,6 @@ app.get('/rides', (req, res) => {
     ],
   })
 })
-
 
 const scrapeSamferdaFor = (requesting, res) => {
   const url = 'http://www.samferda.net/'
