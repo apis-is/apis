@@ -64,7 +64,7 @@
     "moment": "~2.19.1",
     "nock": "^9.0.22",
     "raven": "2.3.0",
-    "redis": "2.8.0",
+    "redis": "^2.8.0",
     "request": "~2.83.0",
     "scraper": "0.0.9",
     "statuses": "^1.2.1",
@@ -74,7 +74,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "DEBUG=server node server.js",
-    "test": "NODE_ENV=testing mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
+    "test": "NODE_ENV=testing mocha --exit --timeout 10000 --reporter=dot ./lib/*.spec.js ./test.js ./endpoints/*/tests/integration_test.js",
     "coveralls": "exit 0",
     "lint": "eslint ."
   },

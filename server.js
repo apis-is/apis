@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const express = require('express')
-const expressMetrics = require('express-metrics')
+//const expressMetrics = require('express-metrics')
+const {metricsPrefix, metricsMiddleware} = require('./lib/expressMetrics')
 
 const fileModule = require('file')
 const { EventEmitter: EE } = require('events')
@@ -28,13 +29,21 @@ const app = express()
 // Set up error tracking with Sentry
 const SENTRY_URL = process.env.SENTRY_URL
 const Raven = require('raven')
+const redis = require('./lib/redis')
+const _ = require('lodash')
 
 Raven.config(SENTRY_URL).install()
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(expressMetrics({
-    port: 8091,
-  }))
+  app.use(metricsMiddleware())
+  app.get('/metrics', (req, res) => {
+    redis.keys(`${metricsPrefix}*`, function(error, keys) {
+      redis.mget(keys, (error, values) => {
+        const keysWithoutPrefix = keys.map(key => key.replace(`${metricsPrefix}/`, ''))
+        res.json(_.zipObject(keysWithoutPrefix, values))
+      })
+    })
+  })
 }
 
 module.exports = app
