@@ -126,7 +126,9 @@ function parseList(body) {
     humanReadableLocation: ($children) => {
       // these are three <td> elements' text values combined.. there migth be a
       // cleaner way to do this, but I don't know how.
-      const strObj = $children.slice(7, 10).map(function () { return $(this).text() })
+      const strObj = $children.slice(7, 10).map(function () {
+        return $(this).text()
+      })
       return Array.prototype.join.call(strObj, ' ').replace(/^\s*|\s*$/g, '')
     },
   }
