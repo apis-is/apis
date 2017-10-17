@@ -108,7 +108,7 @@ app.get('/weather/getAvailableStations', (req, res) => {
     const idRegex = 'station=(\\d*)'
     const titleRegex = '^(([\\p{L}0-9-]*[\\s-]?)*)\\s-'
     const stations = []
-    const hrefs = $(".listtable td a:contains('A')")
+    const hrefs = $('.listtable td a:contains(\'A\')')
 
     for (let i = 0; i < hrefs.length; i++) {
       const elem = $(hrefs[i])

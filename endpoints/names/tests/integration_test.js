@@ -16,7 +16,7 @@ function assertResults(params, beEmpty) {
   request.get(params, (err, res, body) => {
     const json = JSON.parse(body)
 
-    assert(json.results && typeof json.results.length !== 'undefined', "Does not contain a 'results' field")
+    assert(json.results && typeof json.results.length !== 'undefined', 'Does not contain a \'results\' field')
     if (!shouldBeEmpty) {
       assert(json.results.length > 0, 'Results are empty')
     } else {
