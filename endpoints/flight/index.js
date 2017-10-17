@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
 const request = require('request')
 const h = require('apis-helpers')
-const app = require('../../server')
 const cheerio = require('cheerio')
+const app = require('../../server')
 
 app.get('/flight', (req, res) => {
   const data = req.query

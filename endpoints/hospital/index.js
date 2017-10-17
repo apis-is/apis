@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
 const request = require('request')
-const app = require('../../server')
 const cheerio = require('cheerio')
 const _ = require('lodash')
+const app = require('../../server')
 
 app.get('/hospital', (req, res) => {
   request.get(

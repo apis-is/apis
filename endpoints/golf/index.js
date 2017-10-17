@@ -1,9 +1,9 @@
 /* eslint-disable prefer-destructuring */
+const { parse: parseUrl } = require('url')
 const request = require('request')
 const cheerio = require('cheerio')
 const h = require('apis-helpers')
 const _ = require('lodash')
-const { parse: parseUrl } = require('url')
 const app = require('../../server')
 
 app.get('/golf/teetimes', (req, res) => {

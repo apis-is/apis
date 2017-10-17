@@ -7,8 +7,8 @@
 
 const request = require('request')
 const h = require('apis-helpers')
-const app = require('../../server')
 const cheerio = require('cheerio')
+const app = require('../../server')
 
 /** Routes * */
 
