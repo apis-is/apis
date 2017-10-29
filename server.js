@@ -11,8 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const express = require('express')
-//const expressMetrics = require('express-metrics')
-const {metricsPrefix, metricsMiddleware} = require('./lib/expressMetrics')
+const { metricsPrefix, metricsMiddleware } = require('./lib/expressMetrics')
 
 const fileModule = require('file')
 const { EventEmitter: EE } = require('events')
@@ -37,8 +36,8 @@ Raven.config(SENTRY_URL).install()
 if (process.env.NODE_ENV !== 'test') {
   app.use(metricsMiddleware())
   app.get('/metrics', (req, res) => {
-    redis.keys(`${metricsPrefix}*`, function(error, keys) {
-      redis.mget(keys, (error, values) => {
+    redis.keys(`${metricsPrefix}*`, (keysError, keys) => {
+      redis.mget(keys, (getError, values) => {
         const keysWithoutPrefix = keys.map(key => key.replace(`${metricsPrefix}/`, ''))
         res.json(_.zipObject(keysWithoutPrefix, values))
       })
