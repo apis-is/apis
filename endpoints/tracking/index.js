@@ -31,7 +31,7 @@ app.get('/tracking/:trackingNumber', (req, res) => {
       return res.status(404).json({})
     }
 
-    return res.json({
+    return res.cache(60).json({
       history,
     })
   })
