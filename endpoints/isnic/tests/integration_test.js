@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe.skip('isnic', () => {
+describe('isnic', () => {
   it('should return an array of objects containing correct fields', (done) => {
     const fieldsToCheckFor = [
       'domain',
@@ -17,7 +17,12 @@ describe.skip('isnic', () => {
       'expires',
       'lastChange',
     ]
-    const params = helpers.testRequestParams('/isnic', { domain: 'apis.is' })
+    const params = {
+      url: 'http://localhost:3101/isnic',
+      method: 'GET',
+      qs: { domain: 'apis.is' },
+      headers: ['Content-Type: application/json'],
+    }
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })
