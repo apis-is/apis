@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe('isnic', () => {
+describe.skip('isnic', () => {
   it('should return an array of objects containing correct fields', (done) => {
     const fieldsToCheckFor = [
       'domain',

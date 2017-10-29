@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe('sarschool', () => {
+describe.skip('sarschool', () => {
   // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = [
     'id', 'name', 'time_start', 'time_end', 'sar_members_only', 'host',

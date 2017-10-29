@@ -16,7 +16,7 @@ const fieldsToCheckFor = [
 ]
 
 describe('horses', () => {
-  describe('multi-results', function () {
+  describe.skip('multi-results', function () {
     this.timeout(20000)
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/horses', { name: 'Oddur', origin: 'Selfossi' })
@@ -25,7 +25,7 @@ describe('horses', () => {
     })
   })
 
-  describe('single-result-by-name', function () {
+  describe.skip('single-result-by-name', function () {
     this.timeout(20000)
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/horses', { name: 'Fálki', origin: 'Geirshlíð' })
@@ -34,7 +34,7 @@ describe('horses', () => {
     })
   })
 
-  describe('single-result-partial-info', function () {
+  describe.skip('single-result-partial-info', function () {
     this.timeout(20000)
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/horses', { name: 'Lotta', origin: 'Ármóti' })
@@ -43,7 +43,7 @@ describe('horses', () => {
     })
   })
 
-  describe('single-result-by-id', function () {
+  describe.skip('single-result-by-id', function () {
     this.timeout(20000)
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/horses', { id: 'IS1987187700' })

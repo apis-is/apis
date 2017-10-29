@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe('earthquake/is', () => {
+describe.skip('earthquake/is', () => {
   // Which fields we expect and of which type they should be
   const fieldsToCheckFor = {
     timestamp: Date,
@@ -21,7 +21,7 @@ describe('earthquake/is', () => {
   })
 })
 
-describe('earthquake/is/sec', () => {
+describe.skip('earthquake/is/sec', () => {
   // Which fields we expect and of which type they should be
   const fieldsToCheckFor = {
     timestamp: Date,

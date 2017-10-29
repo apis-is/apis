@@ -2,7 +2,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe('currency', () => {
+describe.skip('currency', () => {
   // The only thing that changes is the form attribute, so why not just re-use the object
   const fieldsToCheckFor = ['shortName', 'longName', 'value', 'askValue', 'bidValue', 'changeCur', 'changePer']
 
