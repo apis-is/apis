@@ -18,7 +18,9 @@ after(() => {
   if (process.env.RECORD_MOCK_DATA) {
     const nockCallObjects = nock.recorder.play()
     const noLocalhost = nockCallObjects.filter((o) => {
-      return !o.scope.includes('localhost') && !o.scope.includes('m5.is')
+      return ![
+        'http://localhost:3101', 'http://www.m5.is:80', 'http://hraun.vedur.is:80', 'http://www.vedur.is:80',
+      ].includes(o.scope)
     })
     fs.writeFileSync(mockDataFilename, JSON.stringify(noLocalhost, null, 2))
   }
