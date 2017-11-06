@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="iso-8859-1">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="static/css/style.css">
+		<link rel="shortcut icon" href="http://www.m5.is/favicon.ico" />
+		<script type="text/javascript" src="/js/numberformat.js"></script>
+		<script type="text/javascript" src="static/js/jquery.min.js"></script>
+		<script type="text/javascript" src="static/css/bootstrap/js/bootstrap.min.js"></script>
+
+		<script src="js/highstock/js/highstock.js"></script>
+		<script src="js/highstock/js/modules/exporting.js"></script>
+		<script src="js/highstock/js/is.js"></script>
+
+		<meta name="msapplication-tap-highlight" content="no" /> 
+
+		
+		
+		<title>Gjaldmiðlar - M5</title>
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		
+	</head>
+
+
+
+	<body>
+	
+	<div class="gengisbar">
+		<div class="container wide" style="position: relative;">
+			
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=1" title="Bandarískur dalur&#13;105,92">
+						<span style="font-weight: 600;">USD:</span>
+						&nbsp;106
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=4" title="Dönsk króna&#13;16,507">
+						<span style="font-weight: 600;">DKK:</span>
+						&nbsp;16,5
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=20" title="Evra&#13;122,85">
+						<span style="font-weight: 600;">EUR:</span>
+						&nbsp;123
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=17" title="Japanskt jen&#13;0,92965">
+						<span style="font-weight: 600;">JPY:</span>
+						&nbsp;0,930
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=3" title="Kanadískur dalur&#13;83,125">
+						<span style="font-weight: 600;">CAD:</span>
+						&nbsp;83,1
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=5" title="Norsk króna&#13;12,992">
+						<span style="font-weight: 600;">NOK:</span>
+						&nbsp;13,0
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=2" title="Sterlingspund&#13;139,16">
+						<span style="font-weight: 600;">GBP:</span>
+						&nbsp;139
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=10" title="Svissneskur franki&#13;106,01">
+						<span style="font-weight: 600;">CHF:</span>
+						&nbsp;106
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=6" title="Sænsk króna&#13;12,605">
+						<span style="font-weight: 600;">SEK:</span>
+						&nbsp;12,6
+					</a>
+				</span>
+							<span style="z-index: 2; position: relative;">
+					<a href="?gluggi=gjaldmidill&id=22" title="Gengisvísitala&#13;166,96">
+						<span style="font-weight: 600;">TWI:</span>
+						&nbsp;167
+					</a>
+				</span>
+						<img src="/static/css/gjaldmidlartip.png" style="position: absolute; top: 10px; right: 80px; z-index: 1;">
+		</div>
+		
+	</div>
+	<div class="head-wide">
+		<div class="menubar">
+			<div class="container wide" style="text-align: right;">
+				<a href="/" class="pull-left"><img src="/img/m5_white.png" style="margin-top: 2px;"></a>
+									<a href="?gluggi=forsida" class="menu-item ">Forsíða</a>
+									<a href="?gluggi=gjaldmidlar" class="menu-item selected">Gjaldmiðlar</a>
+									<a href="?gluggi=hagtolur" class="menu-item ">Hagtölur</a>
+									<a href="?gluggi=frettir" class="menu-item ">Fréttir</a>
+									<a href="?gluggi=frodleikur" class="menu-item ">Fróðleikur</a>
+							</div>			
+		</div>
+	</div>
+
+	<div class="container wide">
+		<div class="skuggi" style="margin-top: 40px;">
+			<div class="haus">
+				&nbsp;
+			</div>
+			<div class="efni">
+
+				<div style="margin-bottom: 20px;">
+
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- M5 top -->
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-client="ca-pub-8389363414957813"
+					     data-ad-slot="1700888286"
+					     data-ad-format="auto"></ins>
+					
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					
+				</div>
+
+
+											
+<h1>Gjaldmiðlar</h1>
+
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th style="width: 10%; font-weight: 600;">Merki</th>
+			<th style="width: 60%; font-weight: 600;">Nafn</th>
+			<th style="width: 10%; font-weight: 600; text-align: right;">Gengi</th>
+			<th style="width: 10%; font-weight: 600; text-align: right;"></th>
+			<th style="width: 40%; font-weight: 600; text-align: center;" colspan="2">Breyting</th>
+		</tr>
+	</thead>
+	<tbody>
+					<tr style="background: #EEEEEE;">
+				<td><a href="?gluggi=gjaldmidill&id=1">USD</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=1">Bandarískur dalur</a></td>
+				<td style="text-align: right">105,92</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,45</td>
+				<td style="text-align: right; color:red;">(0,42%)</td>
+						</tr>
+					<tr style="background: white;">
+				<td><a href="?gluggi=gjaldmidill&id=4">DKK</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=4">Dönsk króna</a></td>
+				<td style="text-align: right">16,507</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,071</td>
+				<td style="text-align: right; color:red;">(0,43%)</td>
+						</tr>
+					<tr style="background: #EEEEEE;">
+				<td><a href="?gluggi=gjaldmidill&id=20">EUR</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=20">Evra</a></td>
+				<td style="text-align: right">122,85</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,55</td>
+				<td style="text-align: right; color:red;">(0,45%)</td>
+						</tr>
+					<tr style="background: white;">
+				<td><a href="?gluggi=gjaldmidill&id=17">JPY</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=17">Japanskt jen</a></td>
+				<td style="text-align: right">0,92965</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,00075</td>
+				<td style="text-align: right; color:red;">(0,08%)</td>
+						</tr>
+					<tr style="background: #EEEEEE;">
+				<td><a href="?gluggi=gjaldmidill&id=3">CAD</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=3">Kanadískur dalur</a></td>
+				<td style="text-align: right">83,125</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,16</td>
+				<td style="text-align: right; color:red;">(0,19%)</td>
+						</tr>
+					<tr style="background: white;">
+				<td><a href="?gluggi=gjaldmidill&id=5">NOK</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=5">Norsk króna</a></td>
+				<td style="text-align: right">12,992</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,0080</td>
+				<td style="text-align: right; color:red;">(0,06%)</td>
+						</tr>
+					<tr style="background: #EEEEEE;">
+				<td><a href="?gluggi=gjaldmidill&id=2">GBP</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=2">Sterlingspund</a></td>
+				<td style="text-align: right">139,16</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_graen.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:green; font-weight: 600;">0,100</td>
+				<td style="text-align: right; color:green;">(0,07%)</td>
+						</tr>
+					<tr style="background: white;">
+				<td><a href="?gluggi=gjaldmidill&id=10">CHF</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=10">Svissneskur franki</a></td>
+				<td style="text-align: right">106,01</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,21</td>
+				<td style="text-align: right; color:red;">(0,20%)</td>
+						</tr>
+					<tr style="background: #EEEEEE;">
+				<td><a href="?gluggi=gjaldmidill&id=6">SEK</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=6">Sænsk króna</a></td>
+				<td style="text-align: right">12,605</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_graen.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:green; font-weight: 600;">0,0015</td>
+				<td style="text-align: right; color:green;">(0,01%)</td>
+						</tr>
+					<tr style="background: white;">
+				<td><a href="?gluggi=gjaldmidill&id=22">TWI</a></td>
+				<td><a href="?gluggi=gjaldmidill&id=22">Gengisvísitala</a></td>
+				<td style="text-align: right">166,96</td>
+
+							<td style="text-align: right"><img src="img/pila_litil_raud.gif" align="absmiddle" style="min-width: 12px;"/></td>
+				<td style="text-align: right; color:red; font-weight: 600;">0,53</td>
+				<td style="text-align: right; color:red;">(0,32%)</td>
+						</tr>
+			</tbody>
+</table>
+					
+
+				<div class="row footer">
+					<div class="span4">
+						©2006 - 2017 Vefmiðlun ehf. <br/>
+						<a href="mailto:m5@m5.is" >m5@m5.is</a> - +354 551-9060
+					</div>
+					<div class="span8" style="color: black; text-align: right;">
+													<a href="?gluggi=forsida" class="footer-menu-item ">Forsíða</a>
+													<a href="?gluggi=gjaldmidlar" class="footer-menu-item selected">Gjaldmiðlar</a>
+													<a href="?gluggi=hagtolur" class="footer-menu-item ">Hagtölur</a>
+													<a href="?gluggi=frettir" class="footer-menu-item ">Fréttir</a>
+													<a href="?gluggi=frodleikur" class="footer-menu-item ">Fróðleikur</a>
+											</div>
+				</div>					
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="disclaimer">
+			Ofangreindar upplýsingar fela ekki í sér fjárfestingarráðgjöf eða hvatningu til viðskipta. Allar fjárfestingar fela í sér áhættu og gefur söguleg ávöxtun ekki endilega vísbendingu um framtíðarávöxtun. M5 ber ekki ábyrgð á hugsanlegum villum, töfum á upplýsingum eða ákvörðunum sem byggðar eru á upplýsingunum.
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	
+		$('.random').each(function(){
+			var $divs = $(this).children();
+			$divs.hide().eq(Math.floor(Math.random() * $divs.length)).show();
+		});
+	
+	</script>
+
+	<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3118207-1");
+pageTracker._initData();
+pageTracker._setDomainName("www.m5.is");
+pageTracker._trackPageview();
+</script>
+	</body>
+</html>
