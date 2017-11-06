@@ -19,7 +19,11 @@ after(() => {
     const nockCallObjects = nock.recorder.play()
     const noLocalhost = nockCallObjects.filter((o) => {
       return ![
-        'http://localhost:3101', 'http://www.m5.is:80', 'http://hraun.vedur.is:80', 'http://www.vedur.is:80',
+        'http://localhost:3101',
+        'http://www.m5.is:80',
+        'http://hraun.vedur.is:80',
+        'http://www.vedur.is:80',
+        'http://www.landspitali.is:80',
       ].includes(o.scope)
     })
     fs.writeFileSync(mockDataFilename, JSON.stringify(noLocalhost, null, 2))
