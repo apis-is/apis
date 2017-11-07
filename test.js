@@ -17,6 +17,18 @@ before(() => {
 after(() => {
   if (process.env.RECORD_MOCK_DATA) {
     const nockCallObjects = nock.recorder.play()
-    fs.writeFileSync(mockDataFilename, JSON.stringify(nockCallObjects, null, 2))
+    const noLocalhost = nockCallObjects.filter((o) => {
+      return ![
+        'http://localhost:3101',
+        'http://www.m5.is:80',
+        'http://hraun.vedur.is:80',
+        'http://www.vedur.is:80',
+        'http://www.landspitali.is:80',
+        'http://fotbolti.net:80',
+        'http://skoli.landsbjorg.is:80',
+        'http://www.worldfengur.com:80',
+      ].includes(o.scope)
+    })
+    fs.writeFileSync(mockDataFilename, JSON.stringify(noLocalhost, null, 2))
   }
 })
