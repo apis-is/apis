@@ -24,6 +24,7 @@ after(() => {
         'http://hraun.vedur.is:80',
         'http://www.vedur.is:80',
         'http://www.landspitali.is:80',
+        'http://fotbolti.net:80',
       ].includes(o.scope)
     })
     fs.writeFileSync(mockDataFilename, JSON.stringify(noLocalhost, null, 2))
