@@ -67,8 +67,8 @@ fileModule.walkSync('./endpoints', (dirPath, dirs, endpoints) => {
     if (!(endpoint.includes('.DS_Store') && !dirPath.includes('graphql') && !endpoint.includes('graphql'))) {
       try {
         require(`./${dirPath}/${endpoint}`)
-      } catch (e) {
-        console.error('Error loading file', e)
+      } catch (error) {
+        console.error('Error loading file', error)
       }
     }
   }
