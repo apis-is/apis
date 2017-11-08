@@ -37,6 +37,7 @@
     }
   },
   "description": "A json wrapper around publicly open data in Iceland",
+  "licence": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/kristjanmik/apis.git"
@@ -72,7 +73,7 @@
   ],
   "dependencies": {
     "apis-helpers": "0.0.1",
-    "axios": "^0.9.1",
+    "axios": "^0.17.0",
     "cheerio": "~0.20.0",
     "debug": "^2.2.0",
     "expect": "1.20.2",
@@ -97,13 +98,13 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "DEBUG=server node server.js",
-    "test": "NODE_ENV=integration mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
+    "test": "NODE_ENV=testing mocha --exit --timeout 10000 --reporter=dot ./test.js ./endpoints/*/tests/integration_test.js",
     "coveralls": "exit 0",
     "lint": "xo"
   },
   "devDependencies": {
     "nodemon": "1.12.1",
-    "sinon": "4.0.1",
+    "sinon": "4.1.2",
     "xo": "^0.18.2"
   }
 }

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="is">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta charset="ISO-8859-1">
+	 
+	<meta property="fb:app_id" content="201600254736"/>
+		<meta property="og:type" content="website"/>
+	<meta property="og:title" content="F&oacute;tbolti.net"/>
+	<meta property="og:image" content="http://www.fotbolti.net/themes/2013/images/logo.png"/>
+	<meta property="og:url" content="http://www.fotbolti.net" />
+	<meta property="fb:admins" content="1403749672"/>
+	<title>F&oacute;tbolti.net</title>
+	<link rel="SHORTCUT ICON" href="http://www.fotbolti.net/favicon.ico" />
+	<link rel="alternate" type="application/rss+xml" title="Fotbolti.net - RSS" href="http://www.fotbolti.net/rss.php" />
+	
+	<script src="https://www.google.com/jsapi?key=ABQIAAAATIpibcpsZwBWGL7itev7RxSY6eFCvyHT0NRDYLGweBSPDpYY-BR5_PefbHzhP0NkdRRCqQegAdesxg"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="/min/g=js"></script>
+<link type="text/css" rel="stylesheet" href="/min/g=css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+<script type="text/javascript" src="http://tcr.tynt.com/javascripts/Tracer.js?user=bWFPM8eEyr35KhadbiUt4I&amp;s=121&amp;lang=en"></script>	
+</head>
+<body>
+
+<!-- The comScore Inline Tag consists of two code snippets. Please include both code snippets in your web pages. -->
+
+<!-- The following code snippet should be placed directly (or as close as possible) after the opening <body> tag. --> 
+
+<!-- Begin comScore Inline Tag 1.1302.13 --> 
+<script type="text/javascript"> 
+// <![CDATA[
+function udm_(e){var t="comScore=",n=document,r=n.cookie,i="",s="indexOf",o="substring",u="length",a=2048,f,l="&ns_",c="&",h,p,d,v,m=window,g=m.encodeURIComponent||escape;if(r[s](t)+1)for(d=0,p=r.split(";"),v=p[u];d<v;d++)h=p[d][s](t),h+1&&(i=c+unescape(p[d][o](h+t[u])));e+=l+"_t="+ +(new Date)+l+"c="+(n.characterSet||n.defaultCharset||"")+"&c8="+g(n.title)+i+"&c7="+g(n.URL)+"&c9="+g(n.referrer),e[u]>a&&e[s](c)>0&&(f=e[o](0,a-8).lastIndexOf(c),e=(e[o](0,f)+l+"cut="+g(e[o](f+1)))[o](0,a)),n.images?(h=new Image,m.ns_p||(ns_p=h),h.src=e):n.write("<","p","><",'img src="',e,'" height="1" width="1" alt="*"',"><","/p",">")};
+udm_('http'+(document.location.href.charAt(4)=='s'?'s://sb':'://b')+'.scorecardresearch.com/b?c1=2&c2=19986860&ns_vsite=fotbolti.net&ns_vsection=Forsida');
+// ]]>
+</script>
+<noscript><p><img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=19986860&amp;ns_vsite=fotbolti.net&amp;ns_vsection=Forsida" height="1" width="1" alt="*"></p></noscript> 
+<!-- End comScore Inline Tag -->
+
+<!-- The following code snippet should be place directly (or as close as possible) before the closing <body> tag.
+Please replace the sample ns_vsite value of "site" with your assigned site value.
+Please replace the sample ns_vsection value of "section" with the section value representing the page. -->
+
+<!-- Begin comScore Inline Tag 1.1302.13 -->
+<script type="text/javascript" language="JavaScript1.3" src="http://b.scorecardresearch.com/c2/19986860/cs.js"></script>
+<!-- End comScore Inline Tag -->
+
+
+	<div class="layout">
+		<div class="row">
+			<div class="col-main">
+				<header>
+				<div id="topper" class="col-main2">
+					<div id="search-form">
+						<form action="/search.php" method="get" role="search">
+							<input type="hidden" name="searchType" value="1" value="Leita" />
+							<label for="search-field" style="display: none">Leita í fréttum Fótbolta.net</label>
+							<input role="searchbox" id="search-field" type="text" name="search" placeholder="Leita í fréttum Fótbolta.net" aria-placeholder="Leita í fréttum Fótbolta.net">
+							<input id="btn-search" type="submit" value="" alt="Search" title="Search" role="button" aria-label="Search">
+						</form>
+					</div>
+					<div id="top-social">
+						<ul role="menubar">
+							<li role="menuitem" id="tweeter" aria-haspopup="true" aria-labelledby="twLabel"><a id="twLabel" href="https://twitter.com/Fotboltinet" target="_blank">Tweeter</a></li>
+							<!--<li id="google"><a href="">Google</a></li>-->
+							<li role="menuitem" id="facebook" aria-haspopup="true" aria-labelledby="fbLabel"><a id="bfLabel" href="http://www.facebook.com/pages/F%C3%B3tboltinet/44130306372?fref=ts" target="_blank">Facebook</a></li>
+						</ul>
+					</div>
+					<div id="top-nav" role="topnavigation">
+						<ul role="menubar">
+							<li role="menuitem" aria-haspopup="false" aria-labelledby="askQuestionLabel"><a id="askQuestionLabel" href="/serfraedingahornid.php" class="last-item">Sérfræðingahornið</a></li>
+							<li role="menuitem" aria-haspopup="false" aria-labelledby="aboutLabel"><a id="aboutLabel" href="/um_fotboltinet.php">Um Fótbolti.net</a></li>
+							<li role="menuitem" aria-haspopup="false" aria-labelledby="contactLabel"><a id="contactLabel" href="/hafdu.php" class="">Hafðu samband</a></li>
+							<li role="menuitem" aria-haspopup="false" aria-labelledby="addsLabel"><a id="addsLabel" href="/auglusingar.php">Auglýsingar</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="header-graphics" class="col-main2">
+					<div id="logo"><a href="/">Fótbolti.net</a></div>
+					<div id="banner11"><a href="http://fotbolti.net/banners.php?action=goToURL&ban_id=5427" target="_blank"><img role="banner" alt="banner" src="http://fotbolti.net//banners/5427.jpg" width="570" height="85"></a>
+</div>				</div>
+				</header>
+				<nav role="menubar">
+					<div id="nav" class="col-main2">
+						                                                <ul role="menubar">
+                                                        <li id="home" role="menuitem" aria-haspopup="false" aria-labelledby="fileLabel"><a id="homeLabel" href="/">Forsíða</a></li>
+                                                                                                                <li role="menuitem" aria-haspopup="false" aria-labelledby="articlesLabel" id="pistlar"><a id="articlesLabel" href="/articles.php">Pistlar</a></li>
+                                                        <li role="menuitem" aria-haspopup="false" aria-labelledby="videosLabel" id="video"><a id="videosLabel" href="/sjonvarp.php">Sjónvarp</a></li>
+                                                        <li role="menuitem" aria-haspopup="false" aria-labelledby="radiosLabel" id="radio"><a id="radiosLabel" href="/radio.php">Útvarp</a></li>
+                                                                                                                <li role="menuitem" aria-haspopup="false" aria-labelledby="leaguesLabel" id="leagues"><a id="leaguesLabel" href="/isboltinn.php">Stöðutöflur</a></li>
+                                                                                                                                                                        <li role="menuitem" aria-haspopup="false" aria-labelledby="americanLabel" id="american"><a id="americanLabel" href="https://fantasy.premierleague.com" target="_blank">Fantasy deild American bar</a></li>
+                                                                                                    </ul>
+					</div>
+				</nav>
+								<div id="content-feature" class="col-main-news powerade">
+					<a href="/news/06-11-2017/liverpool-aetlar-ad-fa-david-silva">Liverpool ætlar að reyna að fá David Silva - David Luiz gagnrýndi taktík Conte - Arsenal og Man City berajst um Frenkie de Jong</a>				</div>				<div role="content" id="content" class="col-main">
+														<div id="col-main-1-1" class="col">
+						<div id="hot-news">
+							<div class="col-274-top"></div>
+							<div class="col-274-body" >
+								<div class="blue-top leagues-countries">
+								<table>
+									<tr>
+										<td><a href="/isboltinn.php"><img src="/images/flags/ice-flag-round.png" alt="Icelandic Flag" width="100" /></a></td>
+										<td><a href="/leagues.php"><img src="/images/flags/eu-flag-round.png" alt="EU Flag" width="100" /></a></td>
+									</tr>
+									<tr>
+										<td>ÍSLENSKI BOLTINN</td>
+										<td>EVRÓPSKI BOLTINN</td>
+									</tr>
+								</table>
+								</div>
+							</div>
+						</div>
+						<div id="hot-news">
+							<div class="col-274-top"></div>
+							<div class="col-274-body">
+								<div id="leagues-panel" class="blue-top">
+																								        	<div class="country">Pepsi-deild karla</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36622&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">Pepsi-deild kvenna</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36425&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">Inkasso deildin 1. deild karla</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36428&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">2. deild karla</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36431&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">3. deild karla</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36426&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">4. deild karla</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36664&type=s">
+																							A-riðill 2017																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36665&type=s">
+																							B-riðill 2017																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36666&type=s">
+																							C-riðill 2017																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36663&type=s">
+																							D-riðill 2017																					</a>
+									</div>
+																								        	<div class="country">1. deild kvenna</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36432&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">2. deild kvenna</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36423&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">Borgunarbikar kvenna</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36429&type=s">
+																							2017
+																					</a>
+									</div>
+																								        	<div class="country">Landslið</div>
+															        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=34944&type=s">
+																							A-karla HM 2018 2018																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36621&type=s">
+																							 A-kvenna HM 2017 2017																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36881&type=s">
+																							A-kvenna HM 2019 2019																					</a>
+									</div>
+																								        	<div class="leagues">
+										<a href="/isboltinn.php?ligueid=36471&type=s">
+																							U-21 karla EM 2019 2019																					</a>
+									</div>
+									        						</div>
+							</div>
+							<div class="col-315-bottom"></div>
+						</div>
+					</div>
+					<div id="col-main-2-1" class="col">
+						<div class="col-835-body col">
+							<div id="standings" class="black-top">				
+    															<div class="story-header">
+									<div id="title"></div>
+								</div>
+								<div id="league-content">
+									<div id="league-nav" class="row">
+										<div class="td"><a id="leaguesTable" href="javascript: loadIsLeagues(36622)" class="btn-grey isboltin active"><span class="left"></span><span class="text">Staðan</span><span class="right"></span></a></div>
+										<div class="td"><a id="topScorers" href="javascript: loadIsTopscorers(36622)" class="btn-grey isboltin"><span class="left"></span><span class="text">Leikir og úrslit</span><span class="right"></span></a></div>
+										<div class="td"><a id="liveMatches" href="javascript: loadIsMatches(36622)" class="btn-grey isboltin"><span class="left"></span><span class="text">Markahæstir</span><span class="right"></span></a></div>
+									</div>
+									<div id="gsm_table_content">
+																			<table>
+											<thead>
+												<tr>
+													<th width="40%" colspan="2">&nbsp;</th>
+													<th><acronym title="Games played">L</acronym></th>
+													<th><acronym title="Total wins">U</acronym></th>
+													<th><acronym title="Total draws">J</acronym></th>
+													<th><acronym title="Total losses">T</acronym></th>
+													<th width="10%"><acronym title="Mörk">Mörk</acronym></th>
+													<th class="center" width="10%"><acronym title="Total goal difference">mun</acronym></th>
+													<th class="center" width="10%"><acronym title="Total points">Stig</acronym></th>
+												</tr>
+											</thead>
+											<tbody>
+												
+																								<tr class="even">
+													<td class="center notice">1.</td>
+													<td class="notice">Valur</td>
+													<td class="notice">22</td>
+													<td>15</td>
+													<td>5</td>
+													<td>2</td>
+													<td>43 - 20</td>
+													<td class="center border-left">+23</td>
+													<td class="center notice">50</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">2.</td>
+													<td class="notice">Stjarnan</td>
+													<td class="notice">22</td>
+													<td>10</td>
+													<td>8</td>
+													<td>4</td>
+													<td>46 - 25</td>
+													<td class="center border-left">+21</td>
+													<td class="center notice">38</td>
+												</tr>
+																								<tr class="even">
+													<td class="center notice">3.</td>
+													<td class="notice">FH</td>
+													<td class="notice">22</td>
+													<td>9</td>
+													<td>8</td>
+													<td>5</td>
+													<td>33 - 25</td>
+													<td class="center border-left">+8</td>
+													<td class="center notice">35</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">4.</td>
+													<td class="notice">KR</td>
+													<td class="notice">22</td>
+													<td>8</td>
+													<td>7</td>
+													<td>7</td>
+													<td>31 - 29</td>
+													<td class="center border-left">+2</td>
+													<td class="center notice">31</td>
+												</tr>
+																								<tr class="even">
+													<td class="center notice">5.</td>
+													<td class="notice">Grindavík</td>
+													<td class="notice">22</td>
+													<td>9</td>
+													<td>4</td>
+													<td>9</td>
+													<td>31 - 39</td>
+													<td class="center border-left">-8</td>
+													<td class="center notice">31</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">6.</td>
+													<td class="notice">Breiðablik</td>
+													<td class="notice">22</td>
+													<td>9</td>
+													<td>3</td>
+													<td>10</td>
+													<td>34 - 35</td>
+													<td class="center border-left">-1</td>
+													<td class="center notice">30</td>
+												</tr>
+																								<tr class="even">
+													<td class="center notice">7.</td>
+													<td class="notice">KA</td>
+													<td class="notice">22</td>
+													<td>7</td>
+													<td>8</td>
+													<td>7</td>
+													<td>37 - 31</td>
+													<td class="center border-left">+6</td>
+													<td class="center notice">29</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">8.</td>
+													<td class="notice">Víkingur R.</td>
+													<td class="notice">22</td>
+													<td>7</td>
+													<td>6</td>
+													<td>9</td>
+													<td>32 - 36</td>
+													<td class="center border-left">-4</td>
+													<td class="center notice">27</td>
+												</tr>
+																								<tr class="even">
+													<td class="center notice">9.</td>
+													<td class="notice">ÍBV</td>
+													<td class="notice">22</td>
+													<td>7</td>
+													<td>4</td>
+													<td>11</td>
+													<td>32 - 38</td>
+													<td class="center border-left">-6</td>
+													<td class="center notice">25</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">10.</td>
+													<td class="notice">Fjölnir</td>
+													<td class="notice">22</td>
+													<td>6</td>
+													<td>7</td>
+													<td>9</td>
+													<td>32 - 40</td>
+													<td class="center border-left">-8</td>
+													<td class="center notice">25</td>
+												</tr>
+																								<tr class="even">
+													<td class="center notice">11.</td>
+													<td class="notice">Víkingur Ó.</td>
+													<td class="notice">22</td>
+													<td>6</td>
+													<td>4</td>
+													<td>12</td>
+													<td>24 - 44</td>
+													<td class="center border-left">-20</td>
+													<td class="center notice">22</td>
+												</tr>
+																								<tr class="odd">
+													<td class="center notice">12.</td>
+													<td class="notice">ÍA</td>
+													<td class="notice">22</td>
+													<td>3</td>
+													<td>8</td>
+													<td>11</td>
+													<td>28 - 41</td>
+													<td class="center border-left">-13</td>
+													<td class="center notice">17</td>
+												</tr>
+																							</tbody>
+										</table>
+									</div>
+								</div>    						</div>
+						</div>
+						<div class="col-835-bottom col"></div>
+					</div>				</div>
+				<footer>
+					<div id="footer">
+						<div id="copyright">© Copyright 2002-2017 Fotbolti.net <span>All rights reserved.</span></div>
+						<div id="socials"><a href="http://www.facebook.com/pages/F%C3%B3tboltinet/44130306372?fref=ts" id="fb" target="_blank">Facebook</a><a href="https://twitter.com/Fotboltinet" id="tw" target="_blank">Tweeter</a></div>
+						<div id="logo">&nbsp;</div>
+					</div>
+				</footer>
+			</div>
+						<div class="row-end">&nbsp;</div>
+		</div>
+	</div>
+	</body>
+</html>

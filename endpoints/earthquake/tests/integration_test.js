@@ -1,8 +1,15 @@
 /* eslint-disable import/extensions */
+const fs = require('fs')
+const nock = require('nock')
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
 describe('earthquake/is', () => {
+  before(() => {
+    nock('http://hraun.vedur.is')
+      .get('/ja/skjalftar/skjlisti.html')
+      .reply(200, fs.readFileSync(`${__dirname}/test.fixture`))
+  })
   // Which fields we expect and of which type they should be
   const fieldsToCheckFor = {
     timestamp: Date,
@@ -22,6 +29,12 @@ describe('earthquake/is', () => {
 })
 
 describe('earthquake/is/sec', () => {
+  before(() => {
+    nock('http://hraun.vedur.is')
+      .get('/ja/skjalftar/skjlisti.html')
+      .reply(200, fs.readFileSync(`${__dirname}/test.fixture`))
+  })
+
   // Which fields we expect and of which type they should be
   const fieldsToCheckFor = {
     timestamp: Date,
