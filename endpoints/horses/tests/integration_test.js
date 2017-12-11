@@ -36,7 +36,7 @@ describe('horses', () => {
       .reply(200, fs.readFileSync(`${__dirname}/IS2013182797.fixture`))
       .post('/freezone_horse.jsp', 'fnr=IS1987187700&nafn=&uppruni=&ormerki=&leitahnappur=Search+&leita=1')
       .query({ c: 'EN' })
-      .times(2)
+      .times(3)
       .reply(200, fs.readFileSync(`${__dirname}/IS1987187700.fixture`))
   })
 
