@@ -82,7 +82,7 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-import": "^2.7.0",
-    "nodemon": "1.12.5",
+    "nodemon": "1.12.7",
     "sinon": "4.1.3"
   }
 }
