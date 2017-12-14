@@ -1,7 +1,8 @@
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import cheerio from 'cheerio'
+/* eslint-disable import/first */
+const request = require('request')
+const h = require('apis-helpers')
+const app = require('../../server')
+const cheerio = require('cheerio')
 
 app.get('/currency/m5', (req, res) => {
   // FIXME: Not being used, comment out for now
@@ -51,6 +52,6 @@ app.get('/currency/m5', (req, res) => {
       }
     })
 
-    return res.json({ results: currencies })
+    return res.cache(60).json({ results: currencies })
   })
 })

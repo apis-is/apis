@@ -1,5 +1,7 @@
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
+/* eslint-disable import/extensions */
+const request = require('request')
+const assert = require('assert')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe('ship', () => {
   it('should return an array of objects containing correct fields', (done) => {
@@ -20,5 +22,16 @@ describe('ship', () => {
     const params = helpers.testRequestParams('/ship', { search: 'helga maría' })
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
+  })
+  it('should return a 404 when a ship is not found', (done) => {
+    const params = helpers.testRequestParams('/ship', { search: 'koddsson' })
+    request.get(params, (error, response, body) => {
+      if (error) {
+        return done(error)
+      }
+      const json = JSON.parse(body)
+      assert.equal(json.error, 'No ship found with the query koddsson')
+      done()
+    })
   })
 })

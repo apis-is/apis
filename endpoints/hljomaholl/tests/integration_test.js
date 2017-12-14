@@ -1,5 +1,6 @@
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
+/* eslint-disable import/extensions */
+const request = require('request')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe('hljomaholl', () => {
   // The only thing that changes is the form attribute, so why not just re-use the object
@@ -9,9 +10,7 @@ describe('hljomaholl', () => {
 
   it('should return an array of items with correct fields', (done) => {
     const params = helpers.testRequestParams('/hljomaholl')
-    const resultHandler = helpers.testRequestHandlerForFields(
-      done, fieldsToCheckFor, null, true
-    )
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, null, true)
     request(params, resultHandler)
   })
 })

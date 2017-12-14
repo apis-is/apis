@@ -1,3 +1,8 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/first */
 /**
  * Only for apis.is production environment
  */
@@ -5,30 +10,28 @@ if (process.env.NODE_ENV === 'production') {
   process.chdir('/apis/current')
 }
 
-import express from 'express'
-import expressMetrics from 'express-metrics'
+const express = require('express')
+const expressMetrics = require('express-metrics')
 
-import fileModule from 'file'
-import { EventEmitter as EE } from 'events'
+const fileModule = require('file')
+const { EventEmitter: EE } = require('events')
 
-import statuses from 'statuses'
+const statuses = require('statuses')
 
-import config from './config'
-import cache from './lib/cache'
-import cors from './lib/cors'
+const cache = require('./lib/cache')
+const cors = require('./lib/cors')
 
-import makeDebug from 'debug'
+const debug = require('debug')('server')
 
-const debug = makeDebug('server')
 const app = express()
 
 // Set up error tracking with Sentry
 const SENTRY_URL = process.env.SENTRY_URL
-const raven = require('raven')
-const client = new raven.Client(SENTRY_URL)
-client.patchGlobal()
+const Raven = require('raven')
 
-if (!process.env.NODE_ENV === 'test') {
+Raven.config(SENTRY_URL).install()
+
+if (process.env.NODE_ENV !== 'test') {
   app.use(expressMetrics({
     port: 8091,
   }))
@@ -108,12 +111,11 @@ app.use((error, req, res, next) => {
 /**
  * Start the server
  */
-app.listen(config.port, () => {
+const port = process.env.NODE_ENV === 'testing' ? 3101 : 3100
+app.listen(port, () => {
   app.emit('ready')
 })
 
 app.on('ready', () => {
-  if (!config.testing) {
-    debug('Server running at port:', config.port)
-  }
+  debug('Server running at port:', port)
 })

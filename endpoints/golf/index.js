@@ -1,9 +1,10 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import h from 'apis-helpers'
-import _ from 'lodash'
-import { parse as parseUrl } from 'url'
-import app from '../../server'
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const cheerio = require('cheerio')
+const h = require('apis-helpers')
+const _ = require('lodash')
+const { parse: parseUrl } = require('url')
+const app = require('../../server')
 
 app.get('/golf/teetimes', (req, res) => {
   const clubId = req.query.club

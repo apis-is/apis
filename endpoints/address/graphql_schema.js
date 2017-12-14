@@ -1,10 +1,10 @@
-import {
+const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-} from 'graphql'
+} = require('graphql')
 
-import lookupAddresses from './index'
+const lookupAddresses = require('./index')
 
 const addressType = new GraphQLObjectType({
   name: 'Address',
@@ -37,13 +37,13 @@ const addressType = new GraphQLObjectType({
 
 const addressesType = new GraphQLList(addressType)
 
-export default {
+module.exports = {
   type: addressesType,
   args: {
     address: { type: GraphQLString },
   },
   resolve: (_, args) => {
     const address = args.address.replace(' ', '+')
-    return lookupAddresses(address).then((data) => data, (error) => error)
+    return lookupAddresses(address).then(data => data, error => error)
   },
 }

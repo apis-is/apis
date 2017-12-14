@@ -1,6 +1,6 @@
-import request from 'request'
-import moment from 'moment'
-import app from '../../server'
+const request = require('request')
+const moment = require('moment')
+const app = require('../../server')
 
 // set cache time to 2 minutes
 const cacheTime = 120

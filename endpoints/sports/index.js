@@ -1,82 +1,78 @@
+/* eslint-disable import/first */
 /** ***************************
  * Name:     Sports API
  * Author:   Jón Orri Kristjánsson
  * Created:  March 2014
  */
 
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import cheerio from 'cheerio'
+const request = require('request')
+const h = require('apis-helpers')
+const app = require('../../server')
+const cheerio = require('cheerio')
 
-/** Routes **/
+/** Routes * */
 
 /* Root sports handler */
 app.get('/sports', (req, res, next) => {
-  res.json(
-    {
-      results: [
-        {
-          info: 'This is an api for Icelandic sports events',
-          endpoints: {
-            football: '/sports/football/',
-            handball: '/sports/handball/',
-            'football-male-leagues': '/sports/football/male-leagues/',
-            'football-female-leagues': '/sports/football/female-leagues/',
-          },
+  res.json({
+    results: [
+      {
+        info: 'This is an api for Icelandic sports events',
+        endpoints: {
+          football: '/sports/football/',
+          handball: '/sports/handball/',
+          'football-male-leagues': '/sports/football/male-leagues/',
+          'football-female-leagues': '/sports/football/female-leagues/',
         },
-      ],
-    }
-  )
+      },
+    ],
+  })
   next()
 })
 
 /* Root footbal male leagues handler */
 app.get('/sports/football/male-leagues', (req, res, next) => {
-  res.json(
-    {
-      results: [
-        {
-          info: 'This is an api for Icelandic male football leagues',
-          endpoints: {
-            'borgun-cup': '/sports/football/male-leagues/borgun/',
-            pepsi: '/sports/football/male-leagues/pepsi/',
-            '1st': '/sports/football/male-leagues/1st/',
-            '2nd': '/sports/football/male-leagues/2nd/',
-            '3rd': '/sports/football/male-leagues/3rd/',
-          },
+  res.json({
+    results: [
+      {
+        info: 'This is an api for Icelandic male football leagues',
+        endpoints: {
+          'borgun-cup': '/sports/football/male-leagues/borgun/',
+          pepsi: '/sports/football/male-leagues/pepsi/',
+          '1st': '/sports/football/male-leagues/1st/',
+          '2nd': '/sports/football/male-leagues/2nd/',
+          '3rd': '/sports/football/male-leagues/3rd/',
         },
-      ],
-    }
-  )
+      },
+    ],
+  })
   next()
 })
 
 /* Root footbal female leagues handler */
 app.get('/sports/football/female-leagues', (req, res, next) => {
-  res.json(
-    {
-      results: [
-        {
-          info: 'This is an api for Icelandic female football leagues',
-          endpoints: {
-            'borgun-cup': '/sports/football/female-leagues/borgun/',
-            pepsi: '/sports/football/female-leagues/pepsi/',
-          },
+  res.json({
+    results: [
+      {
+        info: 'This is an api for Icelandic female football leagues',
+        endpoints: {
+          'borgun-cup': '/sports/football/female-leagues/borgun/',
+          pepsi: '/sports/football/female-leagues/pepsi/',
         },
-      ],
-    }
-  )
+      },
+    ],
+  })
   next()
 })
 
 /* Football */
 app.get('/sports/football', (req, res) => {
   const url = 'http://www.ksi.is/mot/naestu-leikir/'
-  request.get({
-    headers: { 'User-Agent': h.browser() },
-    url,
-  },
+  request.get(
+    {
+      headers: { 'User-Agent': h.browser() },
+      url,
+    },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
         return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' })
@@ -114,15 +110,17 @@ app.get('/sports/football', (req, res) => {
         return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj)
-    })
+      return res.cache(60).json(obj)
+    }
+  )
 })
 
 function footballLeagues(url, req, res) {
-  request.get({
-    headers: { 'User-Agent': h.browser() },
-    url,
-  },
+  request.get(
+    {
+      headers: { 'User-Agent': h.browser() },
+      url,
+    },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
         return res.status(500).json({ error: 'www.ksi.is refuses to respond or give back data' })
@@ -159,8 +157,9 @@ function footballLeagues(url, req, res) {
         return res.status(500).json({ error: 'Could not parse the game data' })
       }
 
-      return res.json(obj)
-    })
+      return res.cache(60).json(obj)
+    }
+  )
 }
 
 /* Football male borgun cup */
@@ -209,10 +208,11 @@ app.get('/sports/football/female-leagues/pepsi', (req, res) => {
 /* Handball */
 app.get('/sports/handball', (req, res) => {
   const url = 'http://hsi.is/library/motamal/naestu.htm'
-  request.get({
-    headers: { 'User-Agent': h.browser() },
-    url,
-  },
+  request.get(
+    {
+      headers: { 'User-Agent': h.browser() },
+      url,
+    },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
         return res.status(500).json({ error: 'www.hsi.is refuses to respond or give back data' })
@@ -248,6 +248,7 @@ app.get('/sports/handball', (req, res) => {
         return res.status(500).json({ error: `Could not parse the game data: ${error}` })
       }
 
-      return res.json(obj)
-    })
+      return res.cache(60).json(obj)
+    }
+  )
 })

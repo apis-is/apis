@@ -1,6 +1,8 @@
-import request from 'request'
-import xml2js from 'xml2js'
-import app from '../../server'
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const xml2js = require('xml2js')
+const app = require('../../server')
+
 const parseString = xml2js.parseString
 
 app.get('/particulates', (req, res) => {

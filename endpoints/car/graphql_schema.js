@@ -1,9 +1,9 @@
-import {
+const {
   GraphQLObjectType,
   GraphQLString,
-} from 'graphql'
+} = require('graphql')
 
-import lookupCar from './index'
+const lookupCar = require('./index')
 
 const car = new GraphQLObjectType({
   name: 'Car',
@@ -56,7 +56,7 @@ const car = new GraphQLObjectType({
   },
 })
 
-export default {
+module.exports = {
   type: car,
   args: {
     carPlate: {
@@ -66,5 +66,5 @@ export default {
   },
   resolve: (_, { carPlate }) => lookupCar(carPlate)
     .then(data => data)
-    .catch(error => { throw new Error(error) }),
+    .catch((error) => { throw new Error(error) }),
 }

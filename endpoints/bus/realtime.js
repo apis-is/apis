@@ -95,9 +95,9 @@ app.get('/bus/realtime', function (req, res) {
   var data = req.query
 
   getBusRoutes(data).then(
-    (routes) => res.json(routes),
+    (routes) => res.cache(1).json(routes),
     () => res.status(500).json({ error:'Something is wrong with the data provided from the data source' })
   )
 })
 
-export default getBusRoutes
+module.exports = getBusRoutes

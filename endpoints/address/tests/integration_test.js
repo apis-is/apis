@@ -1,5 +1,5 @@
-import request from 'request'
-import helpers from '../../../lib/test_helpers'
+const request = require('request')
+const helpers = require('../../../lib/test_helpers')
 
 describe('zip', () => {
   it('should return an array of objects containing correct fields', (done) => {

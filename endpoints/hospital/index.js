@@ -1,7 +1,8 @@
-import request from 'request'
-import app from '../../server'
-import cheerio from 'cheerio'
-import _ from 'lodash'
+/* eslint-disable import/first */
+const request = require('request')
+const app = require('../../server')
+const cheerio = require('cheerio')
+const _ = require('lodash')
 
 app.get('/hospital', (req, res) => {
   request.get(
@@ -26,12 +27,11 @@ app.get('/hospital', (req, res) => {
       _.each(
         $('.activityNumbers.activityNumbersNew').children('div'),
         (elem) => {
-          data[elem.attribs.class] = parseInt(
-            $(elem).children().eq(1).html(), 10
-          )
+          data[elem.attribs.class] = parseInt($(elem).children().eq(1).html(), 10)
         }
       )
       // Cache for a hour.
       return res.cache(3600).json({ results: [data] })
-    })
+    }
+  )
 })

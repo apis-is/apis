@@ -1,5 +1,5 @@
-import axios from 'axios'
-import app from '../../server'
+const axios = require('axios')
+const app = require('../../server')
 
 app.get('/metrics', (req, res, next) => {
   axios

@@ -1,7 +1,7 @@
-import request from 'request'
-import moment from 'moment'
-import h from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const moment = require('moment')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 app.get('/currency/arion/:type?', (req, res) => {
   // types: AlmenntGengi,KortaGengi(valitor),SedlaGengi,AirportGengi
@@ -43,6 +43,6 @@ app.get('/currency/arion/:type?', (req, res) => {
       currencies.push(currency)
     })
 
-    return res.json({ results: currencies })
+    return res.cache(60).json({ results: currencies })
   })
 })

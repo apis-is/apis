@@ -1,4 +1,4 @@
-import app from '../../server'
+const app = require('../../server')
 
 app.get('/', (req, res) => {
   res.redirect(301, 'http://docs.apis.is')

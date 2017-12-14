@@ -1,11 +1,13 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
 // TODO: Find a way to enable no-param-reassign
 /* eslint-disable no-param-reassign */
-import request from 'request'
-import { parseString } from 'xml2js'
-import h from 'apis-helpers'
-import cheerio from 'cheerio'
-import xregexp from 'xregexp'
-import app from '../../server'
+const request = require('request')
+const { parseString } = require('xml2js')
+const h = require('apis-helpers')
+const cheerio = require('cheerio')
+const xregexp = require('xregexp')
+const app = require('../../server')
 
 /*
  * ids (tegundir textaspáa)

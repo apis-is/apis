@@ -1,9 +1,10 @@
-import request from 'request'
-import h from 'apis-helpers'
-import app from '../../server'
-import _ from 'lodash'
+/* eslint-disable import/first */
+const request = require('request')
+const h = require('apis-helpers')
+const app = require('../../server')
+const _ = require('lodash')
 
-const lookupAddresses = (address) => new Promise((resolve, reject) => {
+const lookupAddresses = address => new Promise((resolve, reject) => {
   request.get({
     headers: { 'User-Agent': h.browser() },
     url: `https://api.postur.is/PosturIs/ws.asmx/GetPostals?address=${address}`,
@@ -13,11 +14,9 @@ const lookupAddresses = (address) => new Promise((resolve, reject) => {
     }
 
     // There is a enclosing () in the response
-    const data = _.flatten(
-      JSON.parse(body.replace(/[()]/g, ''))
-    )
+    const data = _.flatten(JSON.parse(body.replace(/[()]/g, '')))
 
-    const results = _.map(data, (elem) => ({
+    const results = _.map(data, elem => ({
       street: elem.Gata,
       house: elem.Husnumer,
       zip: elem.Postnumer,
@@ -41,9 +40,9 @@ app.get('/address/:address?', (req, res) => {
   }
 
   lookupAddresses(address).then(
-    (results) => res.cache().json({ results }),
+    results => res.cache().json({ results }),
     () => res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' })
   )
 })
 
-export default lookupAddresses
+module.exports = lookupAddresses

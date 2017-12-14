@@ -1,7 +1,12 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import helpers from 'apis-helpers'
-import app from '../../server'
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-useless-escape */
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const cheerio = require('cheerio')
+const helpers = require('apis-helpers')
+const app = require('../../server')
+
 const browser = helpers.browser
 
 /*
@@ -100,7 +105,7 @@ function parseList(body) {
   // used for the fieldsParser below
   const numberField = function (i) {
     return function ($children) {
-      return + $children.eq(i).text().replace(',', '.')
+      return +$children.eq(i).text().replace(',', '.')
     }
   }
 
@@ -130,17 +135,18 @@ function parseList(body) {
   // is a header row.
   const data = []
 
-  $('table').eq(2).find('tr').slice(1).map(function () {
-    const $children = $(this).children()
-    const obj = {}
-    for (const key in fieldsParser) {
-      if (fieldsParser.hasOwnProperty(key)) {
-        obj[key] = fieldsParser[key]($children)
+  $('table').eq(2).find('tr').slice(1)
+    .map(function () {
+      const $children = $(this).children()
+      const obj = {}
+      for (const key in fieldsParser) {
+        if (fieldsParser.hasOwnProperty(key)) {
+          obj[key] = fieldsParser[key]($children)
+        }
       }
-    }
-    data.push(obj)
-    return obj
-  })
+      data.push(obj)
+      return obj
+    })
 
   return data
 }
@@ -154,7 +160,7 @@ app.get('/earthquake/is', (req, res) => {
       return res.status(500).json({ error: error.toString() })
     }
 
-    return res.json({ results: parseList(body) })
+    return res.cache(60).json({ results: parseList(body) })
   })
 })
 
@@ -166,7 +172,7 @@ app.get('/earthquake/is/sec', (req, res) => {
     if (error) {
       return res.json({ error: error.toString() })
     }
-    return res.json({
+    return res.cache(60).json({
       results: parseJavaScriptVariable(body),
     })
   }, {

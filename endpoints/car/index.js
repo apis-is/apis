@@ -1,7 +1,8 @@
-import request from 'request'
-import $ from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+/* eslint-disable prefer-promise-reject-errors */
+const request = require('request')
+const $ = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 const lookupCar = plate => new Promise((resolve, reject) => {
   // Encode carPlate so that Icelandic characters will work
@@ -56,4 +57,4 @@ app.get('/car', (req, res) => {
     .catch(error => res.status(500).json({ error }))
 })
 
-export default lookupCar
+module.exports = lookupCar

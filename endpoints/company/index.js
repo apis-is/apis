@@ -1,7 +1,7 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+const request = require('request')
+const cheerio = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 app.get('/company', (req, res) => {
   const queryString = {

@@ -1,6 +1,9 @@
-import request from 'request'
-import xml2js from 'xml2js'
-import app from '../../server'
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const xml2js = require('xml2js')
+const app = require('../../server')
+
 const parseString = xml2js.parseString
 
 app.get('/currency/borgun', (req, res) => {
@@ -29,7 +32,7 @@ app.get('/currency/borgun', (req, res) => {
             rateDate: rate.RateDate[0],
           })
         }
-        return res.json({ results: currencies })
+        return res.cache(60).json({ results: currencies })
       })
     }
   )

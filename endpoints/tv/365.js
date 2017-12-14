@@ -1,7 +1,9 @@
-import request from 'request'
-import xml2js from 'xml2js'
-import h from 'apis-helpers'
-import app from '../../server'
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const xml2js = require('xml2js')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 const parseString = xml2js.parseString
 
@@ -64,19 +66,19 @@ app.get('/tv/stod2', (req, res, next) => {
   serve(url, res, next)
 })
 
-/* Stod 2 Sport*/
+/* Stod 2 Sport */
 app.get('/tv/stod2sport', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-dagurinn'
   serve(url, res, next)
 })
 
-/* Stod 2 Sport 2*/
+/* Stod 2 Sport 2 */
 app.get('/tv/stod2sport2', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Sport-2-dagurinn'
   serve(url, res, next)
 })
 
-/* Stod 3*/
+/* Stod 3 */
 app.get('/tv/stod3', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-3-dagurinn'
   serve(url, res, next)
@@ -85,11 +87,5 @@ app.get('/tv/stod3', (req, res, next) => {
 /* Stod 2 Bio */
 app.get('/tv/stod2bio', (req, res, next) => {
   const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Bio-dagurinn'
-  serve(url, res, next)
-})
-
-/* Stod 2 Gull */
-app.get('/tv/stod2gull', (req, res, next) => {
-  const url = 'http://www.stod2.is/XML--dagskrar-feed/XML-Stod-2-Extra-dagurinn'
   serve(url, res, next)
 })

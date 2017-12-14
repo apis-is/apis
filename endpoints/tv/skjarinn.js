@@ -1,8 +1,10 @@
-import request from 'request'
-import moment from 'moment'
-import xml2js from 'xml2js'
-import h from 'apis-helpers'
-import app from '../../server'
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
+const request = require('request')
+const moment = require('moment')
+const xml2js = require('xml2js')
+const h = require('apis-helpers')
+const app = require('../../server')
 
 const parseString = xml2js.parseString
 

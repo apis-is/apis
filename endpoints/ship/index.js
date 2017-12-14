@@ -1,9 +1,12 @@
-import request from 'request'
-import $ from 'cheerio'
-import h from 'apis-helpers'
-import app from '../../server'
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable prefer-promise-reject-errors */
+const request = require('request')
+const $ = require('cheerio')
+const h = require('apis-helpers')
+const app = require('../../server')
 
-const parseIsFloat = (str) => parseFloat(str.replace('.', '').replace(',', '.'))
+const parseIsFloat = str => parseFloat(str.replace('.', '').replace(',', '.'))
 
 const lookupShip = searchStr => new Promise((resolve, reject) => {
   // Encode searchString so that Icelandic characters will work
@@ -83,7 +86,7 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
 
 
     if (fieldList.length > 0 && fieldList[0].length > 0) {
-      resolve(fieldList.map(fields => {
+      resolve(fieldList.map((fields) => {
         const type = typeDict[fields[1]] ? typeDict[fields[1]] : fields[1]
         const registrationStatus = fields[5] === 'Skráð' ? 'Listed' : 'Unlisted'
         return {
@@ -102,7 +105,7 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
         }
       }))
     } else {
-      reject(`No ship found with the name ${name}`)
+      reject(`No ship found with the query ${searchStr}`)
     }
   })
 })
@@ -119,4 +122,4 @@ app.get('/ship', (req, res) => {
     .catch(error => res.status(500).json({ error }))
 })
 
-export default lookupShip
+module.exports = lookupShip

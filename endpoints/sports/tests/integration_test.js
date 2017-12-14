@@ -1,5 +1,6 @@
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
+/* eslint-disable import/extensions */
+const request = require('request')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe.skip('handball', () => {
   it('should return an array of objects containing correct fields', (done) => {

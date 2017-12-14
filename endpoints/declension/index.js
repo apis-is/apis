@@ -1,9 +1,12 @@
-import app from '../../server'
-import request from 'request'
-import helper from 'apis-helpers'
-import cheerio from 'cheerio'
-import url from 'url'
-import _ from 'lodash'
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable import/first */
+const app = require('../../server')
+const request = require('request')
+const helper = require('apis-helpers')
+const cheerio = require('cheerio')
+const url = require('url')
+const _ = require('lodash')
 
 const baseUrl = url.parse('http://dev.phpbin.ja.is/ajax_leit.php')
 
@@ -105,6 +108,6 @@ app.get('/declension/:word', (req, res) => {
   }
 
   getDeclensions((body) => {
-    return res.json(parseTable(body))
+    return res.cache(86400).json(parseTable(body))
   }, params)
 })

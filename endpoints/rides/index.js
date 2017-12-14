@@ -1,23 +1,21 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import app from '../../server'
+const request = require('request')
+const cheerio = require('cheerio')
+const app = require('../../server')
 
 
 /* Root Rides */
 app.get('/rides', (req, res) => {
-  return res.json(
-    {
-      results: [
-        {
-          info: 'This is an api for requests for rides/passengers in Iceland',
-          endpoints: {
-            'samferda-drivers': '/rides/samferda-drivers/',
-            'samferda-passengers': '/rides/samferda-passengers/',
-          },
+  return res.json({
+    results: [
+      {
+        info: 'This is an api for requests for rides/passengers in Iceland',
+        endpoints: {
+          'samferda-drivers': '/rides/samferda-drivers/',
+          'samferda-passengers': '/rides/samferda-passengers/',
         },
-      ],
-    }
-  )
+      },
+    ],
+  })
 })
 
 
@@ -51,7 +49,9 @@ const scrapeSamferdaFor = (requesting, res) => {
           from: cols.eq(2).text().trim(),
           to: cols.eq(3).text().trim(),
           // convert to YYYY-MM-DD for easier sorting
-          date: cols.eq(4).text().trim().split('.').reverse().join('-'),
+          date: cols.eq(4).text().trim().split('.')
+            .reverse()
+            .join('-'),
           time: cols.eq(5).text().trim(),
         })
       }

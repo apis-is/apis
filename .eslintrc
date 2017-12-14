@@ -1,5 +1,4 @@
 {
-  "parser": "babel-eslint",
   "extends": "airbnb/base",
   "rules": {
     "arrow-body-style": ["off"],
@@ -8,7 +7,14 @@
     "no-inline-comments": ["error"],
     "no-console": ["off"],
     "max-len": ["error", 120],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+  }]
   },
   "env": {
     "node": true,

@@ -1,5 +1,7 @@
-[ ![Codeship Status for apis-is/apis](https://codeship.com/projects/7c0ce5a0-9901-0132-893b-365d53813970/status?branch=master)](https://codeship.com/projects/63542)
 # [APIs.is](http://apis.is) - Making data pretty since 2012!
+
+[![Codeship](https://img.shields.io/codeship/7c0ce5a0-9901-0132-893b-365d53813970/master.svg)](https://codeship.com/projects/63542)
+[![Greenkeeper badge](https://badges.greenkeeper.io/apis-is/apis.svg)](https://greenkeeper.io/)
 
 The purpose of [APIs.is](http://apis.is) is to make data readily available to anyone interested. All data that is delivered through APIs.is is JSON formatted and scraped from open public websites.
 
@@ -24,7 +26,7 @@ To run the project locally, first clone this repository...
 $ git clone https://github.com/apis-is/apis.git
 ```
 
-... install the dependencies and run the project.
+.... install the dependencies and run the project.
 
 ```sh
 $ npm install
@@ -39,6 +41,22 @@ To run the tests:
 $ npm test
 ```
 
+The tests utilize a man-in-the-middle library called [nock](https://github.com/node-nock/nock) that
+intercepts requests that the tests made and respond with data from disk. The data was generated using
+the [record feature](https://github.com/node-nock/nock#recording) and saved in [`mock-data.json`](mock-data.json).
+
+If a endpoints data source has changed and the we need to re-record this data we can simply set the
+env variable `RECORD_MOCK_DATA` to a truthy value and run the tests. This will disable nock in the tests
+and make requests to each endpoints data source and save that to disk.
+
+```sh
+RECORD_MOCK_DATA=true npm test
+```
+
+Newly added endpoints should mock the endpoints data source using the `nock` API since this initial
+data mocking was only made to help migrate to a mocking library. See the [original PR](https://github.com/apis-is/apis/pull/376)
+for more info.
+
 ## Adding a new Endpoint
 
 ### Step by Step
@@ -48,7 +66,7 @@ $ npm test
 3. The file will be loaded automatically. Remember to require the server. Bare minimum example endpoint:
 
 ```javascript
-import app from '../../server';
+const app = require('../../server');
 
 app.get('/path', (req,res) => {
   //Sends out empty json object

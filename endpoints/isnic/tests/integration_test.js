@@ -1,5 +1,6 @@
-import request from 'request'
-import helpers from '../../../lib/test_helpers.js'
+/* eslint-disable import/extensions */
+const request = require('request')
+const helpers = require('../../../lib/test_helpers.js')
 
 describe('isnic', () => {
   it('should return an array of objects containing correct fields', (done) => {
@@ -16,7 +17,12 @@ describe('isnic', () => {
       'expires',
       'lastChange',
     ]
-    const params = helpers.testRequestParams('/isnic', { domain: 'apis.is' })
+    const params = {
+      url: 'http://localhost:3101/isnic',
+      method: 'GET',
+      qs: { domain: 'apis.is' },
+      headers: ['Content-Type: application/json'],
+    }
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })

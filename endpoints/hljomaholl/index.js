@@ -1,6 +1,7 @@
-import request from 'request'
-import cheerio from 'cheerio'
-import app from '../../server'
+/* eslint-disable no-plusplus */
+const request = require('request')
+const cheerio = require('cheerio')
+const app = require('../../server')
 
 app.get('/hljomaholl', (req, res) => {
   const url = 'http://www.hljomaholl.is/vidburdir'
