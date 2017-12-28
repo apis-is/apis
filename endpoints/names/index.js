@@ -9,8 +9,8 @@ Created: August 2014
 
 const request = require('request')
 const h = require('apis-helpers')
-const app = require('../../server')
 const cheerio = require('cheerio')
+const app = require('../../server')
 
 /* Handles the request for a specific request URL */
 function handleRequest(providedUrl, req, res) {

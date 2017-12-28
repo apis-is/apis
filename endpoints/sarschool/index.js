@@ -1,10 +1,11 @@
 /* eslint-disable import/first */
 const request = require('request')
-const app = require('../../server')
 const cheerio = require('cheerio')
+const app = require('../../server')
 
-
-function pad(n) { return n < 10 ? `0${n}` : n }
+function pad(n) {
+  return n < 10 ? `0${n}` : n
+}
 
 const getRequest = (callback, providedUrl) => {
   const url = providedUrl || 'http://skoli.landsbjorg.is/Open/Seminars.aspx?'

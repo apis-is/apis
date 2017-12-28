@@ -1,12 +1,12 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable import/first */
-const app = require('../../server')
+const url = require('url')
 const request = require('request')
 const helper = require('apis-helpers')
 const cheerio = require('cheerio')
-const url = require('url')
 const _ = require('lodash')
+const app = require('../../server')
 
 const baseUrl = url.parse('http://dev.phpbin.ja.is/ajax_leit.php')
 

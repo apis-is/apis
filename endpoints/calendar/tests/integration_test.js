@@ -30,7 +30,6 @@ describe('calendar/:year/:month/:day', () => {
   })
 })
 
-
 describe('validateParams', () => {
   it('should return an error if a parameter could not be parsed as an Int', () => {
     expect(normalizeParams('bogusYear', 1, 1))

@@ -8,6 +8,10 @@ globby(['./docs/*.md', './endpoints/**/*.md', '!node_modules/**']).then((paths) 
     content += fs.readFileSync(path, 'utf8')
   })
   const html = marked(content, { escapeMarkdown: false })
+
+  if (!fs.existsSync('./docs/dist/')) {
+    fs.mkdirSync('./docs/dist/')
+  }
   fs.writeFileSync('./docs/dist/index.html', html, 'utf8')
 }).catch((error) => {
   console.error(error)
