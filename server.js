@@ -3,6 +3,7 @@
 /* eslint-disable global-require */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/first */
+/* eslint-disable new-cap */
 /**
  * Only for apis.is production environment
  */
@@ -12,11 +13,12 @@ if (process.env.NODE_ENV === 'production') {
 
 const { EventEmitter: EE } = require('events')
 const express = require('express')
-const expressMetrics = require('express-metrics')
+
 const fileModule = require('file')
 const statuses = require('statuses')
 const debug = require('debug')('server')
 const Raven = require('raven')
+const metricsMiddleware = require('./lib/expressMetrics')
 
 const cache = require('./lib/cache')
 const cors = require('./lib/cors')
@@ -25,12 +27,17 @@ const app = express()
 
 // Set up error tracking with Sentry
 const SENTRY_URL = process.env.SENTRY_URL
+const redis = require('./lib/redis')
+
 Raven.config(SENTRY_URL).install()
 
 if (process.env.NODE_ENV !== 'test') {
-  app.use(expressMetrics({
-    port: 8091,
-  }))
+  app.use(metricsMiddleware())
+  app.get('/metrics', (req, res) => {
+    redis.HGETALL('metrics', (error, metrics) => {
+      res.json(metrics)
+    })
+  })
 }
 
 module.exports = app
