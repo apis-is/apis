@@ -7,8 +7,8 @@
 
 const request = require('request')
 const h = require('apis-helpers')
-const app = require('../../server')
 const cheerio = require('cheerio')
+const app = require('../../server')
 
 /** Routes * */
 
@@ -100,8 +100,8 @@ app.get('/sports/football', (req, res) => {
             })
 
             // Checking whether it has the necessary fields
-            if (game.counter && game.date && game.time && game.tournament && game.location
-              && game.homeTeam && game.awayTeam) {
+            if (game.counter && game.date && game.time && game.tournament && game.location &&
+              game.homeTeam && game.awayTeam) {
               obj.results.push(game)
             }
           }
@@ -203,7 +203,6 @@ app.get('/sports/football/female-leagues/pepsi', (req, res) => {
   const url = 'http://www.ksi.is/mot/motalisti/urslit-stada/?MotNumer=35583'
   return footballLeagues(url, req, res)
 })
-
 
 /* Handball */
 app.get('/sports/handball', (req, res) => {

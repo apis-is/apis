@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 const fs = require('fs')
-const nock = require('nock')
 const assert = require('assert')
+const nock = require('nock')
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 

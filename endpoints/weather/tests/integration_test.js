@@ -1,5 +1,5 @@
-const request = require('request')
 const assert = require('assert')
+const request = require('request')
 const helpers = require('../../../lib/test_helpers')
 
 describe('weather', () => {

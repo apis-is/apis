@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
 const request = require('request')
 const h = require('apis-helpers')
-const app = require('../../server')
 const _ = require('lodash')
+const app = require('../../server')
 
 const lookupAddresses = address => new Promise((resolve, reject) => {
   request.get({

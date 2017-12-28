@@ -6,8 +6,8 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-const request = require('request')
 const assert = require('assert')
+const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
 /* Asserts the results */
@@ -16,7 +16,7 @@ function assertResults(params, beEmpty) {
   request.get(params, (err, res, body) => {
     const json = JSON.parse(body)
 
-    assert(json.results && typeof json.results.length !== 'undefined', "Does not contain a 'results' field")
+    assert(json.results && typeof json.results.length !== 'undefined', 'Does not contain a \'results\' field')
     if (!shouldBeEmpty) {
       assert(json.results.length > 0, 'Results are empty')
     } else {

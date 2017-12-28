@@ -1,9 +1,9 @@
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable import/first */
-const app = require('../../server')
 const fridagar = require('fridagar')
 const debug = require('debug')('endpoint:calendar')
 const { range, isString } = require('lodash')
+const app = require('../../server')
 
 const canBeInt = (intLike) => {
   const num = Number.parseInt(intLike, 10)

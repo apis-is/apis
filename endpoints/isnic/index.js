@@ -3,7 +3,6 @@ const $ = require('cheerio')
 const h = require('apis-helpers')
 const app = require('../../server')
 
-
 app.get('/isnic', (req, res) => {
   const domainName = req.query.domain || ''
 
