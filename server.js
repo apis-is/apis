@@ -31,6 +31,12 @@ const redis = require('./lib/redis')
 
 Raven.config(SENTRY_URL).install()
 
+// The request handler must be the first middleware on the app
+app.use(Raven.requestHandler())
+
+// The error handler must be before any other error middleware
+app.use(Raven.errorHandler())
+
 if (process.env.NODE_ENV !== 'test') {
   app.use(metricsMiddleware())
   app.get('/metrics', (req, res) => {
