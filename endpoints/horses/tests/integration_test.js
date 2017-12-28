@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 const fs = require('fs')
+const assert = require('assert')
 const nock = require('nock')
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
@@ -35,7 +36,7 @@ describe('horses', () => {
       .reply(200, fs.readFileSync(`${__dirname}/IS2013182797.fixture`))
       .post('/freezone_horse.jsp', 'fnr=IS1987187700&nafn=&uppruni=&ormerki=&leitahnappur=Search+&leita=1')
       .query({ c: 'EN' })
-      .times(2)
+      .times(3)
       .reply(200, fs.readFileSync(`${__dirname}/IS1987187700.fixture`))
   })
 
@@ -72,6 +73,16 @@ describe('horses', () => {
       const params = helpers.testRequestParams('/horses', { id: 'IS1987187700' })
       const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
       request.get(params, resultHandler)
+    })
+
+    it('should return an array of objects containing the correct color', (done) => {
+      const params = helpers.testRequestParams('/horses', { id: 'IS1987187700' })
+      request.get(params, (error, response, body) => {
+        const json = JSON.parse(body)
+        const results = json.results[0]
+        assert(results.color === 'Palomino with a star flaxen mane and tail')
+        done()
+      })
     })
   })
 })

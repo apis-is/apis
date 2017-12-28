@@ -60,7 +60,7 @@ app.use(cache())
  */
 fileModule.walkSync('./endpoints', (dirPath, dirs, endpoints) => {
   function requireEndpoint(endpoint) {
-    if (!(endpoint.includes('.DS_Store') && !dirPath.includes('graphql') && !endpoint.includes('graphql'))) {
+    if (endpoint.includes('.js') && endpoint !== 'graphql_schema.js') {
       try {
         require(`./${dirPath}/${endpoint}`)
       } catch (e) {
