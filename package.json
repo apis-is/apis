@@ -85,7 +85,7 @@
     "isn2wgs": "0.0.2",
     "lodash": "^4.7.0",
     "marked": "github:koddsson/marked#escape-markdown-option",
-    "mocha": "~4.0.1",
+    "mocha": "~4.1.0",
     "moment": "~2.20.1",
     "nock": "^9.0.22",
     "raven": "2.3.0",
