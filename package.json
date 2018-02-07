@@ -80,7 +80,7 @@
     "file": "~0.2.2",
     "fridagar": "3.0.0",
     "globby": "^6.1.0",
-    "graphql": "0.12.3",
+    "graphql": "0.13.0",
     "iconv-lite": "^0.4.13",
     "isn2wgs": "0.0.2",
     "lodash": "^4.7.0",
