@@ -23,17 +23,16 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
     data.find('.vehicleinfo ul').each((index, element) => {
       const fields = []
       $(element).find('li').each((i, el) => {
-        let val;
+        let val
         if (i < 7) {
           val = $(el).find('span').text()
-          
-        } else { 
+        } else {
           // i === 7 contains info about aircraft owner
           // i === 8 contains info about aircraft operator
           // We'll parse these fields separately
 
-          const text = $(el).find('span').text();
-          const info = text.split(/\s{3,}/g);
+          const text = $(el).find('span').text()
+          const info = text.split(/\s{3,}/g)
 
           val = {
             name: info[1],
@@ -45,7 +44,7 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
 
         fields.push(val)
       })
-      
+
       if (fields.length > 0) {
         fieldList.push(fields)
       }
@@ -55,12 +54,12 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
       resolve(fieldList.map((fields) => {
         return {
           id: fields[0],
-          registrationNumber: parseInt(fields[1]),
+          registrationNumber: parseInt(fields[1], 10),
           type: fields[2],
-          buildYear: parseInt(fields[3]),
-          serialNumber: parseInt(fields[4]),
-          maxWeight: parseInt(fields[5]),
-          passengers: parseInt(fields[6]),
+          buildYear: parseInt(fields[3], 10),
+          serialNumber: parseInt(fields[4], 10),
+          maxWeight: parseInt(fields[5], 10),
+          passengers: parseInt(fields[6], 10),
           owner: fields[7],
           operator: fields[8],
         }
