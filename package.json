@@ -79,7 +79,7 @@
     "express": "^4.13.4",
     "file": "~0.2.2",
     "fridagar": "3.0.0",
-    "globby": "^6.1.0",
+    "globby": "^8.0.0",
     "graphql": "0.12.3",
     "iconv-lite": "^0.4.13",
     "isn2wgs": "0.0.2",
