@@ -1,0 +1,123 @@
+[
+  {
+    "AskValue": 1,
+    "BidValue": 1,
+    "CustomsRate": 0,
+    "LastValueChange": 0,
+    "MainTicker": null,
+    "MidValue": 1,
+    "Ticker": "ISK",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 105.29,
+    "BidValue": 104.66,
+    "CustomsRate": 0,
+    "LastValueChange": -0.094886,
+    "MainTicker": null,
+    "MidValue": 104.975,
+    "Ticker": "USD",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 141.53,
+    "BidValue": 140.69,
+    "CustomsRate": 0,
+    "LastValueChange": -0.155203,
+    "MainTicker": null,
+    "MidValue": 141.11,
+    "Ticker": "GBP",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 125.63,
+    "BidValue": 124.87,
+    "CustomsRate": 0,
+    "LastValueChange": -0.158945,
+    "MainTicker": null,
+    "MidValue": 125.25,
+    "Ticker": "EUR",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 83.472,
+    "BidValue": 82.973,
+    "CustomsRate": 0,
+    "LastValueChange": -0.145943,
+    "MainTicker": null,
+    "MidValue": 83.2225,
+    "Ticker": "CAD",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 16.873,
+    "BidValue": 16.772,
+    "CustomsRate": 0,
+    "LastValueChange": -0.177483,
+    "MainTicker": null,
+    "MidValue": 16.8225,
+    "Ticker": "DKK",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 12.742,
+    "BidValue": 12.666,
+    "CustomsRate": 0,
+    "LastValueChange": -0.437568,
+    "MainTicker": null,
+    "MidValue": 12.704,
+    "Ticker": "NOK",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 12.755,
+    "BidValue": 12.679,
+    "CustomsRate": 0,
+    "LastValueChange": -0.195618,
+    "MainTicker": null,
+    "MidValue": 12.717,
+    "Ticker": "SEK",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 107.37,
+    "BidValue": 106.73,
+    "CustomsRate": 0,
+    "LastValueChange": -0.111638,
+    "MainTicker": null,
+    "MidValue": 107.05,
+    "Ticker": "CHF",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 0.9327,
+    "BidValue": 0.9272,
+    "CustomsRate": 0,
+    "LastValueChange": -0.224647,
+    "MainTicker": null,
+    "MidValue": 0.92995,
+    "Ticker": "JPY",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  },
+  {
+    "AskValue": 149.63,
+    "BidValue": 148.73,
+    "CustomsRate": 0,
+    "LastValueChange": -0.133485,
+    "MainTicker": null,
+    "MidValue": 149.18,
+    "Ticker": "XDR",
+    "Time": "2017-12-28T11:00:25.857",
+    "Title": null
+  }
+]
