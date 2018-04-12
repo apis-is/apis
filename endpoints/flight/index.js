@@ -1,20 +1,19 @@
 /* eslint-disable import/first */
 const request = require('request')
 const h = require('apis-helpers')
-const cheerio = require('cheerio')
 const _ = require('lodash')
 const moment = require('moment')
-const app = require('../../server')
 const { parseString } = require('xml2js')
+const app = require('../../server')
 
 /* Translates the status to Icelandic and retains date values */
-var statusToIcelandic = function (status, type) {
+const statusToIcelandic = function (status, type) {
   if (_.includes(status, 'Estimat')) {
-    if (type === "departures") {
+    if (type === 'departures') {
       return _.replace(status, 'Estimat.', 'Áætluð brottför')
-    } else {
-      return _.replace(status, 'Estimat.', 'Áætluð lending')
     }
+    // Else Arrival
+    return _.replace(status, 'Estimat.', 'Áætluð lending')
   } else if (_.includes(status, 'Go to Gate')) {
     return 'Fara að hliði'
   } else if (_.includes(status, 'Boarding')) {
@@ -45,15 +44,13 @@ var statusToIcelandic = function (status, type) {
     return 'Töskur á belti'
   } else if (_.includes(status, 'All Bags on Belt')) {
     return 'Allar töskur á belti'
-  } else {
-    return status // Status not important or nothing to translate, return status for now
   }
+  // Status not important or nothing to translate, return status for now
+  return status
 }
 
 app.get(['/flight', '/flight/v1'], (req, res) => {
-
   const data = req.query
-
   /* Information from Kefairport
   Departed / Farin
   Cancelled / Aflýst
@@ -77,7 +74,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
   */
 
   /* Fetches the flight data and returns a JS object in a callback */
-  var getJSONFlightData = function (url, callback) {
+  const getJSONFlightData = function (url, callback) {
     request.get({
       headers: {
         'User-Agent': h.browser()
@@ -85,7 +82,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
       url,
     }, (error, response, body) => {
       if (error) {
-        return callback(err, [])
+        return callback(error, [])
       }
 
       parseString(body, {
@@ -97,29 +94,30 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
   }
 
   /* Converts the data field to old format and translates if needed. */
-  var getFlightTransformed = function (flight) {
+  const getFlightTransformed = function (flight) {
     const dateFormatted = moment(flight.datetime, 'DD.MM.YYYY HH:mm:ss').format('D. MMM.')
     const statusTranslated = data.language === 'is' ? statusToIcelandic(flight.status, data.language) : flight.status
+    // Is departures
     if (data.type === 'departures') {
       return {
         date: dateFormatted,
         flightNumber: flight.flightno,
         airline: flight.airline,
         to: flight.destination,
-        plannedArrival: flight.time, // Legacy bug
-        realArrival: flight.estimated, // Legacy bug
-        status: statusTranslated
-      }
-    } else {
-      return {
-        date: dateFormatted,
-        flightNumber: flight.flightno,
-        airline: flight.airline,
-        from: flight.from,
         plannedArrival: flight.time,
         realArrival: flight.estimated,
         status: statusTranslated
       }
+    }
+    // Is arrivals
+    return {
+      date: dateFormatted,
+      flightNumber: flight.flightno,
+      airline: flight.airline,
+      from: flight.from,
+      plannedArrival: flight.time,
+      realArrival: flight.estimated,
+      status: statusTranslated
     }
   }
 
@@ -137,8 +135,8 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
     url = 'http://xml.kefairport.com/arrivals.xml'
   }
 
-  getJSONFlightData(url, (err, flights) => {
-    if (err) {
+  getJSONFlightData(url, (error, flights) => {
+    if (error) {
       return res.status(500).json({
         error: `Could not fetch and convert XML to JSON: ${error}`
       })
@@ -146,7 +144,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
     const obj = {
       results: []
     }
-    // Reject if it does not respond correctly. 
+    // Reject if it does not respond correctly.
     const needsToBePresent = data.type + '.flight'
 
     // Needs to have either departures' or 'arrivals'
