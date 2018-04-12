@@ -138,6 +138,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
   getJSONFlightData(url, (error, flights) => {
     if (error) {
       return res.status(500).json({
+        results: [],
         error: `Could not fetch and convert XML to JSON: ${error}`
       })
     }
@@ -150,6 +151,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
     // Needs to have either departures' or 'arrivals'
     if (!_.has(flights, needsToBePresent)) {
       return res.status(500).json({
+        results: [],
         error: 'Incorrect response from flight XML provider'
       })
     }
