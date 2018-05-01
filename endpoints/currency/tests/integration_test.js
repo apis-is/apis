@@ -13,7 +13,7 @@ describe('currency', () => {
       nock('http://www.m5.is')
         .get('/')
         .query({ gluggi: 'gjaldmidlar' })
-        .reply(200, fs.readFileSync(`${__dirname}/test.fixture`))
+        .reply(200, fs.readFileSync(`${__dirname}/m5.fixture`))
     })
 
     it('should return an array of objects containing correct fields', (done) => {
@@ -24,6 +24,12 @@ describe('currency', () => {
   })
 
   describe('searching using provider "arion"', () => {
+    before(() => {
+      nock('https://www.arionbanki.is')
+        .get('/Webservice/PortalCurrency.ashx')
+        .reply(200, fs.readFileSync(`${__dirname}/arion.fixture`))
+    })
+
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/currency/arion')
       const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
