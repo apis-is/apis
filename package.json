@@ -81,12 +81,12 @@
     "fridagar": "3.0.0",
     "globby": "8.0.1",
     "graphql": "0.13.2",
-    "iconv-lite": "0.4.19",
+    "iconv-lite": "0.4.21",
     "isn2wgs": "0.0.2",
     "lodash": "^4.17.5",
     "marked": "github:koddsson/marked#escape-markdown-option",
     "mocha": "5.1.1",
-    "moment": "2.21.0",
+    "moment": "2.22.1",
     "nock": "^9.2.3",
     "raven": "2.4.2",
     "redis": "^2.8.0",
@@ -104,7 +104,7 @@
     "lint": "xo"
   },
   "devDependencies": {
-    "nodemon": "1.17.2",
+    "nodemon": "1.17.3",
     "sinon": "4.4.8",
     "xo": "^0.18.2"
   }
