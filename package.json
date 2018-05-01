@@ -105,7 +105,7 @@
   },
   "devDependencies": {
     "nodemon": "1.17.3",
-    "sinon": "4.4.8",
+    "sinon": "5.0.1",
     "xo": "^0.18.2"
   }
 }
