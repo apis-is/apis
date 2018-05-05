@@ -81,7 +81,7 @@
     "fridagar": "3.0.0",
     "globby": "8.0.1",
     "graphql": "0.13.2",
-    "iconv-lite": "0.4.21",
+    "iconv-lite": "0.4.22",
     "isn2wgs": "0.0.2",
     "lodash": "^4.17.5",
     "marked": "github:koddsson/marked#escape-markdown-option",
