@@ -45,16 +45,19 @@ const lookupCar = plate => new Promise((resolve, reject) => {
   })
 })
 
-app.get('/car', (req, res) => {
+app.get('/car', async (req, res) => {
   const carPlate = req.query.number || req.query.carPlate || ''
 
   if (!carPlate) {
     return res.status(431).json({ error: 'Please provide a valid carPlate to lookup' })
   }
 
-  lookupCar(carPlate)
-    .then(car => res.cache().json({ results: [car] }))
-    .catch(error => res.status(500).json({ error }))
+  try {
+    const car = await lookupCar(carPlate)
+    res.cache().json({ results: [car] })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 })
 
 module.exports = lookupCar

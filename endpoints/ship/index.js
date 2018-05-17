@@ -109,16 +109,19 @@ const lookupShip = searchStr => new Promise((resolve, reject) => {
   })
 })
 
-app.get('/ship', (req, res) => {
+app.get('/ship', async (req, res) => {
   const search = req.query.search || ''
 
   if (!search) {
     return res.status(431).json({ error: 'Please provide a valid search string to lookup' })
   }
 
-  lookupShip(search)
-    .then(ships => res.cache().json({ results: ships }))
-    .catch(error => res.status(500).json({ error }))
+  try {
+    const ships = await lookupShip(search)
+    res.cache().json({ results: ships })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 })
 
 module.exports = lookupShip
