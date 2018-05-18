@@ -32,7 +32,8 @@ module.exports = {
   args: {
     busses: { type: GraphQLString },
   },
-  resolve: (_, args) => {
-    return getBusRoutes(args).then(data => data.results, error => error)
+  resolve: async (_, args) => {
+    const data = await getBusRoutes(args)
+    return data.results
   },
 }
