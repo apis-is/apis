@@ -104,7 +104,7 @@
     "lint": "xo"
   },
   "devDependencies": {
-    "nodemon": "1.17.3",
+    "nodemon": "1.17.5",
     "sinon": "5.0.3",
     "xo": "^0.21.0"
   }
