@@ -94,7 +94,7 @@
     "scraper": "0.0.9",
     "statuses": "^1.4.0",
     "xml2js": "0.4.19",
-    "xregexp": "4.1.1"
+    "xregexp": "4.2.0"
   },
   "scripts": {
     "dev": "nodemon server.js",
