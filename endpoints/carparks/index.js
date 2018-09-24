@@ -49,6 +49,7 @@ app.get('/carparks', (req, res) => {
       obj.results.push({
         name: $(that).find('aside h2').text(),
         address: $(that).find('h5').text(),
+        openingHours: $(that).find('.hours h1').text(),
         parkingSpaces: {
           free: !isNaN(freeSpaces) ? freeSpaces : null,
           total: !isNaN(totalSpaces) ? totalSpaces : null,
