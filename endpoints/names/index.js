@@ -56,19 +56,8 @@ function handleRequest(providedUrl, req, res) {
 
 /* Root names handler - only returns a list of resources */
 app.get('/names', (req, res) => {
-  return res.json({
-    results: [
-      {
-        // eslint-disable-next-line max-len
-        info: 'This is an api that lists all allowed Icelandic names. A search parameter can be used with each endpoint',
-        endpoints: {
-          males: '/names/males/',
-          females: '/names/females/',
-          middlenames: '/names/middlenames/',
-        },
-      },
-    ],
-  })
+  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Samthykkt=yes'
+  return handleRequest(url, req, res)
 })
 
 /* Get all legal names for males */
