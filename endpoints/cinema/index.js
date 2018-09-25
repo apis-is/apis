@@ -22,8 +22,7 @@ app.get('/cinema', (req, res) => {
       return res.status(500).json({ error: 'Could not load the body with cherrio.' })
     }
 
-    // Base object to be added to
-    // and eventually sent as a JSON response.
+    // Base object to be added to and eventually sent as a JSON response.
     const obj = {
       results: [],
     }
@@ -40,18 +39,19 @@ app.get('/cinema', (req, res) => {
       const showtimes = []
 
       // Find all theaters and loop through them.
-      const theaters = movie.find('[id^="myndbio"]')
+      const theaters = movie.find('[class^="biotimar"]')
 
       theaters.each(function () {
         // Single theater
         const theater = {
-          theater: $(this).find('#bio a').text().trim(),
+          theater: $(this).find('h3').text().trim(),
           schedule: [],
         }
 
-        // Loop through each showtime and
-        // add them to the theater schedule.
-        $(this).find('.syningartimi_item').each(function () {
+        // Loop through each showtime and add them to the theater schedule.
+        $(this).find('ul.time li').each(function () {
+          // Remove all VIP badge, Icelandic badge and making the time clean
+          $(this).find('.tegund, .salur').remove()
           theater.schedule.push($(this).text().trim())
         })
 
@@ -59,27 +59,23 @@ app.get('/cinema', (req, res) => {
         showtimes.push(theater)
       })
 
-      const src = movie.find('img').attr('src')
-      if (src) {
-        const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || []
-        const imgUrl = `http://kvikmyndir.is${urls[0]}`
-        const realeasedYear = movie
-          .find('.mynd_titill_artal')
-          .text()
-          .replace('/[()]/g', '')
+      const realeasedYear = movie.find('.title .year').text().trim()
+      // After scraping the year, it's removed so we can scrape the title without the year in it
+      movie.find('.year').remove()
+      const movieTitle = movie.find('.title').text().trim()
 
-        // Create an object of info
-        // and add it to the 'results' array.
-        obj.results.push({
-          title: movie.find('.title').remove('.year').html().trim(),
-          released: realeasedYear,
-          restricted: null,
-          imdb: movie.find('.imdbEinkunn').text().trim(),
-          imdbLink: movie.find('.imdbEinkunn a').attr('href') ? movie.find('.imdbEinkunn a').attr('href').trim() : '',
-          image: imgUrl,
-          showtimes,
-        })
-      }
+      const src = movie.find('img').attr('src')
+      const movieImage = src ? scrapeImage(src) : null
+
+      // Create an object of info and add it to the 'results' array.
+      obj.results.push({
+        title: movieTitle,
+        released: realeasedYear,
+        restricted: movie.find('.aldur').text().trim().replace(/\s{2,}/g, ' '),
+        imdb: movie.find('.imdb-einkunn').text().trim(),
+        image: movieImage,
+        showtimes,
+      })
     })
 
     return res.cache().json(obj)
@@ -153,6 +149,13 @@ app.get('/cinema/theaters', (req, res) => {
       })
     })
 
-    return res.cache().json(obj)
+    // return res.cache().json(obj)
+    return res.json(obj)
   })
 })
+
+// Utility function
+const scrapeImage = (src) => {
+  const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || ['']
+  return `http://kvikmyndir.is${urls[0]}`
+}
