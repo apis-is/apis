@@ -2,6 +2,12 @@ const request = require('request')
 const cheerio = require('cheerio')
 const app = require('../../server')
 
+// Utility function
+const scrapeImage = (src) => {
+  const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || ['']
+  return `http://kvikmyndir.is${urls[0]}`
+}
+
 /**
  * Fetches movies for show today in Icelandic cinemas.
  * response - JSON: Movie data within an 'results' array.
@@ -153,9 +159,3 @@ app.get('/cinema/theaters', (req, res) => {
     return res.json(obj)
   })
 })
-
-// Utility function
-const scrapeImage = (src) => {
-  const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || ['']
-  return `http://kvikmyndir.is${urls[0]}`
-}
