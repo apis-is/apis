@@ -56,6 +56,8 @@ function testFiltered(url) {
 }
 
 describe('names', () => {
+  // TODO: Test the /names endpoint here?
+
   /* Test the /names/males endpoint with filtering */
   describe('males-filtered', () => {
     testFiltered('/names/males')
@@ -100,6 +102,8 @@ describe('names', () => {
   describe('middlenames', () => {
     testUnfiltered('/names/middlenames')
   })
+
+  // TODO: Test the /names/rejected endpoint here?
 
   /* Test the /names/rejected/males endpoint with filtering */
   describe('rejected-males-filtered', () => {
