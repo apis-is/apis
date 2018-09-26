@@ -4,8 +4,8 @@ const app = require('../../server')
 
 // Utility function
 const scrapeImage = (src) => {
-  const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || ['']
-  return `http://kvikmyndir.is${urls[0]}`
+  const urls = src.match(/\/images\/poster\/.+\.(jpg|jpeg|png)/ig) || null
+  return urls === null ? null : `http://kvikmyndir.is${urls[0]}`
 }
 
 /**
@@ -155,7 +155,6 @@ app.get('/cinema/theaters', (req, res) => {
       })
     })
 
-    // return res.cache().json(obj)
-    return res.json(obj)
+    return res.cache().json(obj)
   })
 })
