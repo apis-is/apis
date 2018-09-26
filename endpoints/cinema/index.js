@@ -82,7 +82,7 @@ const flipMoviesToTHeaters = (obj) => {
       }
 
       // Check if the same theater is in the array, otherwise add the theater to the array
-      const theaterIndex = theaters.findIndex(theater => 
+      const theaterIndex = theaters.findIndex(theater =>
         theater.name === showtime.theater
       )
       if (theaterIndex === -1) {
