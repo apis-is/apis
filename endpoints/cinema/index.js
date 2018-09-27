@@ -70,11 +70,11 @@ const scrapeMovieCinemaShowtimes = ($) => {
   return obj
 }
 
-const flipMoviesToTHeaters = (obj) => {
+const flipMoviesToTHeaters = (objCinema) => {
   // DOM elements array containing all theaters.
   const theaters = []
 
-  obj.results.forEach((item) => {
+  objCinema.results.forEach((item) => {
     item.showtimes.forEach((showtime) => {
       const movie = {
         title: item.title,
@@ -96,7 +96,7 @@ const flipMoviesToTHeaters = (obj) => {
     })
   })
 
-  return {
+  const obj = {
     results: theaters.map(theater => {
       // Finding correct meta data and merge the objects into one
       return Object.assign(
@@ -106,6 +106,8 @@ const flipMoviesToTHeaters = (obj) => {
       )
     })
   }
+
+  return obj
 }
 
 /**

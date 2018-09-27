@@ -80,7 +80,7 @@ describe('names', () => {
 
   /* Test the /names/females endpoint with invalid filtering */
   describe('females-filtered-invalid', () => {
-    testFilteredEmpty('/names/males')
+    testFilteredEmpty('/names/females')
   })
 
   /* Test the /names/females endpoint without filtering */
