@@ -31,10 +31,10 @@ const redis = require('./lib/redis')
 
 if (SENTRY_URL !== undefined && SENTRY_URL !== '') {
   Raven.config(SENTRY_URL).install()
-  
+
   // The request handler must be the first middleware on the app
   app.use(Raven.requestHandler())
-  
+
   // The error handler must be before any other error middleware
   app.use(Raven.errorHandler())
 }
