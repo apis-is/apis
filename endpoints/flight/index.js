@@ -13,15 +13,15 @@ app.get('/flight', (req, res) => {
   if (!data.language) data.language = ''
 
   if (data.type === 'departures' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/'
+    url = 'https://www.isavia.is/keflavikurflugvollur/flugaaetlun/brottfarir'
   } else if (data.type === 'departures' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Departures/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/departures'
   } else if (data.type === 'arrivals' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Komur/'
+    url = 'https://www.isavia.is/keflavikurflugvollur/flugaaetlun/komur'
   } else if (data.type === 'arrivals' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/arrivals'
   } else {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/arrivals'
   }
 
   request.get({
@@ -29,7 +29,7 @@ app.get('/flight', (req, res) => {
     url,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.kefairport.is refuses to respond or give back data' })
+      return res.status(500).json({ error: 'www.isavia.is refuses to respond or give back data' })
     }
     try {
       $ = cheerio.load(body)
@@ -63,6 +63,7 @@ app.get('/flight', (req, res) => {
             status: $(this).children('td').slice(4).children('span').html(),
           }
         }
+
         obj.results.push(flight)
       }
     })
