@@ -68,5 +68,5 @@ app.get('/flight', (req, res) => {
     })
 
     return res.cache(3600).json(obj)
-    })
+  })
 })
