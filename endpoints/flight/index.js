@@ -48,8 +48,8 @@ app.get('/flight', (req, res) => {
             flightNumber: $(this).children('td').slice(2).html(),
             airline: $(this).children('td').slice(3).children('span').html(),
             to: $(this).children('td').slice(1).children('span').html(),
-            plannedArrival: 'not available', // Status contains data for plannedArrival now, consider deleting this var
-            realArrival: 'not available', // There is not var on website named realArrival anymore, consider deleting it
+            plannedArrival: $(this).children('td').slice(4).children('span').html().split(' ')[1],   // Status contains data for plannedArrival now, consider deleting this var
+            realArrival: '\r\n', // There is not var on website named realArrival anymore, consider deleting it
             status: $(this).children('td').slice(4).children('span').html(),
           }
         } else {
@@ -58,8 +58,8 @@ app.get('/flight', (req, res) => {
             flightNumber: $(this).children('td').slice(2).html(),
             airline: $(this).children('td').slice(3).children('span').html(),
             from: $(this).children('td').slice(1).children('span').html(),
-            plannedArrival: 'not available', // Status contains data for plannedArrival now, consider deleting this var
-            realArrival: 'not available', // There is not var on website named realArrival anymore, consider deleting it
+            plannedArrival: $(this).children('td').slice(4).children('span').html().split(' ')[1],   // Status contains data for plannedArrival now, consider deleting this var
+            realArrival: '\r\n', // There is not var on website named realArrival anymore, consider deleting it
             status: $(this).children('td').slice(4).children('span').html(),
           }
         }
