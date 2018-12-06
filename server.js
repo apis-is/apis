@@ -4,12 +4,6 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/first */
 /* eslint-disable new-cap */
-/**
- * Only for apis.is production environment
- */
-if (process.env.NODE_ENV === 'production') {
-  process.chdir('/apis/current')
-}
 
 const { EventEmitter: EE } = require('events')
 const express = require('express')
