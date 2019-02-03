@@ -62,6 +62,7 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
           operator: fields[8],
         })
       )
+      console.info(aircraft)
 
       resolve(aircraft)
     } else {
@@ -70,15 +71,16 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
   })
 })
 
-app.get('/aircraft', async (req, res) => {
-  const search = req.query.search || ''
+app.get('/aircraft/:search?', async (req, res) => {
+  const search = (req.query.search || req.params.search || '').replace(' ', '+')
 
-  if (!search) {
+  if (search === '') {
     return res.status(431).json({ error: 'Please provide a valid search string to lookup' })
   }
 
   try {
-    const results = await lookupAircraft(search, res)
+    const results = await lookupAircraft(search)
+    console.info({ results })
     res.cache().json({ results })
   } catch (error) {
     res.status(500).json({ error })
