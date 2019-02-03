@@ -16,18 +16,18 @@ describe('aircraft', () => {
       'owner',
       'operator',
     ]
-    const params = helpers.testRequestParams('/aircraft', { search: '100' })
+    const params = helpers.testRequestParams('/aircraft', { aq: '100' })
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })
   it('should return a 404 when an aircraft is not found', (done) => {
-    const params = helpers.testRequestParams('/aircraft', { search: 'loftur' })
+    const params = helpers.testRequestParams('/aircraft', { aq: 'loftur' })
     request.get(params, (error, response, body) => {
       if (error) {
         return done(error)
       }
       const json = JSON.parse(body)
-      assert.equal(json.error, 'No aircraft found with the query \'loftur\'')
+      assert.equal(json.error, 'No aircraft found with the query loftur')
       done()
     })
   })
