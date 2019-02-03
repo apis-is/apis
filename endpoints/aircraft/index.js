@@ -7,9 +7,7 @@ const h = require('apis-helpers')
 const app = require('../../server')
 
 const lookupAircraft = searchStr => new Promise((resolve, reject) => {
-  // Encode searchString so that Icelandic characters will work
-  const searchString = encodeURIComponent(searchStr)
-  const url = `https://www.samgongustofa.is/flug/loftfor/loftfaraskra?aq=${searchString}`
+  const url = `https://www.samgongustofa.is/flug/loftfor/loftfaraskra?aq=${searchStr}`
   request.get({
     headers: { 'User-Agent': h.browser() },
     url,
@@ -51,35 +49,38 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
     })
 
     if (fieldList.length > 0 && fieldList[0].length > 0) {
-      resolve(fieldList.map((fields) => {
-        return {
+      const aircraft = fieldList.map((fields) =>
+        ({
           id: fields[0],
           registrationNumber: parseInt(fields[1], 10),
           type: fields[2],
-          buildYear: parseInt(fields[3], 10),
+          productionYear: parseInt(fields[3], 10),
           serialNumber: parseInt(fields[4], 10),
           maxWeight: parseInt(fields[5], 10),
           passengers: parseInt(fields[6], 10),
           owner: fields[7],
           operator: fields[8],
-        }
-      }))
+        })
+      )
+
+      resolve(aircraft)
     } else {
       reject(`No aircraft found with the query ${searchStr}`)
     }
   })
 })
 
-app.get('/aircraft', (req, res) => {
+app.get('/aircraft', async (req, res) => {
   const search = req.query.search || ''
 
   if (!search) {
     return res.status(431).json({ error: 'Please provide a valid search string to lookup' })
   }
 
-  lookupAircraft(search)
-    .then(aircraft => res.cache().json({ results: aircraft }))
-    .catch(error => res.status(500).json({ error }))
+  try {
+    const results = await lookupAircraft(search, res)
+    res.cache().json({ results })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 })
-
-module.exports = lookupAircraft
