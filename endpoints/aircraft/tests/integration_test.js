@@ -9,7 +9,7 @@ describe('aircraft', () => {
       'id',
       'registrationNumber',
       'type',
-      'buildYear',
+      'constructionYear',
       'serialNumber',
       'maxWeight',
       'passengers',
