@@ -8,6 +8,6 @@ Search the Icelandic aircraft registry
 
 | Parameters        | Description                                                           | Example                                                                                    |
 |-------------------|-----------------------------------------------------------------------|-----------------|
-| Search (required) | Aircraft identification, registration number, type, owner or operator | [TF-AAC](https://apis.is/aircraft?search=TF-AAC), [1073](https://apis.is/ship?search=1073) |
+| Search (required) | Aircraft identification, registration number, type, owner or operator | [TF-AAC](https://apis.is/aircraft?search=TF-AAC), [1073](https://apis.is/aircraft?search=1073) |
 
 ---
