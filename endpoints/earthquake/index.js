@@ -51,7 +51,7 @@ function parseJavaScriptVariable(body) {
   })
 
   // Convert the variable to JavaScript Object Notation and fix seperators in values.
-  const resString = jsonString.replace(/(:\'[-0-9][0-9]*)(,)([0-9]*)/g, '$1.$3')
+  const resString = jsonString.replace(/(:\'[-0-9]\d*)(,)(\d*)/g, '$1.$3')
 
   // Create a Regular expression and change date representation.
   // eslint-disable-next-line max-len

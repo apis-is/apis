@@ -28,7 +28,7 @@ const lookupAddresses = address => new Promise((resolve, reject) => {
   })
 })
 
-app.get('/address/:address?', (req, res) => {
+app.get('/address/:address?', async (req, res) => {
   const address = (
     req.query.address || req.params.address || ''
   ).replace(' ', '+')
@@ -39,10 +39,12 @@ app.get('/address/:address?', (req, res) => {
     })
   }
 
-  lookupAddresses(address).then(
-    results => res.cache().json({ results }),
-    () => res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' })
-  )
+  try {
+    const results = await lookupAddresses(address)
+    res.cache().json({ results })
+  } catch (error) {
+    res.status(500).json({ error: 'www.postur.is refuses to respond or give back data' })
+  }
 })
 
 module.exports = lookupAddresses

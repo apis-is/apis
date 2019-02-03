@@ -4,7 +4,7 @@ const {
   GraphQLString,
 } = require('graphql')
 
-const lookupAddresses = require('./index')
+const lookupAddresses = require('.')
 
 const addressType = new GraphQLObjectType({
   name: 'Address',
@@ -44,6 +44,6 @@ module.exports = {
   },
   resolve: (_, args) => {
     const address = args.address.replace(' ', '+')
-    return lookupAddresses(address).then(data => data, error => error)
+    return lookupAddresses(address)
   },
 }

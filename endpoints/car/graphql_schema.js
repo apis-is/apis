@@ -3,7 +3,7 @@ const {
   GraphQLString,
 } = require('graphql')
 
-const lookupCar = require('./index')
+const lookupCar = require('.')
 
 const car = new GraphQLObjectType({
   name: 'Car',
@@ -64,7 +64,11 @@ module.exports = {
       description: 'The numer on the cars plate',
     },
   },
-  resolve: (_, { carPlate }) => lookupCar(carPlate)
-    .then(data => data)
-    .catch((error) => { throw new Error(error) }),
+  resolve: async (_, { carPlate }) => {
+    try {
+      return await lookupCar(carPlate)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }

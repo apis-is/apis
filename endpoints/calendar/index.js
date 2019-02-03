@@ -54,6 +54,15 @@ const lookupHolidays = (yearStr, monthStr, dayStr) => new Promise((resolve, reje
   }
 })
 
+const lookupAndRespondHolidays = async (res, ...args) => {
+  try {
+    const results = await lookupHolidays(...args)
+    res.json({ results })
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
 app.get('/calendar/', (req, res) => {
   return res.json({
     description: 'Returns if a given date range has or is a holiday',
@@ -68,26 +77,17 @@ app.get('/calendar/', (req, res) => {
 
 app.get('/calendar/:year', (req, res) => {
   const { year } = req.params
-
-  lookupHolidays(year)
-    .then(holidays => res.json({ results: holidays }))
-    .catch(error => res.status(400).json(error))
+  lookupAndRespondHolidays(res, year)
 })
 
 app.get('/calendar/:year/:month', (req, res) => {
   const { year, month } = req.params
-
-  lookupHolidays(year, month)
-    .then(holidays => res.json({ results: holidays }))
-    .catch(error => res.status(400).json(error))
+  lookupAndRespondHolidays(res, year, month)
 })
 
 app.get('/calendar/:year/:month/:day', (req, res) => {
   const { year, month, day } = req.params
-
-  lookupHolidays(year, month, day)
-    .then(holiday => res.json({ results: holiday }))
-    .catch(error => res.status(400).json(error))
+  lookupAndRespondHolidays(res, year, month, day)
 })
 
 module.exports = lookupHolidays

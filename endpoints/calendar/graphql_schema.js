@@ -6,7 +6,7 @@ const {
 } = require('graphql')
 const { GraphQLDate } = require('../../graphql/types/GraphQLDate')
 
-const lookupHolidays = require('./index')
+const lookupHolidays = require('.')
 
 const holiday = new GraphQLObjectType({
   name: 'Holiday',
@@ -36,9 +36,11 @@ module.exports = {
     month: { type: GraphQLString },
     day: { type: GraphQLString },
   },
-  resolve: (_, { year, month, day }) => {
-    return lookupHolidays(year, month, day)
-      .then(data => data)
-      .catch(({ error }) => { throw new Error(error) })
+  resolve: async (_, { year, month, day }) => {
+    try {
+      return await lookupHolidays(year, month, day)
+    } catch (error) {
+      throw new Error(error)
+    }
   },
 }
