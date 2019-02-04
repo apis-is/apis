@@ -27,8 +27,8 @@ describe('aircraft', () => {
       if (error) {
         return done(error)
       }
-      console.info(json)
       const json = JSON.parse(body)
+      console.info(json)
       assert.strictEqual(json.error, 'No aircraft found with the query loftur')
       done()
     })
