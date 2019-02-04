@@ -27,6 +27,7 @@ after(() => {
         'http://fotbolti.net:80',
         'http://skoli.landsbjorg.is:80',
         'http://www.worldfengur.com:80',
+        'http://samgongustofa.is:80',
       ].includes(o.scope)
     })
     fs.writeFileSync(mockDataFilename, JSON.stringify(noLocalhost, null, 2))

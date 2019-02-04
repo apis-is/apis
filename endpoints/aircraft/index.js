@@ -79,7 +79,6 @@ app.get('/aircraft/:search?', async (req, res) => {
 
   try {
     const results = await lookupAircraft(search)
-    console.info({ results })
     res.cache().json({ results })
   } catch (error) {
     res.status(500).json({ error })
