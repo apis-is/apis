@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<!-- eplica-no-index -->
+<!--[if lt IE 9]><html class="msie" xmlns="http://www.w3.org/1999/xhtml" lang="is"><![endif]--><!--[if gte IE 9]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="is"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Eplica CMS - www.eplica.is" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no">
+  <title>Uppfletting í loftfaraskrá | Loftfaraskrá | Samgöngustofa</title>
+
+  <meta property="og:site_name" content="Samgöngustofa" />
+  
+  <link rel="shortcut icon" href="/skin/basic9k/i/fav.ico" />
+  
+  <link rel="canonical" href="https://www.samgongustofa.is/flug/loftfor/loftfaraskra/?aq=100" />
+  <script>if(self!=top){var ö=document.documentElement;ö.style.display='none !important';try{top.location.replace(location)}catch(e){setTimeout(function(){ö.innerHTML=''},500)}}</script>
+  
+  <!--[if (lt IE 9)&(!IEMobile) ]><link href="/skin/basic9k/main-oldie.css?v10" rel="stylesheet" /><![endif]--><!--[if gte IE 9]><!-->
+  <link href="/skin/basic9k/main.css?v10" rel="stylesheet" /><!--<![endif]-->
+
+  
+
+<!--  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      Eplica web management system
+      Eplica 3 : (4 @ 72e5b8540)
+      Tags [release/4.3.1]
+      License Eplica ISP hosted solution
+      eplica.samgongustofa.is::
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      Hugsmiðjan ehf.
+      Tel. +354 550-0900
+      info@eplica.is
+      www.eplica.is
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  -->
+
+  
+  
+ 
+<!-- begin og: tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Uppfletting &iacute; loftfaraskr&aacute;" />
+<meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="https://www.samgongustofa.is/skin/basic9k/i/sgs-logo-2x-foot.png" />
+    <meta name="twitter:image" content="https://www.samgongustofa.is/skin/basic9k/i/sgs-logo-2x-foot.png" />
+    <!-- end og: tags -->
+
+
+    <script>(function(f,o,u,c){o[u]+=' _'+f;setTimeout(function(){o[u]=o[u].replace(f,'');},8000);c=document.createElement('input');if('placeholder' in c){o[u]+=' supports-placeholders';}})(' beforejsinit',document.getElementsByTagName('html')[0],'className');</script>
+  <script src="//use.typekit.net/kjg0mws.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  <script>window.SITE = { reqs:[], onBeforeInit:[], onDomupdated:[], onInit:[] }</script>
+  <script src='https://eplica-cdn.is/req/jqreq.js'></script>
+
+  
+</head>
+<!-- /eplica-no-index -->
+<body class=" sidenav">
+
+  
+
+<div class="pghead" id="pghead">
+<div class="wrap">
+
+  
+        
+<!-- eplica-no-index -->
+<div class="brand" role="banner"><a href="/" title="Samgöngustofa - forsíða"
+    ><img class="logo" src="/skin/basic9k/i/sitelogo.png" alt="Samgöngustofa" /></a></div>
+<div class="skiplink"><p><a href='#pgnav' title='Valmynd'>Valmynd</a></p><hr /></div>
+<!-- /eplica-no-index -->
+
+
+
+        
+    
+</div>
+</div>
+
+
+
+
+  
+<div role="main" class="pgmain">
+<div class="wrap">
+    
+        
+
+
+
+<div class="uppfletting">
+            <H1 class="boxhead">Uppfletting í loftfaraskrá</H1>
+        <form class="boxbody" action="/flug/loftfor/loftfaraskra">
+        <div class="fi_txt">
+            <label for="vehinumber">Númer eða eigandi:</label>
+            <input id="vehinumber" name="aq" type="text"
+                placeholder="Númer eða eigandi"
+                value="100" />
+        </div>
+        <div class="fi_btn"><button type="submit">Fletta upp</button></div>
+    </form>
+</div>
+
+
+  
+<div class="vehicleinfo">
+    <h1 class="boxhead">Loftfaraskrá: <i>100</i></h1>
+    <div class="boxbody">
+            <ul>
+            <li>
+                <strong>Einkennisstafir:</strong>
+                <span>TF-JMH</span>
+            </li>
+            <li>
+                <strong>Skráningar<abbr title="númer">nr</abbr>:</strong>
+                <span>100</span>
+            </li>
+            <li>
+                <strong>Tegund:</strong>
+                <span>Piper Aircraft, Inc. PA-23</span>
+            </li>
+            <li>
+                <strong>Framleiðsluár:</strong>
+                <span>1957</span>
+            </li>
+            <li>
+                <strong>Raðnúmer:</strong>
+                <span>23-1027</span>
+            </li>
+            <li>
+                <strong>Hármarksþungi:</strong>
+                <span>1588 kg</span>
+            </li>
+            <li>
+                <strong>Farþegafjöldi:</strong>
+                <span>4</span>
+            </li>
+
+            <li class="owner">
+                <strong>Eigandi:</strong>
+                                <span>
+                    &THORN;&oacute;rarinn &Aacute;g&uacute;stsson<br/>
+                    <span class="addr">
+                        Grundargata 1<br/>
+                        600 Akureyri<br/>
+                        &Iacute;sland
+                    </span>
+                </span>
+            </li>
+
+            <li class="operator">
+                <strong>Umráðandi:</strong>
+                                <span>
+                    &THORN;&oacute;rarinn &Aacute;g&uacute;stsson<br/>
+                    <span class="addr">
+                        Grundargata 1<br/>
+                        600 Akureyri<br/>
+                        &Iacute;sland
+                    </span>
+                </span>
+            </li>
+        </ul>
+        </div>
+</div>
+
+  
+
+
+        
+    
+        
+
+
+
+
+
+        
+    
+        
+
+<p class="didithelp" aria-labelledby="helpful83310055">
+  <span id="helpful83310055">Var efnið hjálplegt?</span>
+  <a class="button minor yay" role="button" href="#">Já</a>
+  <a class="button minor nay" href="/hvad-tharf-ad-laga">Nei</a>
+</p>
+
+        
+    
+    </div>
+</div>
+
+
+  
+<div class="pgextra2" id="pgnav">
+<div class="wrap">
+    
+        <!-- eplica-no-index -->
+              <div class="enav" role="navigation">
+                
+                <div class="boxbody">
+                    <ul class="level1"
+                      ><li class="english"><a href="http://www.icetra.is" class="cat1">English</a
+                    ></li
+                      ><li class="nosubnav eydublod"><a href="/eydublod/" class="cat2">Eyðublöð</a
+                    ></li
+                      ><li class="nosubnav log-reglur"><a href="/log-reglur/" class="cat3">Lög &amp; reglur</a
+                    ></li
+                      ><li class="cat5"><a href="/um" class="cat5">Um okkur</a
+                    ></li
+                      ><li class="hafasamband"><a href="/samband/" class="cat6">Hafa samband</a
+                    ></li
+                      ><li class="subscriptions last"><a href="/innskraning-vefnotenda" class="cat7">Áskriftir</a
+                    ></li
+                 ></ul>
+             
+                </div>
+              </div>
+              <hr class="stream" />
+        
+      <!-- /eplica-no-index -->
+  
+
+
+        
+    
+        <!-- eplica-no-index -->
+            
+
+<div class="breadcrumbs" role="navigation" aria-labelledby="crumbs58310019"><div>
+  <strong id="crumbs58310019">Þú ert hér:</strong> <a href="/" class='home'>Forsíða</a> <i>&gt;</i> <a href="/flug/">Flug</a> <i>&gt;</i> <a href="/flug/loftfor/">Loftför</a> <i>&gt;</i> <b class="current"><a href="/flug/loftfor/loftfaraskra/">Loftfaraskrá</a></b>
+</div></div>
+<hr class="stream" />
+
+              <div class="mnav" role="navigation">
+                <h2 class="boxhead">Forsíða</h2>
+                <div class="boxbody">
+                    <ul class="level1"
+                      ><li class="home"><a href="/">Forsíða</a></li
+                      ><li class="cat-umferd branch"><a href="/umferd/" class="cat1">Umferð</a
+                    ></li
+                      ><li class="cat-flug parent branch"><a href="/flug/" class="cat2">Flug</a
+                    
+                      ><ul class="level2"
+                        ><li class="indexpage branch"><a href="/flug/flugvellir-og-leidsaga/">Flugvellir og flugleiðsaga</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/nam-og-skirteini/">Nám og skírteini</a
+                    ></li
+                        ><li class="indexpage parent branch"><a href="/flug/loftfor/">Loftför</a
+                    
+                        ><ul class="level3"
+                          ><li class="current"><a href="/flug/loftfor/loftfaraskra/">Loftfaraskrá</a
+                    ></li
+                          ><li><a href="/flug/loftfor/almennt-um-lofthaefimal/">Almennt um lofthæfimál</a
+                    ></li
+                          ><li><a href="/flug/loftfor/easa-vottun-loftfara/">EASA vottun loftfara</a
+                    ></li
+                          ><li><a href="/flug/loftfor/reglur-fyrir-almannaflug-part-m/">Reglur fyrir almannaflug Part M</a
+                    ></li
+                          ><li><a href="/flug/loftfor/hljodstigsvottord/">Hljóðstigsvottorð</a
+                    ></li
+                          ><li><a href="/flug/loftfor/easa-samthykkt-fyrirtaeki/">EASA samþykkt fyrirtæki</a
+                    ></li
+                          ><li><a href="/flug/loftfor/vidurkenndir-flugvirkjar/">Viðurkenndir aðilar - ELA1</a
+                    ></li
+                          ><li><a href="/flug/loftfor/vidbotartegundarskirteini-stc/">Viðbótartegundarskírteini STC</a
+                    ></li
+                          ><li class=" last"><a href="/flug/loftfor/leidbeiningarefni-lofthaefimala/">Leiðbeiningarefni lofthæfimála</a
+                    ></li
+                        ></ul
+                        ></li
+                        ><li class="indexpage branch"><a href="/flug/flugrekendur/">Atvinnuflug / einkaflug</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/farthegar/">Farþegar og flugvirkt</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/oryggi-og-fraedsla/">Öryggi og fræðsla</a
+                    ></li
+                        ><li><a href="/flug/fjarstyrd-loftfor-dronar/">Fjarstýrð loftför (drónar)</a
+                    ></li
+                        ><li class=" last branch"><a href="/flug/tilkynna-flugatvik/tilkynna-flugatvik">Tilkynna flugatvik</a
+                    ></li
+                      ></ul
+                      ></li
+                      ><li class="cat-siglingar branch"><a href="/siglingar/" class="cat3">Siglingar</a
+                    ></li
+                      ><li class="cat-um hidden branch"><a href="/um/" class="cat4">Um okkur</a
+                    ></li
+                      ><li class="mitt-svaedi"><a href="/mittsvaedi/" class="cat5">Mitt svæði</a
+                    ></li
+                 ></ul>
+             
+                </div>
+              </div>
+              <hr class="stream" />
+        
+      <!-- /eplica-no-index -->
+  
+
+
+        
+    
+        
+
+<!-- eplica-no-index -->
+<div class="sitesearch qsearch esearch" role="search">
+  <h2 class="boxhead">Leita á vefnum</h2>
+  <form class="boxbody" action="/leit" >
+    
+    <span class="fi_txt req"><label for="qstr">Leitaðu á vef og í skjölum</label><input id="qstr" name="q" value="" /></span>
+    <span class="fi_btn">
+    
+      <input class="submit" type="submit" value="Leita" />
+    
+    </span>
+  
+  </form>
+</div>
+<hr class="stream" />
+<!-- /eplica-no-index -->
+
+
+
+
+
+        
+    
+    </div>
+</div>
+
+  
+<div class="pgfoot">
+<div class="wrap">
+    <div class="footer" role="contentinfo">
+  <p>
+    <strong><a href="/"><img src="/skin/basic9k/i/sgs-logo-2x-foot.png" alt="Samgöngustofa" /></a></strong>
+    <a class="tel" href="tel:+3544806000">480 6000</a>
+    <span class="heimilisfang">Ármúla 2, <span>108 Reykjavík</span><br/>
+    <span class="Opnunartími">Opið frá 9:00 til 16:00</span>
+    <span class="netfang">samgongustofa(hjá)samgongustofa.is</span>
+<span class="kt">Kennitala: 540513-1040</span></span>
+  </p>
+</div>
+<hr class="stream" />
+        <!-- eplica-no-index -->
+              <div class="footermenu" role="navigation">
+                <h2 class="boxhead">Flýtileiðir</h2>
+                <div class="boxbody">
+                    <ul class="level1"
+                      ><li class="cat-umferd branch"><a href="/umferd/" class="cat1">Umferð</a
+                    
+                      ><ul class="level2"
+                        ><li class="indexpage branch"><a href="/umferd/okutaeki/okutaekjaskra/">Ökutækjaskrá</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/okutaeki/">Ökutæki</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/fraedsla/">Fræðsla</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/oryggi/">Öryggi</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/nam-og-rettindi/">Nám og réttindi</a
+                    ></li
+                        ><li class="branch"><a href="/umferd/sektir-og-vidurlog/sektir-og-refsipunktar">Sektir og viðurlög</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/leyfi-og-eftirlit/">Leyfi og eftirlit</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/umferd/tolfraedi/">Tölfræði</a
+                    ></li
+                        ><li class=" last"><a href="/umferd/farthegar/">Farþegar</a
+                    ></li
+                      ></ul
+                      ></li
+                      ><li class="cat-flug parent branch"><a href="/flug/" class="cat2">Flug</a
+                    
+                      ><ul class="level2"
+                        ><li class="indexpage branch"><a href="/flug/flugvellir-og-leidsaga/">Flugvellir og flugleiðsaga</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/nam-og-skirteini/">Nám og skírteini</a
+                    ></li
+                        ><li class="indexpage parent branch"><a href="/flug/loftfor/">Loftför</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/flugrekendur/">Atvinnuflug / einkaflug</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/farthegar/">Farþegar og flugvirkt</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/flug/oryggi-og-fraedsla/">Öryggi og fræðsla</a
+                    ></li
+                        ><li><a href="/flug/fjarstyrd-loftfor-dronar/">Fjarstýrð loftför (drónar)</a
+                    ></li
+                        ><li class=" last branch"><a href="/flug/tilkynna-flugatvik/tilkynna-flugatvik">Tilkynna flugatvik</a
+                    ></li
+                      ></ul
+                      ></li
+                      ><li class="cat-siglingar branch"><a href="/siglingar/" class="cat3">Siglingar</a
+                    
+                      ><ul class="level2"
+                        ><li class="indexpage branch"><a href="/siglingar/monnun-og-skraning/">Mönnun og skráning</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/eftirlit-og-maelingar/">Eftirlit og mælingar</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/leyfi/">Leyfi</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/skirteini-og-nam/">Nám og skírteini</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/skrar-og-utgafa/">Skrár og útgáfa</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/krofur-til-skipa/">Kröfur til skipa</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/farthegar/">Farþegar</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/siglingar/oryggi-og-fraedsla/">Öryggi og fræðsla</a
+                    ></li
+                      ></ul
+                      ></li
+                      ><li class="cat-um hidden branch"><a href="/um/" class="cat4">Um okkur</a
+                    
+                      ><ul class="level2"
+                        ><li class="indexpage branch"><a href="/um/um-stofnunina/">Um stofnunina</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/um/mannaudur/">Mannauður</a
+                    ></li
+                        ><li class="branch"><a href="/um/frettir/">Fréttir</a
+                    ></li
+                        ><li class="indexpage branch"><a href="/um/fjolmidlatorg/">Fjölmiðlatorg</a
+                    ></li
+                        ><li><a href="/um/gjaldskrar/">Gjaldskrár</a
+                    ></li
+                        ><li><a href="/um/annad-oflokkad/samgonguaaetlun/">Samgönguáætlun</a
+                    ></li
+                        ><li><a href="/eydublod">Eyðublöð</a
+                    ></li
+                        ><li><a href="/log-reglur/">Lög &amp; reglur</a
+                    ></li
+                        ><li class=" last"><a href="/um/medferd-personupplysinga/">Meðferð persónuupplýsinga</a
+                    ></li
+                      ></ul
+                      ></li
+                      ><li class="mitt-svaedi"><a href="/mittsvaedi/" class="cat5">Mitt svæði</a
+                    ></li
+                 ></ul>
+             
+                </div>
+              </div>
+              <hr class="stream" />
+        
+      <!-- /eplica-no-index -->
+  
+
+
+        
+    <div class="social" >
+    <a class="facebook" href="https://www.facebook.com/samgongustofa">Facebook</a>
+    <a class="youtube" href="http://www.youtube.com/channel/UCdIzW3TR311IkFjUP7NMYIA" title="Samgöngustofa á YouTube">YouTube</a>
+</div>
+    </div>
+</div>
+
+
+
+  
+	<!-- eplica-no-index -->
+    <div class="byggiraeplica" lang="is"><span class="stream">Þetta vefsvæði  </span><a href="http://www.eplica.is/" title="Þetta vefsvæði byggir á Eplica" target="_blank">byggir á Eplica</a></div>
+    <!-- /eplica-no-index -->
+
+  
+
+  <script src='/skin/basic9k/main.js?v10'></script>
+  
+  
+        
+<!-- Google Analytics -->
+<script>
+  (function(g,a){g['GoogleAnalyticsObject']=a;g[a]=g[a]||function(){(g[a].q=g[a].q||[]).push(arguments)};g[a].l=1*new Date()})(window,'ga');
+  ga('create', 'UA-49255790-1', 'www.samgongustofa.is');
+  ga('send', 'pageview');
+
+  if ( !window.gaHXM ) {
+      window.gaHXM = {
+          loadScript: 
+              function (opts) {
+                  var script = document.createElement('script');
+                  script.async = 1;
+                  script.src = '//www.google-analytics.com/analytics'+(opts==='debug'?'_debug':'')+'.js';
+                  var refNode = document.getElementsByTagName('script')[0];
+                  refNode.parentNode.insertBefore( script, refNode );
+                  window.gaHXM.loadScript = function () {};
+              },
+      };
+  }
+
+ 
+  gaHXM.loadScript();
+ 
+
+</script>
+<!-- End Google Analytics -->
+
+        
+    <!-- Siteimprove Analytics -->
+<script type="text/javascript">
+    /*<![CDATA[*/
+    (function() {
+        var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+        sz.src = '//siteimproveanalytics.com/js/siteanalyze_6052992.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+    })();
+    /*]]>*/
+</script>
+<!-- End Siteimprove Analytics -->
+
+</body>
+</html>
+

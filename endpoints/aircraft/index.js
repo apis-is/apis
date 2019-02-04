@@ -7,7 +7,7 @@ const h = require('apis-helpers')
 const app = require('../../server')
 
 const lookupAircraft = searchStr => new Promise((resolve, reject) => {
-  const url = `https://www.samgongustofa.is/flug/loftfor/loftfaraskra?aq=${searchStr}`
+  const url = `http://www.samgongustofa.is/flug/loftfor/loftfaraskra?aq=${searchStr}`
   request.get({
     headers: { 'User-Agent': h.browser() },
     url,
