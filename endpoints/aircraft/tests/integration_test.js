@@ -17,30 +17,30 @@ describe('aircraft', () => {
       'operator',
     ]
     const params = helpers.testRequestParams('/aircraft', { search: '100' })
+    console.info(params)
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })
   it('should return a 404 when an aircraft is not found', (done) => {
     const params = helpers.testRequestParams('/aircraft', { search: 'loftur' })
-    request.get(params, (error, response) => {
+    request.get(params, (error, response, body) => {
       if (error) {
         return done(error)
       }
-      // const json = JSON.parse(body)
-      // assert.equal(json.error, 'No aircraft found with the query loftur')
-      assert.strictEqual(response.statusCode, 404, `Invalid status code. Actual: ${response.statusCode}. Expected: 404`)
+      console.info(json)
+      const json = JSON.parse(body)
+      assert.strictEqual(json.error, 'No aircraft found with the query loftur')
       done()
     })
   })
   it('should return a 400 when a search parameter is not provided', (done) => {
     const params = helpers.testRequestParams('/aircraft')
-    request.get(params, (error, response) => {
+    request.get(params, (error, response, body) => {
       if (error) {
         return done(error)
       }
-      // const json = JSON.parse(body)
-      // assert.equal(json.error, 'Please provide a valid search string to lookup')
-      assert.equal(response.statusCode, 400, `Invalid status code. Actual: ${response.statusCode}. Expected: 400`)
+      const json = JSON.parse(body)
+      assert.strictEqual(json.error, 'Please provide a valid search string to lookup')
       done()
     })
   })
