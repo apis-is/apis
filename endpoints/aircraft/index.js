@@ -53,8 +53,8 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
         ({
           id: fields[0],
           registrationNumber: parseInt(fields[1], 10),
-          type: fields[2],
-          productionYear: parseInt(fields[3], 10),
+          type: fields[2].replace('\t', ''),
+          buildYear: parseInt(fields[3], 10),
           serialNumber: parseInt(fields[4], 10),
           maxWeight: parseInt(fields[5], 10),
           passengers: parseInt(fields[6], 10),
@@ -62,7 +62,6 @@ const lookupAircraft = searchStr => new Promise((resolve, reject) => {
           operator: fields[8],
         })
       )
-      console.info(aircraft)
 
       resolve(aircraft)
     } else {
@@ -75,14 +74,15 @@ app.get('/aircraft/:search?', async (req, res) => {
   const search = (req.query.search || req.params.search || '').replace(' ', '+')
 
   if (search === '') {
-    return res.status(431).json({ error: 'Please provide a valid search string to lookup' })
+    return res.status(400).json({ error: 'Please provide a valid search string to lookup' })
   }
 
   try {
     const results = await lookupAircraft(search)
-    console.info({ results })
     res.cache().json({ results })
   } catch (error) {
     res.status(500).json({ error })
   }
 })
+
+module.exports = lookupAircraft
