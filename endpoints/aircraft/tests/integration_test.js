@@ -14,7 +14,6 @@ describe('aircraft', () => {
   })
 
   describe('correct-fields', () => {
-    this.timeout(20000)
     it('should return an array of objects containing correct fields', (done) => {
       const fieldsToCheckFor = [
         'id',
@@ -35,7 +34,6 @@ describe('aircraft', () => {
   })
 
   describe('aircraft-not-found', () => {
-    this.timeout(20000)
     it('should return a 404 when an aircraft is not found', (done) => {
       const params = helpers.testRequestParams('/aircraft', { search: 'loftur' })
       request.get(params, (error, response, body) => {
@@ -49,7 +47,6 @@ describe('aircraft', () => {
       })
     })
 
-    this.timeout(20000)
     it('should return a 400 when a search parameter is not provided', (done) => {
       const params = helpers.testRequestParams('/aircraft')
       request.get(params, (error, response, body) => {
