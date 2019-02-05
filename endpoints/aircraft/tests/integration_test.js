@@ -7,10 +7,13 @@ const helpers = require('../../../lib/test_helpers.js')
 
 describe('aircraft', () => {
   before(() => {
-    nock('http://www.samgongustofa.is/flug/loftfor/loftfaraskra')
-      .get('/')
+    nock('https://www.samgongustofa.is')
+      .get('/flug/loftfor/loftfaraskra')
       .query({ aq: '100' })
-      .reply(200, fs.readFileSync(`${__dirname}/loftfaraskra.fixture`))
+      .reply(200, fs.readFileSync(`${__dirname}/loftfaraskra.100.fixture`))
+      .get('/flug/loftfor/loftfaraskra')
+      .query({ aq: 'loftur' })
+      .reply(200, fs.readFileSync(`${__dirname}/loftfaraskra.loftur.fixture`))
   })
 
   describe('correct-fields', () => {
@@ -27,7 +30,6 @@ describe('aircraft', () => {
         'operator',
       ]
       const params = helpers.testRequestParams('/aircraft', { search: '100' })
-      console.info(params)
       const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
       request.get(params, resultHandler)
     })
@@ -41,7 +43,6 @@ describe('aircraft', () => {
           return done(error)
         }
         const json = JSON.parse(body)
-        console.info(json)
         assert.strictEqual(json.error, 'No aircraft found with the query loftur')
         done()
       })
