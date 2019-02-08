@@ -13,15 +13,15 @@ app.get('/flight', (req, res) => {
   if (!data.language) data.language = ''
 
   if (data.type === 'departures' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/'
+    url = 'https://www.isavia.is/keflavikurflugvollur/flugaaetlun/brottfarir'
   } else if (data.type === 'departures' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Departures/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/departures'
   } else if (data.type === 'arrivals' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Komur/'
+    url = 'https://www.isavia.is/keflavikurflugvollur/flugaaetlun/komur'
   } else if (data.type === 'arrivals' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/arrivals'
   } else {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+    url = 'https://www.isavia.is/en/keflavik-airport/flight-schedule/arrivals'
   }
 
   request.get({
@@ -29,9 +29,8 @@ app.get('/flight', (req, res) => {
     url,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.kefairport.is refuses to respond or give back data' })
+      return res.status(500).json({ error: 'www.isavia.is refuses to respond or give back data' })
     }
-
     try {
       $ = cheerio.load(body)
     } catch (err) {
@@ -40,28 +39,28 @@ app.get('/flight', (req, res) => {
 
     const obj = { results: [] }
 
-    $('table tr').each(function (key) {
+    $('.schedule-items-entry').each(function (key) {
       if (key !== 0) {
         let flight = {}
         if (data.type === 'departures') {
           flight = {
             date: $(this).children('td').slice(0).html(),
-            flightNumber: $(this).children('td').slice(1).html(),
-            airline: $(this).children('td').slice(2).html(),
-            to: $(this).children('td').slice(3).html(),
-            plannedArrival: $(this).children('td').slice(4).html(),
-            realArrival: $(this).children('td').slice(5).html(),
-            status: $(this).children('td').slice(6).html(),
+            flightNumber: $(this).children('td').slice(2).html(),
+            airline: $(this).children('td').slice(3).children('span').html(),
+            to: $(this).children('td').slice(1).children('span').html(),
+            plannedArrival: $(this).children('td').slice(4).children('span').html(), // Status contains data for plannedArrival now, consider deleting this var
+            realArrival: '\r\n', // There is not var on website named realArrival anymore, consider deleting it
+            status: $(this).children('td').slice(4).children('span').html(),
           }
         } else {
           flight = {
             date: $(this).children('td').slice(0).html(),
-            flightNumber: $(this).children('td').slice(1).html(),
-            airline: $(this).children('td').slice(2).html(),
-            from: $(this).children('td').slice(3).html(),
-            plannedArrival: $(this).children('td').slice(4).html(),
-            realArrival: $(this).children('td').slice(5).html(),
-            status: $(this).children('td').slice(6).html(),
+            flightNumber: $(this).children('td').slice(2).html(),
+            airline: $(this).children('td').slice(3).children('span').html(),
+            from: $(this).children('td').slice(1).children('span').html(),
+            plannedArrival: $(this).children('td').slice(4).children('span').html(), // Status contains data for plannedArrival now, consider deleting this var
+            realArrival: '\r\n', // There is not var on website named realArrival anymore, consider deleting it
+            status: $(this).children('td').slice(4).children('span').html(),
           }
         }
 
