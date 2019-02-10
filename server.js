@@ -4,12 +4,6 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/first */
 /* eslint-disable new-cap */
-/**
- * Only for apis.is production environment
- */
-if (process.env.NODE_ENV === 'production') {
-  process.chdir('/apis/current')
-}
 
 const { EventEmitter: EE } = require('events')
 const express = require('express')
@@ -122,7 +116,8 @@ app.use((error, req, res, next) => {
 /**
  * Start the server
  */
-const port = process.env.NODE_ENV === 'testing' ? 3101 : 3100
+const port =
+  process.env.PORT || (process.env.NODE_ENV === 'test' ? 3101 : 3100)
 app.listen(port, () => {
   app.emit('ready')
 })
