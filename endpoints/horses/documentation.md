@@ -2,7 +2,7 @@
 
 Source: [Worldfengur.com](http://www.worldfengur.com/freezone_horse.jsp?c=EN)
 
-- GET [/horses](https://apis.is/horses)
+-  GET [/horses](https://apis.is/horses)
 
 Search the Icelandic horse database Worldfengur.
 **NB: At least one of the following is required, id, name and origin or microchip.**
