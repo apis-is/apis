@@ -1,3 +1,8 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-unneeded-ternary */
+
 const request = require('request')
 const xml2js = require('xml2js')
 const h = require('apis-helpers')
@@ -6,7 +11,7 @@ const app = require('../../server')
 const parseString = xml2js.parseString
 // return callback(null, JSON.parse(data))
 const parseFeed = function (callback, data) {
-  parseString(data, { explicitRoot: false }, (err, result, title) => {
+  parseString(data, { explicitRoot: false }, (err, result) => {
     if (err) return callback(new Error(`Parsing of XML failed. Title ${err}`))
     const roads = []
 
@@ -15,7 +20,7 @@ const parseFeed = function (callback, data) {
       roads.push({
         routeId: Road.IdLeid[0].length > 0 ? Road.IdLeid[0] : null, // Can be null
         routeName: Road.LeidNafn[0].length > 0 ? Road.LeidNafn[0] : null, // Can be null
-        segmentId: parseInt(Road.IdButur[0]),
+        segmentId: parseInt(Road.IdButur[0], 10),
         segmentSerial: Road.Rodun[0],
         segmentName: Road.LangtNafn[0],
         segmentShortName: Road.StuttNafn[0],
@@ -23,10 +28,10 @@ const parseFeed = function (callback, data) {
         conditionId: Road.IdAstand[0],
         conditionDescription: Road.FulltAstand[0],
         conditionShortDescription: Road.StuttAstand[0],
-        priority: parseInt(Road.Forgangur[0]),
+        priority: parseInt(Road.Forgangur[0], 10),
         comment: Road.Aths[0].length > 0 ? Road.Aths[0] : null,
         date: Road.DagsKeyrtUt[0],
-        isHighlands: parseInt(Road.ErHalendi[0]) === 1 ? true : false,
+        isHighlands: parseInt(Road.ErHalendi[0], 2) === 1 ? true : false,
         colorCode: Road.Linulitur[0].length > 0 ? Road.Linulitur[0] : null,
         conditionUpdated: Road.DagsSkrad[0],
         surfaceCondition: Road.AstandYfirbords[0],
@@ -51,7 +56,8 @@ const getFeed = function (url, callback) {
 const serve = function (url, res, next) {
   getFeed(url, (err, data) => {
     if (err) {
-      return res.status(500).json({ error: 'www.vegagerdin.is refuses to respond or give back data ' + err })
+      console.error(err)
+      return next(502)
     }
     res.cache(1800).json({ results: data })
   })

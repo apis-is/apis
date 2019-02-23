@@ -14,10 +14,10 @@ describe('road - all', () => {
   it('should return an array of objects containing correct fields', (done) => {
     const fieldsToCheckFor = [
       'routeId',
-      'routeName', 
-      'segmentId', 
-      'segmentSerial', 
-      'segmentName', 
+      'routeName',
+      'segmentId',
+      'segmentSerial',
+      'segmentName',
       'segmentShortName',
       'segmentSignal',
       'conditionId',
