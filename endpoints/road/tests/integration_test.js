@@ -1,7 +1,7 @@
 const request = require('request')
 const helpers = require('../../../lib/test_helpers')
 
-describe('tv root', () => {
+describe('road root', () => {
   it('should return info', (done) => {
     const fieldsToCheckFor = ['info']
     const params = helpers.testRequestParams('/road/')
@@ -31,7 +31,7 @@ describe('road - all', () => {
       'conditionUpdated',
       'surfaceCondition',
     ]
-    const params = helpers.testRequestParams('/road')
+    const params = helpers.testRequestParams('/road/all')
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
     request.get(params, resultHandler)
   })
