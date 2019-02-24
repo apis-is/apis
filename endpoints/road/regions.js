@@ -1,7 +1,4 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-unneeded-ternary */
+/* eslint-disable */
 
 const request = require('request')
 const xml2js = require('xml2js')
@@ -13,7 +10,7 @@ const parseString = xml2js.parseString
 
 const sourceUrl = 'http://gagnaveita.vegagerdin.is/api/faerd2014_1'
 
-const getRegionSegments = (url) => new Promise((resolve, reject) => { 
+const getRegionSegments = (url) => new Promise((resolve, reject) => {
   request(url, (error, response, body) => {
     if (error) {
       reject(error)
@@ -24,7 +21,7 @@ const getRegionSegments = (url) => new Promise((resolve, reject) => {
     try {
       $ = cheerio.load(body)
     } catch (e) {
-      return res.status(500).json({ error: 'Could not load the body with cherrio.' })
+      return reject(error)
     }
     const hotspots = $('.vg-roadmap-hotspot')
 
@@ -37,13 +34,12 @@ const getRegionSegments = (url) => new Promise((resolve, reject) => {
       // Find hotspot info
       const hotspotinfo = hotspot.attr('data-hotspotinfo')
       const obj = JSON.parse(hotspotinfo.replace(/'/g, '"'))
-      if(obj.idleid)
+      if (obj.idleid)
         segments.push(parseInt(obj.idleid, 10))
     })
     resolve(segments)
   })
 })
-
 const parseFeed = function (callback, data, regionUrl) {
   parseString(data, { explicitRoot: false }, (err, result) => {
     if (err) return callback(new Error(`Parsing of XML failed. Title ${err}`))
@@ -53,35 +49,33 @@ const parseFeed = function (callback, data, regionUrl) {
 
       for (let i = 0; i < result.Faerd.length; ++i) {
         const Road = result.Faerd[i]
-        const segmentId = parseInt(Road.IdButur[0], 10)
-        const shortSegmentId = parseInt(Road.IdButur[0].slice(0, 5))
+        const shortSegmentId = parseInt(Road.IdButur[0].slice(0, 5), 10)
         if (segments.includes(shortSegmentId))
-        roads.push({
-          routeId: Road.IdLeid[0].length > 0 ? Road.IdLeid[0] : null, // Can be null
-          routeName: Road.LeidNafn[0].length > 0 ? Road.LeidNafn[0] : null, // Can be null
-          segmentId: parseInt(Road.IdButur[0], 10),
-          segmentSerial: Road.Rodun[0],
-          segmentName: Road.LangtNafn[0],
-          segmentShortName: Road.StuttNafn[0],
-          segmentSignal: Road.Skilti[0].length > 0 ? Road.Skilti[0] : null,
-          conditionId: Road.IdAstand[0],
-          conditionDescription: Road.FulltAstand[0],
-          conditionShortDescription: Road.StuttAstand[0],
-          priority: parseInt(Road.Forgangur[0], 10),
-          comment: Road.Aths[0].length > 0 ? Road.Aths[0] : null,
-          date: Road.DagsKeyrtUt[0],
-          isHighlands: parseInt(Road.ErHalendi[0], 2) === 1 ? true : false,
-          colorCode: Road.Linulitur[0].length > 0 ? Road.Linulitur[0] : null,
-          conditionUpdated: Road.DagsSkrad[0],
-          surfaceCondition: Road.AstandYfirbords[0],
-        })
+          roads.push({
+            routeId: Road.IdLeid[0].length > 0 ? Road.IdLeid[0] : null, // Can be null
+            routeName: Road.LeidNafn[0].length > 0 ? Road.LeidNafn[0] : null, // Can be null
+            segmentId: parseInt(Road.IdButur[0], 10),
+            segmentSerial: Road.Rodun[0],
+            segmentName: Road.LangtNafn[0],
+            segmentShortName: Road.StuttNafn[0],
+            segmentSignal: Road.Skilti[0].length > 0 ? Road.Skilti[0] : null,
+            conditionId: Road.IdAstand[0],
+            conditionDescription: Road.FulltAstand[0],
+            conditionShortDescription: Road.StuttAstand[0],
+            priority: parseInt(Road.Forgangur[0], 10),
+            comment: Road.Aths[0].length > 0 ? Road.Aths[0] : null,
+            date: Road.DagsKeyrtUt[0],
+            isHighlands: parseInt(Road.ErHalendi[0], 2) === 1 ? true : false,
+            colorCode: Road.Linulitur[0].length > 0 ? Road.Linulitur[0] : null,
+            conditionUpdated: Road.DagsSkrad[0],
+            surfaceCondition: Road.AstandYfirbords[0],
+          })
       }
       return callback(null, roads)
     })
   })
 }
-
-const getFeed = function (url,regionUrl, callback,) {
+const getFeed = function (url, regionUrl, callback) {
   request.get({
     headers: { 'User-Agent': h.browser(), 'Content-Type': 'application/xml; charset=utf-8' },
     encoding: 'utf-8',
@@ -102,48 +96,28 @@ const serve = function (url, regionUrl, res, next) {
   })
 }
 
-
-app.get('/road/reykjavik', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/reykjavik-og-nagrenni-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-app.get('/road/west', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/vesturland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-app.get('/road/southwest', (req, res, next) => {
-  const regionUrl = 'http://vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudvesturland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-app.get('/road/westfjords', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/vestfirdir-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-app.get('/road/south', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudurland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-
-app.get('/road/north', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/nordurland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-app.get('/road/east', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/austurland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-
-app.get('/road/northeast', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/nordausturland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-
-app.get('/road/southeast', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudausturland-faerd-kort/'
-  serve(sourceUrl, regionUrl, res, next)
-})
-
-app.get('/road/highlands', (req, res, next) => {
-  const regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/midhalendid-faerd-kort/'
+app.get('/road/:region', (req, res, next) => {
+  const regionParam = req.params.region
+  let regionUrl = null
+  if (regionParam === 'reykjavik')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/reykjavik-og-nagrenni-faerd-kort/'
+  else if (regionParam === 'west')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/vesturland-faerd-kort/'
+  else if (regionParam === 'southwest')
+    regionUrl = 'http://vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudvesturland-faerd-kort/'
+  else if (regionParam === 'westfjords')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/vestfirdir-faerd-kort/'
+  else if (regionParam === 'south')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudurland-faerd-kort/'
+  else if (regionParam === 'north')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/nordurland-faerd-kort/'
+  else if (regionParam === 'east')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/austurland-faerd-kort/'
+  else if (regionParam === 'northeast')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/nordausturland-faerd-kort/'
+  else if (regionParam === 'southeast')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/sudausturland-faerd-kort/'
+  else if (regionParam === 'highlands')
+    regionUrl = 'http://www.vegagerdin.is/ferdaupplysingar/faerd-og-vedur/midhalendid-faerd-kort/'
   serve(sourceUrl, regionUrl, res, next)
 })
