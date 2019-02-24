@@ -9,7 +9,7 @@ const h = require('apis-helpers')
 const app = require('../../server')
 
 const parseString = xml2js.parseString
-// return callback(null, JSON.parse(data))
+
 const parseFeed = function (callback, data) {
   parseString(data, { explicitRoot: false }, (err, result) => {
     if (err) return callback(new Error(`Parsing of XML failed. Title ${err}`))

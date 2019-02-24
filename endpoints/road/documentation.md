@@ -10,7 +10,8 @@ http://www.vegagerdin.is/upplysingar-og-utgafa/gagnaveita-vegagerdarinnar/
 Lookup road conditions in Iceland
 
 | Endpoints  | Description                                    | Example                                                          |
-|------------|------------------------------------------------|---------------------------------|
-| :endpoint  | Which region in Iceland to get road conditions | [all](https://apis.is/road/all) |
+|------------|------------------------------------------------|---------------------------------------------|
+| :endpoint  | Which region in Iceland to get road conditions | [all](https://apis.is/road/all)             |
+| /reykjavik |                                                | [reykjavik](https://apis.is/road/reykjavik) |
 
 ---
