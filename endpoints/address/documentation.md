@@ -2,7 +2,7 @@
 
 Source [Iceland Post](https://postur.is)
 
--  GET [/address](https://apis.is/address)
+- GET [/address](https://apis.is/address)
 
 Lookup addresses in Iceland through the Icelandic Post API
 

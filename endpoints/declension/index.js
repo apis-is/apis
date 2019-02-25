@@ -38,7 +38,7 @@ function getDeclensions(callback, providedParams) {
     // more than 1 result from request (ex: 'hús')
     if (result.length > 1) {
       // call recursively again with new url
-      const id = result[0].attribs.on_click.match(/\d+/)[0]
+      const id = result[0].attribs.onclick.match(/\d+/)[0]
       baseUrl.query = { id }
       params.url = url.format(baseUrl)
       return getDeclensions(callback, params)

@@ -18,7 +18,7 @@ app.get('/golf/teetimes', (req, res) => {
     // http://stackoverflow.com/a/20091919
     rejectUnauthorized: false,
     headers: { 'User-Agent': h.browser() },
-    url: `http://mitt.golf.is/pages/rastimar/rastimayfirlit/?club=${clubId}`,
+    url: `https://mitt.golf.is/pages/rastimar/rastimayfirlit/?club=${clubId}`,
   }, (err, response, html) => {
     if (err || response.statusCode !== 200) {
       return res.status(500).json({
@@ -48,7 +48,7 @@ app.get('/golf/clubs', (req, res) => {
     // http://stackoverflow.com/a/20091919
     rejectUnauthorized: false,
     headers: { 'User-Agent': h.browser() },
-    url: 'http://mitt.golf.is/pages/rastimar/',
+    url: 'https://mitt.golf.is/pages/rastimar/',
   }, (err, response, html) => {
     if (err || response.statusCode !== 200) {
       return res.status(500).json({

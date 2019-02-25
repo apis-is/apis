@@ -2,7 +2,7 @@
 
 Source: [Keflavik Airport](https://kefairport.is/)
 
--  GET [/flight](https://apis.is/flight)
+- GET [/flight](https://apis.is/flight)
 
 Get a list of all international flights departing and arriving at Keflavik Airport today.
 

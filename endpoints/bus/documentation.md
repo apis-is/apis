@@ -2,7 +2,7 @@
 
 Source [bus.is](https://bus.is)
 
--  GET [/bus/realtime](https://apis.is/bus/realtime)
+- GET [/bus/realtime](https://apis.is/bus/realtime)
 
 Real-time location of busses. Results are only shown for active busses.
 

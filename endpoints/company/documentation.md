@@ -12,6 +12,6 @@ Search the Icelandic company registry
 | Name          | Company name                                  | [Blendin](https://apis.is/company?name=blendin) |
 | Address       | Company's address                             |                                                 |
 | SocialNumber  | Company's social security number / ID number  |                                                 |
-| VSKNR         | Company's VAT-number (VSK in icelandic)       ||                                                |
+| VSKNR         | Company's VAT-number (VSK in icelandic)       |                                                 |
 
 ---

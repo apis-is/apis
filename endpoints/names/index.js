@@ -12,16 +12,16 @@ const h = require('apis-helpers')
 const cheerio = require('cheerio')
 const app = require('../../server')
 
-/* Handles the request for a specific request URL */
-function handleRequest(providedUrl, req, res) {
+// Handles the request for a specific request URL
+const handleRequest = (providedUrl, req, res) => {
   let $
-  // Check for the filter parameter
-  const filter = req.params.filter || req.query.filter || req.query.search || ''
+  // Check for the search parameter
+  const search = req.params.search || req.query.search || req.query.filter || ''
 
-  // Add name filtering if it is requested
+  // Add search if it is requested
   let url = providedUrl || ''
-  if (filter !== '') {
-    url += `&Nafn=${filter}`
+  if (search !== '') {
+    url += `&Nafn=${search}`
   }
 
   request.get({
@@ -41,14 +41,12 @@ function handleRequest(providedUrl, req, res) {
     const obj = { results: [] }
 
     // Clear data regarding the acceptance date of the name (not needed)
-    $('.dir li i').each(() => {
-      $(this).remove()
-    })
+    $('.dir li i').remove()
 
     // Loop through all the names in the list and add them to our array
-    $('.dir li').each(() => {
-      const name = $(this).text()
-      obj.results.push(name.trim())
+    $('.dir li').each((i, el) => {
+      const name = $(el).text().trim()
+      obj.results.push(name)
     })
 
     // Return the results as JSON and cache for 24 hours
@@ -56,61 +54,52 @@ function handleRequest(providedUrl, req, res) {
   })
 }
 
-/* Root names handler - only returns a list of resources */
-app.get('/names', (req, res) => {
-  return res.json({
-    results: [
-      {
-        // eslint-disable-next-line max-len
-        info: 'This is an api that lists all allowed Icelandic names. A search parameter can be used with each endpoint',
-        endpoints: {
-          males: '/names/males/',
-          females: '/names/females/',
-          middlenames: '/names/middlenames/',
-        },
-      },
-    ],
-  })
-})
+const rootUrl = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof='
 
-/* Get all legal names for males */
-app.get('/names/males/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
+// Get all legal names for males
+app.get('/names/males/:search?', (req, res) => {
+  const url = `${rootUrl}&Drengir=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
-/* Get all legal names for females */
-app.get('/names/females/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
+// Get all legal names for females
+app.get('/names/females/:search?', (req, res) => {
+  const url = `${rootUrl}&Stulkur=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
-/* Get all legal middle names */
-app.get('/names/middlenames/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
+// Get all legal middle names
+app.get('/names/middlenames/:search?', (req, res) => {
+  const url = `${rootUrl}&Millinofn=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names for males */
-app.get('/names/rejected/males/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
+// Get all rejected names for males
+app.get('/names/rejected/males/:search?', (req, res) => {
+  const url = `${rootUrl}&Drengir=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names for females */
-app.get('/names/rejected/females/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
+// Get all rejected names for females
+app.get('/names/rejected/females/:search?', (req, res) => {
+  const url = `${rootUrl}&Stulkur=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected middle names */
-app.get('/names/rejected/middlenames/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
+// Get all rejected middle names
+app.get('/names/rejected/middlenames/:search?', (req, res) => {
+  const url = `${rootUrl}&Millinofn=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names */
-app.get('/names/rejected/:filter?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
+// Get all rejected names
+app.get('/names/rejected/:search?', (req, res) => {
+  const url = `${rootUrl}&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no`
+  return handleRequest(url, req, res)
+})
+
+// Get all names with a given search
+app.get('/names/:search?', (req, res) => {
+  const url = `${rootUrl}&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
