@@ -54,56 +54,52 @@ function handleRequest(providedUrl, req, res) {
   })
 }
 
-/* Root names handler - only returns a list of resources */
-app.get('/names', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Samthykkt=yes'
-  return handleRequest(url, req, res)
-})
-
-/* Get all legal names for males */
+// Get all legal names for males
 app.get('/names/males/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
-/* Get all legal names for females */
+// Get all legal names for females
 app.get('/names/females/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
-/* Get all legal middle names */
+// Get all legal middle names
 app.get('/names/middlenames/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names for males */
+// Get all rejected names for males
 app.get('/names/rejected/males/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names for females */
+// Get all rejected names for females
 app.get('/names/rejected/females/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected middle names */
+// Get all rejected middle names
 app.get('/names/rejected/middlenames/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
-/* Get all rejected names */
+// Get all rejected names
 app.get('/names/rejected/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
   return handleRequest(url, req, res)
 })
 
-/* Get all names with a given search */
-app.get('/names/:search', (req, res) => {
+// Note, it is important to have this router below others so it will not trigger other routers as a search query
+// Like GET /names/middlenames will not trigger '/names/:search?' because '/names/middlenames/:search?' route is defined above
+// Get all names with a given search
+app.get('/names/:search?', (req, res) => {
   const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Samthykkt=yes'
   return handleRequest(url, req, res)
 })
