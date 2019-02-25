@@ -12,8 +12,8 @@ const h = require('apis-helpers')
 const cheerio = require('cheerio')
 const app = require('../../server')
 
-/* Handles the request for a specific request URL */
-function handleRequest(providedUrl, req, res) {
+// Handles the request for a specific request URL
+const handleRequest = (providedUrl, req, res) => {
   let $
   // Check for the search parameter
   const search = req.params.search || req.query.search || req.query.filter || ''
@@ -54,52 +54,52 @@ function handleRequest(providedUrl, req, res) {
   })
 }
 
+const rootUrl = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof='
+
 // Get all legal names for males
 app.get('/names/males/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=yes'
+  const url = `${rootUrl}&Drengir=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
 // Get all legal names for females
 app.get('/names/females/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=yes'
+  const url = `${rootUrl}&Stulkur=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
 // Get all legal middle names
 app.get('/names/middlenames/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=yes'
+  const url = `${rootUrl}&Millinofn=on&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
 
 // Get all rejected names for males
 app.get('/names/rejected/males/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Drengir=on&Samthykkt=no'
+  const url = `${rootUrl}&Drengir=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
 // Get all rejected names for females
 app.get('/names/rejected/females/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Samthykkt=no'
+  const url = `${rootUrl}&Stulkur=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
 // Get all rejected middle names
 app.get('/names/rejected/middlenames/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Millinofn=on&Samthykkt=no'
+  const url = `${rootUrl}&Millinofn=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
 // Get all rejected names
 app.get('/names/rejected/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no'
+  const url = `${rootUrl}&Stulkur=on&Drengir=on&Millinofn=on&Samthykkt=no`
   return handleRequest(url, req, res)
 })
 
-// Note, it is important to have this router below others so it will not trigger other routers as a search query
-// Like GET /names/middlenames will not trigger '/names/:search?' because '/names/middlenames/:search?' route is defined above
 // Get all names with a given search
 app.get('/names/:search?', (req, res) => {
-  const url = 'https://www.island.is/mannanofn/leit-ad-nafni/?Stafrof=&Samthykkt=yes'
+  const url = `${rootUrl}&Samthykkt=yes`
   return handleRequest(url, req, res)
 })
