@@ -10,8 +10,8 @@ const assert = require('assert')
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
 
-/* Asserts the results */
-function assertResults(params, beEmpty) {
+// Asserts the results
+const assertResults = (params, beEmpty) => {
   const shouldBeEmpty = beEmpty || false
   request.get(params, (err, res, body) => {
     const json = JSON.parse(body)
@@ -20,135 +20,55 @@ function assertResults(params, beEmpty) {
     if (!shouldBeEmpty) {
       assert(json.results.length > 0, 'Results are empty')
     } else {
-      assert(json.results.length <= 0, 'Results are NOT empty')
+      assert(json.results.length === 0, 'Results are NOT empty')
     }
   })
 }
 
-/* Test the unfiltered list of names */
-function testUnfiltered(url) {
+// Test the unfiltered list of names
+const testUnfiltered = (url) => {
   it('should return an array of strings', (done) => {
     const params = helpers.testRequestParams(url, {})
-
     assertResults(params)
     done()
   })
 }
 
-/* Test filtering with an invalid string */
-function testFilteredEmpty(url) {
+// Test filtering with a string that should return no results
+const testFilteredEmpty = (url) => {
   it('should return an empty array', (done) => {
     const params = helpers.testRequestParams(url, { search: '234asdf' })
-
     assertResults(params, true)
     done()
   })
 }
 
-/* Test filtering the results with a valid filter */
-function testFiltered(url) {
+// Test filtering the results with a valid filter
+const testFiltered = (url) => {
   it('should return an array of strings', (done) => {
     const params = helpers.testRequestParams(url, { search: 'an' })
-
     assertResults(params)
     done()
   })
 }
 
+// Test the endpoint
+const testEndpoint = (name, url) => {
+  // without filtering
+  describe(`${name}`, () => testUnfiltered(url))
+  // with filtering that should return empty array as a results
+  describe(`${name}-filtered-invalid`, () => testFilteredEmpty(url))
+  // with filtering
+  describe(`${name}-filtered`, () => testFiltered(url))
+}
+
 describe('names', () => {
-  // TODO: Test the /names endpoint here?
-
-  /* Test the /names/males endpoint with filtering */
-  describe('males-filtered', () => {
-    testFiltered('/names/males')
-  })
-
-  /* Test the /names/males endpoint with invalid filtering */
-  describe('males-filtered-invalid', () => {
-    testFilteredEmpty('/names/males')
-  })
-
-  /* Test the /names/males endpoint without filtering */
-  describe('males', () => {
-    testUnfiltered('/names/males')
-  })
-
-  /* Test the /names/females endpoint with filtering */
-  describe('females-filtered', () => {
-    testFiltered('/names/females')
-  })
-
-  /* Test the /names/females endpoint with invalid filtering */
-  describe('females-filtered-invalid', () => {
-    // testFilteredEmpty('/names/females')
-    // Should be '/names/females' but that test fails and I can't figure out why
-    testFilteredEmpty('/names/males')
-  })
-
-  /* Test the /names/females endpoint without filtering */
-  describe('females', () => {
-    testUnfiltered('/names/females')
-  })
-
-  /* Test the /names/middlenames endpoint with filtering */
-  describe('middlenames-filtered', () => {
-    testFiltered('/names/middlenames')
-  })
-
-  /* Test the /names/middlenames endpoint with invalid filtering */
-  describe('middlenames-filtered-invalid', () => {
-    testFilteredEmpty('/names/middlenames')
-  })
-
-  /* Test the /names/middlenames endpoint without filtering */
-  describe('middlenames', () => {
-    testUnfiltered('/names/middlenames')
-  })
-
-  // TODO: Test the /names/rejected endpoint here?
-
-  /* Test the /names/rejected/males endpoint with filtering */
-  describe('rejected-males-filtered', () => {
-    testFiltered('/names/rejected/males')
-  })
-
-  /* Test the /names/rejected/males endpoint with invalid filtering */
-  describe('rejected-males-filtered-invalid', () => {
-    testFilteredEmpty('/names/rejected/males')
-  })
-
-  /* Test the /names/rejected/males endpoint without filtering */
-  describe('rejected-males', () => {
-    testUnfiltered('/names/rejected/males')
-  })
-
-  /* Test the /names/rejected/females endpoint with filtering */
-  describe('rejected-females-filtered', () => {
-    testFiltered('/names/rejected/females')
-  })
-
-  /* Test the /names/rejected/females endpoint with invalid filtering */
-  describe('rejected-females-filtered-invalid', () => {
-    testFilteredEmpty('/names/rejected/females')
-  })
-
-  /* Test the /names/rejected/females endpoint without filtering */
-  describe('rejected-females', () => {
-    testUnfiltered('/names/rejected/females')
-  })
-
-  /* Test the /names/rejected/middlenames endpoint with filtering */
-  describe('rejected-middlenames-filtered', () => {
-    testFiltered('/names/rejected/middlenames')
-  })
-
-  /* Test the /names/rejected/middlenames endpoint with invalid filtering */
-  describe('rejected-middlenames-filtered-invalid', () => {
-    testFilteredEmpty('/names/rejected/middlenames')
-  })
-
-  /* Test the /names/rejected/middlenames endpoint without filtering */
-  describe('rejected-middlenames', () => {
-    testUnfiltered('/names/rejected/middlenames')
-  })
+  testEndpoint('names', '/names')
+  testEndpoint('males', '/names/males')
+  testEndpoint('females', '/names/females')
+  testEndpoint('middlenames', '/names/middlenames')
+  testEndpoint('rejected-names', '/names/rejected/')
+  testEndpoint('rejected-males', '/names/rejected/males')
+  testEndpoint('rejected-females', '/names/rejected/females')
+  testEndpoint('rejected-middlenames', '/names/rejected/middlenames')
 })
