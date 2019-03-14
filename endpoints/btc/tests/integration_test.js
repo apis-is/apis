@@ -1,10 +1,8 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable import/first */
 /* eslint-disable import/extensions */
-const assert = require('assert')
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
-
 
 describe('btc', function () {
   this.timeout(20000)

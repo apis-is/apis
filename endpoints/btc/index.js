@@ -1,9 +1,8 @@
-const request = require('request');
-const moment = require('moment');
-const app = require('../../server');
+const request = require('request')
+const app = require('../../server')
 
 // set cache time to 1 minute
-const cacheTime = 60;
+const cacheTime = 60
 
 function queryGzipJson(url, callback) {
   const headers = {
@@ -25,7 +24,6 @@ function queryGzipJson(url, callback) {
 function queryRate(callback) {
   queryGzipJson('https://myntkaup.is/api/assets/bitcoin', callback)
 }
-
 
 function standardErrorResponse(res) {
   return res.status(500).json({
