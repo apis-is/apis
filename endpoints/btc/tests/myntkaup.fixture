@@ -1,0 +1,9 @@
+{
+  "id": "bitcoin",
+  "symbol": "BTC",
+  "currencySymbol": "₿",
+  "rateUsd": 4040.7933255406665,
+  "rateIsk": 472287.6491152461,
+  "rateIskFriendly": "472.287kr.",
+  "timestamp": 1553041842635
+}
