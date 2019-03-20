@@ -2708,6 +2708,52 @@
           </row>
         </article>
 
+        <article id="endpoint-bitcoin" shortname="bitcoin" title="Bitcoin to ISK exchange rate" icon="btc" class="endpoint">
+          <row>
+            <column class="medium-10 large-8 col-centered">
+              <hgroup>
+                <icon class="blue fa fa-btc"></icon>
+                <h3><a href="#endpoint-bitcoin">
+                    <icon class="fa fa-link"></icon>Bitcoin to ISK exchange rate</a></h3>
+                <h4>Source:&nbsp;<a href="https://myntkaup.is/" target="_blank" title="Myntkaup, auðveldasta leiðin til þess að kaupa Bitcoin á Íslandi í dag.">myntkaup.is</a></h4>
+              </hgroup>
+              <box class="light endpoint">
+                <titlebar class="blue">
+                  <method>get</method>
+                  <path><a href="http://apis.is/btc" target="_blank">/btc</a></path>
+                </titlebar>
+                <div class="content">
+                  <p>Current Bitcoin to ISK exchange rate.</p>
+                  <h5 toggle-next="closed" class="demo">jQuery demo</h5>
+                  <pre class="demo"><code class="javascript">$.ajax({
+        'url': 'http://apis.is/btc',
+        'type': 'GET',
+        'dataType': 'json',
+        'success': function(response) {
+            console.log(response);
+        }
+});
+        </code></pre>
+                  <h5 toggle-next="closed" class="response">Response</h5>
+                  <pre class="response"><code class="json">
+{
+  "results": [
+    {
+      "id": "bitcoin",
+      "symbol": "BTC",
+      "currencySymbol": "₿",
+      "rateUsd": 3878.990012322519,
+      "rateIsk": 458225.2181623272,
+      "rateIskFriendly": "458.225kr."
+    }
+  ]
+}</code></pre>
+                </div>
+
+              </box>
+            </column>
+          </row>
+        </article>
       </main>
       <footer>
         <section class="dark">
