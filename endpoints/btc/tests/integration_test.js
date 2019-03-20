@@ -1,12 +1,12 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable import/first */
 /* eslint-disable import/extensions */
-const request = require('request')
-const helpers = require('../../../lib/test_helpers.js')
-const nock = require('nock')
 const fs = require('fs')
+const request = require('request')
+const nock = require('nock')
+const helpers = require('../../../lib/test_helpers.js')
 
-describe('btc', function () {
+describe('btc', ()=> {
   const rateTypes = {
     id: String,
     symbol: String,
