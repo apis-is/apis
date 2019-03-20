@@ -1,8 +1,8 @@
 const request = require('request')
 const app = require('../../server')
 
-// set cache time to 1 minute
-const cacheTime = 60
+// set cache time to 10 secs
+const cacheTime = 10
 
 function queryGzipJson(url, callback) {
   const headers = {
@@ -36,6 +36,6 @@ app.get('/btc', (req, res) => {
     if (error || response.statusCode !== 200) {
       return standardErrorResponse(res)
     }
-    return res.cache(cacheTime).json(data)
+    return res.cache(cacheTime).json({results: [data]})
   })
 })

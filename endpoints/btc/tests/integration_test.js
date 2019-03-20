@@ -3,31 +3,30 @@
 /* eslint-disable import/extensions */
 const request = require('request')
 const helpers = require('../../../lib/test_helpers.js')
+const nock = require('nock')
+const fs = require('fs')
 
 describe('btc', function () {
-  this.timeout(20000)
   const rateTypes = {
     id: String,
     symbol: String,
     currencySymbol: String,
     rateUsd: Number,
     rateIsk: Number,
-    rateIskFriendly: String
+    rateIskFriendly: String,
+    timestamp: Number
   }
-  const statsFields = Object.keys(rateTypes)
+  const fieldsToCheckFor = Object.keys(rateTypes)
+
+  before(() => {
+    nock('https://myntkaup.is')
+      .get('/api/assets/bitcoin')
+      .reply(200, fs.readFileSync(`${__dirname}/myntkaup.fixture`))
+  })
+
   it('should return object containing specific fields with correct types', (done) => {
     const params = helpers.testRequestParams('/btc')
-    request.get(params, (err, res, body) => {
-      if (err) throw err
-      let json
-      try {
-        json = JSON.parse(body)
-      } catch (e) {
-        throw e
-      }
-      helpers.assertPresenceOfFields(statsFields, [json])
-      helpers.assertTypesOfFields(rateTypes, [json])
-      done()
-    })
+    const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+    request(params, resultHandler)
   })
 })
