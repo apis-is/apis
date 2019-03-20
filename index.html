@@ -2707,7 +2707,7 @@
             </column>
           </row>
         </article>
-        
+
         <article id="endpoint-bitcoin" shortname="bitcoin" title="Bitcoin to ISK exchange rate" icon="btc" class="endpoint">
           <row>
             <column class="medium-10 large-8 col-centered">
@@ -2730,18 +2730,23 @@
         'type': 'GET',
         'dataType': 'json',
         'success': function(response) {
-        console.log(response);
+            console.log(response);
         }
 });
         </code></pre>
                   <h5 toggle-next="closed" class="response">Response</h5>
-                  <pre class="response"><code class="json">{
-        "id": "bitcoin",
-        "symbol": "BTC",
-        "currencySymbol": "₿",
-        "rateUsd": 3878.990012322519,
-        "rateIsk": 458225.2181623272,
-        "rateIskFriendly": "458.225kr."
+                  <pre class="response"><code class="json">
+{
+  "results": [
+    {
+      "id": "bitcoin",
+      "symbol": "BTC",
+      "currencySymbol": "₿",
+      "rateUsd": 3878.990012322519,
+      "rateIsk": 458225.2181623272,
+      "rateIskFriendly": "458.225kr."
+    }
+  ]
 }</code></pre>
                 </div>
 
