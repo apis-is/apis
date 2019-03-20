@@ -6,7 +6,7 @@ const request = require('request')
 const nock = require('nock')
 const helpers = require('../../../lib/test_helpers.js')
 
-describe('btc', ()=> {
+describe('btc', () => {
   const rateTypes = {
     id: String,
     symbol: String,
