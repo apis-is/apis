@@ -100,7 +100,7 @@ const getFlightData = (parameters, callback) => {
 app.get(['/flight', '/flight/v1'], (req, res) => {
   getFlightData(req.query, (error, flights) => {
     if (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({ error, results: [] })
     }
     const legacyFlights = _.map(flights, f => {
       return {
@@ -123,7 +123,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
 app.get(['/flight/v2'], (req, res) => {
   getFlightData(req.query, (error, flights) => {
     if (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({ error, results: [] })
     }
     // Generally we can expect flight data to change every 60 seconds or less
     return res.cache(60).json({ results: flights })
