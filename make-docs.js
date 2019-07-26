@@ -1,8 +1,10 @@
 const fs = require('fs')
 const globby = require('globby')
-const marked = require('marked')
+const marked = require('marked');
 
-globby(['./docs/*.md', './endpoints/**/*.md', '!node_modules/**']).then((paths) => {
+(async () => {
+  const paths = await globby(['./docs/*.md', './endpoints/**/*.md', '!node_modules/**'])
+
   let content = ''
   paths.forEach((path) => {
     content += fs.readFileSync(path, 'utf8')
@@ -13,6 +15,6 @@ globby(['./docs/*.md', './endpoints/**/*.md', '!node_modules/**']).then((paths) 
     fs.mkdirSync('./docs/dist/')
   }
   fs.writeFileSync('./docs/dist/index.html', html, 'utf8')
-}).catch((error) => {
+})().catch((error) => {
   console.error(error)
 })

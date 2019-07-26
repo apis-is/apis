@@ -60,19 +60,46 @@ const measurements = {
 const stationListURL = 'http://www.vedur.is/vedur/stodvar?t=3'
 
 /* Fetches the weather data and returns a JS object in a callback */
-function getJsonData(url, callback) {
+const getData = async url => new Promise((resolve, reject) => {
   request.get({
     headers: { 'User-Agent': h.browser() },
     url,
   }, (error, response, body) => {
     if (error) {
-      throw new Error(`${url} did not respond`)
+      reject(new Error(`${url} did not respond`))
+      return
     }
 
     parseString(body, (err, result) => {
-      callback(result)
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve(result)
     })
   })
+})
+
+const getDataWithKey = async (url, key) => {
+  const data = await getData(url)
+
+  // No error, but data is empty, then whatever we're looking for doesn't exist
+
+  if (!data || !data[key]) {
+    throw new Error(404)
+  }
+
+  return data[key]
+}
+
+const handleAsyncEndpoint = endpoint => {
+  return async function (req, res, next) {
+    try {
+      return await endpoint.call(this, req, res, next)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 /* Root weather handler */
@@ -152,7 +179,7 @@ app.get('/weather/:type/:lang?', (req, res, next) => {
 })
 
 /* Forecasts */
-app.get('/weather/forecasts/:lang?', (req, res) => {
+app.get('/weather/forecasts/:lang?', handleAsyncEndpoint(async (req, res) => {
   const lang = req.params.lang || 'is'
   const stations = req.query.stations
   const descriptions = (
@@ -176,35 +203,32 @@ app.get('/weather/forecasts/:lang?', (req, res) => {
     })
   }
 
-  getJsonData(url, (providedForecasts) => {
-    // make some nice changes to the object for cleaner JSON
-    const forecasts = Object.assign({}, providedForecasts)
-    forecasts.results = forecasts.forecasts.station
-    delete forecasts.forecasts.station
-    delete forecasts.forecasts
-    h.deArrayfy(forecasts.results)
+  const providedForecasts = await getDataWithKey(url, 'forecasts')
 
-    forecasts.results.forEach((result) => {
-      result.id = result.$.id
-      result.valid = result.$.valid
-      delete result.$
-      if (lang === 'is') {
-        result.forecast.forEach((f) => {
-          Object.keys(f).forEach((m) => {
-            f[m] = f[m].replace(/,/g, '.')
-          })
+  // make some nice changes to the object for cleaner JSON
+  const forecasts = { results: providedForecasts.station }
+  h.deArrayfy(forecasts.results)
+
+  forecasts.results.forEach((result) => {
+    result.id = result.$.id
+    result.valid = result.$.valid
+    delete result.$
+    if (lang === 'is') {
+      result.forecast.forEach((f) => {
+        Object.keys(f).forEach((m) => {
+          f[m] = f[m].replace(/,/g, '.')
         })
-      }
-    })
-    if (descriptions) {
-      forecasts.descriptions = measurements[lang]
+      })
     }
-    return res.cache(300).json(forecasts)
   })
-})
+  if (descriptions) {
+    forecasts.descriptions = measurements[lang]
+  }
+  return res.cache(300).json(forecasts)
+}))
 
 /* Observations */
-app.get('/weather/observations/:lang?', (req, res) => {
+app.get('/weather/observations/:lang?', handleAsyncEndpoint(async (req, res) => {
   const lang = req.params.lang || 'is'
   const stations = req.query.stations
   const descriptions = (
@@ -238,33 +262,32 @@ app.get('/weather/observations/:lang?', (req, res) => {
     url += `&anytime=${anytime}`
   }
 
-  getJsonData(url, (observations) => {
-    // make some nice changes to the object for cleaner JSON
-    observations.results = observations.observations.station
-    delete observations.observations.station
-    delete observations.observations
-    h.deArrayfy(observations.results)
-    for (let i = observations.results.length - 1; i >= 0; i--) {
-      const observation = observations.results[i]
-      observation.id = observation.$.id
-      observation.valid = observation.$.valid
-      delete observation.$
-      // fix decimal
-      if (lang === 'is') {
-        Object.keys(observation).forEach((m) => {
-          observation[m] = observation[m].replace(/,/g, '.')
-        })
-      }
+  const data = await getDataWithKey(url, 'observations')
+
+  // make some nice changes to the object for cleaner JSON
+  const observations = { results: data.station }
+  h.deArrayfy(observations.results)
+
+  for (let i = observations.results.length - 1; i >= 0; i--) {
+    const observation = observations.results[i]
+    observation.id = observation.$.id
+    observation.valid = observation.$.valid
+    delete observation.$
+    // fix decimal
+    if (lang === 'is') {
+      Object.keys(observation).forEach((m) => {
+        observation[m] = observation[m].replace(/,/g, '.')
+      })
     }
-    if (descriptions) {
-      observations.descriptions = measurements[lang]
-    }
-    return res.cache(300).json(observations)
-  })
-})
+  }
+  if (descriptions) {
+    observations.descriptions = measurements[lang]
+  }
+  return res.cache(300).json(observations)
+}))
 
 /* Texts */
-app.get('/weather/texts/:lang?', (req, res) => {
+app.get('/weather/texts/:lang?', handleAsyncEndpoint(async (req, res) => {
   const lang = req.params.lang || 'is'
   const types = req.query.types
   const url = `http://xmlweather.vedur.is/?op_w=xml&view=xml&type=txt&lang=${lang}&ids=${types}`
@@ -283,24 +306,23 @@ app.get('/weather/texts/:lang?', (req, res) => {
     })
   }
 
-  getJsonData(url, (texts) => {
-    // make some nice changes to the object for cleaner JSON
-    texts.results = texts.texts.text
-    delete texts.texts.text
-    delete texts.texts
-    h.deArrayfy(texts.results)
-    for (let i = texts.results.length - 1; i >= 0; i--) {
-      const text = texts.results[i]
-      text.id = text.$.id
-      delete text.$
-      if (text.content instanceof Object) {
-        delete text.content.br
-        text.content = text.content._
-      }
+  const data = await getDataWithKey(url, 'texts')
+
+  // make some nice changes to the object for cleaner JSON
+  const texts = {results: data.text}
+  h.deArrayfy(texts.results)
+
+  for (let i = texts.results.length - 1; i >= 0; i--) {
+    const text = texts.results[i]
+    text.id = text.$.id
+    delete text.$
+    if (text.content instanceof Object) {
+      delete text.content.br
+      text.content = text.content._
     }
-    return res.cache(300).json(texts)
-  })
-})
+  }
+  return res.cache(300).json(texts)
+}))
 
 /*
  * observation *
