@@ -6,161 +6,147 @@ const moment = require('moment')
 const { parseString } = require('xml2js')
 const app = require('../../server')
 
-/* Translates the status to Icelandic and retains date values */
-const statusToIcelandic = function (status, type) {
-  if (_.includes(status, 'Estimat')) {
-    if (type === 'departures') {
-      return _.replace(status, 'Estimat.', 'Áætluð brottför')
-    }
-    // Else Arrival
-    return _.replace(status, 'Estimat.', 'Áætluð lending')
-  } else if (_.includes(status, 'Go to Gate')) {
-    return 'Fara að hliði'
-  } else if (_.includes(status, 'Boarding')) {
-    return 'Hlið opið'
-  } else if (_.includes(status, 'Departed')) {
-    return _.replace(status, 'Departed', 'Farin')
-  } else if (_.includes(status, 'Cancelled')) {
-    return 'Aflýst'
-  } else if (_.includes(status, 'Delayed')) {
-    return 'Seinkað'
-  } else if (_.includes(status, 'Waiting next information')) {
-    return 'Beðið eftir upplýsingum'
-  } else if (_.includes(status, 'Gate Closed')) {
-    return 'Hliði lokað'
-  } else if (_.includes(status, 'Confirm')) {
-    return _.replace(status, 'Confirm.', 'Staðfest')
-  } else if (_.includes(status, 'Final Call')) {
-    return 'Lokaútkall'
-  } else if (_.includes(status, 'Check in Closed')) {
-    return 'Innritun lokað'
-  } else if (_.includes(status, 'Check in Open')) {
-    return 'Innritun opin'
-  } else if (_.includes(status, 'Landed')) {
-    return _.replace(status, 'Landed', 'Lent')
-  } else if (_.includes(status, 'Bags arrive shortly')) {
-    return 'Töskur væntanlegar'
-  } else if (_.includes(status, 'Bags on belt')) {
-    return 'Töskur á belti'
-  } else if (_.includes(status, 'All Bags on Belt')) {
-    return 'Allar töskur á belti'
+
+
+const getFlightData = (parameters, callback) => {
+
+  // Default Parameters to upstream endpoint
+  let query = {
+    airport: 'KEF',
+    cargo: 0,
+    dateFrom: moment().subtract(5, 'minutes').format('YYYY-MM-DD HH:mm'),
+    dateTo: moment().endOf('day').format('YYYY-MM-DD HH:mm'),
+    language: 'en',
+    departures: true
   }
-  // Status not important or nothing to translate, return status for now
-  return status
-}
-
-app.get(['/flight', '/flight/v1'], (req, res) => {
-  const data = req.query
-  /* Information from Kefairport
-  Departed / Farin
-  Cancelled / Aflýst
-  Delayed / Seinkað
-  Diverted / Diverted
-  Waiting next information / Beðið eftir upplýsingum
-  Return to normal / Return to normal
-  Scheduled / Scheduled
-  Estimated / Áætluð brottför
-  Confirmed / Staðfest
-  Gate Closed / Hliði lokað
-  Final Call / Lokaútkall
-  Boarding / Hlið opið
-  Check in Closed / Innritun lokað
-  Check in Open / Innritun opin
-  Go to Gate / Fara að hliði
-  Landed / Lent
-  Bags arrive shortly / Töskur væntanlegar
-  Bags on Belt / Töskur á belti
-  All Bags on Belt / Allar töskur á belti
-  */
-
-  /* Fetches the flight data and returns a JS object in a callback */
-  const getJSONFlightData = function (url, callback) {
-    request.get({
-      headers: {
-        'User-Agent': h.browser()
-      },
-      url,
-    }, (error, response, body) => {
-      if (error) {
-        return callback(error, [])
-      }
-
-      parseString(body, {
-        explicitArray: false
-      }, (err, result) => {
-        return callback(err, result)
-      })
-    })
-  }
-
-  /* Converts the data field to old format and translates if needed. */
-  const getFlightTransformed = function (flight) {
-    const dateFormatted = moment(flight.datetime, 'DD.MM.YYYY HH:mm:ss').format('D. MMM.')
-    const statusTranslated = data.language === 'is' ? statusToIcelandic(flight.status, data.language) : flight.status
-    // Is departures
-    if (data.type === 'departures') {
-      return {
-        date: dateFormatted,
-        flightNumber: flight.flightno,
-        airline: flight.airline,
-        to: flight.destination,
-        plannedArrival: flight.time,
-        realArrival: flight.estimated,
-        status: statusTranslated
-      }
-    }
-    // Is arrivals
-    return {
-      date: dateFormatted,
-      flightNumber: flight.flightno,
-      airline: flight.airline,
-      from: flight.from,
-      plannedArrival: flight.time,
-      realArrival: flight.estimated,
-      status: statusTranslated
-    }
-  }
-
-  /* default set as departures */
-  let url = 'http://xml.kefairport.com/departures.xml'
 
   /* Allowed values are either 'departures' or 'arrivals' */
-  if (!data.type) data.type = 'departures'
-
-  /* Allowed values are either 'en' or 'is' */
-  if (!data.language) data.language = 'is'
-
-  // default settings are type: 'departures' and language: 'is'
-  if (data.type === 'arrivals') {
-    url = 'http://xml.kefairport.com/arrivals.xml'
+  if (parameters.type) {
+    if (parameters.type === 'departures') {
+      query.departures = true
+    }
+    if (parameters.type === 'arrivals') {
+      query.departures = false
+    }
   }
 
-  getJSONFlightData(url, (error, flights) => {
+  /* Allowed values are either 'en' or 'is' */
+  if (parameters.language) {
+    if (parameters.language === 'en') {
+      query.language = 'en'
+    }
+    if (parameters.language === 'is') {
+      query.language = 'is'
+    }
+  }
+
+  /* Allowed values are IATA-3 Airport names (only from Iceland) */
+  if (parameters.airport) {
+    if (parameters.airport.length === 3) {
+      query.airport = parameters.airport
+    }
+  }
+
+  /* Allowed values are either 0 or 1 */
+  if (parameters.language) {
+    if (parameters.language === 'en') {
+      query.language = 'en'
+    }
+    if (parameters.language === 'is') {
+      query.language = 'is'
+    }
+  }
+
+  /* Allowed values datetime format YYYY-MM-DDTHH:mm 
+  ** Expected maximum range back is 90 days
+  */
+  if (parameters.dateFrom) {
+    let dateFrom = moment(parameters.dateFrom, 'YYYY-MM-DD[T]HH:mm')
+    if (dateFrom.isValid()) {
+      query.dateFrom = dateFrom.format('YYYY-MM-DD HH:mm')
+    }
+  }
+
+  /* Allowed values datetime format YYYY-MM-DDTHH:mm 
+  ** Expected maximum range forward is the current flight season (summer/winter) which is usually 30+ days
+  */
+  if (parameters.dateTo) {
+    let dateTo = moment(parameters.dateTo, 'YYYY-MM-DD[T]HH:mm')
+    if (dateTo.isValid()) {
+      query.dateTo = dateTo.format('YYYY-MM-DD HH:mm')
+    }
+  }
+
+  const baseUrl = 'https://www.isavia.is/json/flight'
+  let url = encodeURI(
+    `${baseUrl}/?airport=${query.airport}&cargo=${query.cargo}&dateFrom=${query.dateFrom}&dateTo=${query.dateTo}&language=${query.language}&departures=${query.departures}`
+  )
+  let flights = []
+  request.get({
+    url,
+    headers: {
+      'User-Agent': h.browser()
+    },
+    json: true
+  }, (error, response, body) => {
+
+    if (error) {
+      callback(`Could not fetch data from upstream API endpoint: ${error}`)
+    }
+
+    if (_.has(body, 'Code')) {
+      if (body.Code !== '') {
+        callback(`Upstream API endpoint contains an error: ${body}`)
+      }
+    }
+    if (_.has(body, 'Items')) {
+      flights = body.Items
+    }
+    return callback(false, flights)
+  })
+
+}
+
+/**********************************
+ *** Version 1 - Legacy ****
+**********************************/
+app.get(['/flight', '/flight/v1'], (req, res) => {
+  getFlightData(req.query, (error, flights) => {
     if (error) {
       return res.status(500).json({
-        results: [],
-        error: `Could not fetch and convert XML to JSON: ${error}`
-      })
-    }
-    const obj = {
-      results: []
-    }
-    // Reject if it does not respond correctly.
-    const needsToBePresent = data.type + '.flight'
-
-    // Needs to have either departures' or 'arrivals'
-    if (!_.has(flights, needsToBePresent)) {
-      return res.status(500).json({
-        results: [],
-        error: 'Incorrect response from flight XML provider'
+        error: error
       })
     }
 
-    let flightsConverted = []
-    flightsConverted = _.map(flights[data.type].flight, (f) => {
-      return getFlightTransformed(f)
+    const legacyFlights = _.map(flights, function(f){
+      return {
+        "date": moment(f.Scheduled).format('D. MMM.'),
+        "flightNumber": f.No,
+        "airline": f.Airline,
+        "to": f.OriginDest,
+        "plannedArrival": moment(f.Scheduled).format('HH:mm'),
+        "realArrival": f.Estimated ? moment(f.Estimated).format('HH:mm') : '',
+        "status": f.Status
+      }
     })
-    obj.results = flightsConverted
-    return res.cache(3600).json(obj)
+
+    // Generally we can expect flight data to change every 60 seconds or less
+    return res.cache(60).json(legacyFlights)
+  })
+})
+/**********************************
+ *** Version 2 - Moar Data! ****
+**********************************/
+
+app.get(['/flight/v2'], (req, res) => {
+
+  getFlightData(req.query, (error, flights) => {
+    if (error) {
+      return res.status(500).json({
+        error: error
+      })
+    }
+    // Generally we can expect flight data to change every 60 seconds or less
+    return res.cache(60).json(flights)
   })
 })
