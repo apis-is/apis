@@ -115,7 +115,7 @@ app.get(['/flight', '/flight/v1'], (req, res) => {
     })
 
     // Generally we can expect flight data to change every 60 seconds or less
-    return res.cache(60).json(legacyFlights)
+    return res.cache(60).json({ results: legacyFlights })
   })
 })
 
@@ -126,6 +126,6 @@ app.get(['/flight/v2'], (req, res) => {
       return res.status(500).json({ error })
     }
     // Generally we can expect flight data to change every 60 seconds or less
-    return res.cache(60).json(flights)
+    return res.cache(60).json({ results: flights })
   })
 })
