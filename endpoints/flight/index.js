@@ -41,15 +41,6 @@ const getFlightData = (parameters, callback) => {
       query.airport = parameters.airport
     }
   }
-  /* Allowed values are either 0 or 1 */
-  if (parameters.language) {
-    if (parameters.language === 'en') {
-      query.language = 'en'
-    }
-    if (parameters.language === 'is') {
-      query.language = 'is'
-    }
-  }
   /* Allowed values datetime format YYYY-MM-DDTHH:mm
   ** Expected maximum range back is 90 days
   */
