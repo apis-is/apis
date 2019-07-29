@@ -1,74 +1,122 @@
 /* eslint-disable import/first */
 const request = require('request')
 const h = require('apis-helpers')
-const cheerio = require('cheerio')
+const _ = require('lodash')
+const moment = require('moment')
 const app = require('../../server')
 
-app.get('/flight', (req, res) => {
-  const data = req.query
-  let url = ''
-  let $
-
-  if (!data.type) data.type = ''
-  if (!data.language) data.language = ''
-
-  if (data.type === 'departures' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Brottfarir/'
-  } else if (data.type === 'departures' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Departures/'
-  } else if (data.type === 'arrivals' && data.language === 'is') {
-    url = 'http://www.kefairport.is/Flugaaetlun/Komur/'
-  } else if (data.type === 'arrivals' && data.language === 'en') {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
-  } else {
-    url = 'http://www.kefairport.is/English/Timetables/Arrivals/'
+const getFlightData = (parameters, callback) => {
+  // Default Parameters to upstream endpoint
+  const query = {
+    airport: 'KEF',
+    cargo: 0,
+    dateFrom: moment().subtract(5, 'minutes').format('YYYY-MM-DD HH:mm'),
+    dateTo: moment().endOf('day').format('YYYY-MM-DD HH:mm'),
+    language: 'en',
+    departures: true
   }
 
+  /* Allowed values are either 'departures' or 'arrivals' */
+  if (parameters.type) {
+    if (parameters.type === 'departures') {
+      query.departures = true
+    }
+    if (parameters.type === 'arrivals') {
+      query.departures = false
+    }
+  }
+
+  /* Allowed values are either 'en' or 'is' */
+  if (parameters.language) {
+    if (parameters.language === 'en') {
+      query.language = 'en'
+    }
+    if (parameters.language === 'is') {
+      query.language = 'is'
+    }
+  }
+  /* Allowed values are IATA-3 Airport names (only from Iceland) */
+  if (parameters.airport) {
+    if (parameters.airport.length === 3) {
+      query.airport = parameters.airport
+    }
+  }
+  /* Allowed values datetime format YYYY-MM-DDTHH:mm
+  ** Expected maximum range back is 90 days
+  */
+  if (parameters.dateFrom) {
+    const dateFrom = moment(parameters.dateFrom, 'YYYY-MM-DD[T]HH:mm')
+    if (dateFrom.isValid()) {
+      query.dateFrom = dateFrom.format('YYYY-MM-DD HH:mm')
+    }
+  }
+  /* Allowed values datetime format YYYY-MM-DDTHH:mm
+  ** Expected maximum range forward is the current flight season (summer/winter) which is usually 30+ days
+  */
+  if (parameters.dateTo) {
+    const dateTo = moment(parameters.dateTo, 'YYYY-MM-DD[T]HH:mm')
+    if (dateTo.isValid()) {
+      query.dateTo = dateTo.format('YYYY-MM-DD HH:mm')
+    }
+  }
+  const baseUrl = 'https://www.isavia.is/json/flight'
+  const url = encodeURI(
+    `${baseUrl}/?airport=${query.airport}&cargo=${query.cargo}&dateFrom=${query.dateFrom}&dateTo=${query.dateTo}&language=${query.language}&departures=${query.departures}`
+  )
+  let flights = []
   request.get({
-    headers: { 'User-Agent': h.browser() },
     url,
+    headers: {
+      'User-Agent': h.browser()
+    },
+    json: true
   }, (error, response, body) => {
-    if (error || response.statusCode !== 200) {
-      return res.status(500).json({ error: 'www.kefairport.is refuses to respond or give back data' })
+    if (error) {
+      callback(`Could not fetch data from upstream API endpoint: ${error}`)
     }
 
-    try {
-      $ = cheerio.load(body)
-    } catch (err) {
-      return res.status(500).json({ error: 'Could not parse body' })
+    if (_.has(body, 'Code')) {
+      if (body.Code !== '') {
+        callback(`Upstream API endpoint contains an error: ${body}`)
+      }
     }
+    if (_.has(body, 'Items')) {
+      flights = body.Items
+    }
+    return callback(false, flights)
+  })
+}
 
-    const obj = { results: [] }
-
-    $('table tr').each(function (key) {
-      if (key !== 0) {
-        let flight = {}
-        if (data.type === 'departures') {
-          flight = {
-            date: $(this).children('td').slice(0).html(),
-            flightNumber: $(this).children('td').slice(1).html(),
-            airline: $(this).children('td').slice(2).html(),
-            to: $(this).children('td').slice(3).html(),
-            plannedArrival: $(this).children('td').slice(4).html(),
-            realArrival: $(this).children('td').slice(5).html(),
-            status: $(this).children('td').slice(6).html(),
-          }
-        } else {
-          flight = {
-            date: $(this).children('td').slice(0).html(),
-            flightNumber: $(this).children('td').slice(1).html(),
-            airline: $(this).children('td').slice(2).html(),
-            from: $(this).children('td').slice(3).html(),
-            plannedArrival: $(this).children('td').slice(4).html(),
-            realArrival: $(this).children('td').slice(5).html(),
-            status: $(this).children('td').slice(6).html(),
-          }
-        }
-
-        obj.results.push(flight)
+//  Version 1 - Legacy
+app.get(['/flight', '/flight/v1'], (req, res) => {
+  getFlightData(req.query, (error, flights) => {
+    if (error) {
+      return res.status(500).json({ error, results: [] })
+    }
+    const legacyFlights = _.map(flights, f => {
+      return {
+        date: moment(f.Scheduled).format('D. MMM.'),
+        flightNumber: f.No,
+        airline: f.Airline,
+        to: f.OriginDest,
+        plannedArrival: moment(f.Scheduled).format('HH:mm'),
+        realArrival: f.Estimated ? moment(f.Estimated).format('HH:mm') : '',
+        status: f.Status
       }
     })
 
-    return res.cache(3600).json(obj)
+    // Generally we can expect flight data to change every 60 seconds or less
+    return res.cache(60).json({ results: legacyFlights })
+  })
+})
+
+//  Version 2 - Moar Data!
+app.get(['/flight/v2'], (req, res) => {
+  getFlightData(req.query, (error, flights) => {
+    if (error) {
+      return res.status(500).json({ error, results: [] })
+    }
+    // Generally we can expect flight data to change every 60 seconds or less
+    return res.cache(60).json({ results: flights })
   })
 })
