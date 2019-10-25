@@ -7,7 +7,7 @@ const app = require('../../server')
 const lookupCar = plate => new Promise((resolve, reject) => {
   // Encode carPlate so that Icelandic characters will work
   const carPlate = encodeURIComponent(plate)
-  const url = `http://www.samgongustofa.is/umferd/okutaeki/okutaekjaskra/uppfletting?vq=${carPlate}`
+  const url = `https://www.samgongustofa.is/umferd/okutaeki/okutaekjaskra/uppfletting?vq=${carPlate}`
 
   request.get({
     headers: { 'User-Agent': h.browser() },
