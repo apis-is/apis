@@ -5,7 +5,6 @@ const cheerio = require('cheerio')
 const app = require('../../server')
 
 app.get('/currency/cb', (req, res) => {
-
   request.get({
     headers: { 'User-Agent': h.browser() },
     url: 'https://www.sedlabanki.is/hagtolur/opinber-gengisskraning/',
