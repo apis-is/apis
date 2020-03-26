@@ -45,6 +45,14 @@ describe('currency', () => {
     })
   })
 
+  describe('searching using provider "cb"', () => {
+    it('should return an array of objects containing correct fields', (done) => {
+      const params = helpers.testRequestParams('/currency/cb')
+      const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
+      request(params, resultHandler)
+    })
+  })
+
   describe('searching using provider "borgun"', () => {
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/currency/borgun')
