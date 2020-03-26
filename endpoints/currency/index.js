@@ -2,7 +2,7 @@ const app = require('../../server')
 
 app.get('/currency', (req, res) => {
   const provider = req.query.provider || 'arion'
-  const providers = ['m5', 'arion', 'lb', 'borgun']
+  const providers = ['m5', 'arion', 'lb', 'borgun', 'cb']
 
   if (providers.indexOf(provider) >= 0) {
     return res.redirect(301, `/currency/${provider}`)
