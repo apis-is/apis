@@ -25,15 +25,18 @@ app.get('/company', (req, res) => {
 
     if ($('.resultnote').length === 0) {
       const tr = $('.boxbody > .nozebra tbody tr').first()
+      const vsk = $('.boxbody > .vsknr tbody tr').first()
       if (tr.length > 0) {
         const name = $('.boxbody > h1').html()
         const sn = $('.boxbody > h1').html()
+        const vnum = vsk.length > 0 ? vsk.find('td').eq(1).text() : ''
 
         obj.results.push({
           name: name.substring(0, name.indexOf('(') - 1),
           sn: sn.substring(sn.length - 11, sn.length - 1),
           active: $('p.highlight').text().length === 0 ? 1 : 0,
           address: tr.find('td').eq(0).text(),
+          vatnum: vnum
         })
       }
     } else {
