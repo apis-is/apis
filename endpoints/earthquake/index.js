@@ -49,6 +49,7 @@ function parseJavaScriptVariable(body) {
     }
   })
   
+  // Create a function that returns the JSON object (handles the date stuff for us)
   jsonObject = new Function("return " + jsonString)()
 
   // rename fields to match current specs
@@ -146,7 +147,7 @@ app.get('/earthquake/is/sec', (req, res) => {
 })
 
 /*
- * Main vedur.is website (JS variable included in the source) (secondary source of information).
+ * Main vedur.is website (JS variable included in the source).
  */
 app.get('/earthquake/is', (req, res) => {
   getEarthquakes((error, body) => {
