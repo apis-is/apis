@@ -50,7 +50,6 @@ function parseJavaScriptVariable(body) {
   })
   
   jsonObject = new Function("return " + jsonString)()
-  console.log(jsonObject)
 
   // rename fields to match current specs
   const resFields = []
