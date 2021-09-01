@@ -51,8 +51,8 @@ function parseJavaScriptVariable(body) {
 
   // Create a function that returns the JSON object (handles the date stuff for us)
   // Disable ESLint because we have to evaluate the json string
-  // eslint-disable-next-line eqeqeq
-  var jsonObject = new Function('return ' + jsonString)()
+  // eslint-disable-next-line no-new-func
+  const jsonObject = new Function('return ' + jsonString)()
 
   // rename fields to match current specs
   const resFields = []
