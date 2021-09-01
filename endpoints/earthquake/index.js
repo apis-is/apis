@@ -38,7 +38,6 @@ function getEarthquakes(callback, params) {
  */
 function parseJavaScriptVariable(body) {
   // Work with empty string if scraping fails.
-  let res
   let jsonString = ''
   // Create a cheerio object from response body.
   const $ = cheerio.load(body)
@@ -49,42 +48,23 @@ function parseJavaScriptVariable(body) {
       jsonString = $(elem).html().match(/(VI\.quakeInfo = )(.+);/)[2]
     }
   })
+  
+  jsonObject = new Function("return " + jsonString)()
+  console.log(jsonObject)
 
-  // Convert the variable to JavaScript Object Notation and fix seperators in values.
-  const resString = jsonString.replace(/(:\'[-0-9]\d*)(,)(\d*)/g, '$1.$3')
-
-  // Create a Regular expression and change date representation.
-  // eslint-disable-next-line max-len
-  const regexDate = /(\'t\':)new Date\((([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+),([0-9.,-]+))\)(,\'a\')/g
-  const dateReplace = (match, p1, p2, p3, p4, p5, p6, p7, p8, p9) => {
-    const parsedDate = new Date(
-      parseInt(p3, 10),
-      parseInt(p4.split('-')[0], 10) - 1, parseInt(p5, 10),
-      parseInt(p6, 10),
-      parseInt(p7, 10),
-      parseInt(p8, 10)
-    )
-    return `${p1}\\${parsedDate.toISOString()}\\${p9}`
-  }
-
-  try {
-    // Create semi-final JSON string.
-    res = JSON.parse(resString.replace(regexDate, dateReplace).replace(/\'/g, '"'))
-  } catch (ex) {
-    return JSON.parse([{ error: 'Error parsing source.' }])
-  }
   // rename fields to match current specs
   const resFields = []
-  res.forEach((element) => {
-    const tmpRow = {}
-    tmpRow.timestamp = element.t
-    tmpRow.latitude = element.lat
-    tmpRow.longitude = element.lon
-    tmpRow.depth = element.dep
-    tmpRow.size = element.s
-    tmpRow.quality = element.q
-    tmpRow.humanReadableLocation = `${element.dL} km ${element.dD} af ${element.dR}`
-    resFields.push(tmpRow)
+  jsonObject.forEach((element) => {
+    const row = {
+      timestamp: element.t,
+      latitude: element.lat,
+      longitude: element.lon,
+      depth: element.dep,
+      size: element.s,
+      quality: element.q,
+      humanReadableLocation: `${element.dL} km ${element.dD} af ${element.dR}`
+    }
+    resFields.push(row)
   })
 
   return resFields
@@ -154,9 +134,9 @@ function parseList(body) {
 }
 
 /*
- * Hraun table parse
+ * Hraun table parse, currently broken
  */
-app.get('/earthquake/is', (req, res) => {
+app.get('/earthquake/is/sec', (req, res) => {
   getEarthquakes((error, body) => {
     if (error) {
       return res.status(500).json({ error: error.toString() })
@@ -169,7 +149,7 @@ app.get('/earthquake/is', (req, res) => {
 /*
  * Main vedur.is website (JS variable included in the source) (secondary source of information).
  */
-app.get('/earthquake/is/sec', (req, res) => {
+app.get('/earthquake/is', (req, res) => {
   getEarthquakes((error, body) => {
     if (error) {
       return res.json({ error: error.toString() })
