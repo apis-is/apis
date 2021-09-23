@@ -59,11 +59,11 @@ function parseJavaScriptVariable(body) {
   jsonObject.forEach((element) => {
     const row = {
       timestamp: element.t,
-      latitude: element.lat,
-      longitude: element.lon,
-      depth: element.dep,
-      size: element.s,
-      quality: element.q,
+      latitude: parseFloat(element.lat.replace(',', '.')),
+      longitude: parseFloat(element.lon.replace(',', '.')),
+      depth: parseFloat(element.dep.replace(',', '.')),
+      size: parseFloat(element.s.replace(',', '.')),
+      quality: parseFloat(element.q.replace(',', '.')),
       humanReadableLocation: `${element.dL} km ${element.dD} af ${element.dR}`
     }
     resFields.push(row)
