@@ -86,7 +86,7 @@
     "lodash": "^4.17.5",
     "marked": "github:koddsson/marked#escape-markdown-option",
     "mocha": "5.1.1",
-    "moment": "2.22.1",
+    "moment": "2.29.2",
     "nock": "^9.2.3",
     "raven": "2.4.2",
     "redis": "^2.8.0",
