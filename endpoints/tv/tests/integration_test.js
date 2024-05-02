@@ -1,5 +1,6 @@
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers')
+jest.setTimeout(20000)
 
 describe('tv root', () => {
   it('should return info', (done) => {
@@ -66,7 +67,6 @@ describe('tv - stod2', () => {
 
 describe.skip('tv - ruv ithrottir', function () {
   it('should return an array of objects containing correct fields', (done) => {
-    this.timeout(20000)
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
     const params = helpers.testRequestParams('/tv/ruvithrottir')
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor, undefined, true)
@@ -76,7 +76,6 @@ describe.skip('tv - ruv ithrottir', function () {
 
 describe.skip('tv - ruv', function () {
   it('should return an array of objects containing correct fields', (done) => {
-    this.timeout(20000)
     const fieldsToCheckFor = ['series', 'title', 'originalTitle', 'description', 'live', 'premier']
     const params = helpers.testRequestParams('/tv/ruv')
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)

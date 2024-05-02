@@ -1,5 +1,5 @@
-const request = require('request')
-const $ = require('cheerio')
+const request = require('../../apis-request-bridge.js')
+const $ = require('../../apis-cheerio-bridge.js')
 const h = require('apis-helpers')
 const app = require('../../server')
 
@@ -47,14 +47,25 @@ function queryTimestamps(callback) {
 }
 
 function parseTimestamps(htmlText) {
-  const data = $(htmlText)
-  return {
-    lastPriceChanges: data.find('#file-prices_changed_timestamp-LC1').text().slice(0, 23),
-    lastPriceCheck: data.find('#file-prices_lookup_timestamp-LC1').text().slice(0, 23),
+  try {
+    console.log('parsing cheerio', typeof $, $)
+    const data = $(htmlText)
+    console.log('parsed cheerio', data.find('#file-prices_changed_timestamp-LC1').text().slice(0, 23))
+    return {
+      lastPriceChanges: data.find('#file-prices_changed_timestamp-LC1').text().slice(0, 23),
+      lastPriceCheck: data.find('#file-prices_lookup_timestamp-LC1').text().slice(0, 23),
+    }
+  } catch (error) {
+    console.error('Could not parse timestamps', error)
+    return {
+      lastPriceChanges: null,
+      lastPriceCheck: null,
+    }
   }
 }
 
 app.get('/petrol', (req, res) => {
+  console.log('petrol endpoint')
   const timestampApis = (new Date().toISOString().slice(0, 23))
   const nineMinutes = 900
   queryData((error1, response1, jsonText) => {

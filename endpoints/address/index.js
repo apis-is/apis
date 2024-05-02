@@ -1,5 +1,5 @@
 /* eslint-disable import/first */
-const request = require('request')
+const request = require('../../apis-request-bridge.js')
 const h = require('apis-helpers')
 const _ = require('lodash')
 const app = require('../../server')

@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers.js')
 
 const fieldsToCheckFor = [
@@ -12,9 +12,9 @@ const fieldsToCheckFor = [
   'key',
   'name',
 ]
+jest.setTimeout(20000)
 
 describe('get-petrol-stations', function () {
-  this.timeout(20000)
   it('should return an array of objects containing correct fields', (done) => {
     const params = helpers.testRequestParams('/petrol')
     const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)

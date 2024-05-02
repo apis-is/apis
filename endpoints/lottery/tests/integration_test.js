@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers.js')
 
 describe.skip('lottery', () => {

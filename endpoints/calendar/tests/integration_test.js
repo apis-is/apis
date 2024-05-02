@@ -1,4 +1,4 @@
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const expect = require('expect')
 const helpers = require('../../../lib/test_helpers')
 const { normalizeParams } = require('..')

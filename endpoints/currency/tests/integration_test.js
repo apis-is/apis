@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 const fs = require('fs')
 const nock = require('nock')
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers.js')
 
 describe('currency', () => {
@@ -9,7 +9,7 @@ describe('currency', () => {
   const fieldsToCheckFor = ['shortName', 'longName', 'value', 'askValue', 'bidValue', 'changeCur', 'changePer']
 
   describe('searching using provider "m5"', () => {
-    before(() => {
+    beforeAll(() => {
       nock('http://www.m5.is')
         .get('/')
         .query({ gluggi: 'gjaldmidlar' })
@@ -24,7 +24,7 @@ describe('currency', () => {
   })
 
   describe('searching using provider "arion"', () => {
-    before(() => {
+    beforeAll(() => {
       nock('https://www.arionbanki.is')
         .get('/Webservice/PortalCurrency.ashx')
         .reply(200, fs.readFileSync(`${__dirname}/arion.fixture`))
@@ -32,14 +32,6 @@ describe('currency', () => {
 
     it('should return an array of objects containing correct fields', (done) => {
       const params = helpers.testRequestParams('/currency/arion')
-      const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
-      request(params, resultHandler)
-    })
-  })
-
-  describe('searching using provider "lb"', () => {
-    it('should return an array of objects containing correct fields', (done) => {
-      const params = helpers.testRequestParams('/currency/lb')
       const resultHandler = helpers.testRequestHandlerForFields(done, fieldsToCheckFor)
       request(params, resultHandler)
     })

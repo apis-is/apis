@@ -7,7 +7,7 @@ Created: August 2014
 */
 
 const assert = require('assert')
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers.js')
 
 /* Asserts the results */

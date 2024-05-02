@@ -2,8 +2,8 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-useless-escape */
 /* eslint-disable prefer-destructuring */
-const request = require('request')
-const cheerio = require('cheerio')
+const request = require('../../apis-request-bridge.js')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const helpers = require('apis-helpers')
 const app = require('../../server')
 

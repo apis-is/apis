@@ -1,7 +1,7 @@
 /* eslint-disable import/first */
-const request = require('request')
+const request = require('../../apis-request-bridge.js')
 const h = require('apis-helpers')
-const cheerio = require('cheerio')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const app = require('../../server')
 
 app.get('/currency/m5', (req, res) => {

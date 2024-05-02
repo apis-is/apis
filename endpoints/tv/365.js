@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
-const request = require('request')
-const xml2js = require('xml2js')
+const request = require('../../apis-request-bridge.js')
+const xml2js = require('../../apis-xml2js-bridge.js')
 const h = require('apis-helpers')
 const app = require('../../server')
 

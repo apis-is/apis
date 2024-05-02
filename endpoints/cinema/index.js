@@ -1,5 +1,5 @@
-const request = require('request')
-const cheerio = require('cheerio')
+const request = require('../../apis-request-bridge.js')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const app = require('../../server')
 
 /**

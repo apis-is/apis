@@ -1,11 +1,11 @@
 /* eslint-disable import/extensions */
 const fs = require('fs')
 const nock = require('nock')
-const request = require('request')
+const request = require('../../../apis-test-request-bridge.js')
 const helpers = require('../../../lib/test_helpers.js')
 
 describe('earthquake/is', () => {
-  before(() => {
+  beforeAll(() => {
     nock('http://hraun.vedur.is')
       .get('/ja/skjalftar/skjlisti.html')
       .reply(200, fs.readFileSync(`${__dirname}/test.fixture`))
@@ -29,7 +29,7 @@ describe('earthquake/is', () => {
 })
 
 describe('earthquake/is/sec', () => {
-  before(() => {
+  beforeAll(() => {
     nock('http://hraun.vedur.is')
       .get('/ja/skjalftar/skjlisti.html')
       .reply(200, fs.readFileSync(`${__dirname}/test.fixture`))

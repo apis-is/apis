@@ -2,11 +2,10 @@
 /* eslint-disable no-plusplus */
 // TODO: Find a way to enable no-param-reassign
 /* eslint-disable no-param-reassign */
-const request = require('request')
-const { parseString } = require('xml2js')
+const request = require('../../apis-request-bridge.js')
+const { parseString } = require('../../apis-xml2js-bridge.js')
 const h = require('apis-helpers')
-const cheerio = require('cheerio')
-const xregexp = require('xregexp')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const app = require('../../server')
 
 /*
@@ -58,6 +57,9 @@ const measurements = {
 }
 
 const stationListURL = 'http://www.vedur.is/vedur/stodvar?t=3'
+
+const idRegex = /station=(\d*)/
+const titleRegex = /^(([\p{L}0-9()-]*[\s-]?)*)\s-/u
 
 /* Fetches the weather data and returns a JS object in a callback */
 const getData = async url => new Promise((resolve, reject) => {
@@ -132,16 +134,14 @@ app.get('/weather/getAvailableStations', (req, res) => {
     } catch (e) {
       throw new Error('Error loading DOM', e)
     }
-    const idRegex = 'station=(\\d*)'
-    const titleRegex = '^(([\\p{L}0-9-]*[\\s-]?)*)\\s-'
     const stations = []
     const hrefs = $('.listtable td a:contains(\'A\')')
 
     for (let i = 0; i < hrefs.length; i++) {
       const elem = $(hrefs[i])
       // get the station title and id
-      const titleMatch = xregexp.cache(titleRegex).exec(elem.attr('title'))
-      const idMatch = xregexp.cache(idRegex).exec(elem.attr('href'))
+      const titleMatch = titleRegex.exec(elem.attr('title'))
+      const idMatch = idRegex.exec(elem.attr('href'))
 
       if (!idMatch || !titleMatch) {
         throw new Error('Parsing error -- Source is changed')

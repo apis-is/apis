@@ -7,9 +7,9 @@ Email:   hjorturls@gmail.com
 Created: August 2014
 */
 
-const request = require('request')
+const request = require('../../apis-request-bridge.js')
 const h = require('apis-helpers')
-const cheerio = require('cheerio')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const app = require('../../server')
 
 /* Handles the request for a specific request URL */

@@ -1,8 +1,9 @@
 /* eslint-disable import/first */
-const request = require('request')
-const cheerio = require('cheerio')
-const iconv = require('iconv-lite')
+const request = require('../../apis-request-bridge.js')
+const cheerio = require('../../apis-cheerio-bridge.js')
 const app = require('../../server')
+
+const decoder = new TextDecoder('iso-8859-1');
 
 // returns the stats table of Icelandic football teams.
 // data retrieved from fotbolti.net.
@@ -17,7 +18,7 @@ app.get('/isbolti', (req, res) => {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({ error: 'Could not retreive data from fotbolti.net' })
     }
-    const body = iconv.decode(html, 'iso-8859-1')
+    const body = decoder.decode(html)
 
     try {
       $ = cheerio.load(body)

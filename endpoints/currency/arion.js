@@ -1,4 +1,4 @@
-const request = require('request')
+const request = require('../../apis-request-bridge.js')
 const moment = require('moment')
 const h = require('apis-helpers')
 const app = require('../../server')
@@ -15,7 +15,7 @@ app.get('/currency/arion/:type?', (req, res) => {
   request.get({
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     url: 'https://www.arionbanki.is/Webservice/PortalCurrency.ashx',
-    body: toSend,
+    qs: toSend,
   }, (error, response, body) => {
     if (error || response.statusCode !== 200) {
       return res.status(500).json({ error: 'www.arionbanki.is refuses to respond or give back data' })
